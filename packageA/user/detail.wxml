@@ -1,0 +1,243 @@
+<!--pages/order/detail.wxml-->
+<!-- 订单状态 -->
+<view class='container detail-loader'>
+   <!-- 返回首页悬浮框/分享进入显示 -->
+  <view class='goHomeFixed' catchtap='gotoHome' wx:if="{{isShowGoHome}}">
+    <image src='{{iconURL}}/product-icon-leftReturn.svg' class='icon-leftReturn'></image>
+    <text>返回首页</text>
+  </view>
+
+  <view class="order-info status-header">
+    <view class='info-price'>
+      <text class='header-status'>{{order.status_desc}}</text>
+      <view class="group-time" wx:if="{{order.status == 12}}"><text>{{h}}:{{m}}:{{s}}</text>后未成团自动取消订单</view>
+      <!-- <view class='header-status-tip' wx:if="{{order.status == 6}}">本次交易获得{{order.points}}个买买提积分</view> -->
+      <!-- <text class="header-status" wx:if="{{order.status == ORDER_STATUS.CREATED}}">等待买家支付</text>
+      <text class="header-status" wx:if="{{order.status == ORDER_STATUS.PAID}}">等待卖家发货</text>
+      <text class="header-status" wx:if="{{order.status == ORDER_STATUS.PREPARING}}">等待快递揽收</text>
+      <text class='header-status' wx:if="{{order.status == ORDER_STATUS.DELIVERING}}">等待买家收货</text>
+      <text class='header-status' wx:if="{{order.status == ORDER_STATUS.DELIVERIED}}">交易成功</text>
+      <text class='header-status' wx:if="{{order.status == ORDER_STATUS.FINISHED}}">交易成功</text>
+      <text class="header-status" wx:if="{{order.status == ORDER_STATUS.CANCELLED}}">交易取消</text>
+      <text class="header-status" wx:if="{{order.status == ORDER_STATUS.COMPLETE}}">交易关闭</text> -->
+    </view>
+    <view class='info-online'>
+      <view class='iconfont icon-img_dengdaimaijiazhifux' wx:if="{{order.status == ORDER_STATUS.CREATED}}"></view>
+      <view class='iconfont icon-img_dengdaishangpinpeisongx' wx:if="{{order.status == ORDER_STATUS.PAID||order.status == ORDER_STATUS.PREPARING}}"></view>
+      <view class='iconfont icon-img_dengdaimaijiatihuox' wx:if="{{order.status == ORDER_STATUS.PICKING}}"></view>
+      <view class='iconfont icon-img_jiaoyichenggongx' wx:if="{{order.status == ORDER_STATUS.COMMENTING||order.status == ORDER_STATUS.FINISHED}}"></view>
+      <view class='iconfont icon-img_dingdanyiquxiaox' wx:if="{{order.status == ORDER_STATUS.CANCELLED}}"></view>
+      <image class="group-bag" wx:if="{{order.status == 12}}" src="{{iconURL}}/group-bagicon.png"></image>
+      <!-- <view class='iconfont icon-img_tuikuanchenggongx'></view> -->
+    </view>
+  </view>
+  <!-- 收货信息 -->
+  <view class="order-address ">
+    <view class="address-contact">
+      <span class="info-leftshift">{{order.consignee.name}} {{order.consignee.mobile}}</span>
+    </view>
+    <view class="address-detail ellipsis">
+      <span class="info-leftshift ">{{order.consignee.address}} {{order.consignee.pickup_address}}</span>
+    </view>
+    <view class="address-detail" wx:if="{{(order.consignee.pickup_contact||order.consignee.pickup_phone)}}">
+      <span class='info-leftshift t2'>便利店店主：</span>
+      <span class="info-leftshift t2">{{order.consignee.pickup_contact}} {{order.consignee.pickup_phone}}</span>
+    </view>
+    <view class='storeManager' wx:if="{{(order.consignee.pickup_contact||order.consignee.pickup_phone)}}" catchtap='callManager' data-tel='{{order.consignee.pickup_phone}}'>
+      <image class='tel_icon' src='{{iconURL}}/phone_blue.png'></image>
+      <text>联系店主</text>
+    </view>
+    <view class='address-tab iconfont icon-img_dizhix'>
+    </view>
+  </view>
+  <!-- 详情广告位 -->
+  <view class="shop-img" wx:if="{{showCountMode}}" bindtap="goWebView" data-item="{{shopCouponImg[0]}}">
+    <image class="image-mode" mode="widthFix" src="{{shopCouponImg[0].ad_code}}"></image>
+  </view>
+  <!-- 提货码 -->
+  <view class='qrCode' wx:if="{{order.status == ORDER_STATUS.PICKING}}">
+    <view class="back-tip" wx:if="{{showBackTip}}">
+      <i>已申请售后，暂时无法提货！</i>
+    </view>
+    <view class='qr'>
+      <canvas class='canvas' style="width:{{qrcodeWidth}}px; height:{{qrcodeWidth}}px;" canvas-id='canvas' bindlongtap='save'></canvas>
+    </view>
+    <view class='code'>
+      <text class='small'>提货码：</text>
+      <text>{{order.get_sn}}</text>
+    </view>
+    <view class='des'>
+      <view>提货时请向工作人员出示提货码</view>
+      <view>请勿将提货码告知他人，防止包裹丢失</view>
+    </view>
+  </view>
+  <!-- 商品信息 -->
+  <view class='order-list'>
+    <view class='list-item'>
+      <view class='order-main'>
+        <!-- <view class='goods-fms'  wx:if="{{order.status == ORDER_STATUS.DELIVERING || order.status == ORDER_STATUS.DELIVERIED || order.status == ORDER_STATUS.FINISHED}}">
+          <span class="fms-no">包裹{{delivery_id + 1}}</span>
+          <span class="fms-num">({{goods_formate.delivery_goods_num}}件商品)</span>
+          <span catchtap="touchExpress" wx:if="{{goods_formate.is_send != 0}}" data-order='{{order}}' data-delivery_id='{{goods_formate.delivery_id}}'>
+            <span class="fms-check">查看物流</span>
+            <image class="fms-arrow" mode='widthFix' src="{{iconURL}}/icon_right_arrow.png" />
+          </span>
+          <span wx:else>
+            <span class="fms-check">尚未发货</span>
+          </span>
+        </view> -->
+        <view class='date_wrap' wx:if="{{order.status == ORDER_STATUS.PICKING}}">
+          <view class='order_tab'>{{special_day_text}}</view>
+          <!-- <view class='des'>{{order.shippingTimeDesc}}</view> -->
+        </view>
+        <view class='goods-item' bindtap='goprodcut' data-product-id='{{goods.goods_id}}' data-score-id="{{goods.score_goods_id}}"
+        data-order_prom_type="{{order.order_prom_type}}" wx:for='{{order.products}}' wx:for-item='goods' wx:key="{{index}}">
+          <view class='item-photo'>
+            <image src='{{goods.header_img}}'></image>
+          </view>
+          <view class='item-info'>
+            <view class='info-name'>
+              <text>{{goods.goods_name}}</text>
+            </view>
+            <view class='info-attr w80'>
+              <text>{{goods.sku_key_name}}</text>
+            </view>
+            <view class="info-price-credits" wx:if="{{order.order_prom_type == 8}}">
+              {{goods.score_price }}
+              <i class="score" style="color:#303030">积分</i>
+              <!--<image src="{{iconURL}}/credits-icon01.png" class="credits-icon"></image>-->
+            </view>
+            <view class="info-price" wx:if="{{order.order_prom_type != 8}}">
+              <i class="icon-rmb">¥</i>{{goods.shop_price}}
+            </view>
+            <view class="info-amount">x{{goods.amount}}</view>
+            <view class="info-return" catchtap="go_application_return" data-goods='{{goods}}' wx:if="{{goods.back_info.back_btn == 1}}">
+              {{goods.back_info.show_back_status}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="item-footer {{order.status != ORDER_STATUS.CREATED && order.status != ORDER_STATUS.DELIVERING && order.status != ORDER_STATUS.DELIVERIED && order.status != ORDER_STATUS.FINISHED ? 'no-border' : ''}} {{order.order_source=='qqwallet' ? 'multi-line' : ''}}">
+        <view class="footer-sum b-bottom">
+          <view>
+            <i class="sum-nums">共{{order.goods_count}}件商品</i>
+          </view>
+        </view>
+      </view>
+      <view class="footer-fix" wx:if="{{order.order_btn.back_btn == 1||order.order_btn.pay_btn == 1 || order.order_btn.cancel_btn == 1 || order.order_btn.comment_again_btn == 1 || order.order_btn.comment_btn == 1 || order.order_btn.receive_btn == 1}}">
+        <button type='default' class="footer-button" wx:if="{{order.order_btn.cancel_btn == 1}}" catchtap='touchCancel' data-order-id='{{order.order_id}}'>取消订单</button>
+        <button style="background-color:#ffe150;color:#555!important" class="footer-button" wx:if="{{order.order_btn.pay_btn == 1}}" catchtap="touchPay"  data-order-id='{{order.order_id}}'>
+          立即支付
+        </button>
+         <button  class="footer-button y-button" wx:if="{{order.order_btn.receive_btn == 1}}" catchtap="touchConfirm" data-order-id='{{order.order_id}}'>确认收货</button>
+        <button  class="footer-button y-button" wx:if="{{order.order_btn.comment_btn == 1}}" catchtap='touchComment' data-order-id='{{order.order_id}}'>立即评价</button>
+        <button  class="footer-button y-button" wx:if="{{order.order_btn.comment_again_btn == 1}}" catchtap='touchSubComment' data-order-id='{{order.order_id}}'>追加评价</button>
+        <button type='default' class="footer-button" wx:if="{{order.order_btn.back_btn == 1}}" catchtap='refund' data-order-id='{{order.order_id}}'>申请退款</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="order-summury">
+    <view class="summury-detail">
+      商品合计
+      <span class="total-price-credits" wx:if="{{order.order_prom_type == 8}}">
+        {{order.score_price}}
+          <i class="score">积分</i>
+        <!--<image src="{{iconURL}}/credits-icon01.png" class="credits-icon"></image>-->
+      </span>
+      <span class="total-price" wx:if="{{order.order_prom_type != 8}}">
+        <i>¥</i>{{order.total_goods_price}}
+      </span>
+    </view>
+    <view class="summury-detail" wx:for="{{order.prom_info}}" wx:key="{{index}}" wx:if="{{order.order_prom_type != 8}}">
+      {{item.prom_name}}
+      <span class="total-price">{{item.value}}
+      </span>
+    </view>
+    <!-- <view class="summury-detail">
+      运费
+      <span class="total-price"><i class='icon_rmb' wx:if='{{order.shipping_info.show_type == 1}}'>¥</i>{{order.shipping_info.value}}</span>
+    </view> -->
+    <view class="summury-total">
+      实付款
+      <span class="total-price-credits" wx:if="{{order.order_prom_type == 8}}">
+        {{order.score_price}}
+          <i class="score">积分</i>
+        <!--<image src="{{iconURL}}/credits-icon01.png" class="credits-icon"></image>-->
+      </span>
+      <span class="total-price" wx:if="{{order.order_prom_type != 8}}">
+        <i class='icon_rmb'>¥</i>{{order.order_amount}}
+      </span>
+    </view>
+  </view>
+  <view class="group-status" wx:if="{{order.found_id>0}}" bindtap="toDetail">
+    <text>{{order.team_info.status_desc}}</text>
+    <view class="group-headimg">
+      <image class="headimg" wx:for="{{order.team_info.team_img}}" wx:key="{{index}}" wx:if="{{index<3}}" src="{{item}}"></image>
+      <image wx:if="{{order.team_info.team_img.length>3}}" class="headimg" src="{{iconURL}}/morepeople.png"></image>
+      <text class="iconfont icon-btn_xiangyoudajiantoux right-status">
+
+      </text>
+    </view>
+  </view>
+  <view class="order-info">
+    <view class='info-text'>
+      <text>下单时间：{{order.add_time}}</text>
+    </view>
+    <view class='info-text'>
+      <text>订单编号：{{order.order_sn}}</text>
+      <view class='info-Clip' bindtap='setClipboard'>
+        <button type='default' hover-class='none'>复制单号</button>
+      </view>
+    </view>
+
+  </view>
+
+
+  <!-- <view class='tc' bindtap='goHome'>
+    <span class='text_content_small color_large_gray'>回到首页去逛逛</span>
+    <image class='gohomeImage' src='{{iconURL}}/icon_right_arrow.png'></image>
+  </view> -->
+</view>
+<!-- <view class="order-kf">
+  <view class="kf-time">
+    服务时间：9:00-23:00
+  </view>
+  <view class="kf-type row">
+    <view class="col w50 kf-ol">
+      <button open-type='contact' hover-class="none" session-from='cilicili'>
+        <image src="{{iconURL}}/icon_kfOnline.png"></image>
+        <text>在线客服</text>
+      </button>
+    </view>
+    <view bindtap='phoneCall' class="col w50 kf-ol no-margin">
+      <image src="{{iconURL}}/icon_kfTel.png" />
+      <text>电话客服</text>
+    </view>
+  </view>
+</view> -->
+
+<!--申请原因-->
+<view class="drawer_screen" catchtouchmove='true' catchtap="setModalStatus" data-status="0" wx:if="{{showfwModalStatus}}" wx:if="{{showfwModalStatus}}"></view>
+<view class='action-modal' animation="{{animationData}}" wx:if="{{showfwModalStatus}}">
+  <view class='title'>选择申请原因</view>
+  <picker-view class='modal-inner' indicator-class="pick_item" value="{{value}}">
+    <picker-view-column>
+      <view wx:for="{{reasons}}" class="pick_item" catchtap='setReasonBefore' data-status="1" data-item='{{item}}'>{{item}}</view>
+    </picker-view-column>
+  </picker-view>
+</view>
+
+<!--查看拼团详情和分享参团-->
+<view class="group-btn-box" style='padding-bottom:{{iphoneXBottom}}'  wx:if="{{order.status == 12}}" >
+  <view>
+    <form report-submit='true'  bindsubmit="toDetail">
+      <button class="group-detail" form-type='submit' >查看拼团详情</button>
+    </form>
+    <form report-submit='true' bindsubmit="toShare">
+      <button form-type='submit' class="group-share" open-type="share">喊工友参团</button>
+    </form>
+  </view>
+</view>
+
+<loading wx:if="{{loadingShow}}"></loading>

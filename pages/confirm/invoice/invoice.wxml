@@ -1,0 +1,27 @@
+<view class="invoice">
+  <view class="topBorder"></view>
+  <view class="invoiceType">
+    <view class="Title">发票类型</view>
+      <div bindtap="invoiceType" data-type="none" class="{{typeTap == 'none' ? 'active' : ''}}">不开发票</div>
+      <div bindtap="invoiceType" data-type="paper" wx:for='{{Invoicedata.type}}' class="{{typeTap == 'paper' ? 'active' : ''}}">{{item.name}}</div>
+  </view>
+  <view class="invoiceUp" hidden="{{typeTap != 'paper'}}">
+    <view class="Title">发票抬头</view>
+    <div bindtap="invoiceUp" data-type="personal" class="{{upTap == 'personal' ? 'active' : ''}}">{{Invoicedata.title[0].name}}</div>
+    <div bindtap="invoiceUp" data-type="unit" class="{{upTap == 'unit' ? 'active' : ''}}">{{Invoicedata.title[1].name}}</div>
+    <view hidden="{{upTap != 'unit'}}">
+      <input type="text" bindblur="nuitName" placeholder="请填写你的单位名称" placeholder-style="color:#C8C8C8;" value="{{companyName}}" />
+      <view class="codeTitle Title">纳税人识别号</view>
+      <input type="number" bindblur="taxesCode" placeholder="请填写15-20位纳税人识别号" placeholder-style="color:#C8C8C8;" value="{{taxesCode}}" />
+    </view>
+  </view>
+  <view class="needKnow">
+    <view>发票需知</view>
+    <view>1.开发票金额为用户实际支付金额</view>
+    <view>2.纸质发票会在确认收货后30个工作日内发出</view>
+    <view>3.开单位抬头发票请填写纳税人识别号，以免影响报销</view>
+  </view>
+  <view class='save' bindtap="saveInvoice">
+    <button class='submit' type='warn'>保存</button>
+  </view>
+</view>

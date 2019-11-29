@@ -1,0 +1,68 @@
+<!--pages/search/search.wxml-->
+<import src="../template/template.wxml" />
+<!-- 搜索框 -->
+<view class="search df">
+  <view class="flexs">
+    <!-- <div class="cancelSearch" bindtap="cancelSearch" wx:if="{{searchValue}}">
+      <image src="{{iconUrl}}/icon_clear.png"></image>
+    </div> -->
+    <input class="searchbar {{searchValue?'w90':''}}" placeholder='搜索商品' auto-focus focus="{{focus}}" confirm-type="search" value="{{searchValue}}" bindinput="searchValueInput" bindconfirm="doSearch" />
+    <button class='cancelSearch' bindtap="cancelSearch" wx:if="{{searchValue}}">取消</button>
+    <button class='search_icon' bindtap="doSearch">
+      <view class='iconfont icon-img_sousuox'></view>
+    </button>
+  </view>
+</view>
+<!-- 热门搜索及历史搜索 -->
+<view class="cont" hidden="{{shopList.length > 0 || (searchValue && hotAndHistoryHidden && shopList.length <= 0)}}">
+  <view wx:if="{{hotWord.length}}">
+  <!-- wx:if="{{hotWord.length}}" -->
+    <view class="hotTitle" >
+      <text class="font_14">热门搜索</text>
+    </view>
+    <view class="w100 history">
+      <div class="historyList" wx:for="{{hotWord}}" wx:key="index" bindtap="doKeySearch" data-key="{{item}}">{{item}}</div>
+    </view>
+  </view>
+  <view wx:if="{{historyKeyList.length > 0}}">
+    <view class="histroyTitle">
+      <text class="font_14 mt10">历史搜索</text>
+      <!-- 清除历史 -->
+      <view class='clearHistory iconfont icon-btn_guanbianniux' bindtap="clearHistory"></view>
+    </view>
+    <view class="w100 history">
+      <view class="historyList" wx:for="{{historyKeyList}}" wx:key="index" bindtap="doKeySearch" data-key="{{item}}">{{item}}</view>
+    </view>
+  </view>
+</view>
+<!-- 筛选条 -->
+<view hidden="{{shopList.length <= 0 && hiddenTitle}}">
+  <view class='filterTitle'>
+    <view class='seach-bar row'>
+      <view class="bar-item col tc font_14" bindtap="filter" data-type="normal"><view class="bar-border  {{sort == 'normal' ? 'active' : ''}}">全部</view></view>
+      <view class="bar-item col tc font_14" bindtap="filter" data-type="new"><view class="bar-border {{sort == 'new' ? 'active' : ''}}">最新</view></view>
+      <view class="bar-item col tc font_14" bindtap="filter" data-type="price"><view class="bar-border  {{sort == 'price' ? 'active' : ''}}">价格</view></view>
+    </view>
+  </view>
+  <!--<view style='padding: 85rpx;'></view>-->
+  <view class='search_list'>
+    <goodList  list="{{shopList}}" type="2" align="left"/>
+  </view>
+  
+  <!-- <import src="../listdetailTemplate/listdetailTemplate.wxml" />
+  <template is="listDetail" data="{{shopList}}" /> -->
+</view>
+<!-- 未找到 -->
+<view class="search_no" wx:if="{{searchValue && showEmpty}}">
+   <view>
+     <image class="scimg" src="{{iconUrl}}/search_no02.png"></image>
+  </view> 
+  <text  class="font_14">找不到想要的？请告诉我们</text>
+  <navigator hover-class="none" url='/pages/problem/feedBook/feedBook' class='search_no_btn search_no_btn1 mgt130 mb24'>留言反馈</navigator>
+  <navigator hover-class="none" bindtap='goHome' class='search_no_btn search_no_btn2'>回首页逛逛</navigator>
+</view>
+<view class="refreshEnd" wx:if="{{!reachBottom && productData.length >= page_size}}">
+  <text>没有更多啦~</text>
+</view>
+
+<loading wx:if="{{loadingShow}}"></loading>

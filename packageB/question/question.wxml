@@ -1,0 +1,138 @@
+<view class="container">
+  <view class='order-filter fixe-top-bar' id="barH">
+    <view class='filter-item w20 tochtype01 {{currentTap==0 ? "active" : "" }}' data-current="0" bindtap="swichNav">
+      <text>商品</text>
+    </view>
+    <view class='filter-item w20 tochtype02 {{currentTap==1 ? "active" : "" }}' data-current="1" bindtap="swichNav">
+      <text>优惠券</text>
+    </view>
+    <view class='filter-item w20 tochtype03 {{currentTap==2 ? "active" : "" }}' data-current="2" bindtap="swichNav">
+      <text>下单</text>
+    </view>
+    <view class='filter-item w20 tochtype04 {{currentTap==3 ? "active" : "" }}' data-current="3" bindtap="swichNav">
+      <text>物流</text>
+    </view>
+    <view class='filter-item w20 tochtype04 {{currentTap==4 ? "active" : "" }}' data-current="4" bindtap="swichNav">
+      <text>售后</text>
+    </view>
+  </view>
+  <scroll-view scroll-y='ture' scroll-into-view='{{toView}}' class='sqa-list-box' bindscroll="scrollEvent">
+    <view class='box_type' id='commodity'>
+      <text class='box_title'>商品问题</text>
+      <text class='menu-p-title'>
+        <text>1.</text>你们商城商品是不是正品啊？</text>
+      <text class='menu-p-text'>答：保证是正品！请放心噢，都是100%正品，IP官方授权，官方可查！</text>
+      <text class='menu-p-title'>
+        <text>2.</text>价格能不能再便宜点啊？</text>
+      <text class='menu-p-text'>答：价格是官方订价，都是非常优惠的呢，一分钱一分货嘛，棒棒的产品质量才是你们追求的目标不是吗？</text>
+      <text class='menu-p-title'>
+        <text>3.</text>商品实际颜色和你们的图片怎么都不一样啊？</text>
+      <text class='menu-p-text'>答：一点点色差是正常的哦，因为实物拍照出来的照片是按我们的显示器进行调色，调成实物颜色的哦，您的显示器和我们调色的显示器设置不一样，所以您看到的图片会和实际有一点点色差是正常的哦！</text>
+    </view>
+    <view class='box_type' id='coupon'>
+      <text class='box_title'>优惠卷使用</text>
+      <text class='menu-p-title'>
+        <text>1.</text>优惠卷使用</text>
+      <view class='menu-p-text'>
+        <view>1)	单笔订单只能使用1个优惠券，不支持同时使用多个 ，用券后差额不找零、不退回。</view>
+        <view>2)	优惠券不能抵扣运费，只能抵扣商品金额(包邮券除外)。特价商品不可使用优惠券，与其他优惠不同享 。</view>
+        <view>3)	每张优惠券的使用条件请查看对应优惠券的使用说明。</view>
+        <view>4)	请在优惠券有效期内使用，过期未使用优惠券将自动作废。</view>
+        <view>5)	特殊商品不可使用优惠券。</view>
+      </view>
+      <text class='menu-p-title'>
+        <text>2.</text>优惠券失效</text>
+      <view class='menu-p-text'>
+        <view>1)	使用优惠券的订单，若产生退货，优惠券均不退回，退款金额按优惠后的小计金额退款。</view>
+        <view>2)	过期未使用优惠券将自动作废。</view>
+        <view>3)	如需了解更多，可咨询客服。</view>
+      </view>
+    </view>
+    <view class='box_type' id="Order">
+      <text class='box_title'>下单问题</text>
+      <text class='menu-p-title'>
+        <text>1.</text>收货地址怎么添加？</text>
+      <text class='menu-p-text'>答：您在进行订单确认时，有收货地址的提示您添加收货地址，也可以在“个人中心-地址管理”里更改。</text>
+      <text class='menu-p-title'>
+        <text>2.</text>收货地址没有我的城市怎么办？</text>
+      <text class='menu-p-text'>答：城市随便选一个，只要在详细地址里写正确的地址！</text>
+      <text class='menu-p-title'>
+        <text>3.</text>我可以用银行卡付钱吗？</text>
+      <text class='menu-p-text'>答：可以，把你的银行卡绑定微信支付就OK了！</text>
+      <text class='menu-p-title'>
+        <text>4.</text>我已经下订单但还没支付，我的订单会被保留多长时间？</text>
+      <text class='menu-p-text'>答：只有30分钟噢，这么抢手的东西你忍心考虑30分钟那么久么！嘻嘻！</text>
+      <text class='menu-p-title'>
+        <text>5.</text>订单已付款但是页面没显示付款？</text>
+      <text class='menu-p-text'>答：网速不给力可能会出现这种情况，如果钱已经扣了但依旧显示未付款，请联系客服MM让她帮你解决哈。</text>
+      <text class='menu-p-title'>
+        <text>6.</text>可以修改商品信息（款式/颜色/大小）吗？</text>
+      <text class='menu-p-text'>答：主人，这个是改不了的噢，如果真要换，需要退款重新下单。</text>
+      <text class='menu-p-title'>
+        <text>7.</text>我可以修改快递信息（收货地址/电话）吗？</text>
+      <text class='menu-p-text'>答：可以，在订单发货的前，联系客服MM就能马上改啦（部分订单不支持修改），如果货物已经发了也不要担心，稍微出一丢丢钱就能改啦，快递小哥会在派件时收的噢。</text>
+      <text class='menu-p-title'>
+        <text>8.</text>商品发货后，拒签快递会收取费用吗？</text>
+      <text class='menu-p-text'>答：可以拒签啊，不过你忍心掏钱支付来回的运费吗？</text>
+      <text class='menu-p-title'>
+        <text>9.</text>商品（易碎品）破损怎么办？</text>
+      <text class='menu-p-text'>答：如果快递出现了破损，可以拒收，跟快递小哥说好在快递单上写明拒收的原因，同时记得跟客服MM做一下报备，如已签收发现破损的，请在24小时内及时联系客户MM协商解决，超过24小时的会默认商品完好噢，到时西西也帮不了你啦。</text>
+      <text class='menu-p-title'>
+        <text>10.</text>商品签收后发现缺件怎么办？</text>
+      <text class='menu-p-text'>答：赶紧联系客服MM解决噢，24小时内客服MM会马上帮你解决滴。</text>
+    </view>
+    <view class='box_type' id="Logistics">
+      <text class='box_title'>物流问题</text>
+      <text class='menu-p-title'>
+        <text>1.</text>你们是从哪里发货的啊？我是发货地的客户，可以自己上门取货，不收我快递费吗？</text>
+      <text class='menu-p-text'>答：sorry噢，商品是深圳或上海仓发货滴，就不劳您大驾来取货啦。</text>
+      <text class='menu-p-title'>
+        <text>2.</text>你们是发什么快递啊？我想用其他快递可以吗？</text>
+      <text class='menu-p-text'>答：都是用默认普通快递发货噢，比如中通、韵达，不支持指定快递。如果要用顺丰，下单的时候记得联系客服MM补一丢丢费用升级快递的配送方式噢。</text>
+      <text class='menu-p-title'>
+        <text>3.</text>普通快递没有到我们这边，怎么办？</text>
+      <text class='menu-p-text'>答：主人可以不用担心，西西会找其他快递公司保证配送到您的所在地，当然也会选择配送到就近的网点，主人可以自行前往就近点自取噢。</text>
+      <text class='menu-p-title'>
+        <text>4.</text>我今天下单了，怎么还没发货呢？ </text>
+      <text class='menu-p-text'>答：16点半前付款当天就能发货，是16点半后就请安心睡一觉等明天发货吧。</text>
+      <text class='menu-p-title'>
+        <text>5.</text>为什么我在跟踪物流里查不到快递信息？</text>
+      <text class='menu-p-text'>答：系统偷懒又延迟啦，可以晚一点再查看噢。</text>
+      <text class='menu-p-title'>
+        <text>6.</text>什么时候可以收到货呢？</text>
+      <text class='menu-p-text'>答：正常快递默认2-5天就会到哦，偏远山区会慢一些些，正常3-7天。</text>
+    </view>
+    <view class='box_type' id="Service">
+      <text class='box_title'>售后问题</text>
+      <text class='menu-p-title'>
+        <text>1.</text>多长时间可以退换货？</text>
+      <text class='menu-p-text'>答：不影响二次销售的情况下，商品签收次日起7天内就可以随便退货。</text>
+      <text class='menu-p-title'>
+        <text>2.</text>不想要了，怎么退货呢？</text>
+      <view class='menu-p-text'>
+        <view>答：不影响二次销售，请把商品先包装好，附上发货单，填好退换货登记表，其中的赠品、发票记得都要一并打包寄回。</view>
+        <view>退货流程如下：</view>
+        <view>退换货说明：请将退换货商品包装好，且商品不影响二次销售；退换货时请务必附上发货单，并填写退换货登记表；若订单中有赠品、发票、免单商品及发货单，需随商品一同寄回；请勿发平邮或到付件，商品寄出后，请及时在每笔退换货订单中填写“物流信息”;因商品质量问题退换货，来回运费由平台承担，因个人原因退换货，来回运费由您个人承担；感谢您的支持。</view>
+        <view>（1）自商品签收次日起7日内，您可申请无忧退货。</view>
+        <view>（2）登陆商城选择“个人中心-我的订单-申请售后”申请退货。</view>
+        <view>（3）审核过程中，客服会与您联系进行信息确认，需您提供1-5张商品实物图片及说明退货原因。</view>
+        <view>（4）退货申请审核通过后，退货地址等信息会在订单中出现哦，您可在10天内寄回商品。</view>
+        <view>（5）若订单中有赠品、发票、免单商品及发货单，需随商品寄回。</view>
+        <view>（6）支持目前主流的快递公司寄回哦，您可选择方便寄出的快递，不接受到付、顺丰、平邮或物流（仅支持普通快递方式）寄回。</view>
+        <view>（7）请您寄出后将快递公司及运单号填写到退货订单中，仓库签收商品次日起7天内处理完成，退款会在1-5个工作日原路返还给您，请您注意查收。</view>
+      </view>
+      <text class='menu-p-title'>
+        <text>3.</text>退货运费怎么办？</text>
+      <text class='menu-p-text'>答：如果主人的商品没问题，还望您先自掏腰包付下来回运费，如果商品有质量问题，我们会自己掏钱解决来回运费哒。</text>
+      <text class='menu-p-title'>
+        <text>4.</text>质量问题退换货运费我先垫付，怎么退还给我？</text>
+      <text class='menu-p-text'>答：寄回商品的主人们一定要及时联系客服MM告知垫付的邮费以及支付宝帐号，仅支持中通、圆通、申通、汇通、韵达等快递退回哦，千万记住，别用顺丰，别用顺丰，别用顺丰！不然就少收一些钱了。</text>
+      <text class='menu-p-title'>
+        <text>5.</text>我要申请退换货，发票丢了怎么办？</text>
+      <text class='menu-p-text'>答：也就扣一下相应的税点，其他没大碍哒，但为了保证能收到全额退款，还请保管好自己的发票。</text>
+      <text class='menu-p-title'>
+        <text>6.</text>这么多天了还没收到退款，怎么回事？</text>
+      <text class='menu-p-text'>答：银行问题呢，银行回款时间不一样哦，请主人要更加耐心，钱不久就会到账啦。</text>
+    </view>
+  </scroll-view>
+</view>

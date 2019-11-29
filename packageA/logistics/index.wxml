@@ -1,0 +1,37 @@
+<view class="container">
+    <view class="index" wx:if="{{!pickUpSelech}}">
+        <view class="delivery-header" bindtap="toNodelivery" data-style='1'>
+            <view class="delivery-oldnum">{{deliveryOldnum}}</view>
+            <view class="delivery-text">到货剩余订单数</view>
+            <view class="switch-pickup" catchtap="getUserPickUpApi">{{addressName}}</view>
+        </view>
+        <view class="row index-box">
+            <view class="index-item" bindtap="toRouter" data-type='delivery' wx:if="{{expressAuthList.orderConfirm}}">
+                <view class="iconfont icon-ERP_tihuofangshi flex-icon"></view>
+                <view class="flex-text">用户取件</view>
+            </view>
+            <view class="index-item" bindtap="toRouter" data-type='arrival' wx:if="{{expressAuthList.boxConfirm}}">
+                <view class="iconfont icon-daohuoqingdian flex-icon"></view>
+                <view class="flex-text">到货通知</view>
+            </view>
+            <view class="index-item" bindtap="toNodelivery" data-style='2'>
+                <view class="number" wx:if="{{wayNum > 0}}">{{wayNum}}</view>
+                <view class="iconfont icon-img_dengdaishangpinpeisongx flex-icon"></view>
+                <view class="flex-text">在途订单</view>
+            </view>
+            <view class="index-item" bindtap="toNodelivery" data-style='3'>
+                <view class="iconfont icon-img_img_quhuochenggongx flex-icon"></view>
+                <view class="flex-text">售后到库</view>
+            </view>
+            <view class="index-item" bindtap="toRouter" data-type='invitationWrite' wx:if="{{expressAuthList.inviteExchange}}">
+                <view class="iconfont icon-btn_xing_hx flex-icon"></view>
+                <view class="flex-text">邀请码核销</view>
+            </view>
+        </view>
+    </view>
+    <import src="../../utils/wxaSortPicker/wxaSortPicker.wxml" />
+    <view wx:if="{{pickUpSelech}}" class='pickup-model'></view>
+    <template wx:if="{{pickUpSelech}}" is="wxaSortPicker" data="{{wxaSortPickerData,dataType}}" bindtap="handleclick" />
+</view>
+
+<loading wx:if="{{loadingShow}}"></loading>

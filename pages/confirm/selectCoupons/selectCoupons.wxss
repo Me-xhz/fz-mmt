@@ -1,0 +1,226 @@
+/* pages/confirm/selectCoupons/selectCoupons.wxss */
+
+.cashgift-list {
+  position: relative;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 26rpx;
+  background: #fff;
+}
+
+.cashgift-list .cashgift-list-box {
+  margin-bottom: 22rpx;
+}
+
+.cashgift-list .list-item {
+  position: relative;
+  z-index: 2;
+  display: block;
+  overflow: hidden;
+  color: #fff;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  /* background: url('http://img.mall.surex.cn/cilicili_icons/icon-cashgift-select.png') no-repeat; */
+  background-size: 100% 100%;
+}
+
+.cashgift-list .list-item.status {
+  color: #ddd;
+  background: url('http://img.mall.surex.cn/cilicili_icons/icon-bonus-lose.png') no-repeat;
+  background-size: 100% 100%;
+}
+
+.cashgift-list .list-item.tabused {
+  background: url('http://img.mall.surex.cn/cilicili_icons/icon-bonus-bease.png') no-repeat;
+  background-size: 100% 100%;
+}
+
+.cashgift-list .list-item .item-tips {
+  position: relative;
+  display: block;
+  height: 88rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding-left: 100rpx;
+  color: #404245;
+  font-size: 28rpx;
+  font-weight: normal;
+  text-align: left;
+  line-height: 88rpx;
+}
+
+.cashgift-list .list-item .item-info {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  min-height: 160rpx;
+  padding: 30rpx;
+}
+
+.cashgift-list .list-item .item-info.select-bg {
+  width: 622rpx;
+  background: url('http://img.mall.surex.cn/cilicili_icons/icon_cashgift_select.png') no-repeat;
+  background-size: 100% 100%;
+  box-sizing: border-box;
+  margin-left: 76rpx;
+}
+
+.cashgift-list .list-item .info-ac {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+}
+
+.cashgift-list .list-item.active .info-ac .ac-icon {
+  background-image: url("http://img.mall.surex.cn/cilicili_icons/icon_check_on.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.cashgift-list .list-item .info-ac .ac-icon {
+  width: 54rpx;
+  height: 54rpx;
+  background-image: url('http://img.mall.surex.cn/cilicili_icons/icon_check_off.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.cashgift-list .list-item .item-info .info-name {
+  display: inline-block;
+  position: relative;
+  font-size:48rpx;
+  line-height:48rpx;
+  font-weight: normal;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.cashgift-list .list-item .item-info .info-attr {
+  display: inline-block;
+  margin-left: 18rpx;
+  color:#3E3E3E;
+  font-size: 26rpx;
+  font-weight: normal;
+  text-align: left;
+  line-height: 26rpx;
+}
+
+.cashgift-list .list-item .item-info .info-expires {
+  display: block;
+  position: relative;
+  padding-top: 20rpx;
+  font-size: 26rpx;
+  font-weight: normal;
+  text-align: left;
+  line-height: 26rpx;
+  box-sizing: border-box;
+}
+
+.cashgift-list .list-item .info-button-go {
+  position: absolute;
+  top: 22rpx;
+  right: 26rpx;
+  color: #f9ae08;
+  background: #fff;
+  padding: 20rpx 32rpx;
+  border-radius: 3px;
+  font-size: 30rpx;
+  line-height: 1;
+}
+
+.cashgift-list .list-item .info-button-go.out {
+  background: #e9ebec;
+  color: #bbb;
+}
+
+.cashgift-list .list-item .info-button-no {
+  position: absolute;
+  right: -22rpx;
+  bottom: -22rpx;
+}
+
+.cashgift-list .list-item .info-button-no img {
+  width: 160rpx;
+}
+
+.cashgift-list .list-item .item-value {
+  position: absolute;
+  top: 16rpx;
+  right: 28rpx;
+  height: 36rpx;
+  display: block;
+  color: #ff5252;
+  font-weight: normal;
+  font-size: 36rpx;
+  text-align: right;
+  line-height: 28rpx;
+  box-sizing: border-box;
+}
+
+.cashgift-list .list-item .item-value em {
+  color: #ff5252;
+  font-size: 56rpx;
+  font-weight: normal;
+  line-height: 56rpx;
+  font-style: normal;
+}
+
+.cashgift-list .list-item-attr {
+  position: relative;
+  margin-top: -4px;
+  background: #f8ae0a;
+  padding: 32rpx;
+  padding-top: 34rpx;
+  color: #fff;
+  padding-right: 160rpx;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.cashgift-list .list-item-attr.status {
+  background: #b2b0b0;
+  color: #ddd;
+}
+
+.cashgift-list .list-item-attr .attr-txt {
+  font-size: 26rpx;
+  line-height: 38rpx;
+}
+
+.cashgift-list .list-item-attr.limit .attr-txt {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.cashgift-list .list-item-attr .attr-icon .down {
+  display: none;
+}
+
+.cashgift-list .list-item-attr.limit .attr-icon .down {
+  display: block;
+}
+
+.cashgift-list .list-item-attr.limit .attr-icon .up {
+  display: none;
+}
+
+.cashgift-list .list-item-attr .attr-icon {
+  position: absolute;
+  top: 38rpx;
+  right: 26rpx;
+}
+
+.cashgift-list .list-item-attr .attr-icon img {
+  width: 32rpx;
+}
+
+.cashgift-list .list-item-attr .attr-txt.showattr {
+  -webkit-line-clamp: inherit;
+}

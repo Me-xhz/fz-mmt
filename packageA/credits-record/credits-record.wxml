@@ -1,0 +1,28 @@
+<!--兑换记录-->
+<view class="credits-record">
+    <view class="credits-box" wx:for="{{changeList}}" wx:key="{{index}}">
+        <view class="credits-left">
+            <view class="credits-title">
+                {{item.score_goods_name}}
+            </view>
+            <view class="credits-time">
+                {{item.exchange_time}}
+            </view>
+        </view>
+        <view class="credits-right">
+            <view class="credits-price">
+                <text>{{item.goods_des}}</text>
+                <i class="score">积分</i>
+                <!--<image src="{{iconURL}}/credits-icon01.png">-->
+
+                <!--</image>-->
+            </view>
+        </view>
+    </view>
+</view>
+<view class='empty' wx:if='{{changeList && changeList.length <= 0}}'>
+  <view class='empty-item'>
+    <image class="item-logo" src="{{iconURL}}/icon_order_empty02.png" mode='widthFix'></image>
+    <view class="item-text">暂无兑换记录</view>
+  </view>
+</view>

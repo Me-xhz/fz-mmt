@@ -1,0 +1,215 @@
+page {
+  background: #efeff4;
+}
+
+/* pages/address/address.wxss */
+
+.container {
+  font-size: 12px;
+  position: relative;
+}
+
+form {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.box {
+  background: white;
+}
+
+.section {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 103.4rpx;
+  overflow: hidden;
+  box-sizing: border-box;
+  border-bottom: #f2f2f2 2rpx solid;
+}
+
+.btn-area {
+  padding: 0 28.6rpx;
+  margin-top: 41.8rpx;
+}
+
+.btn-delete {
+  padding: 0 28.6rpx;
+  margin-top: 20rpx;
+}
+
+.picker {
+  width: 600rpx;
+  height: 103.4rpx;
+  line-height: 103.4rpx;
+  padding-left: 36rpx;
+  box-sizing: border-box;
+  font-size: 35.2rpx;
+  font-weight: 400;
+  text-align: left;
+  color: #030303;
+}
+
+.ww {
+  width: 95%;
+  height: 60rpx;
+}
+
+.item-title {
+  float: left;
+  display: block;
+  width: 30%;
+  height: 103.4rpx;
+  line-height: 103.4rpx;
+  padding-left: 36rpx;
+  box-sizing: border-box;
+  font-size: 35.2rpx;
+  font-weight: 400;
+  text-align: left;
+  color: #030303;
+}
+
+.item-input {
+  float: left;
+  display: block;
+  width: 70%;
+  box-sizing: border-box;
+  padding-right: 88rpx;
+  height: 103.4rpx;
+}
+
+.item-input input {
+  display: block;
+  width: 100%;
+  height: 71.2rpx;
+  margin: 16.2rpx 0;
+  box-sizing: border-box;
+  background-color: #fff;
+  border: none;
+  text-align: left;
+  color: #030303;
+  font-size: 35.2rpx;
+  font-weight: 400;
+  line-height: 71.2rpx;
+}
+
+.address-detail {
+  padding: 20.8rpx 36rpx 20rpx 36rpx;
+  display: block;
+  width: 100%;
+  min-height: 162.8rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+  border: none;
+  text-align: left;
+  overflow: hidden;
+  color: #030303;
+  font-size: 29.2rpx;
+  font-weight: 400;
+  line-height: 32rpx;
+}
+
+.inputnum {
+  font-size: 26.4rpx;
+  color: #999;
+  padding: 29.2rpx 31rpx 29.2rpx 0;
+  background: #fff;
+  position: relative;
+  width: 100%;
+  text-align: right;
+  box-sizing: border-box;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.addrSwitch {
+  transform: scale(0.8) !important;
+}
+
+.switch-title {
+  display: inline-block;
+  width: 30%;
+  height: 90rpx;
+  line-height: 90rpx;
+  padding-left: 36rpx;
+  box-sizing: border-box;
+  font-size: 35.2rpx;
+  font-weight: 400;
+  text-align: left;
+  color: #030303;
+}
+
+.switch-item {
+  display: inline-block;
+  width: 70%;
+  box-sizing: border-box;
+  height: 90rpx;
+  padding-right: 20rpx;
+  line-height: 90rpx;
+  text-align: right;
+}
+
+.addressView {
+  height: 554.4rpx;
+  position: fixed;
+  bottom: 0rpx;
+  z-index: 999;
+  background: #fff;
+  width: 100%;
+}
+
+.scrollView {
+  height: 395rpx;
+}
+
+.addressList {
+  position: relative;
+  height: 79.2rpx;
+  border-bottom: #f8f8f8 1px solid;
+  text-align: center;
+  overflow: hidden;
+  color: #030303;
+  font-size: 31.68rpx;
+  padding-right: 43.2rpx;
+  line-height: 79.2rpx;
+}
+
+.cancelView {
+  position: absolute;
+  bottom: 0rpx;
+  width: 100%;
+  height: 79.2rpx;
+  background: #fff;
+  border-top: 1px solid #f2f2f2;
+}
+
+.cancel {
+  position: relative;
+  margin: 10rpx;
+  box-sizing: border-box;
+  background: #f7f7f7;
+  text-align: center;
+  color: #030303;
+  font-size: 25.2rpx;
+  font-weight: 400;
+  height: 59.2rpx;
+  line-height: 59.2rpx;
+}
+
+.shade {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0rpx;
+  background: #030303;
+  z-index: 10;
+  opacity: 0.3;
+}
+.addDetail{
+  color:#808080;
+  font-size: 35.2rpx;
+}
+.addArea{
+  position: absolute;
+  left: 30%;
+}

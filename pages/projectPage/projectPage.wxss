@@ -1,0 +1,20 @@
+/* pages/projectPage/projectPage.wxss */
+page{
+  height: 100vh;
+  background: #fff !important;
+}
+.head_box{
+  height: 360rpx;
+  width: 100%;
+  background-position:center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.head_pic{
+  height: 360rpx;
+  width: 100%;
+}
+
+.goodList{
+  padding: 25rpx;
+}

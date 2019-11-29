@@ -1,0 +1,106 @@
+<view>
+
+  <!--<view class="navbar fixed-top">
+		<view class="navbar-left hide-weixin" ng-click="goBack()">
+			<img class="button-icon" ng-src="{{iconURL}}/nav-left.png" />
+			<view class="button-text">返回</view>
+		</view>
+		<view class="navbar-title">收货地址</view>
+		<view class="navbar-right"></view>
+	</view>-->
+
+  <!-- Form -->
+  <view class="address-form">
+    <view class="form-item">
+      <view class="item-title">收货人：</view>
+      <view class="item-input">
+        <input type="text" maxlength="12" placeholder="名字" ng-model="name" />
+      </view>
+      <view class="item-addrepeat" ng-show="name.length > 0" ng-click="name=''">
+        <image ng-src="{{iconURL}}/icon-addrepeat.png"></image>
+      </view>
+    </view>
+    <view class="form-item">
+      <view class="item-title">
+        <span class="border-right">联系电话：</span>
+      </view>
+      <view class="item-input">
+        <input type="tel" ng-change="validtel()" placeholder="手机或固定电话" ng-model="mobile" />
+      </view>
+      <view class="item-addrepeat" ng-show="mobile.length > 0" ng-click="mobile=''">
+        <image ng-src="{{iconURL}}/icon-addrepeat.png"></image>
+      </view>
+    </view>
+    <view class="form-item" ng-click="touchPickerShow()">
+      <view class="item-title">详细地址：</view>
+      <view class="item-select" ng-if="!regions">省、市、区</view>
+      <view class="item-value" ng-if="regions">{{formatRegions}}</view>
+      <image class="item-arrow" src="{{iconURL}}/icon-addresss-down.png"></image>
+    </view>
+    <view class="form-item">
+      <view class="item-textarea">
+        <textarea type="text" placeholder="请填写详细地址（街道、小区、门牌等）" maxlength="300"></textarea>
+      </view>
+    </view>
+    <view class="form-item no-border">
+      <view class="item-title">
+        <span class="border-right">邮政编码</span>
+      </view>
+      <view class="item-input">
+        <input type="tel" ng-change="validtel()" placeholder="邮政编码" ng-model="mobile" />
+      </view>
+      <view class="item-addrepeat" ng-show="mobile.length > 0" ng-click="mobile=''">
+        <image ng-src="{{iconURL}}/icon-addrepeat.png"></image>
+      </view>
+    </view>
+    <!--<view class="form-item" ng-class="{active: isDefault}" ng-click="touchSetDefault()" ng-show="notDefault">
+			<view class="item-title padding-left">设置默认</view>
+			<view class="item-checkbox"></view>
+		</view>-->
+  </view>
+  <view class="toggle-item row row-center">
+    <view class="item-title col">默认地址</view>
+    <view class="item-toggle col">
+      <switch wx:if="{{!canchangeDefault}}" bindchange="switchChange" />
+      <switch wx:if="{{canchangeDefault}}" bindchange="switchChange" />
+    </view>
+  </view>
+
+  <!-- Picker -->
+  <view class="drawer_screen" wx:if="{{false}}" bindtap="touchPickerCancel()"></view>
+  <view class="address-picker" wx:if="{{false}}" ng-show="showPicker">
+    <view class="picker-header">{{pickerRegionName || '请选择地区'}}</view>
+    <view class="picker-list">
+      <view id="address_picker_top"></view>
+      <view class="list-loading" ng-if="addressEditModel.isLoading">正在加载...</view>
+      <view class="list-item" ng-repeat="region in pickerData track by $index" ng-click="touchPickerRegion(region)" ng-if="pickerData && pickerData.length">
+        {{region.name}}
+        <image class="item-arrow" ng-src="{{iconURL}}/icon_right_arrow.png" ng-if="region.regions && region.regions.length"></image>
+      </view>
+    </view>
+    <view class="picker-cancel" ng-click="touchPickerCancel()">取消</view>
+  </view>
+  <!-- 保存地址 -->
+  <view class="address-action">
+    <!--<view class="bar-cancel" ng-click="touchCancel()">取消</view>-->
+    <view class="bar-save" ng-click="touchSave()">
+      <span ng-if="!isselectnew">保存</span>
+      <!-- <span ng-if="isselectnew">保存并使用</span> -->
+    </view>
+  </view>
+  <!-- 删除地址 -->
+  <view class="address-action" ng-if="addressEditModel.consignee">
+    <view class="bar-delete" ng-click="touchDelete()">删除地址</view>
+  </view>
+  <!-- Dialog -->
+  <view id="dialog" wx:if="{{false}}" ng-show="showDelAddressDialog">
+    <view class="mask"></view>
+    <view class="dialog danger">
+      <view class="dialog-content">是否要删除该地址？</view>
+      <view class="dialog-button">
+        <view class="button left" ng-click="cancelDelAddress()">取消</view>
+        <view class="button right" ng-click="sureToDelAddress()">确认</view>
+      </view>
+    </view>
+  </view>
+</view>

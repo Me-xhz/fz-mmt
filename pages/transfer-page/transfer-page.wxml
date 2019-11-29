@@ -1,0 +1,12 @@
+<view class="transfer-page">
+  <view class="image">
+    <image class="animation" src="{{iconURL}}/game-yt-animation01.gif" mode="widthFix"></image>
+  </view>
+  <view class="image">
+    <image class="top-logo" src="{{iconURL}}/game-yt-top-logo.png" mode="widthFix"></image>
+  </view>
+  <button class="btn" bindtap="goPageUrl">立即进入</button>
+  <view class="bottom-image">
+    <image class="bottom-logo" src="{{iconURL}}/game-yt-bottom-logo.png" mode="widthFix"></image>
+  </view>
+</view>

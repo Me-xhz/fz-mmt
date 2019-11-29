@@ -1,0 +1,40 @@
+.inputBox {
+  margin-top: 300rpx;
+  width: 750rpx;
+}
+.delivery-input {
+  min-width: 40rpx;
+  width: 450rpx;
+  min-height: 80rpx;
+  line-height: 100rpx;
+  border: 1rpx #555555 solid;
+  padding: 10rpx;
+  margin-left: 40rpx;
+  border-radius: 8rpx;
+  font-size: 42rpx;
+}
+.btn-sm{
+  width: 150rpx;
+  text-align: center;
+  height: 100rpx;
+  padding: 0;
+  background-color: #ff0041;
+  line-height: 100rpx;
+  color: #fff;
+  font-size: 32rpx;
+}
+.scan{
+  position: absolute;
+  bottom: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  width: 160rpx;
+  height: 160rpx;
+  line-height: 160rpx;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  text-align: center;
+  color: #fff;
+  background-color: #ff0041;
+}

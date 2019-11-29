@@ -1,0 +1,5 @@
+<view class="loading-box">
+  <view class="box-one"></view>
+  <view class="box-two"></view>
+  <view class="box-three"></view>
+</view>

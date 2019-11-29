@@ -1,0 +1,33 @@
+<!--pages/user/order-express.wxml-->
+<view class="container">
+  <view class="order-express">
+    <view class="express-header">
+      <view class="header-item">
+        <span class="item-title">物流公司：</span>
+        <span class="item-content">{{topinfo.shipping_name}}</span>
+      </view>
+      <view class="header-item">
+        <span class="item-title">运单编号：</span>
+        <span class="item-content">{{topinfo.invoice_no}}</span>
+      </view>
+    </view>
+    <view class="express-status" wx:if="{{listinfo && listinfo.length}}">
+      <view class="status-item first" wx:if="{{listinfo && listinfo.length}}" wx:for="{{listinfo}}" wx:for-item="status">
+        <view class="item-title">
+          {{status.content}}
+        </view>
+        <view class="item-content">{{status.datetime}}</view>
+        <view class="item-vline"></view>
+        <view class="item-dot"></view>
+      </view>
+      <view class="status-item first">
+        <view class="item-title">商品已出库，快递揽收中</view>
+        <view class="item-content">{{orderExpressModel.topinfo.shipping_time}}</view>
+        <view class="item-vline tip"></view>
+        <view class="item-dot"></view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<loading wx:if="{{loadingShow}}"></loading>

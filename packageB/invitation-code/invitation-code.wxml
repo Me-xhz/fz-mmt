@@ -1,0 +1,36 @@
+<!--packageB/invitation-code/invitation-code.wxml-->
+<view class="invitation-code" style="background-image: url({{iconURL}}/invitation-code-bg.png)">
+  <view class='goHomeFixed' catchtap='gotoHome'>
+    <view class="iconfont icon-btn_fanhuizuojiantoux icon-leftReturn"></view>
+    <text>返回</text>
+  </view>
+  <image class="header-logo" src="{{iconURL}}/invitation-code-logo.png"></image>
+  <view class="main">
+    <view class="code-box">
+    <view class="text">
+      <import src="../../wxParse/wxParse.wxml" />
+      <view class="wxParse">
+        <template is="wxParse" data="{{wxParseData:content.nodes}}" />
+      </view>
+    </view>
+    <view class="code {{info.status == 0 ? '' : 'smoll'}}">{{info.status == 0 ? info.invite_code : info.status_text}}</view>
+    <view class="rend" wx:if="{{info.status == 0}}">
+      <canvas class='canvas' style="width:{{qrcodeWidth}}px; height:{{qrcodeWidth}}px;" canvas-id='canvas' bindlongtap='save'></canvas>
+    </view>
+    </view>
+    <view class="btn-box">
+      <button bindtap="gotoHome">返回</button>
+    </view>
+    <view class="footer">*最终解释权归买买提所有</view>
+  </view>
+</view>
+<!-- 获得分享红包弹窗 -->
+<view class="curtain" wx:if="{{showRidoTitleModal}}" catchtouchmove="bindtouchmove"></view>
+<view class="popup-model" wx:if="{{showRidoTitleModal}}" catchtouchmove="bindtouchmove">
+  <view class="title">领取成功</view>
+  <view class="row popup-footer-btn">
+    <view class="btn" bindtap="gotoHome">返回首页</view>
+  </view>
+</view>
+
+<loading wx:if="{{loadingShow}}"></loading>

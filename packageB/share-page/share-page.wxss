@@ -1,0 +1,22 @@
+page{
+    background-color: #fff;
+}
+.share-list{
+    width:100%;
+    padding: 24rpx;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+.share-list .share-box{
+    background-color: #ffe150;
+    width: 30%;
+    height:200rpx;
+    margin: 10rpx;
+    border-radius: 44rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    font-weight: 500;
+}

@@ -1,0 +1,92 @@
+<view class="container with-loader">
+  <view class="aftermarket-status">
+    <view wx:for="{{listinfo.timeline}}" class="aftermarket-box {{index == (listinfo.timeline.length-1) ? 'last' : ''}} {{ listinfo.back_cnt.is_fucked == 1 ? 'end' : ''}}">
+      <view class="box-line"></view>
+      <view class="box-top">
+        <i>{{item.created_at}}</i>
+      </view>
+      <view wx:if="{{item.back_info.model}}" class="box-main {{item.back_info.model != 1 && item.back_info.model != 4 && item.back_info.model != 3 && item.back_info.model != 7 ? 'revist' : ''}} {{item.back_info.model != 1 && item.back_info.model != 2 && item.back_info.model != 5 && item.back_info.model != 6 && item.back_info.model != 7 && item.back_info.model != 8 ? 'revive' : ''}}">
+        <view wx:if="{{item.back_info.title}}" class="main_title {{item.back_info.model == 7 ? 'no-padding' : ''}}">{{item.back_info.title}}</view>
+        <view class="main_list_menu01" wx:if="{{item.back_info.model == 1}}">
+          <view class="main_list_menu01_p">售后单号：{{item.back_info.back_apply.back_sn}}</view>
+          <view class="main_list_menu01_p">售后商品：{{item.back_info.back_apply.goods_name}}</view>
+          <view class="main_list_munu01_btns">
+            <button bindtap="showwithdrawDialog" wx:if="{{listinfo.back_cnt.status == 1}}">取消申请</button>
+            <button bindtap="go_order_return_detail">查看详情</button>
+          </view>
+        </view>
+        <view class="main_list_menu02" wx:if="{{item.back_info.model == 2}}">
+          <view class="main_list_menu02_addmsg">请在30天内将货物寄回以下地址并提交物流信息</view>
+          <view class="main_list_menu02_add">{{item.back_info.sure_address.address}}</view>
+          <view class="main_list_menu02_p">收件人：{{item.back_info.sure_address.receive}}</view>
+          <view class="main_list_menu02_p">电话：{{item.back_info.sure_address.tel}}</view>
+        </view>
+        <view class="main_list_menu03" wx:if="{{item.back_info.model == 3}}">
+          <view class="main_list_menu03_inputs">
+            <view class="inputs_wl-input" bindtap='showLogistics'>
+              <input type="text" value="{{shipping_name == '其他' ? '' : shipping_name}}" disabled='{{LogisticsDs}}' placeholder="{{LogisticsDs ? '请选择物流公司' : '请填写物流公司'}}" bindinput='LogisticsTxt' readonly="readonly" bindtap="showShipping" />
+              <view class="item-img">
+                <image wx:if='{{LogisticsDs}}' src="{{iconURL}}/icon_arrowDown.png" mode='widthFix'/>
+              </view>
+            </view>
+            <view class="inputs_wl-input">
+              <input type="text" value="{{shipping_sn}}" bindinput='LogisticsSn' placeholder="物流单号" />
+            </view>
+          </view>
+          <view class="main_list_menu03_update_imgs">
+            <view class='h1'>上传图片
+              <i>(最多3张)</i>
+            </view>
+            <view class="box-img" wx:for="{{uploadImg}}" wx:for-item='img' wx:key='index'>
+              <image src="{{img}}" />
+              <image class="img-del" src="{{iconURL}}/btn_delImg.png" bindtap="delUploadImg" data-index='{{index}}' />
+            </view>
+            <label wx:if="{{uploadImg.length < 3}}" bindtap='updataimg'></label>
+          </view>
+          <view class="main_list_menu03_upadate_button">
+            <button bindtap="submitShipping">提交</button>
+          </view>
+        </view>
+        <view class="main_list_menu04" wx:if="{{item.back_info.model == 4}}">
+          <view class="main_list_menu04_shippingcompany">物流公司：{{item.back_info.shipping_info.shipping_name}}</view>
+          <view class="main_list_menu04_shippingodd">物流单号：{{item.back_info.shipping_info.invoice_no}}</view>
+          <view class="main_list_menu04_addimgs row" wx:if="{{item.back_info.shipping_info.back_ship_pic1 || item.back_info.shipping_info.back_ship_pic2 || item.back_info.shipping_info.back_ship_pic3}}">
+            <view class="addimgs_img" wx:if="{{item.back_info.shipping_info.back_ship_pic1}}">
+              <image src="{{item.back_info.shipping_info.back_ship_pic1}}" />
+            </view>
+            <view class="addimgs_img" wx:if="{{item.back_info.shipping_info.back_ship_pic2}}">
+              <image src="{{item.back_info.shipping_info.back_ship_pic2}}" />
+            </view>
+            <view class="addimgs_img" wx:if="{{item.back_info.shipping_info.back_ship_pic3}}">
+              <image src="{{item.back_info.shipping_info.back_ship_pic3}}" />
+            </view>
+          </view>
+        </view>
+        <view class="main_list_menu05" wx:if="{{item.back_info.model == 5}}">
+          <view class="main_list_menu05_tkmonny">退款金额：
+            <i class='icon_rmb'>¥</i>
+            {{item.back_info.back_amount}}
+          </view>
+          <view class="main_list_menu05_tkmonnymsg">退款金额将在7个工作日内退回到支付账户，请注意查收</view>
+        </view>
+        <view class="main_list_menu06" wx:if="{{item.back_info.model == 6}}">
+          <view class="main_list_menu06_shippingcompany">物流公司：{{item.back_info.change_shipping_info.change_shipping_name}}</view>
+          <view class="main_list_menu06_shippingodd">物流单号：{{item.back_info.change_shipping_info.change_invoice_no}}</view>
+          <view class="main_list_munu06_btns">
+            <button bindtap="go_order_return_shipping" data-back-id = "{{}}">查看物流</button>
+             <button bindtap="showConfirmDialog" wx:if="{{listinfo.back_cnt.status == 4}}">确认收货</button>
+          </view>
+        </view>
+        <view class="main_list_menu07" wx:if="{{item.back_info.model == 7}}"></view>
+        <view class="main_list_menu08" wx:if="{{item.back_info.model == 8}}">
+          <view class="main_list_menu08_msg">客服因{{item.back_info.reject_reason.receve}}原因不同意退货如有疑问可提出申诉</view>
+          <view class="main_list_menu08_buttons">
+            <button bindtap="go_linkkf">在线申诉</button>
+            <button>电话申诉</button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<loading wx:if="{{loadingShow}}"></loading>

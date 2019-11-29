@@ -1,0 +1,70 @@
+/* components/notice/notice.wxss */
+.notice{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9998;
+  padding: 0 16rpx;
+  box-sizing: border-box;
+  transform: translateY(-230rpx);
+}
+.notice.show{
+  transform: translateY(20rpx);
+  transition: all 0.5s ease;
+}
+.notice-box{
+  display: flex;
+  background:rgba(0,0,0,0.6);
+  box-shadow:0px 0px 9px 0px rgba(0,0,0,0.25);
+  border-radius:8px;
+  height:210rpx;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 0 24rpx;
+}
+.notice-box .user-logo{
+  width: 156rpx;
+  height: 156rpx;
+  background-color: #eeeeee;
+}
+.right-box{
+  width: 530rpx;
+  height: 156rpx;
+  position: relative;
+}
+.notice-box .text{
+  font-size: 32rpx;
+  color: #303030;
+  margin-left: 16rpx;
+  display: flex;
+  font-weight:600;
+}
+.notice-box .text .name{
+  width: 100rpx;
+  height: 40rpx;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.notice-box .text i{
+  font-size: 30rpx;
+  color: #FFE150
+}
+.notice-box .btn{
+  position: absolute;
+  bottom: 0;
+  right: 26rpx;
+  width: 236rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #fff;
+  background:linear-gradient(180deg,rgba(255,154,0,1) 0%,rgba(255,97,0,1) 100%);
+  border-radius: 50px;
+  margin-left: 10rpx;
+  padding: 0;
+}

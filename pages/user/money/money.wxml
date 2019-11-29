@@ -1,0 +1,14 @@
+<!--pages/user/money/money.wxml-->
+<view class='list'>
+  <view class='item' wx:for="{{account_info}}" wx:key='{{index}}'>
+    <view class='des t4'>{{item.desc}}</view>
+    <view class='time t2'>{{item.change_time}}</view>
+    <view class='price'>{{item.type==2?'-':'+'}}{{item.change_money}}</view>
+  </view>
+  <view class="empty" wx:if="{{account_info.length==0}}">
+    <view class="empty-item">
+      <image class="item-logo" src="{{iconURL}}/icon_order_empty01.png" />
+      <view class="item-text">暂无余额消费记录</view>
+    </view>
+  </view>
+</view>

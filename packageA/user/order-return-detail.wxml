@@ -1,0 +1,137 @@
+<!--main sn-->
+<view class='container'>
+<!-- 返回首页悬浮框/分享进入显示 -->
+  <view class='goHomeFixed' catchtap='gotoHome' wx:if="{{isShowGoHome}}">
+    <image src='{{iconURL}}/product-icon-leftReturn.svg' class='icon-leftReturn'></image>
+    <text>返回首页</text>
+  </view>
+  <view class="sns-header row row-center">
+    <view class="col {{backInfo.show_order_status.type == 1 ? 'danger' : ''}}">{{backInfo.show_order_status.title}}</view>
+    <!-- <navigator url="/pages/problem/problem" class='message t3'>联系客服</navigator> -->
+    <button class='message t3' show-message-card='true' open-type='contact' session-from='goodBuy'>联系客服</button>
+    <!-- <view class="header-button" bindtap="go_aftermarketSchedule" data-back_sn='{{backInfo.back_id}}' wx:if="{{backInfo.is_history_show == 1}}">查看进度</view> -->
+  </view>
+  <!-- 申请售后信息 -->
+  <view class='idontk' wx:if="{{backInfo.status == 2 && backInfo.back_type != 3}}">
+    <view class='t1'>是否已将退换货商品寄放至提货点位置？</view>
+    <view class='t3 btn' bindtap='Idontk'>已寄回</view>
+  </view>
+  <!-- 提货码 -->
+  <!-- 换货已发出 -->
+  <view class='qrCode' wx:if="{{backInfo.status == 5&&backInfo.get_sn.length>0}}">
+    <!-- <view class='qr'>
+      <image src='http://temp.im/300x300'></image>
+    </view> -->
+    <view class='code'>
+      <text class='small'>提货码：</text><text>{{backInfo.get_sn}}</text>
+    </view> 
+    <view class='des'>
+      <view>提货时请向工作人员出示提货码</view>
+      <view>请勿将提货码告知他人，防止包裹丢失</view>
+    </view>
+  </view>
+  <!-- 拒绝原因 -->
+  <view class="refuse_remark t4" wx:if="{{backInfo.refuse_remark!=''&&(backInfo.status==6||backInfo.status==7)}}">
+    拒绝原因：{{backInfo.refuse_remark}}
+  </view>
+  <!-- Goods -->
+  <view class="order-main">
+    <view class="goods-item no-border" wx:for="{{backInfo.goods_info}}" bindtap="go_product" data-product-id='{{backInfo.goods_info.goods_id}}'>
+      <view class="item-photo">
+        <image src='{{item.header_img}}'></image>
+      </view>
+      <view class="item-info">
+        <view class="info-name">
+          {{item.goods_name}}
+        </view>
+        <view class="info-attr">{{item.sku_key_name}}</view>
+        <view class="info-price">
+          <i class='icon_rmb'>¥</i>{{item.shop_price}}
+        </view>
+        <view class="info-amount">x{{item.amount}}</view>
+      </view>
+    </view>
+  </view>
+  <!--order msg-->
+  <view class="order-msg-box">
+    <view class="order-msg" wx:if="{{backInfo.back_type !=1}}">
+      <view class="msg-header row">
+        <span class="header-title t4">退款金额</span>
+        <span class="col header-price">
+          <i class="font-bold">
+            <i class='icon_rmb'>¥</i>{{backInfo.back_amount}}
+          </i>
+          <!-- <i wx:if="{{!showback_fee}}" class="header-txt_del">（若使用余额或者优惠券，将一并退回）</i> -->
+        </span>
+      </view>
+    </view>
+    <view class="order-msg">
+      <view class="msg-header row">
+        <span class="header-title t4">申请原因</span>
+        <span class="header-txt col tr">{{backInfo.reason}}</span>
+      </view>
+    </view>
+    <view class="order-msg-mainbox">
+      <view class="msg-header">
+        <span class="header-title t4">详细描述</span>
+      </view>
+      <text>{{backInfo.reason_detail}}</text>
+      <view class="msg-imgbox" wx:if="{{backInfo.back_goods_pics.length > 0}}">
+        <view class="box-img" wx:for="{{backInfo.back_goods_pics}}">
+          <image wx:if='{{item}}' src="{{item}}" />
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="order-sns">
+    <p>
+      <i class="sns-title t4">申请时间：</i>
+      <i class="sns-txt t4">{{backInfo.goods_info[0].add_time}}</i>
+    </p>
+    <p class="allowselect">
+      <i class="sns-title t4 forbiddenselect">订单编号：</i>
+      <i class="sns-txt t4 allowselect">{{backInfo.order_sn}}</i>
+    </p>
+    <p class="allowselect">
+      <i class="sns-title t4 forbiddenselect">售后单号：</i>
+      <i class="sns-txt t4 allowselect">{{backInfo.back_sn}}</i>
+    </p>
+  </view>
+  
+  <view class="order-msg-box" wx:if="{{backInfo.contact}}">
+    <view class="order-msg">
+      <view class="msg-header row">
+        <span class="header-title">联系方式</span>
+        <span class="header-txt col tr">{{backInfo.contact}}</span>
+      </view>
+    </view>
+  </view>
+</view>
+<!--GO KF-->
+<view class='order-kf'>
+  <view class='phone-kf t3' bindtap='phoneCall'>联系客服</view>
+  <view class='t2 phone-kf-time'>
+    <text>服务时间：</text>
+    <text>9:00-18:00</text>
+  </view>
+</view>
+<!-- <view class="order-kf">
+  <view class="kf-time">
+    服务时间：9:00-23:00
+  </view>
+  <view class="kf-type row">
+    <view class="col w50 kf-ol" bindtap="golinkkf">
+      <button open-type='contact' hover-class="none" session-from='cilicili'>
+        <image src="{{iconURL}}/icon_kfOnline.png"></image>
+        <text>在线客服</text>
+      </button>
+    </view>
+    <view bindtap='phoneCall' class="col w50 kf-ol no-margin">
+      <image src="{{iconURL}}/icon_kfTel.png" />
+      <text>电话客服</text>
+    </view>
+  </view>
+</view> -->
+
+<loading wx:if="{{loadingShow}}"></loading>

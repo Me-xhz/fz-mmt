@@ -1,0 +1,18 @@
+/* components/vcode/vcode.wxss */
+
+.yzm{
+  padding: 0 22rpx;
+  height: 46rpx;
+  line-height: 46rpx;
+  box-sizing: border-box;
+  font-size: 30rpx;
+  background-color: #fff !important;
+}
+
+
+ .inactivity{
+  color: #eb3c39;
+}
+.activited{
+  color: #ddd;
+}

@@ -1,0 +1,24 @@
+<!--components/invitationGuide/invitationGuide.wxml-->
+<view class="invitation-curtain" wx:if="{{show}}"></view>
+<view class="invitation-guide" wx:if="{{show}}" style="background-image: url('{{iconURL}}/getTiketsuccess_bg_tiket2.png')">
+  <view class="guide-box">
+    
+    <view class="ticketContent">
+      <!-- <view class="tikiet_title">领取成功</view> -->
+      <view class="tikiet_limit" >
+          <view class="amount" wx:if="{{moneytype}}">￥ <text>{{bonus}}</text></view>
+          <view class="amount" wx:if="{{!moneytype}}"><text>{{bonus}}</text><i>折</i></view>
+          <view class="tiketDetail">
+            <!-- <view class="tiket_use">{{tiketName}}</view> -->
+            <view class="decrip">{{description}}</view>
+            <view class="usable" >{{deadline}}</view>
+          </view>
+      </view>
+      <view class="btnrgroup">
+          <!-- <button bindtap="gotiketCenter" class="readDetail">立即查看</button> -->
+          <button bindtap="goback" class="Issure">立即领取</button>
+      </view>
+    </view>
+    <view class="tiketOut" bindtap="hide" style="background-image:url({{iconURL}}/btn-index-closs.png)"></view>
+  </view>
+</view>

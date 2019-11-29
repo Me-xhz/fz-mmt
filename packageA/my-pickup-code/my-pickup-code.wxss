@@ -1,0 +1,233 @@
+/* packageA/my-pickup-code/my-pickup-code.wxss */
+page{
+    background-color: #fff;
+}
+.code-box{
+    position: relative;
+}
+.code-record{
+    width: 130rpx;
+    height:100rpx;
+    background-color:#ffe150;
+    border-radius:200rpx 0 0 200rpx;
+    text-align: center;
+    font-weight: 500;
+    padding: 10rpx 4rpx;
+    box-sizing: border-box;
+    line-height: 40rpx;
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    font-size: 32rpx;
+    color:#303030;
+    position: absolute;
+    right: 0;
+    top:90rpx;
+    z-index:1001;
+}
+.pickup-code-box{
+    width: 100%;
+    padding: 32rpx 24rpx 0 24rpx;
+    box-sizing: border-box;
+}
+.pickup-code-box .pickup-code{
+    width: 100%;
+    height:678rpx;
+    background-color: #FEF1A7;
+    border-radius: 12rpx;
+    padding: 18rpx 18rpx 0 18rpx;
+    box-sizing: border-box;
+}
+.pickup-code-box .pickup-code .code{
+    width: 100%;
+    height:540rpx;
+    background-color: #fff;
+    border-radius: 12rpx;
+    padding: 24rpx 12rpx;
+    box-sizing: border-box;
+}
+.pickup-code-box .pickup-code .code .code-text{
+    font-size:40rpx;
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+}
+.pickup-code-box .pickup-code .code .code-text i{
+    font-size: 24rpx;
+    color:#aaa;
+    line-height: 34rpx;
+}
+.pickup-code-box .pickup-code .code .code-text text{
+    line-height: 56rpx;
+    margin-left: 10rpx;
+}
+.pickup-code-box .pickup-code .code .code-img{
+    width: 424rpx;
+    height:424rpx;
+    margin: 0 auto;
+}
+.pickup-code-box .pickup-code .code .reload-btn{
+    width: 134rpx;
+    height:56rpx;
+    background:rgba(0,0,0,0.05);
+    border-radius: 34rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:20rpx auto 0 auto;
+
+}
+.pickup-code-box .pickup-code .code .reload-btn .reload-img{
+    width: 28rpx;
+    height:30rpx;
+}
+.pickup-code-box .pickup-code .code .reload-btn .reload-text{
+    font-size: 24rpx;
+    color:#303030;
+    font-weight: 500;
+    margin-left: 12rpx;
+}
+.pickup-code-box .pickup-code .pickup-num{
+    width: 100%;
+    text-align: center;
+    color:#814900;
+    font-weight: 500;
+    font-size: 32rpx;
+    line-height: 44rpx;
+}
+.pickup-code-box .pickup-code .pickup-num i{
+    font-size: 80rpx;
+    font-weight: 500;
+    line-height: 112rpx;
+    color:#EB3C39;
+    margin: 0 28rpx;
+}
+.pickup-list{
+    padding:0 24rpx;
+    box-sizing: border-box;
+    margin-bottom: 50rpx;
+}
+.pickup-list .pickup-box{
+    margin-top: 48rpx;
+
+}
+.pickup-list .pickup-box .pickup-name{
+    font-size: 32rpx;
+    font-weight: 600;
+    line-height: 44rpx;
+    color:#303030;
+    display: flex;
+    justify-content: space-between;
+}
+.pickup-list .pickup-box .pickup-name .pickup_btn{
+    width: 206rpx;
+    height:56rpx;
+    color:#303030;
+    font-size: 24rpx;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    padding: 0 22rpx;
+    box-sizing: border-box;
+    background:rgba(0,0,0,0.05);
+    border-radius: 34rpx;
+}
+.pickup-list .pickup-box .pickup-name .pickup_btn image{
+    width: 30rpx;
+    height:30rpx;
+    margin-right: 12rpx;
+}
+.pickup-list .pickup-box .goods-list .goods-box{
+    width: 100%;
+    height:160rpx;
+    margin-top: 24rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.pickup-list .pickup-box .goods-list .goods-box .goods-img{
+    width: 160rpx;
+    height:160rpx;
+    background-color: #aaa;
+}
+.pickup-list .pickup-box .goods-list .goods-box .goods-msg{
+    flex: 1;
+    padding-left: 16rpx;
+    box-sizing: border-box;
+    height:160rpx;
+    position: relative;
+}
+.pickup-list .pickup-box .goods-list .goods-box .goods-msg .goods-name{
+    width: 378rpx;
+    height:80rpx;
+    font-size: 28rpx;
+    color:#303030;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-align: left;
+    overflow: hidden;
+    line-height: 40rpx;
+}
+.pickup-list .pickup-box .goods-list .goods-box .goods-msg .goods-content{
+    font-size: 28rpx;
+    color:#aaa;
+    font-weight: 500;
+    position: absolute;
+    bottom: 0;
+    left: 16rpx;
+}
+.pickup-list .pickup-box .goods-list .goods-box .goods-msg .goods-num{
+    font-size:80rpx;
+    color:#EB3C39;
+    font-weight: 500;
+    position: absolute;
+    top:22rpx;
+    right: 0;
+    line-height: 112rpx;
+}
+
+.pickup-list .pickup-box .goods-list .goods-box .goods-msg i{
+    font-size: 48rpx;
+    line-height: 66rpx;
+    margin-right: 12rpx;
+}
+.empty-box {
+    position: relative;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 104rpx;
+}
+
+.empty-box.address-empty {
+    height: 600rpx;
+    background: #fff;
+
+}
+
+.empty-box .empty-new-item {
+    /*position: absolute;*/
+    /*left: 50%;*/
+    /*top: 40%;*/
+    display: block;
+    width: 100%;
+    /*transform: translate(-50%,-50%);*/
+}
+
+.empty-box .empty-new-item .item-logo {
+    display: block;
+    margin: 0 auto;
+    width: 288rpx;
+    height: 128rpx;
+}
+.empty-box .empty-new-item .item-text{
+    display: block;
+    height: 120rpx;
+    margin-top: 48rpx;
+    color: #333;
+    font-size: 32rpx;
+    font-weight: 600;
+    overflow: hidden;
+    text-align: center;
+}

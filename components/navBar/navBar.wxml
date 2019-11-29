@@ -1,0 +1,11 @@
+<!--components/navBar/navBar.wxml-->
+<view class="navbar-box" style="height: {{navBarHeight}}px">
+  <view style="height: {{navBarHeight}}px"></view>
+  <view class="navbar-menu" style="height: {{navBarHeight}}px">
+    <view class="menu-left {{!showBack || !showHome ? 'noborder' : ''}}">
+      <view bindtap="back" wx:if="{{showBack}}" class="iconfont icon-btn_fanhuizuojiantoux"></view>
+      <view bindtap="backHome" wx:if="{{showHome}}" class="iconfont icon-btn_shangxiangshouyex"></view>
+    </view>
+    <view class="menu-title">{{title}}</view>
+  </view>
+</view>

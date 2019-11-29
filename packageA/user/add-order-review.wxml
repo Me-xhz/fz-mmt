@@ -1,0 +1,64 @@
+<view class="container">
+  <!-- Goods -->
+  <view class="review-goods" wx:for="{{orderReview}}" wx:key="index">
+    <view class="goods-item">
+      <view class="row row-center item-inner margin_left">
+        <view class="item-photo">
+          <image src="{{item.goods_img}}" />
+        </view>
+        <view class="item-name">{{item.goods_name}}</view>
+        <view class="review_view">
+          <view class="review_grade" wx:if="{{item.comment_rank == 1}}">
+            <image class="grade-icon"  src="{{iconURL}}/icon_comment_good.png" />
+            <span class="grade-name">好评</span>
+          </view>
+          <view class="review_grade" wx:if="{{item.comment_rank == 2}}">
+            <image class="grade-icon"  src="{{iconURL}}/icon_comment_middle.png" />
+            <span class="grade-name">中评</span>
+          </view>
+          <view class="review_grade" wx:if="{{item.comment_rank == 3}}">
+            <image class="grade-icon"  src="{{iconURL}}/icon_comment_bad.png" />
+            <span class="grade-name">差评</span>
+          </view>
+        </view>
+      </view>
+      <view class="old-review padding_left">
+        <view>
+          <text>{{item.old_content}}</text>
+        </view>
+        <view class="box-img" wx:for="{{item.review_img}}" wx:key="index" wx:for-item="img">
+          <image src="{{img}}"></image>
+        </view>
+      </view>
+      <view class="item-textarea padding_left">
+        <view class="addReviewTitle">追加评价</view>
+        <textarea maxlength="500" type="text" placeholder="请输入文字描述，5-500字" data-checked-id="{{item.checkedId}}" bindinput="add_comments"></textarea>
+      </view>
+      <view class="upload-img-box clearfix padding_left" style='padding-left:0'>
+        <view class="box-title">上传图片
+          <span>(选填，最多3张)</span>
+        </view>
+        <view class="box-img" wx:for="{{item.uploadImg}}" wx:for-item='img' wx:for-index="index" wx:key='index'>
+          <image src="{{img}}"></image>
+          <view class='img-del iconfont icon-btn_huangsetishiguanbix' bindtap="delUploadImg" data-index='{{index}}' data-checked-id="{{item.checkedId}}"></view>
+          <!-- <image class="img-del" src="{{iconURL}}/btn_delImg.png" bindtap="delUploadImg" data-index='{{index}}' data-checked-id="{{item.checkedId}}"/> -->
+        </view>
+        <label wx:if="{{item.uploadImg.length < 3}}" bindtap='updataimg' data-checked-id="{{item.checkedId}}"></label>
+      </view>
+    </view>
+  </view>
+  <view class="review-submit-box">
+    <button type='warn' class="review-submit" bindtap="submitImg">提交</button>
+  </view>
+</view>
+<!-- Dialog -->
+<view id="dialog" hidden="{{true}}">
+  <view class="mask"></view>
+  <view class="dialog danger">
+    <view class="dialog-content">确定放弃本次评价？</view>
+    <view class="dialog-button">
+      <view class="button left" bindtap="touchDialogCancel">取消</view>
+      <view class="button right" bindtap="touchDialogConfirm">确认</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,170 @@
+<!--packageB/invitation-share/invitation-share.wxml-->
+<view class="invitation-share" style="background-image: url('{{iconURL}}/invitation-red-packet-bg.png')">
+  <view class="header-swiper" wx:if="{{swiperNotice.length > 0}}">
+    <swiper class="header-swiper-list" bindchange="swiperBindchange" vertical="true" autoplay="true" interval="3000" circular="true" current="{{swiperCurrent}}">
+      <swiper-item class="swiper-item" wx:for="{{swiperNotice}}" wx:key='{{index}}'>
+        <view class="row swiper-block">
+          <image class="img" src="{{item.head_pic}}" width="widthFix"></image>
+          <view class="row text">
+            <view class="name">{{item.nickname}}</view>
+            <i wx:if="{{item.red_packet_type == 2}}">成功邀请好友下单，提现</i>
+            <i wx:if="{{item.red_packet_type == 1}}">下单成功，从手气红包获得了</i>
+          </view>
+          <view class="price">{{item.red_packet_in_cash}}元</view>
+        </view>
+      </swiper-item>
+      <view class="swiper-nohover"></view>
+    </swiper>
+  </view>
+  <view class="red-log" bindtap="getCslist">红包记录</view>
+  <view class="red-activity" bindtap="showActivityModel">活动规则</view>
+  <view class="header-title">
+    <view class="title">邀请同事成功下单</view>
+    <view class="title">可立即 <text>{{award_name}}</text></view>
+  </view>
+  <!-- 邀请下单人数未超过3人，显示的红包奖励 -->
+  <view class="header-img-box" wx:if="{{!showaword}}">
+    <image class="header-img" src="{{iconURL}}/invitation-red-packet.png" mode="widthFix"></image>
+    <button class="header-img-btn" style="background-image: url('{{iconURL}}/invitation-red-packet-btn.png')"></button>
+    <view class="img-number">20<i>元</i></view>
+    <view class="img-number-msg">(最少5元)</view>
+    <image class="prompt-img" src="{{iconURL}}/invitation-guide-prompt.gif" mode="widthFix"></image>
+    <form report-submit="true" bindsubmit="showShareGuide" wx:if="{{guideIsShowBtn && invite_list.length <= 0}}">
+      <button class="header-img-btn-model" form-type="submit"></button>
+    </form>
+    <button class="header-img-btn-model" open-type="share" bindtap="invitationShare" data-shareInfo="{{shareInfoInvite}}" wx:if="{{!guideIsShowBtn && invite_list.length <= 0}}"></button>
+    <form report-submit="true" bindsubmit="getEnvelopes" data-rid="{{invite_list[0].red_packet_id}}" wx:if="{{invite_list.length > 0}}">
+      <button class="header-img-btn-model" form-type="submit"></button>
+    </form>
+  </view>
+  <!-- 邀请下单人数超过3人，显示的优惠券奖励 -->
+  <view class="header-img-box02" wx:if="{{showaword}}">
+    <image class="header-img" src="{{iconURL}}/invitationShare_redPacket02.png" mode="widthFix"></image>
+    <view class="img-number">
+    {{tiket_limit}}<i>￥</i>
+    </view>
+    <form report-submit="true" bindsubmit="showShareGuide" wx:if="{{!tiketBtnshow}}">
+      <button class="header-img-btn-model" form-type="submit"></button>
+    </form>
+    <!-- 有代金券可领的时候显示这个按钮领代金券 -->
+     <form report-submit="true" bindsubmit="gettiket" data-name="tiket"  wx:if="{{tiketBtnshow}}">
+      <button class="header-img-btn-model" form-type="submit"></button>
+    </form>
+  </view>
+  <!-- 锚点跳转 -->
+  <view id="invitation "></view>
+
+  <view class="invitation-record " wx:if="{{invite_list.length> 0 || (invite_list.length == 0 && invite_list_urge.length == 0)}}">
+      <view class="invitation-record-box">
+        <view class="title">邀请记录</view>
+        <view class="record-card">
+          <view class="row card-box" wx:if="{{invite_list.length > 0}}" wx:for="{{invite_list}}" wx:key='{{index}}'>
+            <image class="user-logo" src="{{item.head_pic}}" mode="widthFix"></image>
+            <view>
+              <view class="msg">
+                <view class="span">{{item.nickname}}</view>
+                <i>在你的邀请下抢到了好货</i>
+              </view>
+              <view class="log">
+                <i class="open">
+                <text wx:if="{{item.red_packet_id > 0}}">你获得了一个可立即提现的红包</text>                      <text wx:if="{{item.coupon_id > 0}}">你获得了一张代金券</text>
+                </i>
+              </view>
+            </view>
+            <!-- 开红包 -->
+            <view class="btn open" wx:if="{{item.red_packet_id > 0}}" bindtap="getEnvelopes" data-rid="{{item.red_packet_id}}">开红包</view>
+            <!-- 领优惠券 -->
+            <view class="btn open" wx:if="{{item.coupon_id > 0}}" bindtap="getEnvelopes" data-rid="{{item.coupon_id}}" data-name="tiket" >立即领取</view>
+          </view>
+          <view class="default" wx:if="{{invite_list.length <= 0}}">
+            <image src="{{iconURL}}/invitation-red-packet-default.png" mode="widthFix"></image>
+            <view class="text">暂无邀请记录，邀请好友可得红包</view>
+          </view>
+        </view>
+      </view>
+  </view>
+  <view class="invitation-record" wx:if="{{invite_list_urge.length > 0}}">
+    <view class="invitation-record-box">
+      <view class="title">以下好友点击了你的链接，下单成功你将获得{{award_type}}</view>
+      <view class="record-card">
+        <view class="row card-box urge" wx:for="{{invite_list_urge}}" wx:key='{{index}}'>
+          <image class="user-logo" src="{{item.head_pic}}" mode="widthFix"></image>
+          <view>
+            <view class="msg">
+              <view class="span">{{item.nickname}}</view>
+              <i wx:if="{{item.status == 1}}">来到了买买提</i>
+              <i wx:if="{{item.status == 3}}">被其他人催促下单成功了</i>
+            </view>
+            <view class="log">
+              <i class="urge" wx:if="{{item.status == 1}}">好友下单成功你可以获得{{award_type_c}}</i>
+              <i wx:if="{{item.status == 3}}">你慢了一步,下次记得抓紧催他下单啊</i>
+            </view>
+          </view>
+          <form report-submit="true" bindsubmit="urgingReport" data-shareInfo="{{shareInfoUrge}}" wx:if="{{item.status == 1}}">
+            <button class="btn urge" form-type="submit" open-type="share" data-shareInfo="{{shareInfoUrge}}">催他下单</button>
+          </form>
+          <view class="btn edit" wx:if="{{item.status == 3}}" bindtap="getCsClickKnow" data-id="{{item.id}}">知道了</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 红包记录 -->
+<view class="curtain" wx:if="{{redLogShow || redActivityShow || popupShow}}" catchtouchmove="bindtouchmove"></view>
+<view class="red-log-model invitation-record" catchtouchmove="bindtouchmove" wx:if="{{redLogShow}}">
+  <view class="title">红包记录</view>
+  <scroll-view scroll-y="true" class="record-card scroll">
+    <view class="row card-box" wx:for="{{redLogList}}" wx:if="{{redLogList.length > 0}}" wx:key="{{index}}">
+      <image class="user-logo" src="{{item.head_pic}}" mode="widthFix"></image>
+      <view>
+        <view class="msg">
+          <view class="span">{{item.nickname}}</view>
+          <i>在你的邀请下抢到了好货</i>
+        </view>
+        <view class="log">
+          <i class="open" wx:if="{{item.red_packet_in_cash>0}}">你打开了一个现金红包</i>
+          <i class="open" wx:if="{{!item.red_packet_in_cash>0}}">你领取了一张代金券</i>
+        </view>
+      </view>
+      <view class="text-btn" wx:if="{{item.red_packet_in_cash>0}}">
+        <i>获得</i> {{item.red_packet_in_cash}}
+        <i>元</i>
+      </view>
+      <view class="text-btn" wx:if="{{!item.red_packet_in_cash>0}}">
+        <view wx:if="{{item.coupon.money.type==0}}">
+        <i>获得</i> {{item.coupon.money.bonus}}
+        <i>元</i></view>
+        <view wx:if="{{item.coupon.money.type==1}}">{{item.coupon.money.sill}}<i>折</i></view>
+       
+      </view>
+    </view>
+    <view class="default" wx:if="{{redLogList.length <= 0}}">
+      <image src="{{iconURL}}/invitation-red-packet-default.png" mode="widthFix"></image>
+      <view class="text">暂无邀请记录，邀请好友可得红包</view>
+    </view>
+  </scroll-view>
+  <view class="iconfont icon-btn_qiapianguanbianniux" bindtap="hideRedLog"></view>
+</view>
+<!-- 活动规则 -->
+<view class="red-activity-model" wx:if="{{redActivityShow}}" catchtouchmove="bindtouchmove">
+  <image src="{{iconURL}}/invitationShare_bg_rules.png" mode="widthFix"></image>
+  <view class="rule_txt" >
+    <view class="itemtxt"><view class="dot">1</view><view class="txtru">{{rules.item1}}</view></view>
+    <view class="itemtxt"><view class="dot">2</view><text class="txtru">{{rules.item2}}</text></view>
+    <view class="itemtxt"><view class="dot">3</view><text class="txtru">{{rules.item3}}</text></view>
+    <view class="itemtxt"><view class="dot">4</view><text class="txtru">{{rules.item4}}</text></view>
+    <view class="statement"><view>郑重声明：</view><text>{{rules.item5}}</text></view>
+  </view>
+  <view class="iconfont icon-btn_qiapianguanbianniux" bindtap="hideRedActivity"></view>
+</view>
+<!-- 引导弹窗 -->
+<view class="popup-model" wx:if="{{popupShow}}" catchtouchmove="bindtouchmove">
+  <image src="{{iconURL}}/invitation-red-popou.png" mode="widthFix"></image>
+  <view class="row popup-footer-btn">
+    <view class="btn left" bindtap="hidePopup">继续邀请</view>
+    <view class="btn right" bindtap="goHome">返回主页</view>
+  </view>
+</view>
+<invitationGuide isShow="{{guideIsShow}}" imgUrl="{{showaword}}"></invitationGuide>
+<!-- 红包-可领取红包 -->
+<envelopes wx:if="{{showRedEnvel}}" bind:click="getCsInviteList" show="{{showRedEnvel}}" rid="{{red_packet_id}}" showType="{{showRedEnvelType}}" tiketId="{{tiket_id}}"></envelopes>

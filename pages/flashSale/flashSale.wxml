@@ -1,0 +1,80 @@
+<!--pages/flashSale/flashSale.wxml-->
+<!-- <view class='ad'>
+  <image
+    src='{{item.header_img}}'
+    wx:for="{{activitylist}}"
+    wx:key="{{item.activity_id}}"
+    hidden='{{item.activity_id!=activity_id}}'>
+  </image>
+</view> -->
+<view class='status_bar'>
+  <view
+    class='status {{item.activity_id==activity_id?"actived":""}}'
+    wx:for="{{activitylist}}"
+    wx:key="{{item.activity_id}}"
+    data-activity_id='{{item.activity_id}}'
+    data-actived_idx='{{index}}'
+    bindtap='actived'>
+    <view>{{item.name}}</view>
+    <view class='text'>{{item.progress.des}}</view>
+  </view>
+</view>
+<!-- state  0:已结束  1：正在进行  2：预告 -->
+<view class='countDown mt16' wx:for="{{activitylist}}" hidden='{{item.activity_id!=activity_id}}' wx:key="{{item.activity_id}}" >
+    <view class='countDown-line-lf'></view>
+    <text data-activity_id='{{item.activity_id}}'>
+      <block wx:if="{{item.progress.state==0}}">本场已结束</block>
+      <block wx:if="{{item.progress.state==1}}">距结束</block>
+      <block wx:if="{{item.progress.state==2}}">距开始</block>
+    </text>
+    <countDown timestamp="{{item.progress.start_time}}" wx:if="{{item.progress.state==2}}"></countDown>
+    <countDown timestamp="{{item.progress.end_time}}"  wx:if="{{item.progress.state==1}}"></countDown>
+    <view class='countDown-line-rt'></view>
+</view>
+<!-- 商品列表 -->
+<view class='good_list' scroll-y="true">
+    <view class='good_wrap' wx:for="{{good_list}}">
+      <view class='good_pic'>
+          <view class="inequacy"  wx:if="{{item.is_enough==0}}">
+              <image class='' src='{{iconURL}}/inequacy02.png'></image>
+          </view>
+
+          <image src='{{item.list_img}}'></image>
+      </view>
+      <view class='good_info'>
+        <view class='good_name'>
+          <text class='good_tag' wx:if="{{item.activity_label}}">{{item.activity_label}}</text>
+          {{item.goods_name}}
+        </view>
+
+        <view class='good_price' style="margin-top:{{item.state==0?'60':'0'}}rpx">￥<text class='larger'>{{item.shop_price}}</text><text class='small'>￥{{item.market_price}}</text></view>
+
+        <view class='sale_bar' wx:if="{{item.state==1 && item.is_enough == 1}}">
+            <view class='left'>已售{{item.goods_sell_num}}份</view>
+            <view class='right'>剩余{{item.goods_amount - item.goods_sell_num}}份</view>
+        </view>
+        <view class='sale_bar_enough' wx:if="{{item.state==1 && item.is_enough == 0}}">
+          <view class='bar_enough'>已抢完</view>
+        </view>
+        <view class='good_num'  wx:if="{{item.state==2}}">限量{{item.goods_amount}}件</view>
+
+        <!-- <view class='percent_bar middle_pos' wx:if="{{item.state==1}}">
+          <view class='percent' style='width:{{item.percent}}%'></view>
+          <text class='percent_num' wx:if="{{item.percent>0}}">{{item.percent}}%</text>
+          <text class='percent_num' style='font-style:oblique;' wx:if="{{item.percent==0}}">已售罄</text>
+        </view> -->
+        <!-- <view class='bb'></view> -->
+        <view class='get_btn' >
+          <button class='btn3' wx:if="{{item.state==0}}" >原价购买</button>
+          <button class='btn1' wx:if="{{item.state==1}}">立即抢购</button>
+          <button class='btn2' wx:if="{{item.state==2}}">即将开始</button>
+        </view>
+      </view>
+      <form bindsubmit='goToProduct' class='flashSale-from-goods' data-goodsId='{{item.goods_id}}' report-submit='true'>
+        <button form-type='submit'></button>
+      </form>
+    </view>
+  <view class='no_more' hidden='{{good_list.length!=total || good_list.length==0}}'>没有更多了</view>
+</view>
+
+<loading wx:if="{{loadingShow}}"></loading>

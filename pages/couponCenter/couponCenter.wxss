@@ -1,0 +1,34 @@
+/* pages/couponCenter/couponCenter.wxss */
+
+page{
+  background-color: #f2f2f2;
+}
+.list{
+  padding: 32rpx 24rpx;
+}
+
+/* 暂无优惠券 */
+.coupon-empty{
+  margin-top: 60rpx;
+  align-items: center;
+  height: 385rpx;
+}
+.coupon-empty-image{
+  width: 280rpx;
+  height: 200rpx;
+  margin: 0 auto !important;
+  padding-top: 24rpx;
+}
+.coupon-empty-image image{
+  width: 100%;
+  height: 100%;
+}
+.coupon-empty-text{
+  margin-top: 45rpx;
+  font-size: 26rpx;
+  color: #555555;
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-weight: 700;
+}

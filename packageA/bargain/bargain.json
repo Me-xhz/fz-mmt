@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "specifications": "/components/specifications/specifications",
+    "paypu":"/components/payPu/index"
+  },
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "商品详情"
+}

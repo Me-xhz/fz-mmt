@@ -1,0 +1,157 @@
+<!-- 返回首页悬浮框/分享进入显示 -->
+<!-- <view class='goHomeFixed' catchtap='gotoHome' wx:if="{{isShowGoHome}}">
+    <image src='{{iconURL}}/product-icon-leftReturn.svg' class='icon-leftReturn'></image>
+    <text>返回首页</text>
+</view> -->
+<view class='credits-header'>
+<!--<view class='credits-header' wx:if="{{adList.length > 0 && adList[0].ad_code != '' && !invite_info.invite_list}}">-->
+    <!--<view class="swipers newSwipers indexAd" id="topHeight">-->
+        <!--<swiper indicator-color="{{indicatorColor}}" current="{{indexAdcurrent}}" indicator-active-color="#ffbb44" indicator-dots="{{indicatorDots}}" circular="{{circular}}" autoplay="{{!autoplay}}" interval="{{interval}}" duration="{{duration}}">-->
+            <!--<swiper-item wx:for="{{adList}}" wx:key="{{item.ad_id}}" style="{{item.ad_code?'':'background-image:url({{iconURL}}/cstp.png)'}}">-->
+                <!--<image mode="aspectFit" class="adImg newAdimg" src='{{item.ad_code}}'></image>-->
+                <!--<form class='index-from-indexAd new' bindsubmit='goWebView' data-type='2' data-item='{{item}}' report-submit='true'>-->
+                    <!--<button form-type='submit'></button>-->
+                <!--</form>-->
+            <!--</swiper-item>-->
+        <!--</swiper>-->
+    <!--</view>-->
+    <view class="credits-tips">
+        可用积分： <i>{{points}}</i> <text class="get-more-score" bindtap="showScoreTask">如何获取</text>
+    </view>
+    <view class="credits-record" bindtap="toRecord">
+        兑换记录 <view class="iconfont icon-btn_xiangyoudajiantoux icon-right-arrow"></view>
+    </view>
+</view>
+<view class="credits-task">
+    <image class="task-sign-image" src="{{scoreAdList[0]}}" bindtap="creditsSign">
+
+    </image>
+    <image class="task-sign-image" src="{{scoreAdList[1]}}" bindtap="{{game_info.staus == 1 ? 'goForward' : 'showForward'}}">
+
+    </image>
+</view>
+<view class="credits-title-box">
+    <view class="credits-title">
+        <image src="{{iconURL}}/credits-title.png"></image>
+        <view class="credits-title-rules" bindtap="toRules">
+            兑换规则
+        </view>
+    </view>
+    <view  class="credits-title-tips" wx:if="{{scoreGoodsNotice!=''}}">
+        <view class="credits-title-text" style="width:{{!noticeCheck?boxwidth+'rpx':'100%'}}">
+            <view class="credits-text-animation {{!noticeCheck?'credits-text-transform':''}}" style="left:{{!noticeCheck?'50%':marqueeDistance+'rpx'}};">
+                {{scoreGoodsNotice}}
+            </view>
+        </view>
+    </view>
+</view>
+<view class="goods-list">
+    <view class="goods-box" wx:for="{{scoreGoodsList}}" bindtap="toProduct" data-score_goods_id="{{item.score_goods_id}}" wx:key="index">
+        <view class="img-box">
+            <image src="{{item.list_img}}" class="goods-img"></image>
+            <!--<image src="{{iconURL}}/is-exchange.png" class="tips"></image>-->
+            <image src="{{iconURL}}/in-replenishment.png" class="tips" wx:if="{{item.is_enough!=1}}"></image>
+        </view>
+        <view class="goods-msg">
+            <view class="goods-title">
+                {{item.score_goods_name}}
+            </view>
+            <view class="goods-price">
+                {{item.score_price}}
+                <i>
+                    积分
+                </i>
+                <!--<image src="{{iconURL}}/credits-icon.png" class="price-icon">-->
+
+                <!--</image>-->
+            </view>
+        </view>
+    </view>
+</view>
+<!--积分领取弹窗-->
+<view class="drawer_screen" wx:if="{{showScore}}" bindtap="showScoreModal" catchtouchmove="preventdefault"></view>
+<view class="get-score-modal" style="background-image:url({{iconURL}}/credits-task-bg.png) " animation="{{animationData}}" wx:if="{{showScore}}">
+    <image class="close-credits" src="{{iconURL}}/close-credits-task.png" bindtap="showScoreModal"></image>
+    <view class="score-title">
+        海量积分轻松得
+    </view>
+    <view class="score-list">
+        <view class="score-box" wx:for="{{scoreTaskList}}">
+            <image class="score-icon" src="{{item.icon_img}}">
+
+            </image>
+            <view class="score-list-name">
+                {{item.name}}({{item.achieve_num}}/{{item.can_num}})
+            </view>
+            <view class="score-list-btn">
+                <view class="score-btn" wx:if="{{item.state==0&&item.id!=4}}" bindtap="{{item.id==1?'creditsSign':item.id==2?'gotoHome':item.id==3?'gotoHome':''}}">
+                    {{item.state_desc}}
+                </view>
+                <view class="score-btn-text" wx:else>
+                    {{item.state_desc}}
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="credits-bottom" wx:if="{{scoreGoodsList.length>0}}">~ 到底啦！~</view>
+<loadingBottom wx:if="{{showBottomLoading}}"></loadingBottom>
+<!--答谢积分弹窗-->
+<view class="drawer_screen" wx:if="{{showThankModal}}" catchtouchmove="preventdefault"></view>
+<view class="credits-thank-box {{showThankModal?'thank-animation':''}}" wx:if="{{showThankModal}}" style="background-image: url({{iconURL}}/credits-card01.png)">
+    <view class="credits-thank-title">
+        <view class="credits-thank-title-text">
+            恭喜获得答谢积分
+        </view>
+    </view>
+    <view class="credits-thank-score">
+        共<i>{{bargainThankList.total_score}}</i>积分
+    </view>
+    <scroll-view class="credits-thank-list" scroll-y="true">
+        <view class="credits-thank-list-box" wx:for="{{bargainThankList.list}}" wx:key="{{index}}">
+            <image class="score-icon" src="{{item.head_pic}}">
+
+            </image>
+            <view class="score-nickname">
+                <view>
+                    {{item.nickname}}
+                </view>
+                <i>感谢帮砍</i>
+            </view>
+            <view class="score-list-btn">
+                <view class="score-btn-text">
+                    {{item.points}}<i>积分</i>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+    <view class="credits-thank-btn" bindtap="getAllPoint">
+        开心收下
+    </view>
+</view>
+<!--敬请期待弹窗-->
+<!--兑换完弹窗-->
+<view class="drawer_screen_credits" wx:if="{{showForward}}" bindtap="closeForward" catchtouchmove="preventdefault"></view>
+<view class="credits-box" wx:if="{{showForward}}">
+    <text>{{game_info.msg}}</text>
+    <view class="get-score" bindtap="closeForward">
+        <text>确定</text>
+        <view class="iconfont icon-btn_xiangyoudajiantoux"></view>
+    </view>
+    <view class="welfare-closs" bindtap="closeForward">
+        <image src="{{iconURL}}/btn-index-closs.png" mode="widthFix"></image>
+    </view>
+</view>
+<!--敬请期待弹窗-->
+<view class="drawer_screen_credits" wx:if="{{showTaskForward}}" bindtap="closeTaskForward"   catchtouchmove="preventdefault"></view>
+<view class="credits-task-none" wx:if="{{showTaskForward}}">
+    <view>获取积分通道更新中</view>
+    <view>敬请期待</view>
+    <view class="get-score-none" bindtap="closeTaskForward">
+        <text>确定</text>
+        <view class="iconfont icon-btn_xiangyoudajiantoux"></view>
+    </view>
+    <view class="welfare-closs" bindtap="closeTaskForward">
+        <image src="{{iconURL}}/btn-index-closs.png" mode="widthFix"></image>
+    </view>
+</view>

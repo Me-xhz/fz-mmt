@@ -1,0 +1,278 @@
+<view class='container'>
+  <!-- 返回首页悬浮框/分享进入显示 -->
+  <view class='goHomeFixed' catchtap='gotoHome' wx:if="{{isShowGoHome}}">
+    <image src='{{iconURL}}/product-icon-leftReturn.svg' class='icon-leftReturn'></image>
+    <text>返回首页</text>
+  </view>
+  <view class='search-bar'>
+    <view class="flexs">
+      <input class="searchbar" placeholder='搜索商品' confirm-type="search" value="{{searchValue}}" bindinput="searchValueInput" bindconfirm="searchProductData" />
+      <button class='search_icon'>
+        <view class='iconfont icon-img_sousuox'></view>
+      </button>
+    </view>
+  </view>
+  <view bindtap="toShopCoupon" class="coupon-flex {{ordernum.can_use_shop_coupon && ordernum.can_use_shop_coupon > 0 && showCouponFlex ? 'show' : ''}}">
+    温馨提示：您有<i>{{ordernum.can_use_shop_coupon}}</i>个红包可使用 >>
+  </view>
+  <view class='notice-wrap' wx:if='{{showNotice}}' bindtap='noticeToast'>
+    <view class='notice'>
+      <view class="marquee_text" style="left:{{noticeMarqueeDistance}}px;">
+        {{notice}}
+      </view>
+      <view class="marquee_text" style="left:{{noticeMarqueeDistance + sizeLength}}px;">
+        {{notice}}
+      </view>
+    </view>
+    <view class='filter'></view>
+    <view class='iconfont icon-btn_gerenzhongxinyoujiantoux'></view>
+  </view>
+  <view class="header-msg">
+    <view class='header-box' style='background-image: url({{shopInfo.backgroud_img}})'>
+      <view class="shop-logo">
+        <image src='{{shopInfo.logo}}' lazy-load="true"></image>
+      </view>
+      <view class="shop-msg">
+        <view class="shop-name">{{shopInfo.name}}</view>
+        <view class="foctory-name" wx:if="{{shopInfo.pickup_name}}">
+          <i class="iconfont icon-btn_shouyedingweix"></i>
+          <i>{{shopInfo.pickup_name}}</i>
+        </view>
+        <view class="affiche">{{shopInfo.desc}}</view>
+      </view>
+      <button class='share' open-type="share">
+        <i class='iconfont icon-fenxiang-'></i>
+      </button>
+    </view>
+  </view>
+  <view class="all-goods">
+    <scroll-view scroll-y="true" scroll-top="{{leftScrollTop}}" scroll-with-animation="true" class="left" style='height: {{viewHeight}}px;'>
+      <view class="classify {{seletTag == item.id ? 'active' : ''}}" bindtap='seletedCategory' data-id="{{item.id}}" data-index="{{index}}" wx:for="{{categoryInfo}}" wx:key="index">
+        <image class="icon-goods" lazy-load="true" src="{{item.icon}}" wx:if="{{item.type==2||item.type==1}}"></image>
+        <view class="{{item.type==2||item.type==1?'right-font':''}}">{{item.name}}</view>
+        <view wx:if="{{item.in_cart_num > 0}}" class='categoryMsg'>{{item.in_cart_num}}</view>
+      </view>
+    </scroll-view>
+
+
+    <scroll-view scroll-y="true" scroll-top="{{rightScrollTop}}" class="right" bindscrolltolower="onReachBottom" lower-threshold="150" style='height: {{viewHeight}}px;'>
+      <view class="goods" bindtap="showProduct" data-id="{{item.id}}" wx:for="{{categoryList}}" wx:key="index">
+        <view class="goods-img">
+          <image src='{{item.original_img}}' lazy-load="true"></image>
+        </view>
+        <view class='goods-disble-img' wx:if="{{item.is_enough == 0}}">
+          <image  lazy-load="true" src='{{iconURL}}/inequacy02.png'></image>
+        </view>
+        <view class="goods-msg">
+          <view class="goods-name">
+            {{item.name}}
+          </view>
+          <view class="goods_desc">
+            {{item.goods_desc}}
+          </view>
+          <!-- <view class="goods-standrad">
+                      {{item.sku_key_name}}
+                  </view> -->
+          <view class="goods-price">
+            <i>¥</i>
+            <text class="price-num">{{item.shop_price}}</text>
+            <text class="market-price" wx:if="{{item.shop_price!=item.market_price}}">¥{{item.market_price}}</text>
+          </view>
+          <view class='cart-number-box' catchtap='{{item.in_cart_num == 0 ? "addCart" : ""}}' data-item='{{item}}' data-type="add">
+            <view class='addcart_icon reduce {{item.in_cart_num > 0 ? "reduceShow" : ""}}' catchtap='addCart' data-item='{{item}}' data-type="reduce">
+              <i class="iconfont lh-44">-</i>
+            </view>
+            <text class='{{item.in_cart_num > 0 ? "show" : ""}}'>{{item.in_cart_num}}</text>
+            <view class='addcart_icon add' catchtap='addCart' data-item='{{item}}' data-type="add">
+              <i class="iconfont icon-add lh-44"></i>
+            </view>
+          </view>
+        </view>
+      </view>
+      <loadingBottom wx:if="{{showBottomLoading}}"></loadingBottom>
+    </scroll-view>
+  </view>
+  <view class="bottom-box">
+    <view class="shop-logo {{animationActive ? 'active' : ''}}" bindtap="showShop">
+      <i class="iconfont icon-btn_shangxianggouwuchex"></i>
+      <view class='tag' wx:if="{{cartNum > 0}}">{{cartNum}}</view>
+    </view>
+    <view class="all-price">
+      <text class='p' wx:if="{{shopInfo.is_close_shop == 0 && cartTotals.total_price}}">¥{{cartTotals.total_price}}</text>
+      <text class='i' wx:if="{{shopInfo.is_close_shop == 0 && cartTotals.shipping_price && cartTotals.shipping_text == ''}}">配送费：¥{{cartTotals.shipping_price}}</text>
+      <text class='i' wx:if="{{shopInfo.is_close_shop == 0 && cartTotals.shipping_price && cartTotals.shipping_text != ''}}">{{cartTotals.shipping_text}}</text>
+      <text class='t' wx:if="{{shopInfo.is_close_shop == 1}}">{{shopInfo.close_desc}}</text>
+    </view>
+    <view class="buy-btn {{btnDisplay ? 'no-buy-btn':''}}" bindtap="{{btnDisplay ? '' : 'goSettlement'}}">
+      {{btnText}}
+    </view>
+  </view>
+  <view wx:if="{{animationActive}}" class='cart-animation {{animationActive ? "active" : ""}}'>
+    <image src='{{cartAnimationImg}}' lazy-load="true"></image>
+  </view>
+  <view class="conpun-postion-box" wx:if="{{showCountIcon}}">
+    <view class="conpun-postion-img" bindtap="getAssistanceCoupon">
+      <image class="imgbox" lazy-load="true" src="{{iconURL}}/tackout-conpun-ad-imgbox.png"></image>
+      <!-- <image class="imgbtn" lazy-load="true" src="{{iconURL}}/bargain-conpun-ad-imgbtn.png"></image> -->
+      <!-- <view class="text">点击领取</view> -->
+    </view>
+  </view>
+</view>
+<!--跳转订单页-->
+<!-- <view class="load-order">
+
+</view> -->
+<!--购物车弹窗-->
+<view class="drawer_screen" catchtap="showShop" wx:if="{{showModalStatus}}"></view>
+<view animation="{{animationData}}" class="shop-box" wx:if="{{showModalStatus}}">
+  <view class="box-title">
+    <text class="sku-title">已选商品</text>
+    <view class="sku-title" bindtap='onShopCartClean' wx:if="{{cartList.length > 0}}">
+      <i class="iconfont icon-lajitong mr-10"></i>
+      <i>清空</i>
+    </view>
+  </view>
+  <view class='cart-list-box'>
+    <view class="cart-list" wx:for="{{cartList}}" wx:key="index">
+      <view class="cart-msg">
+        <view class="cart-name">{{item.goods_name}}</view>
+        <view class="cart-price"><i>¥</i>{{item.shop_price}}</view>
+        <view class='cart-number-box'>
+          <view class='addcart_icon reduce' wx:if="{{item.in_cart_num > 0}}" catchtap='addCart' data-item='{{item}}' data-type="reduce">
+            <i class="iconfont lh-44">-</i>
+          </view>
+          <text wx:if="{{item.in_cart_num > 0}}">{{item.in_cart_num}}</text>
+          <view class='addcart_icon add' catchtap='addCart' data-item='{{item}}' data-type="add">
+            <i class="iconfont icon-add lh-44"></i>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='cart-no-list' wx:if="{{cartList.length == 0}}">
+    <image lazy-load="true" src='{{iconURL}}/icon_cart_empty02.png'></image>
+    <text>您还没有添加商品~</text>
+  </view>
+</view>
+<!--商详弹窗-->
+<view class="drawer_screen" catchtap="showProduct" wx:if="{{showProductModal}}"></view>
+<view animation="{{animationDatas}}" class="product-sku" wx:if="{{showProductModal}}">
+  <!--轮播商品图片-->
+  <swiper class="goods-product-img" indicator-dots="true" indicator-active-color="#ffe150">
+    <swiper-item wx:for="{{gallery}}" wx:key="index">
+      <image lazy-load="true" data-current='{{item.image_url}}' src="{{item.image_url}}" class="slide-image" />
+    </swiper-item>
+  </swiper>
+
+  <view class="goods-product-title">
+    <view class="goods-product-msg">
+      <view class="goods-product-name">
+        {{goodInfo.name}}
+      </view>
+      <view class="goods_desc">
+        {{goodInfo.goods_desc}}
+      </view>
+      <view class="goods-product-price">
+        <i>¥</i>
+        <text class="price-num">{{goodInfo.shop_price}}</text>
+        <text class="market-price" wx:if="{{goodInfo.shop_price != goodInfo.market_price}}">¥{{goodInfo.market_price}}</text>
+      </view>
+    </view>
+    <view class='cart-number-box'>
+      <view class='addcart_icon reduce' wx:if="{{goodInfo.in_cart_num > 0}}" catchtap='addCart' data-item='{{goodInfo}}' data-type="reduce">
+        <i class="iconfont lh-44">-</i>
+      </view>
+      <text wx:if="{{goodInfo.in_cart_num > 0}}">{{goodInfo.in_cart_num}}</text>
+      <view class='addcart_icon add' catchtap='addCart' data-item='{{goodInfo}}' data-type="add">
+        <i class="iconfont icon-add lh-44"></i>
+      </view>
+    </view>
+  </view>
+  <view class="store-msg">
+    <view class='address row'>
+      <image lazy-load="true" class='address-img' src='{{shopInfo.logo}}'></image>
+      <text class='address-name'>{{shopInfo.name}}</text>
+      <view class="contact">
+        <view class="to-link" bindtap='makePhoneCall'>
+          <image lazy-load="true" src="{{iconURL}}/phone_blue.png"></image>
+          <text>联系商家</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='iconfont closs icon-btn_guanbianniux' catchtap="showProduct"></view>
+</view>
+<!--搜索弹窗-->
+<view class="drawer_screen" catchtap="showSearch" wx:if="{{showSearchModal}}"></view>
+<view animation="{{animationSearch}}" class="search-modal" wx:if="{{showSearchModal}}">
+  <view class='header-bar'>搜索结果</view>
+  <scroll-view scroll-y="true" bindscrolltolower="searchReachBottom" lower-threshold="100" class='search-list-box'>
+    <view class="goods" bindtap="showProduct" data-id="{{item.id}}" wx:for="{{searchList}}" wx:key="index">
+      <view class="goods-img">
+        <image lazy-load="true" src='{{item.original_img}}'></image>
+      </view>
+      <view class='goods-disble-img'>
+        <image lazy-load="true" wx:if="{{item.is_enough == 0}}" src='{{iconURL}}/inequacy02.png'></image>
+      </view>
+      <view class="goods-msg">
+        <view class="goods-name">
+          {{item.name}}
+        </view>
+        <!-- <view class="goods-standrad">
+              {{item.sku_key_name}}
+          </view> -->
+        <view class="goods-price">
+          <i>¥</i>
+          <text class="price-num">{{item.shop_price}}</text>
+          <text class="market-price" wx:if="{{item.shop_price != item.market_price}}">¥{{item.market_price}}</text>
+        </view>
+        <view class='cart-number-box'>
+          <view class='addcart_icon reduce' wx:if="{{item.in_cart_num > 0}}" catchtap='addCart' data-item='{{item}}' data-type="reduce">
+            <i class="iconfont lh-44">-</i>
+          </view>
+          <text wx:if="{{item.in_cart_num > 0}}">{{item.in_cart_num}}</text>
+          <view class='addcart_icon add' catchtap='addCart' data-item='{{item}}' data-type="add">
+            <i class="iconfont icon-add lh-44"></i>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <view class='iconfont closs icon-btn_guanbianniux' catchtap="showSearch"></view>
+</view>
+<!-- 领券弹窗 -->
+<view class="drawer_screen" wx:if="{{showCountModel}}"></view>
+<view class="conut-modal" wx:if="{{showCountModel}}">
+  <view class="conut-modal-box {{showCountModel ? 'show' : ''}}">
+    <image lazy-load="true" mode="widthFix" bindtap="getSpecialCoupon" src="{{shopCouponImg}}"></image>
+    <view class='iconfont closs icon-btn_guanbianniux' catchtap="hideConut"></view>
+  </view>
+</view>
+
+<!-- 优惠券领取成功后显示 -->
+<view class='Advertisement' wx:if="{{showCouponPopup}}">
+  <view class='AdvertisementAbs'>
+    <view class='AdimageBox'>
+      <image mode='widthFix' class='AdvertisementImg' src='{{couponPopupInfo.bk_img}}'></image>
+      <form report-submit='true' class='AdvertisementOut-view' bindsubmit='hideCouponPopup'>
+        <button class='AdvertisementOut' style="background-image:url({{iconURL}}/btn-index-closs.png)" formType='submit'></button>
+      </form>
+    </view>
+    <view class="coupon-box">
+      <scroll-view scroll-y='true' class='coupon-box-scroll'>
+        <view class='coupon-wrap' style='background-image:url({{iconURL}}/img_qdhbyhqkp@2x.png)' wx:for="{{couponPopupInfo.lists}}" wx:key="{{index}}">
+          <view class='left'>
+            <text class='price1'>¥</text>
+            <text class='price2'>{{item.value}}</text>
+          </view>
+          <view class='right'>
+            <view class='text1 ellipsis'>{{item.name}}</view>
+            <view class='text2 ellipsis'>{{item.description}}</view>
+            <view class='text2' style='white-space:nowrap;'>{{item.use_end_date}}</view>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="shadow"></view>
+    </view>
+  </view>
+</view>

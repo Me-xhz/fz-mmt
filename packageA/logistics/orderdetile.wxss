@@ -1,0 +1,324 @@
+.orderdetail {
+  padding-bottom: 100rpx;
+}
+
+.order-header {
+  position: relative;
+  padding: 20rpx 25rpx;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+}
+
+.order-item {
+  font-size: 30rpx;
+  color: #000;
+  margin-top: 10rpx;
+}
+
+.order-state {
+  position: absolute;
+  top: 35rpx;
+  right: 25rpx;
+  background-color: #eb3c39;
+  color: #fff;
+  padding: 10rpx;
+  border-radius: 8rpx;
+  font-size: 20rpx;
+}
+
+.order-geo {
+  align-items: center;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+}
+
+.geo-text {
+  font-size: 50rpx;
+  font-weight: bold;
+  color: #dc0805;
+}
+
+.geo-name {
+  font-size: 30rpx;
+  margin-top: 10rpx;
+  color: #555;
+}
+
+.order-info {
+  position: relative;
+  background-color: #fff;
+  margin: 20rpx 0;
+  padding: 25rpx;
+}
+
+.info-item {
+  font-size: 30rpx;
+  color: #333;
+  margin-top: 10rpx;
+}
+
+.info-item.key {
+  font-size: 44rpx;
+  color: #000;
+}
+.info-item.key.tel{
+  color: #1989fa;
+}
+.info-state {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  background-color: #1989fa;
+  color: #fff;
+  font-size: 48rpx;
+  text-align: center;
+  letter-spacing: 4px;
+  font-weight: bold;
+}
+
+.info-state.start {
+  background-color: #eb3c39;
+}
+
+.info-state.sale {
+  background-color: #1989fa;
+  font-size: 42rpx;
+}
+
+.submit {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 750rpx;
+  text-align: center;
+  height: 100rpx;
+  background-color: #eb3c39;
+  font-size: 40rpx;
+  color: #fff;
+  line-height: 100rpx;
+  z-index: 10
+}
+
+.submit.disbled {
+  background-color: #aaa;
+}
+
+.order-main {
+  padding-top: 25rpx;
+  padding-left: 80rpx;
+}
+.order-main .goods-item.on{
+  background-color: #888;
+  opacity: 0.6
+}
+.order-main .goods-item .item-info {
+  min-height: 180rpx;
+}
+
+.order-main .goods-item .item-photo {
+  width: 180rpx;
+  height: 180rpx;
+}
+
+.order-main .goods-item .item-info .info-name {
+  font-size: 32rpx;
+}
+
+.total-goods {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 32rpx;
+  background-color: #fff;
+  border-bottom: 1rpx solid #f2f2f2;
+}
+
+.total-goods-msg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 32rpx;
+  padding-bottom: 20rpx;
+  margin-bottom: 20rpx;
+  border-bottom: 1rpx solid #f2f2f2;
+}
+
+.total-goods i {
+  font-size: 80rpx;
+  color: #eb3c39;
+  margin: 0 8rpx;
+  font-weight: bold;
+}
+
+.info-amount-font {
+  font-size: 80rpx !important;
+  color: #eb3c39 !important;
+  font-weight: 600 !important;
+}
+
+.order-main .info-chack {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  left: -60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.order-main .info-chack .iconfont {
+  font-size: 40rpx;
+  color: #39aceb;
+}
+
+.order-main .info-chack.on .iconfont {
+  color: #eb3c39;
+}
+
+.order-main .goods-item .item-info .info-amount {
+  top: 80% !important;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+}
+
+.order-main .goods-item .item-info .amount-button {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.order-main .goods-item .item-info .amount-button button {
+  width: 80rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 50rpx;
+}
+
+.order-main .goods-item .item-info .amount-input {
+  width: 120rpx;
+  height: 80rpx;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50rpx;
+  color: #000;
+  font-weight: bold;
+}
+
+.order-main .goods-item .item-info .amount-input i {
+  color: #eb3c39;
+  font-size: 60rpx;
+}
+
+/*********** Dialog ***********/
+
+.dialog {
+  z-index: 1079;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  width: 700rpx;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 1);
+  text-align: center;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+.dialog .dialog-title{
+  position: relative;
+  width: 100%;
+  border-bottom: 1rpx solid #d5d5d6;
+  font-size: 42rpx;
+  padding: 20rpx 0;
+}
+.dialog .dialog-title i{
+  color: #eb3c39;
+  font-size: 60rpx;
+  font-weight: bold;
+  margin: 0 10rpx;
+}
+.dialog .dialog-scroll{
+  height: 520rpx;
+}
+.dialog .dialog-content {
+  position: relative;
+  width: 100%;
+  color: #030303;
+  font-size: 36rpx;
+  overflow: hidden;
+  line-height: 34rpx;
+  box-sizing: border-box;
+  text-align: left;
+  padding: 30rpx 20rpx;
+  display: flex;
+  display: -webkit-flex;
+  border-bottom: 1rpx solid #d5d5d6;
+}
+.dialog .dialog-content i{
+  color: #eb3c39;
+  margin-left: 20rpx;
+  font-size: 50rpx;
+  text-align: right;
+  width: 25%;
+}
+
+.dialog .dialog-closs {
+  position: absolute;
+  top: 18rpx;
+  right: 18rpx;
+}
+
+.dialog .dialog-closs img {
+  width: 36rpx;
+}
+
+.dialog .dialog-button {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  text-decoration: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  border-top: 1rpx solid #d5d5d6;
+}
+
+.dialog .dialog-button .button {
+  float: left;
+  position: relative;
+  display: block;
+  width: 50%;
+  box-sizing: border-box;
+  color: #030303;
+  font-size: 32rpx;
+  font-weight: normal;
+  text-align: center;
+  padding: 30rpx 0;
+}
+
+.dialog .dialog-button .button.left {
+  font-weight: normal;
+}
+
+.dialog .dialog-button .button.right {
+  font-weight: bold;
+  color: #eb3c39;
+}
+
+.dialog .dialog-button .button.right:after {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1rpx;
+  bottom: 0;
+  border-left: 1rpx solid #d5d5d6;
+  color: #d5d5d6;
+}

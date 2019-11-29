@@ -1,0 +1,116 @@
+/* pages/user/order-express.wxss */
+
+.order-express {
+  position: relative;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.order-express .express-header {
+  position: relative;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: #e9e9e9 1px solid;
+  border-width: 0.5px;
+  padding: 32rpx 26rpx;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.order-express .express-header .header-item {
+  position: relative;
+  display: block;
+  font-size: 28rpx;
+  margin-bottom: 10rpx;
+}
+
+.order-express .express-header .header-item .item-title {
+  position: relative;
+  color: #030303;
+  font-weight: normal;
+}
+
+.order-express .express-header .header-item .item-content {
+  position: relative;
+  color: #030303;
+  font-weight: normal;
+}
+
+.order-express .express-status {
+  position: relative;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: #f2f2f2 1rpx solid;
+  background-color: #fff;
+  padding: 54rpx 0;
+  overflow: hidden;
+}
+
+.order-express .express-status .status-item {
+  position: relative;
+  display: block;
+  padding: 2rpx 120rpx 40rpx 120rpx;
+  overflow: hidden;
+}
+
+.order-express .express-status .status-item .item-title {
+  position: relative;
+  color: #767676;
+  font-size: 26rpx;
+  line-height: 32rpx;
+  margin-top: -4rpx;
+  font-weight: normal;
+}
+
+.order-express .express-status .status-item .item-title a {
+  color: #fdaa17;
+}
+
+.order-express .express-status .status-item .item-content {
+  position: relative;
+  color: #767676;
+  font-size: 26rpx;
+  font-weight: normal;
+}
+
+.order-express .express-status .status-item .item-vline {
+  position: absolute;
+  top: 0;
+  left: 67.5rpx;
+  display: block;
+  width: 1px;
+  height: 100%;
+  background-color: #bbb;
+}
+
+.order-express .express-status .status-item .item-vline.tip {
+  height: 0;
+}
+
+.order-express .express-status .status-item .item-dot {
+  position: absolute;
+  top: 0;
+  left: 68rpx;
+  transform: translateX(-50%);
+  display: block;
+  width: 24rpx;
+  height: 24rpx;
+  background-color: #bbb;
+  border-radius: 50%;
+}
+
+.order-express .express-status .status-item:first-of-type .item-dot {
+  background-color: #FF7F95;
+}
+
+.order-express .express-status .status-item:first-of-type .item-title {
+  color: #FF7F95;
+}
+
+.order-express .express-status .status-item:first-of-type .item-content {
+  color: #FF7F95;
+}

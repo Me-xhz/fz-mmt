@@ -1,0 +1,286 @@
+page {
+  background: white;
+}
+
+.orderDetails {
+  padding: 20rpx 24rpx;
+  height: 190rpx;
+  overflow: hidden;
+}
+
+.orderListTitle {
+  height: 100rpx;
+  line-height: 100rpx;
+  border-bottom: 1rpx solid #f3f3f3;
+}
+
+.orderListTitle .userImg {
+  float: left;
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 35rpx;
+  margin: 15rpx;
+}
+
+.orderListTitle .userImg image {
+  border-radius: 35rpx;
+  width: 100%;
+  height: 100%;
+}
+
+.orderListTitle .userName {
+  padding-right: 50rpx;
+  background: url(../../../images/member_list_arrow.png) no-repeat 90% center;
+  background-size: 35rpx 35rpx;
+}
+
+.orderListTitle .orderStatus {
+  float: right;
+  margin-right: 20rpx;
+  color: #2f7b27;
+  font-size: 34rpx;
+}
+
+.orderListDetails {
+  position: relative;
+  height: 100%;
+  display: flex; 
+  padding: 30rpx 0;
+  box-sizing: border-box;
+  background: url('http://img.mall.surex.cn/cilicili_icons/icon_coupon_bg.png') 100% 100% no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+.orderListDetails .col-70 {
+  width: 70%;
+  box-sizing: border-box;
+}
+.orderListDetails .col-30 {
+  width: 30%;
+  box-sizing: border-box;
+}
+
+.orderListDetails.odd {
+  background-image: url('http://img.mall.surex.cn/cilicili_icons/icon_coupon_bgDisabled.png');
+}
+
+.orderListDetails .productImg {
+  flex: 1.3;
+  height: 217rpx;
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+}
+
+.orderListDetails .productImg image {
+  width: 100%;
+  height: 100%;
+}
+
+.n {
+  margin-top: 21.8rpx;
+  margin-right: 17.8rpx;
+  font-size: 25.8rpx;
+  display: inline-block;
+  line-height: 25.8rpx;
+  font-weight: 400;
+  color: #fff;
+}
+
+.b {
+  font-size: 23.8rpx;
+  display: inline-block;
+  line-height: 23.8rpx;
+  color: #fff;
+}
+
+.y {
+  font-size: 23.7rpx;
+  font-weight: 400;
+  color: #fff;
+}
+
+.x {
+  color: #fff;
+  font-size: 51.6rpx;
+  font-weight: 400;
+  padding-right: 25.8rpx;
+}
+
+.hh {
+  font-weight: 400;
+  font-size: 27.8rpx;
+  text-align: center;
+  color: #FF7F95;
+  width: 115.2rpx;
+  height: 59.6rpx;
+  line-height: 59.6rpx;
+  border-radius: 8rpx;
+  background-color: #fff;
+  position: absolute;
+  top: 21.8rpx;
+  right: 23.8rpx;
+}
+
+.odd .ticket-left .ticket-title {
+  color: #FFF;
+}
+.odd .ticket-left .ticket-dec {
+  color: #FFF;
+}
+.odd .ticket-left .ticket-time {
+  color: #FFF;
+}
+
+.c {
+  font-size: 21rpx;
+  position: relative;
+  top: -73rpx;
+  left: 237rpx;
+  width: 400rpx;
+  color: #ccc;
+}
+
+.classname {
+  font-size: 25rpx;
+  color: #ccc;
+}
+
+/* 08.1.12 */
+
+.cashgift-exchange {
+  box-sizing: border-box;
+  background: #f2f2f2;
+  padding: 15.8rpx;
+}
+
+.exchange-ltinput {
+  box-sizing: border-box;
+  border: 0;
+  font-size: 27.7rpx;
+  line-height: 27.7rpx;
+  color: #333;
+  border-radius: 1.8rpx;
+  padding: 15.8rpx 23.76rpx;
+  background-color: #fff;
+  height: 59.6rpx;
+  min-height: initial;
+}
+
+.exchange-rtbutton {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 13.8rpx 31.6rpx;
+  border-width: 0.9rpx;
+  font-size: 27.7rpx;
+  border-radius: 4.8rpx;
+  height: 59.6rpx;
+  line-height: 1;
+}
+.width90{
+  width: 90%;
+}
+.width10{
+  width: 10%;
+}
+.sendCode {
+  background: #030303;
+  color: #fff;
+}
+
+.ticket-left {
+  padding-left: 54rpx;
+}
+.ticket-left .ticket-title {
+  font-size:48rpx;
+  line-height:48rpx;
+  font-weight:bold;
+  padding-bottom:18rpx;
+}
+.ticket-left .ticket-dec {
+  color:#3E3E3E;
+  font-size:24rpx;
+  line-height:24rpx;
+  height:24rpx;
+  margin-bottom:10rpx;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  -webkit-line-clamp:1;
+}
+.ticket-left .ticket-time {
+  font-size:24rpx;
+  line-height:24rpx;
+}
+.ticket-button {
+  position: relative;
+  text-align: center;
+  line-height: 130rpx;
+  font-size:36rpx;
+  font-weight:bold;
+}
+.button-image {
+  position:absolute;
+  right:-20rpx;
+  bottom:-32rpx;
+}
+.button-image image {
+  width: 148rpx;
+  height: 148rpx;
+}
+
+.orderListFooter {
+  box-sizing: border-box;
+  padding: 27.8rpx 32.7rpx;
+  display: flex;
+  position: relative;
+}
+
+.i {
+  font-size: 25.8rpx;
+  color: #fff;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  float: left;
+}
+.couponArrow{
+  position: absolute;
+  right: 0;
+  top: 27.8rpx;
+  display: flex;
+  
+}
+.unfold .i {
+  -webkit-line-clamp: 10;
+}
+
+.couponArrow .pa {
+  width: 30.8rpx;
+  height: 17.8rpx;
+  transform: translateY(50%);
+  -webkit-transform: translateY(50%);
+  right: 0;
+}
+.emptyCoupon>view{
+  text-align: center;
+  font-size: 25rpx;
+  margin-top: 40rpx;
+}
+.complete{
+  text-align: center;
+  font-size: 20rpx;
+  margin-top: 49.2rpx;
+  margin-bottom: 28rpx;
+  color: #7D7D7F;
+}
+.rituallTitle{
+  position: fixed;
+  top: 0;
+  z-index: 9;
+}
+.rituallContent{
+  margin-top:108.8rpx;
+}

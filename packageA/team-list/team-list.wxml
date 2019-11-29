@@ -1,0 +1,41 @@
+<!-- 返回首页悬浮框/分享进入显示 -->
+<view class='goHomeFixed' catchtap='gotoHome' wx:if="{{isShowGoHome}}">
+    <image src='{{iconURL}}/product-icon-leftReturn.svg' class='icon-leftReturn'></image>
+    <text>返回首页</text>
+</view>
+
+<!-- 拼团参加列表 -->
+<view class="join-team">
+    <view class="team-list-box">
+        <view class="team-list">
+            <!--拼团列表组件-->
+            <!--components/teamList/teamList.wxml-->
+                <view wx:for="{{teamList}}" wx:key="index">
+                    <view class="join-list">
+                        <image class="join-list-img" src="{{item.head_pic}}">
+
+                        </image>
+                        <view class="join-list-name">
+                            {{item.nickname}}
+                        </view>
+                        <view class="join-list-right">
+                            <view class="join-list-less">
+                                <view>
+                                    还差 <text class="i">{{item.surplus}}人</text>拼成
+                                </view>
+                                <view class="count-time">
+                                    剩余<countDown time-text="time-text" doc-text="doc-text" timestamp="{{item.found_end_time*1000}}" type="2"></countDown>
+
+                                </view>
+                            </view>
+                            <form report-submit='true' bindsubmit="toAddTeam" data-alpha-beta="0" data-found_id="{{item.found_id}}" data-team_id="{{item.team_id}}" >
+                                <button form-type='submit' class="join-list-btn" >
+                                    去拼团
+                                </button>
+                            </form>
+                        </view>
+                    </view>
+                </view>
+        </view>
+    </view>
+</view>

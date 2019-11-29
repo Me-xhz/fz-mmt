@@ -1,0 +1,100 @@
+<!--pages/user/returnSQA.wxml-->
+<view class="container">
+  <view class='order-filter fixe-top-bar' id="barH">
+    <view class='filter-item w20 tochtype01 {{currentTap==0 ? "active" : "" }}' data-current="0" bindtap="swichNav">
+      <text>退款</text>
+    </view>
+    <view class='filter-item w20 tochtype02 {{currentTap==1 ? "active" : "" }}' data-current="1" bindtap="swichNav">
+      <!-- <a href="orderClass"> -->
+        <text>退货退款</text>
+      <!-- </a> -->
+    </view>
+    <view class='filter-item w20 tochtype03 {{currentTap==2 ? "active" : "" }}' data-current="2" bindtap="swichNav">
+      <text>换货</text>
+    </view>
+    <view class='filter-item w20 tochtype04 {{currentTap==3 ? "active" : "" }}' data-current="3" bindtap="swichNav">
+      <text>钱款去向</text>
+    </view>
+    <view class='filter-item w20 tochtype04 {{currentTap==4 ? "active" : "" }}' data-current="4" bindtap="swichNav">
+      <text>发票</text>
+    </view>
+  </view>
+  <scroll-view scroll-y='ture' scroll-into-view='{{toView}}' scroll-with-animation="false" class='sqa-list-box' bindscrolltolower="scrollBottom" lower-threshold="scroll">
+    <view class='box_type' id='refundProcess'>
+      <text class='box_title'>退款流程</text>
+      <image class="refundProcessImg" src="{{iconUrl}}/return-faq-list01.png"></image>
+      <text class='box_title'>退款常见问题</text>
+      <text class='menu-p-title'>
+        <text>1.</text>什么时候可以申请退款？</text>
+      <text class='menu-p-text'>订单状态为【待发货】时，买家可申请退款。</text>
+      <text class='menu-p-title'>
+        <text>2.</text>退款申请被拒绝了怎么办？</text>
+      <text class='menu-p-text'>客服拒绝后，如有疑问可通过再线客服进行申诉。</text>
+      <text class='menu-p-title'>
+        <text>3.</text>实际退款的金额为什么和申请的金额不同？</text>
+      <text class='menu-p-text'>由于买家个人原因退货产生的寄出邮费或者寄回过程中发生的折损费用等这些。</text>
+    </view>
+    <view class='box_type' id='refunds'>
+      <text class='box_title'>退货退款</text>
+      <image class="refundsImg" src="{{iconUrl}}/return-faq-list02.png"></image>
+      <text class='box_title'>常见问题</text>
+      <text class='menu-p-title'>
+        <text>1.</text>订单显示已经发货，货还没收到可以申请退货吗？</text>
+      <text class='menu-p-text'>目前不可以，确认收货后，才能申请退货。</text>
+      <text class='menu-p-title'>
+        <text>2.</text>已经确认收货了可以申请退货吗？</text>
+      <text class='menu-p-text'>确认收货后45天内仍可以进行退货退款申请。</text>
+      <text class='menu-p-title'>
+        <text>3.</text>实际退款的金额为什么和申请的金额不相同？</text>
+      <text class='menu-p-text'>由于买家个人原因退货产生的寄出邮费或者寄回过程中发生的折损费用等这些需要买家承担，所以退款金额中可能会扣掉这部分金额，具体情况以买家和客服协商结果为准。</text>
+      <text class='menu-p-title'>
+        <text>4.</text>退货寄回货物的费用由哪一方承担？</text>
+      <text class='menu-p-text'>由于买家原因发生的退货，寄出、寄回货物的运费均由买家承担;由于客服原因发生的退货（如质量问题），费用由客服承担。</text>
+      <text class='menu-p-title'>
+        <text>5.</text>退货可以退部分吗？</text>
+      <text class='menu-p-text'>如果买了多件商品，可以在申请的时候选择需要退货的件数。</text>
+      <text class='menu-p-title'>
+        <text>6.</text>退货时，商品的退款是怎么计算的？</text>
+      <text class='menu-p-text'>按照实际支付货款金额退还。若您在该订单中使用过优惠券，则该优惠券不予返还，并按“券后支付价”为商品退款。</text>
+    </view>
+    <view class='box_type' id="exchangeGoods">
+      <text class='box_title'>换货</text>
+      <image class="exchangeImg" src="{{iconUrl}}/return-faq-list03.png"></image>
+      <text class='box_title'>常见问题</text>
+      <text class='menu-p-title'>
+        <text>1.</text>什么时候可以申请换货？</text>
+      <text class='menu-p-text'>确认收货后45天内都可以申请换货。</text>
+      <text class='menu-p-title'>
+        <text>2.</text>换货能不能换价格相同的其他商品？</text>
+      <text class='menu-p-text'>换货只支持同产品的换货，如果拍错或者其他原因需要换成其他型号，买家可以取消订单或者申请。</text>
+      <text class='menu-p-title'>
+        <text>3.</text>换货支持部分换吗？</text>
+      <text class='menu-p-text'>支持，买家可以在申请的时选择换货件数，但是注意换货总次数不能超过1次，买家需慎重操作。</text>
+    </view>
+    <view class='box_type' id="moneyGoes">
+      <text class='box_title'>钱款去向</text>
+      <text class='box_title'>常见问题</text>
+      <text class='menu-p-title'>
+        <text>1.</text>退款完成后，退款退到了哪里呢？</text>
+      <text class='menu-p-text'>确认收货前，退单位中的现金将原路退回买家账户;确认收货后，由于交易已完成，所以现金部分是由客服联系买家进行打款。</text>
+      <text class='menu-p-title'>
+        <text>2.</text>涉及到运费的补偿，客服怎么支付给买家？</text>
+      <text class='menu-p-text'>由于退货额外产生的运费，如果需要补偿给买家则需要买家在填写售后单时正确填写退款账户，后续客服会通过该退款账户进行打款补偿。</text>
+    </view>
+    <view class='box_type' id="invoice">
+      <text class='box_title'>发票</text>
+      <text class='box_title'>常见问题</text>
+      <text class='menu-p-title'>
+        <text>1.</text>你们是开的什么类型的发票？</text>
+      <text class='menu-p-text'>解释：目前只支持纸质类发票。</text>
+      <text class='menu-p-title'>
+        <text>2.</text>发票可以和商品同时寄到吗？</text>
+      <div class='menu-p-text'>发票和商品是分开寄出的哦。<view>a.如果您下单时已经勾选发票，我们会在商品寄出15个工作日后，为你寄送发票。</view><view>b.如果是补寄发票，在您购买商品订单支付成功次日起30天内，可以通过在线客服申请补寄发票，补开发票需要客户提供订单号、发票抬头信息等给客服。</view></div>
+      <text class='menu-p-title'>
+        <text>3.</text>发票的金额包含运费和活动金额？</text>
+      <div class='menu-p-text'>
+        <view>a.不包邮订单，发票金额包含您实际支付的商品金额和运费金额。</view><view>b.包邮订单，发票金额是您订单实际支付的商品金额。</view>
+      </div>
+    </view>
+  </scroll-view>
+</view>

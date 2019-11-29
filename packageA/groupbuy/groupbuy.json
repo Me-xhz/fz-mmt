@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "team-list":"/components/teamList/teamList"
+  },
+  "navigationBarTitleText": "拼团详情"
+}

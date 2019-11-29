@@ -1,0 +1,9 @@
+<!--packageB/invitation-code-share/invitation-code-share.wxml-->
+<view class="invitation-code-share">
+  <view class="share-buttons">
+    <button class="row" data-type="invite" open-type="share" wx:for="{{list}}" wx:key="{{index}}" data-item="{{item}}">
+      <view class="left">{{item.name}}</view>
+      <view class="right">{{item.pickup_name}}</view>
+    </button>
+  </view>
+</view>

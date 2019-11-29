@@ -1,0 +1,72 @@
+/* pages/confirm/invoice/invoice.wxss */
+.topBorder{
+ border-bottom: 1px solid #f2f2f2;
+}
+.invoiceType, .invoiceUp{
+  height: auto;
+  background:#fff;
+  padding: 32rpx 24rpx;
+  margin-bottom: 20rpx;
+  box-sizing: border-box;
+  width: 750rpx;
+}
+.Title{
+  font-size: 30rpx;
+  margin-bottom: 20rpx;
+  font-weight: bold;
+  color: #1E1E1E;
+}
+.codeTitle{
+  margin-top: 32rpx;
+  margin-bottom: 0;
+}
+.invoiceType div, .invoiceUp div{
+  border:1px solid #9E9E9E;
+  display: inline-block;
+  padding: 15rpx 24rpx;
+  box-sizing: border-box;
+  border-radius: 8rpx;
+  margin-right: 16rpx;
+  font-size: 26rpx;
+  color: #A4A4A4;
+  height: 66rpx;
+  font-weight: 500;
+}
+.invoiceUp input{
+  background: #F2F2F2;
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  height: 60rpx;
+  border-radius: 5rpx;
+  line-height: 70rpx;
+}
+.needKnow{
+  font-size: 28rpx;
+  padding: 0 24rpx;
+  margin-top: 20rpx;
+}
+.needKnow view{
+  margin-top: 10rpx;
+  color: #8A8A8A;
+}
+.invoice .active{
+  border:1px solid #FF7F95;
+  color: #FF7F95;
+}
+.save{
+  text-align: center;
+  margin-top: 30rpx;
+  padding:0 24rpx;
+}
+.saveButton{
+  background:#FF7F95;
+  width:100%;
+  display: inline-block;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #FFF7E7;
+  border-radius: 8rpx;
+  font-size: 30rpx;
+}

@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+  "loadingBottom":"/components/loadingBottom/loadingBottom"
+  },
+  "navigationBarTitleText": "积分商城"
+}

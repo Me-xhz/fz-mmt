@@ -1,0 +1,66 @@
+<!--pages/confirm/paymentStatus/paymentStatus.wxml-->
+<!-- <view class='payment_header'>
+  <view class='font_16'><text>收货人：{{consignee.consignee}} {{consignee.mobile}}</text></view>
+  <view class='font_16'><text>收货地址：<block wx:for='{{consignee.regions}}'>{{item.name}}</block>{{consignee.address}}</text></view>
+</view> -->
+
+<view class='payment_box'>
+  <view class='user-ad'>
+    <view class="swipers newSwipers indexAd white-bg-color" id="topHeight" wx:if="{{adList[0].ad_link != ''}}">
+      <swiper indicator-color="{{indicatorColor}}" current="{{indexAdcurrent}}" indicator-active-color="#ffbb44" indicator-dots="{{indicatorDots}}" circular="{{circular}}" autoplay="{{!autoplay}}" interval="{{interval}}" duration="{{duration}}">
+        <swiper-item wx:for="{{adList}}" wx:key="{{item.ad_id}}" style="{{item.ad_code?'':'background-image:url({{iconURL}}/cstp.png)'}}">
+          <image mode="aspectFill" class="adImg newAdimg" src='{{item.ad_code}}'></image>
+          <form class='index-from-indexAd new' bindsubmit='goWebView' data-type='2' data-item='{{item}}' report-submit='true'>
+            <button form-type='submit'></button>
+          </form>
+        </swiper-item>
+      </swiper>
+    </view>
+  </view>
+  <view class='title_wrap'>
+    <view class='iconfont icon-img_zhifuchenggongx' style='color:#7ed321!important' wx:if='{{success == 1}}'></view>
+    <view class='iconfont icon-img_zhifushibaix' style='color:#eb3c39!important' wx:if='{{success == 0}}'></view>
+    <view class='tc font_17'>{{msg}}</view>
+  </view>
+  <view class='btns row'>
+    <!-- <button type='default' bindtap='goOrderDetail' class='btn col'>查看订单</button> -->
+    <button type='default' style="background-color: #fff!important;" bindtap='goOrderList' class='btn col'>查看订单</button>
+    <button type='warn' style='background-color:#ffe150!important;color:#303030!important;border:none' bindtap='goHome' wx:if='{{success == 1}}' class='btn col'>继续逛逛</button>
+    <button type='warn' bindtap='onPay' wx:if='{{success == 0}}' style='background-color:#ffe150!important;color:#303030!important;border:none' class='btn col onPay'>重新支付</button>
+  </view>
+
+</view>
+
+<!-- 推荐商品 -->
+<!-- <view class='title'>
+  <image src='{{iconURL}}/img_pay_goods01.png'></image>
+</view>
+<view class='recommend'>
+  <goodList list="{{recommend_good_list}}" type="2" align="left"></goodList>
+</view> -->
+
+<!-- 自动发放优惠券弹窗 -->
+<view class="drawer_screen" wx:if="{{showNewCouponModalStatus}}"></view>
+<view animation="{{animationData}}" style='opacity:0' class="nc_manu_box" wx:if="{{showNewCouponModalStatus}}">
+  <image class='new-coupon-img' mode='widthFix' src='{{newCouponImg}}'></image>
+  <view class='new-coupon-btn'>
+    <form bindsubmit='goCouponList' report-submit='true'>
+      <button hover-class='none' formType='submit'>立即领取</button>
+    </form>
+  </view>
+  <view class='iconfont icon-btn_qiapianguanbianniux' bindtap='hideNewCouponModalStatus'></view>
+</view>
+
+<view class="drawer_screen" wx:if="{{order_confirm_notice && !!order_confirm_img}}"></view>
+<!-- 通知 -->
+<view class='order_confirm_notice_wrap' wx:if="{{order_confirm_notice && !!order_confirm_img}}">
+  <view class="order_confirm_notice_content">
+    <image mode="widthFix" src='{{order_confirm_img}}'></image>
+  </view>
+  <view class='order_confirm_notice_btn'>
+    <button class='btn' bindtap="changeOrderNotice">我知道了</button>
+  </view>
+</view>
+
+<!-- 领取红包弹窗 -->
+<envelopes show="{{showRedEnvel}}" rid="{{red_packet_id}}" showType="{{showRedEnvelType}}"></envelopes>

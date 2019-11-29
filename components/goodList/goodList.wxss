@@ -1,0 +1,207 @@
+/* components/goodList3/goodList3.wxss */
+@import "/wxParse/suui/suui.wxss";
+
+.goodList{
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+}
+.row{
+  align-items: center;
+
+}
+.between{
+  justify-content: space-between;
+}
+.mr13{
+  margin-right: 13rpx;
+}
+/* 2-col */
+.good_card2{
+  position: relative;
+  /* float: left; */
+  width: 344rpx;
+  flex: 0 0 344rpx;
+  background-color: #FFF;
+  border-radius: 8rpx;
+  overflow: hidden;
+  margin-bottom: 16rpx;
+}
+.good_pic2{
+  width: 344rpx;
+  height: 344rpx;
+  position: relative;
+}
+
+.inequacy_wrap .inequacy{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  background-color: rgba(0,0,0,0.3);
+  justify-content: center;
+}
+.inequacy_wrap .inequacy image{
+  height:66rpx;
+  width:158rpx ;
+}
+.good_pic2 image{
+  width: 344rpx;
+  height: 344rpx;
+}
+.good_info2{
+  width: 344rpx;
+}
+
+/* 3-col */
+.good_card3{
+  position: relative;
+  /* float: left; */
+  width: 232rpx;
+  flex: 0 0 232rpx;
+}
+.good_pic3{
+  width: 232rpx;
+  height: 232rpx;
+  position: relative;
+}
+.good_pic3 image{
+  width: 232rpx;
+  height: 232rpx;
+}
+.good_info3{
+  width: 232rpx;
+}
+
+.good_pic{
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.good_pic .goods_lable{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 232rpx;
+  height: 232rpx;
+}
+.prom_info{
+  height: 34rpx;
+  line-height: 34rpx;
+  padding: 0 10rpx;
+  background-color: #ff0041;
+  font-size: 18rpx;
+  color: #fff;
+  text-align: center;
+  position: absolute;
+  bottom: -36rpx;
+  left: 0;
+}
+
+.title{
+  width: 100%;
+  height: 80rpx;
+  box-sizing: border-box;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow:hidden;
+  /* text-overflow:ellipsis; */
+  /* white-space:nowrap; */
+  color: #555;
+  font-size: 28rpx;
+  line-height: 1.5;
+  font-weight: 500;
+  padding: 0 10rpx;
+}
+.price{
+  font-size: 32rpx;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  padding: 0 10rpx;
+}
+.price .small{
+  font-size: 24rpx;
+  margin-left: 8rpx;
+}
+.price .sPrice{
+  text-decoration:line-through;
+  color: #aaa;
+}
+.goodList .tab{
+  display: inline-block;
+  background-color: #ffe150;
+  color: #555;
+  font-size: 20rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  width: 60rpx;
+  text-align: center;
+  margin-left: 8rpx;
+}
+.font_18{
+  font-size: 36rpx;
+}
+
+/* 折扣标签 */
+.goodList .good_pic .discount_label{
+  display: block;
+  line-height: 34rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+  font-size: 24rpx;
+  padding: 0 5rpx;
+  margin-left: 5rpx;
+  margin-top: 5rpx;
+}
+
+.index-from-goodsCard{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 11;
+}
+
+.index-from-goodsCard2 button{
+  width: 344rpx;
+  height: 514rpx;
+  background-color: transparent;
+}
+.index-from-goodsCard3 button{
+  width: 232rpx;
+  height: 380rpx;
+  background-color: transparent;
+}
+.team-tips-box{
+  line-height: 30rpx;
+  display: inline-block;
+  height:40rpx;
+  vertical-align: middle;
+}
+.team-tips{
+  padding: 0 12rpx;
+  text-align: center;
+  line-height: 28rpx;
+  height: 28rpx;
+  border-radius: 16rpx;
+  display: inline-block;
+  color: #d8b300;
+  border: 2rpx solid #d8b300;
+  font-size: 18rpx;
+  margin-right: 4rpx;
+}
+.tips-active {
+  border-radius: 16rpx;
+  border: 2rpx solid #ff7028 !important;
+  color: #ff7028 !important;
+}

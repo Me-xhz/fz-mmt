@@ -1,0 +1,4 @@
+<!--components/vcode/vcode.wxml-->
+<view>
+  <button bindtap="getYzm" class='yzm {{disabled ? "activited" : "inactivity"}}' hover-class="none" disabled="{{disabled}}">{{yzm_text}}</button>
+</view>

@@ -1,0 +1,45 @@
+.sqa-list-box {
+  position: relative;
+  margin-top: 88rpx;
+}
+
+.sqa-list-box .box_type {
+  background: #fff;
+  padding: 52.8rpx 26.4rpx;
+  margin-bottom: 22rpx;
+}
+
+.sqa-list-box .box_title {
+  display: block;
+  font-size: 44rpx;
+  line-height: 44rpx;
+  padding-bottom: 30.8rpx;
+  font-weight: bold;
+}
+
+.sqa-list-box .menu-p-title {
+  position: relative;
+  display: block;
+  color: #030303;
+  font-size: 35rpx;
+  padding-bottom: 11rpx;
+  line-height: 45rpx;
+  padding-left: 44rpx;
+}
+
+.sqa-list-box .menu-p-title text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 30rpx;
+}
+
+.sqa-list-box .menu-p-text {
+  display: block;
+  font-size: 35rpx;
+  line-height: 45rpx;
+  padding-left: 44rpx;
+  padding-bottom: 55rpx;
+  color: #767676;
+  word-wrap: break-word;
+}

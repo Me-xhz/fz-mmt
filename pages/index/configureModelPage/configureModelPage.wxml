@@ -1,0 +1,2 @@
+<!--pages/index/configureModelPage/configureModelPage.wxml-->
+<configureModel list="{{indexModel}}" bindtoGet='toGetCoupon'></configureModel>

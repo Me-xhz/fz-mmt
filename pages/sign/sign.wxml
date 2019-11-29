@@ -1,0 +1,164 @@
+<!--pages/sign/sign.wxml-->
+<view class='sign_wrap'>
+
+  <!-- 返回首页悬浮框/分享进入显示 -->
+  <view class='goHomeFixed' catchtap='gotoHome' wx:if="{{isShowGoHome}}">
+    <image src='{{iconURL}}/product-icon-leftReturn.svg' class='icon-leftReturn'></image>
+    <text>返回首页</text>
+  </view>
+
+  <view class='sign-info' style="background-image:url({{iconURL}}/signin-info-bg.png)">
+    <view class='switch_wrap' bindtap='switchChange' data-open_msg='{{signcount.open_msg}}'>
+      <view class='switch {{signcount.open_msg==1?"checked":""}}'><view class='box'></view></view>
+      <view class="signin-remind-switch">{{signcount.open_msg==1?"已提醒":"提醒我开启"}}</view>
+    </view>
+
+    <view class='money'>
+      <text class='small'>￥</text>{{signcount.money}}</view>
+    <text class='money_des'>签到已领取现金金额</text>
+    <!-- 7天签到 -->
+    <view class='sevenDays'>
+      <view class='dayItem' wx:for="{{gift_list}}" wx:for-index="idx" wx:key="idx">
+        <view class='redPacket'>
+          <image class='pack' wx:if="{{idx+1<=signcount.count}}" src='{{iconURL}}/signin_gift_receive.png'></image>
+          <image class='pack' wx:if="{{idx+1>signcount.count}}" src='{{iconURL}}/signin_gift_unget.png'></image>
+          <image class='box' wx:if="{{idx==2||idx==6}}" src='{{iconURL}}/signin_gift_box.png'></image>
+        </view>
+        <view class='text {{idx+1==signcount.days?"today":""}}'>{{idx+1==signcount.days?'今天':item.text}}</view>
+        <view class='tag-text font_w600' wx:if="{{idx+1==3}}" style='background-image:url({{iconURL}}/signin_gift_tag_little.png)'>送额外红包</view>
+        <view class='tag-text font_w600' wx:if="{{idx+1==7}}" style='background-image:url({{iconURL}}/signin_gift_tag_little.png)'>送大额红包</view>
+      </view>
+    </view>
+    <view class='sevenDays-progress row' style='background-image:url({{iconURL}}/signin-gifts-progress.png)'>
+      <view class='sign-bar'  animation="{{animationData}}" style='width:{{signcount.count*14.3}}%;'></view>
+      <view class='progress-list' wx:for="{{gift_list}}" wx:for-index="idx" wx:key="idx" >
+      <!-- 动画的那块 -->
+        <view class='action-box' wx:if="{{goAc&&idx+1==signcount.count}}" style='background-image:url({{iconURL}}/tyx@2x.png)'>
+          <image src='{{iconURL}}/dgdh.gif?{{random}}' ></image>
+        </view>
+        <view class='action-box' wx:else  style='background-image:url({{iconURL}}/signin-progress-{{idx+1>signcount.count?"un":""}}press.png)'></view>
+        <view class='points'><text class='small' wx:if="{{idx+1>signcount.count}}">+</text>{{idx+1>signcount.count?signcount.points[idx].points:""}}{{!signcount.points[idx]?0:""}}</view>
+      </view>
+    </view>
+    <view class='signin-text-remind'>签到积分现金双赢，现金买好物，积分抽大奖，购物还送积分！</view>
+    <view class="signin-text-rule" bindtap='showButton'>活动规则</view>
+    <!-- 签到按钮 -->
+    <form report-submit='true' class='signin-button-block' bindsubmit='sign'>
+      <button wx:if="{{signcount.sign==0}}" class='signin-button-image' style="background-image:url({{iconURL}}/signin-button-unpress.png)" formType='submit'></button>
+      <button wx:else class='signin-button-image' style="background-image:url({{iconURL}}/signin-button-press.png)" formType='submit'></button>
+    </form>
+      <!-- <image class='signin-button-image' src='{{iconURL}}/signin-button-{{signcount.sign==0?"un":""}}press.png' bindtap='sign'></image> -->
+  </view>
+  <!-- 开启提醒/活动规则 -->
+  <view class="signin-remind-bottom row">
+    <view class="signin-text-score">你的积分：<text class='big'>{{signcount.now_points}}</text></view>
+    <!-- <view class="signin-remind-line"></view> -->
+    <view class="signin-score-list" bindtap='goIntegralList'>
+      积分明细
+      <text class='iconfont icon-btn_xiangyoudajiantoux icon-right' bindtap='goIntegralList'></text>
+    </view>
+  </view>
+
+
+
+  <view class='score-block' wx:if="{{signcount.invite.status==1 || signcount.points_game.status==1}}">
+    <!-- <button class='to_share score-block-image {{signcount.invite.status!=0&&signcount.points_game.status!=0?"two":""}}' open-type="share"> -->
+      <image wx:if="{{signcount.invite.status==1}}" class='score-block-image {{signcount.invite.status!=0&&signcount.points_game.status!=0?"two":""}}' src='{{signcount.invite.img}}' bindtap='goToShare'></image>
+    <!-- </button> -->
+    <image wx:if="{{signcount.points_game.status==1}}" class='score-block-image {{guideShow?"zIndex1000":""}} {{signcount.invite.status!=0&&signcount.points_game.status!=0?"two":""}}' src='{{signcount.points_game.img}}' bindtap='goToLotteryDraw'>
+    </image>
+     <!-- 积分游戏引导 -->
+      <view class='guide' style='display:{{guideShow?"block":"none"}}'>
+        <image src='{{iconURL}}/btn_wzdl@2x.png' class='close_btn' bindtap='closeGuide'></image>
+        <image src='{{iconURL}}/img_jfcjydwz@2x.png' class='guide_img'></image>
+      </view>
+  </view>
+  <view class='score-pop-md' hidden='{{!guideShow}}'></view>
+  <!-- 弹窗 -->
+  <!-- 活动规则弹窗 -->
+  <view class="rules-pop-hold {{showRules?'hide':'show'}}">
+    <view class="rules-pop">
+      <view class='rules-content'>
+        <view class='rules-title'>活动规则</view>
+        <view class='rules-line'></view>
+        <!-- 活动规则内容 -->
+        <scroll-view class='rules-text-box' scroll-y="true">
+          <view class='rules-text' wx:for="{{rule_text}}" wx:key="{{item.id}}">
+            <text>{{item}}</text>
+          </view>
+        </scroll-view>
+        <view class="iconfont icon-btn_guanbianniux icon-closs {{showRules?'hide':'show'}}" bindtap='showButton'></view>
+      </view>
+    </view>
+
+    <view class='rules-pop-md' bindtap='showButton'></view>
+  </view>
+
+  <!-- 签到弹窗 -->
+  <view class="signin-pop-hold {{showSignin?'hide':'show'}}">
+    <view class='signin-pop'>
+      <view class='signin-content'>
+        <image src='{{iconURL}}/popup_red_gift.png' class='popup_red_gift'></image>
+        <text class='signin-pop-title'>恭喜获得</text>
+        <!-- 签到领取内容 -->
+        <view class='signin-pop-red-gift'>
+          <block wx:for="{{signState.prize}}" wx:key="index">
+            <!-- <view class='iconfont icon-add iconAdd' wx:if="{{index>0}}"></view> -->
+            <view class='pop-red-gift-info' wx:if="{{item.send_type==1}}">
+              <text class='pop-red-gift-text'>{{item.price}}</text>
+            </view>
+            <!-- <view class='pop-red-gift-info-2' wx:if="{{item.send_type==2}}">
+              <text class='pop-red-gift-text'>{{item.name}}...</text>
+              <text class='pop-red-gift-time'>{{item.time}}</text>
+            </view> -->
+            <view class='coupon-wrap' wx:if="{{item.send_type==2}}" style='background-image:url({{iconURL}}/img_qdhbyhqkp@2x.png)'>
+              <view class='left'>
+                <text class='price1'>￥</text><text class='price2'>{{item.price}}</text>
+              </view>
+              <view class='right'>
+                <view>
+                  <view class='text1 ellipsis'>{{item.name}}</view>
+                  <view class='text2 ellipsis'>{{item.description}}</view>
+                  <view class='text2 ellipsis'>{{item.time}}</view>
+                </view>
+              </view>
+            </view>
+          </block>
+        </view>
+
+
+        <!-- 去购物按钮 -->
+        <!-- <view class='pop-red-gift-button' bindtap='goIndex'>
+          <image src='{{iconURL}}/signin_gift_btn.png'></image>
+          <text class='pop-red-gift-btn-text'>去购物</text>
+        </view> -->
+
+        <!-- 关闭按钮 -->
+        <view class="iconfont icon-btn_guanbianniux icon-closs {{showSignin?'hide':'show'}}" bindtap='showButton2'></view>
+      </view>
+    </view>
+    <view class="signin-pop-md" bindtap='showButton2'></view>
+  </view>
+
+  <!-- 推荐商品列表 -->
+  <view class='recommend'>
+    <view class='title'><image src='{{iconURL}}/signin-list-header.png'></image></view>
+    <goodList list="{{recommend_good_list}}" type="2" align="left"></goodList>
+  </view>
+  <button class='to_share' open-type="share">
+    <image src='{{iconURL}}/button-icon-share01.png'></image>
+  </button>
+</view>
+
+<view class="drawer_screen">
+
+</view>
+<view class="gohomeModal">
+  <view class="modal-font">
+    活动已结束
+  </view>
+  <button class="modal-btn" catchtap='gotoHome'>
+    返回首页
+  </button>
+</view>
+<loading wx:if="{{loadingShow}}"></loading>

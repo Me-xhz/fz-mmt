@@ -1,0 +1,162 @@
+<view class="container with-loader">
+  <!-- Goods -->
+  <view class="order-main" bindtap="go_product" wx:for='{{orderInfo.products}}' wx:for-item='products' data-product-id='{{products.goods_id}}'>
+    <view class="goods-item no-border">
+      <view class="item-photo">
+        <image src='{{products.header_img}}'></image>
+      </view>
+      <view class="item-info">
+        <view class="info-name">
+          {{products.goods_name}}
+        </view>
+        <view class="info-attr">{{products.sku_key_name}}</view>
+        <view class="info-price">
+          <i class='icon_rmb'>¥</i>{{products.shop_price}}
+        </view>
+        <view class="info-amount">x{{products.amount}}</view>
+      </view>
+    </view>
+  </view>
+  <!--severs-->
+  <!-- wx:if="{{orderInfo.show_back_btn_allow == 2}}" -->
+  <view class="order-severs">
+    <view class="order-severs-name t4" wx:if="{{type==2}}">售后类型
+      <!-- <span bindtap="GoretrunSQA">
+        <image src="{{iconURL}}/icon_faq.png" />常见问题</span> -->
+    </view>
+    <view class="order-severs-menu">
+      <view wx:if="{{type == 2}}" class="menu-item row {{uploadInfo.backStatus==2 ? 'active' : ''}}" bindtap="setBackStatus" data-status='2'>
+        <image mode='widthFix' src="{{iconURL}}/gouxuan03.png" />
+        <span class="w15 t1">退货退款</span>
+        <span class="sub-txt t2">已收到货，需要退还商品</span>
+      </view>
+      <view wx:if="{{type == 2}}" class="menu-item row {{uploadInfo.backStatus==1 ? 'active' : ''}}" bindtap="setBackStatus" data-status='1'>
+        <image mode='widthFix' src="{{iconURL}}/gouxuan03.png" />
+        <span class="w15 t1">换货</span>
+        <span class="sub-txt t2">对已收到的商品不满意，需要换</span>
+      </view>
+      <view wx:if="{{type == 1}}" class="menu-item row {{uploadInfo.backStatus==3 ? 'active' : ''}}" bindtap="setBackStatus" data-status='3'>
+        <span>退款金额</span>
+        <span style="padding-left:10rpx;">
+          <text class='red-font-color'>￥{{back_amount}}</text>
+          <text class='small_font'>（若使用余额或者优惠券，将一并退回）</text>
+        </span>
+        <!-- <image mode='widthFix' src="{{iconURL}}/gouxuan03.png" /> -->
+      </view>
+    </view>
+    <!--<view class="order-severs-text">
+				<p ng-if="orderInfo.show_back_btn_allow == 2">1.已收到货，需要退还货物，请选择退货退款</p>
+				<p ng-if="orderInfo.show_back_btn_allow == 2">2.对已收到的货物不满意，请选择换货</p>
+				<p ng-if="orderInfo.show_back_btn_allow == 1">未收到货，或者与我们协商一致的情况下，请选择仅退款</p>
+				<p class="msg">温馨提示：因退款后达不到包邮条件而需要补交邮费的，请以客服协商结果为准。</p>
+			</view>-->
+  </view>
+  <!--info-->
+  <view class="order-nums">
+    <!--<view class="order-nums--name">申请数量: {{orderInfo.goods_num}}</view>-->
+    <!-- <view class="item-info row row-center" wx:if="{{uploadInfo.backStatus!=1 && !isSource}}">
+      <view class="info-title w23">退款金额</view>
+      <view class="info-content col tr padding-right">
+        <span class="text_content_small color_large_gray">最多可退</span>
+        <span class="content-price"><i class='icon_rmb'>¥</i>{{back_amount}}
+        </span>
+        <span class="content-shpping" wx:if="{{showShippingPrice}}">运费(
+          <i wx:if="{{showShippingPrice == 1}}">+</i>
+          <i wx:if="{{showShippingPrice == 2}}">-</i><i class='icon_rmb'>¥</i>
+          {{shipping_fee}})
+        </span>
+        <span class="content-shpping" wx:if="{{!showShippingPrice}}">(不含运费)</span>
+      </view>
+    </view> -->
+    <view class="item-info row row-center">
+      <view class="info-title t4 w23">申请原因</view>
+      <view class="info-content col tr" bindtap="setModalStatus" data-status='1'>
+        <span class="content-reason t1">{{uploadInfo.reason || '请选择原因'}}</span>
+        <view class='iconfont icon-btn_xiangyoudajiantoux'></view>
+      </view>
+    </view>
+
+    <!-- <view class="item-info row row-center" wx:for='{{orderInfo.products}}' wx:for-item='products' wx:if="{{products.amount > 1}}">
+      <view class="info-title">申请件数</view>
+      <view class="info-content col tr">
+        <view class="order-nums-ls">
+          <view class="order-nums-msg" wx:if="{{orderInfo.show_back_btn_allow != 1}}">您最多可申请{{products.amount}}件</view>
+          <view class="order-nums-button left {{uploadInfo.applyAmount <= 1 || orderInfo.show_back_btn_allow == 1 ? 'del' : ''}}" bindtap='touchAmountSub'>
+          </view>
+          <input type="text" wx:if="{{orderInfo.show_back_btn_allow == 1}}" class="order-nums-count" value="{{uploadInfo.applyAmount}}" readonly="readonly" />
+          <input type="text" wx:if="{{orderInfo.show_back_btn_allow != 1}}" class="order-nums-count" value="{{uploadInfo.applyAmount}}" bindinput="back_amount_change" bindblur="back_amount_blur" />
+          <view class="order-nums-button right {{uploadInfo.applyAmount < products.amount && orderInfo.show_back_btn_allow != 1 ? 'active' : ''}} {{uploadInfo.applyAmount >= products.amount || orderInfo.show_back_btn_allow == 1 ? 'del' : ''}}" bindtap="touchAmountAdd">
+          </view>
+        </view>
+      </view>
+    </view> -->
+    <view class="order-nums-texts">
+      <view class="order-nums-texts-title t4">详细描述</view>
+      <textarea hidden='{{textareaHidden}}' class='t5' placeholder="请输入文字描述，2-200字，描述清晰可以让客服更快为你服务哦´･ᴗ･`" maxlength="200" value="{{uploadInfo.desc}}" bindinput="filterSpecialCharacters" />
+      <view class="inputnum">
+        {{uploadInfo.desc.length || '0'}}/200
+      </view>
+    </view>
+    <view class="upload-img-box clearfix">
+      <view class="box-title t4">上传图片
+        <span>(选填，最多3张)</span>
+      </view>
+      <view class="box-img" wx:for="{{uploadImg}}" wx:for-item='img' wx:key='index'>
+        <image src="{{img}}" />
+        <view class='img-del iconfont icon-btn_huangsetishiguanbix' bindtap="delUploadImg" data-index='{{index}}'></view>
+        <!-- <image class="img-del" src="{{iconURL}}/btn_delImg.png" bindtap="delUploadImg" data-index='{{index}}' /> -->
+      </view>
+      <label wx:if="{{uploadImg.length < 3}}" bindtap='updataimg'></label>
+    </view>
+  </view>
+  <!-- <view class="row row-center item-telphone">
+    <view class="info-title w25">联系方式</view>
+    <view class="info-content col tr">
+      <input type="number" placeholder="选填，便于我们联系你" value="{{uploadInfo.telphone}}" bindinput="limittelphonelen" />
+    </view>
+    <view class="info-addrepeat" wx:if="{{uploadInfo.telphone.length > 0}}" bindtap="delemphonelen">
+      <image mode='widthFix' src="{{iconURL}}/icon_clear.png" />
+    </view>
+  </view> -->
+
+</view>
+<!--申请原因-->
+<view class="drawer_screen" catchtouchmove='false' catchtouchmove="preventTouchMove" catchtap="setModalStatus" data-status="0" wx:if="{{showfwModalStatus}}" wx:if="{{showfwModalStatus}}"></view>
+<view class='action-modal' animation="{{animationData}}" wx:if="{{showfwModalStatus}}">
+  <view class='title'>选择申请原因</view>
+  <picker-view class='modal-inner' indicator-class="pick_item" value="{{value}}" bindchange="setReasonBefore">
+    <picker-view-column>
+      <view wx:for="{{reasons}}" class="pick_item" catchtap='setReasonBefore' data-status="0" data-item='{{item}}'>{{item}}</view>
+    </picker-view-column>
+  </picker-view>
+</view>
+<view class="footer">
+  <button class='button-warn' bindtap="submitApply">提交</button>
+</view>
+
+<view class='alert_modal' hidden='{{alertHidden}}'>
+  <view class='h2' wx:if="{{type!=1}}">申请成功</view>
+  <view class='content' wx:if="{{type!=1}}">
+    <view class='tip'>售后单号为：{{back_sn}}</view>
+    <view>请将退换货商品退回提货点，并向提货点人员索要包装袋以及需填写的退换必填信息卡片（售后单号为必填项，请截图保存）</view>
+    <view class='tip2'>【若卡片信息未填写，则商品将无法进行退换货处理哟】</view>
+  </view>
+  <view class='content' wx:if="{{type==1}}">
+    <view class='tip3'>申请成功</view>
+  </view>
+  <button class='alert_modal_btn' bindtap='tapBack'>确认</button>
+</view>
+<view class='drawer_screen' hidden='{{alertHidden}}'></view>
+<!-- <view animation="{{animationData}}" catchtouchmove='true' class="action-modal" wx:if="{{showfwModalStatus}}">
+  <view class="modal-inner">
+    <view class="modal-close" bindtap="setModalStatus" data-status="0">
+      <image src="{{iconURL}}/icon_modal_closs.png" />
+    </view>
+    <view class="modal-inner-header">请选择主要申请原因（单选）</view>
+    <view class="apply-reasons-box">
+      <view class="box-content">
+        <span class="content-item {{reason==item ? 'active' : ''}}" bindtap="setReasonBefore" data-status="0" data-item='{{item}}' wx:for="{{reasons}}">{{item}}</span>
+      </view>
+    </view>
+  </view>
+</view> -->

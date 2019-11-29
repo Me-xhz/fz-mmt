@@ -1,0 +1,9 @@
+<view class="container">
+  <view class='row inputBox'>
+    <input value='{{inputValue}}' class='delivery-input' placeholder="请输入邀请码" bindinput="deliveryInput"></input>
+    <button bindtap='submit' class='btn-sm'>确认</button>
+  </view>
+  <view class='scan' bindtap='scanCode'>
+    扫一扫
+  </view>
+</view>

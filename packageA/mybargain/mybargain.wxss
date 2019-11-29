@@ -1,0 +1,126 @@
+page{
+    background-color: #fff;
+}
+.goods-box {
+    width: 100%;
+    padding:0 24rpx;
+    box-sizing: border-box;
+ }
+ .goods-box-msg{
+     width: 100%;
+     padding:24rpx 0;
+     display: flex;
+     box-sizing: border-box;
+     border-bottom: 2rpx solid #f0f0f0;
+ }
+ .goods-img {
+    width: 232rpx;
+    height: 232rpx;
+}
+
+ .goods-news {
+    margin-left: 16rpx;
+    flex: 1;
+    position: relative;
+}
+
+ .goods-news .goods-name {
+    overflow: hidden;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: -o-ellipsis-lastline;
+    width:340rpx;
+}
+
+ .goods-news .goods-standrad {
+    margin-top: 4rpx;
+    font-size: 24rpx;
+    color: #aaa;
+}
+
+ .goods-news .group-price {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+ .goods-news .group-price .price-sign{
+    font-size: 28rpx;
+    color: #DC0805;
+    font-weight: 500;
+}
+ .goods-news .group-price .price {
+    font-size:40rpx;
+    color: #DC0805;
+    font-weight: 500;
+}
+
+ .goods-news .group-price .bargain-font {
+    font-size: 24rpx;
+    color: #303030;
+    font-weight: 600;
+}
+.to-bargain{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.to-bargain .bargain-btn{
+    width:176rpx;
+    height:64rpx;
+    background:linear-gradient(270deg,rgba(255,225,80,1) 0%,rgba(255,235,139,1) 100%);
+    color:#555;
+    text-align: center;
+    line-height: 64rpx;
+    font-weight: 600;
+    font-size: 28rpx;
+    border-radius: 32rpx;
+}
+.bargain-status{
+    position: absolute;
+    right: 0;
+    top:0;
+    font-size: 24rpx;
+    font-weight: 600;
+}
+.bargain-status .bargain-in{
+    color:#FFB400;
+}
+.bargain-status .bargain-success{
+    color:#EB3C39;
+}
+.bargain-status .bargain-fail{
+    color:#aaa;
+}
+.empty{
+    position:relative;
+    display:block;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+.empty .empty-item {
+    position:absolute;
+    left:50%;
+    display:block;
+    width:100%;
+    transform:translateX(-50%);
+}
+.empty .empty-item .item-logo{
+    display:block;
+    margin:0 auto;
+    width:288rpx;
+    height:128rpx;
+}
+.empty .empty-item .item-text{
+    display:block;
+    height:120rpx;
+    margin-top:48rpx;
+    color:#333;
+    font-size:32rpx;
+    font-weight:600;
+    overflow:hidden;
+    text-align:center;
+}

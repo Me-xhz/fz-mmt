@@ -1,0 +1,13 @@
+<view class="code-record" bindtap="goRecord">
+    核销记录
+</view>
+<view class="container">
+  <view class='row inputBox'>
+    <input value='{{inputValue}}' class='delivery-input' placeholder="请输入取货码" bindinput="deliveryInput"></input>
+    <button bindtap='submit' class='btn-sm'>确认</button>
+  </view>
+  <view class='scan' bindtap='scanCode'>
+    扫一扫
+  </view>
+</view>
+<loading wx:if="{{loadingShow}}"></loading>

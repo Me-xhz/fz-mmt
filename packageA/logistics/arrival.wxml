@@ -1,0 +1,20 @@
+<view class="row arrival-header">
+  <input value='{{inputValue}}' maxlength="12" class="arrival-input" bindinput='arrivalInput' type="text" placeholder="请输入提货箱一维码"/>
+  <view bindtap="scanCode" class="sys-btn">扫码</view>
+</view>
+<view class="arrival-list" wx:for="{{itemList}}" wx:key="{{index}}">
+    <text class="arrival-time">{{item.box_finish_time}}</text>
+    <view class="row-wrap arrival-box">
+        <view class='positionR' wx:for="{{item.box_list}}" wx:for-item="list" wx:key="index" bindtap="{{list.status == 2?'':'goArrivalOrder'}}" data-box_sn="{{list.box_sn}}" wx:if="{{list.count>0}}">
+            <view wx:if="{{list.status == 2}}" class="iconfont icon-xiangbox60 arrival-icon"></view>
+            <view wx:else class="iconfont icon-xiangbox59 arrival-icon icon-color"></view>
+            <view class="arrival-name {{list.status == 2 ? 'active' : ''}}">
+             <view class="box-name">{{list.pickup_logogram}}</view>
+             <view class="box-number">{{list.box_name}}</view>
+            </view>
+            <view class="arrival-orderNum">{{list.count}}</view>
+        </view>
+    </view>
+</view>
+
+<loading wx:if="{{loadingShow}}"></loading>

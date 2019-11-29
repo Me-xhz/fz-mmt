@@ -1,0 +1,67 @@
+<view class='order-filter rituallTitle'>
+  <view class='filter-item {{currentTap==0 ? "active" : "" }}' data-current="0" catchtap="swichNav">
+    <text>未使用</text>
+  </view>
+  <view class='filter-item {{currentTap==1 ? "active" : "" }}' data-current="1" catchtap="swichNav">
+    <text>已使用</text>
+  </view>
+  <view class='filter-item {{currentTap==2 ? "active" : "" }}' data-current="2" catchtap="swichNav">
+    <text>已失效</text>
+  </view>
+</view>
+<view class="rituallContent">
+    <view wx:if="{{vou && vou.length > 0}}">
+  <view  class="orderDetails {{currentTap==2 ? 'odd' : ''}}" wx:for="{{vou}}" wx:key="item.id">
+    <view class="orderListDetails {{currentTap==2 ? 'odd': ''}}">
+      <view class='col-70 ticket-left'>
+        <view class='color_theme ticket-title'>{{item.name}}</view>
+        <view class='ticket-dec'>{{item.description}}</view>
+        <view class='color_theme ticket-time'>{{item.use_end_date}}</view>
+      </view>
+      <view class='col-30 ticket-button color_theme' hidden='{{currentTap!=0}}' bindtap="like">使用</view>
+      <view class="button-image" hidden='{{currentTap!=1}}'>
+        <image src='{{iconURL}}/icon_cashgift_used.png' mode='widthFix'></image>
+      </view>
+      <view class="button-image" hidden='{{currentTap!=2}}'>
+        <image src='{{iconURL}}/icon_cashgift_deprecated.png' mode='widthFix'></image>
+      </view>
+      <!-- <view class='ticket-item'>
+        <view class="productInfo">
+          <text class="x">{{item.name}}</text>
+          <text class="y">{{item.value}}</text>
+        </view>
+        <view class="pr">
+
+          -- <text class="n">使用期限</text> --
+          <text class="b">{{item.use_end_date}}</text>
+        </view>
+      </view>
+      <view class="hh" hidden='{{currentTap!=0}}' bindtap="like">使用</view>
+      <view class="image-hh" hidden='{{currentTap!=1}}'>
+        <image src='{{iconURL}}/icon_cashgift_used.png' mode='widthFix'></image>
+      </view>
+      <view class="image-hh" hidden='{{currentTap!=2}}'>
+        <image src='{{iconURL}}/icon_cashgift_deprecated.png' mode='widthFix'></image>
+      </view> -->
+    </view>
+    <!-- <view class='orderListFooter {{item.checked ? "unfold" : ""}}' bindtap='unfoldCoupon' data-checked='{{item.id}}'>
+      <div class='width90 i'>
+        {{item.description}}
+      </div>
+      <div class='width10 couponArrow'>
+        <image src='{{iconURL}}/icon_cashgift_down.png' class='pa' hidden='{{item.checked}}'></image>
+        <image src='{{iconURL}}/icon_cashgift_up.png' class='pa' hidden='{{!item.checked}}'></image>
+      </div>
+    </view> -->
+  </view>
+</view>
+<view class="empty" wx:if='{{vou && vou.length <= 0 && !couponType}}'>
+  <view class="empty-item">
+      <image class='item-logo' src="{{iconURL}}/icon_coupon_empty.png" mode='widthFix'></image>
+      <text class='item-text'>暂无优惠券</text>
+    </view>
+</view>
+<view class="refreshEnd" wx:if="{{!refresh && vou.length > page_size}}">
+    <text>没有更多啦~</text>
+  </view>
+</view>

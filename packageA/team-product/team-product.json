@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "team-list": "/components/teamList/teamList",
+    "navBar": "/components/navBar/navBar",
+    "specifications": "/components/specifications/specifications"
+  },
+  "navigationBarTitleText": "拼团商品"
+}

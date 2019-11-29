@@ -1,0 +1,54 @@
+<!--pages/recharge/recharge.wxml-->
+<view class='page'>
+<!-- 手机号 -->
+  <view class='mobile_wrap'>
+    <view class='tel'>
+      <input type='number' value='18039098805' maxlength='11' class='mobile'></input>
+    </view>
+    <view class='btn_wrap'>
+      <view class='btn' wx:if="{{}}">
+        <image src='{{iconURL}}/btn_sjhsq@2x.png'></image>
+        <text>一键授权</text>
+      </view>
+      <view class='btn' wx:else>
+        <image src='{{iconURL}}/btn_sjhysq@2x.png'></image>
+        <text>已授权</text>
+      </view>
+    </view>
+  </view>
+  <!-- 充话费 -->
+  <view class='money_wrap'>
+    <view class='title'>
+      <text class='mr16'>充话费</text><text class='t2'>到账后生效，当月有效</text>
+      <navigator class='record t2' url="./record/record">充值记录>></navigator>
+    </view>
+    <view class='clearfix'>
+      <view 
+        class='money_box mb26 {{selectIdx==index?"actived":""}} {{index%3!=0?"ml22":""}}' 
+        wx:for="{{arr}}"
+        wx:key="{{index}}"
+        data-index='{{index}}'
+        catchtap='selectItem'>
+        <view class='text1 {{selectIdx==index?"actived":""}}'>100元</view>
+        <view class='text2 {{selectIdx==index?"actived":""}}'>售价100元</view>
+      </view>
+    </view>
+  </view>
+  <view class='money_wrap'>
+    <view class='title'>
+      <text class='mr16'>充话费</text><text class='t2'>到账后生效，当月有效</text>
+      <navigator class='record t2' url="./record/record">充值记录>></navigator>
+    </view>
+    <view class='clearfix'>
+      <view 
+        class='money_box mb26 {{selectIdx==index?"actived":""}} {{index%3!=0?"ml22":""}}' 
+        wx:for="{{arr}}"
+        wx:key="{{index}}"
+        data-index='{{index}}'
+        catchtap='selectItem'>
+        <view class='text1 {{selectIdx==index?"actived":""}}'>100元</view>
+        <view class='text2 {{selectIdx==index?"actived":""}}'>售价100元</view>
+      </view>
+    </view>
+  </view>
+</view>

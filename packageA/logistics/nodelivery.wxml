@@ -1,0 +1,43 @@
+<view class='container'>
+  <view class='row node-number'>
+    <view class="text" bindtap="showNumberModel">查看商品数量统计</view>
+    <view class="number">订单数：{{boxOrderNumber}}</view>
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{pickerArray}}" wx:if="{{pageStyle == 1}}">
+      <view class="row picker-select">
+        <view>{{pickerArray[pickerIndex]}}</view>
+        <view class="iconfont icon-btn_sanjiaoxiaojiantoux"></view>
+      </view>
+    </picker>
+  </view>
+  <view class="row searchbox">
+    <picker mode="date" class="dataInpt" value='{{dateValue}}' bindchange="bindTimeChange">{{dateValue == "" ? "选择日期" : dateValue}}</picker>
+    <input class="searchInput" value="{{searchValue}}" type='text' bindinput='searchInput' bindconfirm="searchCifim" placeholder='姓名/手机号/物流单号'></input>
+  </view>
+
+  <view class="list-pad">
+    <view class="list-box" wx:for="{{boxOrderInfo}}" wx:key="{{index}}" bindtap="goDetail" data-order-sn="{{item.order_sn}}">
+      <view class="list-item">订单号：{{item.order_sn}}</view>
+      <view class="list-item">物流单号：{{item.delivery_sn}}</view>
+      <view class="list-item">收货人：{{item.consignee}}</view>
+      <view class="list-item" catchtap="onCall" data-mobile="{{item.mobile}}">手机号：<i class="color-blue">{{item.mobile}}</i></view>
+      <view class="list-item" wx:if="{{pageStyle == 1}}">是否发送取货码：{{item.is_noticed}}</view>
+      <view class="list-item" wx:if="{{pageStyle == 1}}">取货码发送时间：{{item.order_send_time}}</view>
+      <view wx:if="{{item.is_have_back == 1}}" class='list-status'>用户已申请售后</view>
+      <view class="list-btn-box">
+        <button class="list-btn">查看详情</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="drawer_screen" bindtap="hideNumberModel" wx:if="{{numberModelStatus}}" catchtouchmove="bindtouchmove"></view>
+<view class="number-model-box" wx:if="{{numberModelStatus}}" catchtouchmove="bindtouchmove">
+  <view class="header-text">共<i>{{numberList.length}}</i>个商品，总计<i>{{boxGoodsInfoCount}}</i>件</view>
+  <scroll-view class="row model-scroll" scroll-y="true">
+    <view class="row model-list" wx:for="{{numberList}}" wx:key="{{index}}">
+      <text class="list-name {{item.type == 2 ? 'red' : ''}}">{{item.goods_name}}</text>
+      <text class="list-number">x{{item.send_number}}</text>
+    </view>
+  </scroll-view>
+</view>
+<loading wx:if="{{loadingShow}}"></loading>

@@ -1,0 +1,229 @@
+/* packageA/logistics/cancel-record.wxss */
+.node-number{
+    text-align: center;
+    background-color: #ffffff;
+    height: 80rpx;
+    line-height: 80rpx;
+    display: flex;
+    flex: 1;
+    padding: 0 20rpx;
+}
+.node-number .text{
+    font-size: 28rpx;
+    border: 1rpx #555555 solid;
+    padding: 0 20rpx;
+}
+.number{
+    font-size: 40rpx;
+    color: #555555;
+    padding-left: 40rpx ;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+.picker-select{
+    display: flex;
+    align-items: center;
+    padding: 0 20rpx;
+    font-size: 26rpx;
+     border-radius: 8rpx;
+    min-width: 80rpx;
+    border: 1rpx solid #aaa;
+    height:72rpx;
+    margin-left: 50rpx;
+}
+.font_60{
+    font-size: 60rpx;
+}
+.searchbox {
+    background-color: #ffffff;
+    padding: 30rpx 24rpx 10rpx 25rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.right-box{
+    text-align: right;
+    padding-right: 25rpx;
+}
+.dataInpt {
+    width: 230rpx;
+    height: 70rpx;
+    line-height: 100rpx;
+    color: #555555;
+    font-size: 30rpx;
+    display: flex;
+    align-items: center;
+    border: 1rpx #555555 solid;
+    padding: 0 15rpx;
+    border-radius: 8rpx;
+}
+.searchInput {
+    width: 390rpx;
+    height: 80rpx;
+    border-radius: 8rpx;
+    margin-left: 20rpx;
+    font-size: 30rpx;
+    border: 1rpx #555555 solid;
+    padding: 0 15rpx;
+}
+.list-pad {
+    padding: 0 25rpx;
+    padding-bottom: 40rpx;
+    background-color: #ffffff;
+}
+.list-box {
+    margin-bottom: 20rpx;
+    background-color: #fff;
+    border: 2rpx solid #e6e6e6;
+    border-radius: 8rpx;
+    padding: 24rpx;
+    overflow: hidden;
+    position: relative;
+}
+.date-num{
+    width: 230rpx;
+}
+.list-name{
+    width: 75%;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    text-align: left;
+    overflow: hidden;
+
+}
+.list-item {
+    padding: 4rpx 0;
+    color: #555555;
+    font-size: 30rpx;
+}
+.total-num{
+    color:#EB3C39;
+}
+.list-time {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #1DA1F2;
+    color: #ffffff;
+    padding: 10rpx;
+    font-size: 24rpx;
+}
+.goods-list{
+    width: 100%;
+}
+.goods-list .goods-boxs{
+    font-size: 32rpx;
+    min-height: 88rpx;
+    width: 100%;
+    background-color: #fff;
+    align-items: center;
+    padding: 0 10rpx;
+}
+.goods-list .goods-active{
+    background-color: #f2f2f2!important;
+}
+.goods-list .goods-boxs .goods-name{
+    width: 85%;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    text-align: left;
+    overflow: hidden;
+}
+.goods-list .goods-boxs .goods-num{
+    width: 25%;
+    text-align: right;
+    color: #EB3C39;
+    font-size: 38rpx;
+}
+.list-btn-box{
+    position: absolute;
+    right: 24rpx;
+    bottom: 120rpx;
+}
+.list-btn-box .list-btn{
+    background-color: #1DA1F2;
+    color: #ffffff;
+    padding: 0 10rpx;
+    font-size: 28rpx;
+    border-radius: 0;
+    margin-bottom: 10rpx;
+}
+.list-status {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #EB3C39;
+    color: #ffffff;
+    padding: 10rpx;
+    font-size: 24rpx;
+}
+
+.number-model-box{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    width: 600rpx;
+    background-color: #ffffff;
+    z-index: 1001
+}
+.number-model-box .header-text{
+    text-align: center;
+    border-bottom: 1rpx solid #f2f2f2;
+    font-size: 40rpx;
+    height: 100rpx;
+    line-height: 100rpx;
+}
+.number-model-box .header-text i{
+    color: #EB3C39;
+    margin: 0 10rpx;
+    font-size: 48rpx;
+}
+.number-model-box .model-main{
+    margin: 20rpx 0;
+    width: 100%;
+    text-align: center;
+    font-size: 30rpx;
+}
+.number-model-box .model-main .main-title{
+    flex: 1;
+}
+.number-model-box .model-main .main-number{
+    flex: 1;
+}
+.number-model-box .model-scroll{
+    height: 740rpx;
+}
+.number-model-box .model-list{
+    width: 100%;
+    font-size: 32rpx;
+    padding: 10rpx 24rpx;
+    min-height: 88rpx;
+    display: flex;
+    align-items: center;
+}
+.number-model-box .model-list:nth-child(2n){
+    background-color: #f2f2f2
+}
+.number-model-box .model-list .list-number{
+    width: 25%;
+    text-align: right;
+    color: #EB3C39;
+    font-size: 38rpx;
+}
+.color-blue{
+    color: #1DA1F2
+}
+.credits-bottom{
+    font-size: 24rpx;
+    color: #CBCFD6;
+    text-align: center;
+    padding: 40rpx 0;
+}
+.credits-bottom image{
+    width: 94rpx;
+    height:80rpx;
+}

@@ -1,0 +1,23 @@
+<!--components/notice/notice.wxml-->
+<view class="notice {{showNotice ? 'show' : ''}}" style="top:{{type == 1 ? navBarHeight : '0'}}px">
+  <view class="notice-box">
+    <image class="user-logo" src="{{notice.head_pic}}" mode="widthFix" bindtap="getEnvelopes"></image>
+    <view class="right-box">
+      <view class="text" bindtap="getEnvelopes">
+        <view class="name">{{notice.nickname}}</view>
+        <i wx:if="{{notice.status == 1}}">来了,快催他下单帮你提现吧！</i>
+        <i wx:if="{{notice.status == 2}}">在你的邀请下抢到了好货</i>
+      </view>
+      <form report-submit="true" bindsubmit="urgingReport" data-shareInfo="{{shareInfo}}" wx:if="{{notice.status == 1}}">
+        <button open-type="share" form-type="submit" data-shareInfo="{{shareInfo}}" class="btn">催他下单</button>
+      </form>
+      <view wx:if="{{notice.status == 2}}" class="btn" bindtap="getRedEnvel">
+          <view wx:if="{{topbtnShow}}">领取红包</view>
+          <view wx:if="{{!topbtnShow}}">领取代金券</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<envelopes show="{{showRedEnvel}}" rid="{{notice.red_packet_id}}" tiketId="{{tiketID}}" showType="{{showRedEnvelType}}"></envelopes>
+

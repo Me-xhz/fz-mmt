@@ -1,0 +1,161 @@
+<!-- <button bindtap='showSkuDrawerHandle'>
+  测试</button> -->
+<view id='preview' style='background-color:{{ConfigStyle.value.backgroundColor.value}};background-image:url({{ConfigStyle.value.backgroundImage.value == null ? "" : ConfigStyle.value.backgroundImage.value}})'>
+  <!-- 返回首页悬浮框/分享进入显示 -->
+  <view class='goHomeFixed' catchtap='gotoHome' wx:if="{{isShowGoHome}}">
+    <image src='{{iconURL}}/product-icon-leftReturn.svg' class='icon-leftReturn'></image>
+    <text>返回首页</text>
+  </view>
+  <view class='preview' wx:for='{{Items}}'>
+    <!-- 相对定位 -->
+    <view class='previewAbs' style='height:{{item.data.style.value.height.value * 2}}rpx' wx:if='{{item.type == "relative"}}'>
+      <view class='AbsBox' style='top:{{(children.style.top ? children.style.top : 0) * 2}}rpx;left:{{(children.style.left ? children.style.left : 0) * 2}}rpx' wx:for='{{item.children}}' wx:for-item='children'>
+        <image class='AbsImage' style='width:{{(children.style.width ? children.style.width : 375) * 2}}rpx;height:{{(children.style.height ? children.style.height : "")* 2}}rpx' mode='widthFix' wx:if='{{children.type == "poster"}}' src='{{children.data.pic.value[0].image.value}}'></image>
+        <view class='AbsHotpot' bindtap='hotpotLink' data-type='{{children.data.style.value.hotType.value}}' data-id='{{children.data.style.value.link.value}}' style='width:{{children.data.style.value.width.value * 2}}rpx;height:{{children.data.style.value.height.value * 2}}rpx'
+          wx:if='{{children.type == "hotspot" && children.data.style.value.hotType.value != 9}}'></view>
+        <button open-type="contact" hover-class="none" style='width:{{children.data.style.value.width.value * 2}}rpx;height:{{children.data.style.value.height.value * 2}}rpx;background-color: transparent;padding: 0;' wx:if='{{children.type == "hotspot" && children.data.style.value.hotType.value == 9}}' session-from="添加客服二维码"></button>
+        <video style='width:{{children.style.width * 2}}rpx;height:{{children.style.height * 2}}rpx' class='AbsViode' objectFit='fill' show-center-play-btn='true' src='{{children.data.pic.value[0].videos.value}}' poster="{{children.data.pic.value[0].plot.value}}" wx:if='{{children.type == "videos"}}'></video>
+        <!-- <view class='AbsText' style='text-align:{{children.data.style.value.textAlign.value}};background-color:{{children.data.style.value.backgroundColor.value}};padding:{{children.data.style.value.padding.value}}px;margin:{{children.data.style.value.margin.value}}px;font-size:{{children.data.style.value.fontSize.value * 2}}rpx;color:{{children.data.style.value.color.value}};width:{{children.style.width * 2}}rpx;height:{{children.style.height * 2}}rpx'
+          wx:if='{{children.type == "txt"}}'>{{children.data.content.value}}</view> -->
+        <view class='AbsbackgroundImage' wx:if='{{children.type == "backgroundImage"}}'>
+          <view class='backgroundImagebox'>
+            <image mode='widthFix' style='width:{{(children.style.width ? children.style.width : 375) * 2}}rpx;' wx:for='{{children.data.pic.value[0].image.value}}' wx:for-item='img' src='{{img}}'></image>
+          </view>
+        </view>
+        <!-- <button class='AbsBtn {{children.data.size.value}} {{children.data.theme.value}}' style='width:{{children.style.width * 2}}rpx;' wx:if='{{children.type == "btn"}}'>{{children.data.content.value}}</button> -->
+        <view class="AbsCountDown" wx:if='{{children.type == "countdown"}}'>
+          <view class="text">{{countTimeType == 0 ? '距活动开始仅剩:' : '距活动结束仅剩:'}}</view>
+          <countDown type="2" time-text="time-text" doc-text="doc-text" isShowMs="true" timestamp="{{countTimeDate}}"></countDown>
+        </view>
+        <!-- <view class="Absquared-row-3-2" wx:if='{{children.type == "squared" && children.data.style.value.type.value == 1}}' style="background-color:{{children.data.style.value.backgroundColor.value}};">
+          <view class='squared-box-row' wx:if="{{item.value != ''}}" wx:for="{{children.data.style.value.link}}" bindtap='goProduct' data-id='{{item.value}}'>
+            <image class='squared-row-img' src='{{}}'></image>
+            <view class='squared-name'>小黄人充电宝</view>
+            <view class='squared-price'>
+              <view class='p'>¥120</view>
+              <view class='i'>¥120</view>
+            </view>
+          </view>
+        </view> -->
+        <!-- <view class="Absquared-row-2-3" wx:if='{{children.type == "squared" && children.data.style.value.type.value == 2}}' style="background-color:{{children.data.style.value.backgroundColor.value}};">
+          <view class='squared-box-row' wx:if="{{item.value != ''}}" wx:for="{{children.data.style.value.link}}" bindtap='goProduct' data-id='{{item.value}}'>
+            <image class='squared-row-img' src='{{}}'></image>
+            <view class='squared-name'>小黄人充电宝5500ml,支持双系统充电</view>
+            <view class='squared-price'>
+              <view class='p'>¥120</view>
+              <view class='i'>¥120</view>
+            </view>
+          </view>
+        </view> -->
+      </view>
+    </view>
+    <!-- 绝对定位 -->
+    <view class='PreSwiper' wx:if='{{item.type == "swipe"}}'>
+      <swiper style="height:440rpx" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}">
+        <block wx:for="{{item.data.pic.value}}" wx:if='{{pic.image.value != ""}}' wx:for-item="pic">
+          <swiper-item>
+            <image bindtap='hotpotLink' data-type='{{pic.hotType.value}}' data-id='{{pic.link.value}}' src="{{pic.image.value}}" class="slide-image" width="100%" mode='widthFix' />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view class='PreImage' wx:if='{{item.type == "poster"}}'>
+      <image style='width:100%' mode='widthFix' src="{{item.data.pic.value[0].image.value}}" data-key='{{index}}'></image>
+    </view>
+    <view class='PreHostImage' wx:if='{{item.type == "posterHost"}}'>
+      <image style='width:100%' mode='widthFix' src="{{item.data.pic.value[0].image.value}}" data-key='{{index}}'></image>
+      <view class='AbsHotpot' bindtap='hotpotLink' wx:for="{{item.children}}" wx:for-item="children" data-type='{{children.data.style.value.hotType.value}}' data-id='{{children.data.style.value.link.value}}' style='width:{{children.data.style.value.width.value * 2}}rpx;height:{{children.data.style.value.height.value * 2}}rpx;position: absolute;top:{{(children.style.top ? children.style.top : 0) * 2}}rpx;left:{{(children.style.left ? children.style.left : 0) * 2}}rpx'
+          wx:if='{{children.type == "hotspot" && children.data.style.value.hotType.value != 9}}'></view>
+          <button open-type="contact" hover-class="none" wx:for="{{item.children}}" wx:for-item="children" style='width:{{children.data.style.value.width.value * 2}}rpx;height:{{children.data.style.value.height.value * 2}}rpx;background-color: transparent;padding: 0;position: absolute;top:{{(children.style.top ? children.style.top : 0) * 2}}rpx;left:{{(children.style.left ? children.style.left : 0) * 2}}rpx' wx:if='{{children.type == "hotspot" && children.data.style.value.hotType.value == 9}}' session-from="添加客服二维码"></button>
+    </view>
+    <!-- <view class='PreVideo' wx:if='{{item.type == "videos"}}'>
+      <video style='width:750rpx;height:570rpx' objectFit='fill' show-center-play-btn='true' src='{{item.data.pic.value[0].videos.value}}' poster="{{item.data.pic.value[0].plot.value}}"></video>
+    </view> -->
+    <view class='PrebackgroundImage' wx:if='{{item.type == "backgroundImage"}}'>
+      <view class='backgroundImagebox'>
+        <image mode='widthFix' style='width:{{children.style.width * 2}}rpx;' wx:for='{{item.data.pic.value[0].image.value}}' wx:for-item='img' src='{{img}}'></image>
+      </view>
+    </view>
+    <!-- <view class='PreText' style='text-align:{{item.data.style.value.textAlign.value}};background-color:{{item.data.style.value.backgroundColor.value}};padding:{{item.data.style.value.padding.value}}px;margin:{{item.data.style.value.margin.value}}px;font-size:{{item.data.style.value.fontSize.value * 2}}rpx;color:{{item.data.style.value.color.value}};width:100%'
+      wx:if='{{item.type == "txt"}}'>{{item.data.content.value}}</view> -->
+    <!-- <view class='Prebtn' wx:if='{{item.type == "btn"}}'>
+      <button class='AbsBtn {{item.data.size.value}} {{item.data.theme.value}}'>{{item.data.content.value}}</button>
+    </view> -->
+    <view class='PreTime' wx:if='{{item.type == "countdown"}}'>
+      <countDown timestamp="{{countTimeDate}}"></countDown>
+    </view>
+  </view>
+
+  <!-- 活动报名弹窗 -->
+  <view class="drawer-screen" bindtap="phoneMaskCancel" data-status="0" wx:if="{{showPhoneModal}}"></view>
+  <view animation="{{animationData}}" style='opacity:0' class="modal-join-box" wx:if="{{showPhoneModal}}">
+    <view class='modal-join-header'>填写信息</view>
+    <!-- 无表单配置数据 -->
+    <view class='modal-join-content' wx:if="{{field_data.length==0}}">
+      <view class='content-item row'>
+        <view class='item-left'>姓名：</view>
+        <input value='{{joinName}}' maxlength="10" class='item-right' placeholder="请输入姓名" type='text' bindinput="inputInfo" data-item="1"></input>
+      </view>
+      <view class='content-item row'>
+        <view class='item-left'>手机号码：</view>
+        <input value='{{joinPhone}}' class='item-right' placeholder="请输入手机号码" type='number' bindinput="inputInfo" data-item="2"></input>
+      </view>
+      <view class='content-item row'>
+        <view class='item-left'>年龄：</view>
+        <input value='{{joinAge}}' class='item-right' placeholder="请输入年龄" type='number' bindinput="inputInfo" data-item="3"></input>
+      </view>
+      <view class='content-item row'>
+        <view class='item-left'>所在工厂：</view>
+        <input value='{{joinFactory}}' maxlength="10" class='item-right' placeholder="请输入厂名" type='text' bindinput="inputInfo" data-item="4"></input>
+      </view>
+      <view class='content-button row'>
+        <view class='button-com button-cancel' bindtap='phoneMaskCancel'>取消</view>
+        <view class='button-com button-ok' bindtap='phoneMaskSubmit'>确定</view>
+      </view>
+    </view>
+    <!-- 有表单配置数据 -->
+    <view class='modal-join-content' wx:else>
+      <view class='content-item row' wx:for="{{field_data}}">
+        <view class='item-left'>{{item.label_name}}：</view>
+        <input class='item-right' value='{{field_upd_data[index]}}' type='text' bindinput="inputBind" data-idx="{{index}}" wx:if="{{item.type!=2}}"></input>
+        <view class='item-right ellipsis' wx:else data-idx="{{index}}" bindtap='showSku'>{{item.val}}</view>
+      </view>
+      <view class='content-button row'>
+        <view class='button-com button-cancel' bindtap='phoneMaskCancel'>取消</view>
+        <view class='button-com button-ok' bindtap='field_upd'>确定</view>
+      </view>
+    </view>
+  </view>
+
+
+  <!-- 规格选择弹窗 wx:if="{{showSkuDrawer}}"-->
+  <view class='skuDrawer' animation="{{skuAnimationData}}">
+    <view class='iconfont icon-btn_qiapianguanbianniux' bindtap='showSkuDrawerHandle'></view>
+    <view class='title'>{{select_label_name}}</view>
+    <view class='content'>
+      <scroll-view class='left' scroll-y='true'>
+        <view class='item {{index==good_idx?"actived":""}}' wx:for="{{selectedSkuArr}}" bindtap='selectGood' data-index='{{index}}' data-goodId='{{item.goods_id}}'>
+          <text>{{item.goods_name}}</text>
+        </view>
+      </scroll-view>
+      <scroll-view class='right' scroll-y='true'>
+        <!-- 组 -->
+        <view class='skuWrap' wx:for="{{properties.spec_name}}" wx:for-index="idx">
+          <view class='name'>{{item.spec_name}}</view>
+          <view class='skuArr clearfix'>
+            <!-- sku -->
+            <button class='sku-item t4 {{attr.id==skuArr[idx]?"actived-item":""}}' wx:for="{{item.attrs}}" wx:for-item="attr" wx:for-index="index" bindtap='selectAttr' data-idx='{{idx}}' data-attr='{{attr}}'>{{attr.item}}</button>
+            <!-- <view class='sku-item active-item'>xxxxxxxxxxxx</view> -->
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <button class='btn' type='warn' bindtap='affirm'>确认</button>
+  </view>
+
+</view>
+<button class='to_share' open-type="share">
+  <image src='{{iconURL}}/button-icon-share01.png'></image>
+</button>
+
+<loading wx:if="{{loadingShow}}"></loading>

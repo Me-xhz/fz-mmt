@@ -1,0 +1,31 @@
+<view class='cashCoupon' style='background-image:url({{iconURL}}/img_getcash_bg.png)'>
+  <view class='content' style='background-image:url({{iconURL}}/img_getcash_card.png)'>
+    <view class='cashCoupon_box'>
+
+      <view class='cashCoupon_header'>
+        <view class='head_portrait'>
+          <image src='{{user.head_pic}}' style='background-image:url({{iconURL}}/default_pic.png)'></image>
+        </view>
+        <view class='title'>该优惠券由 <text class='title_name'>【{{user.nickname}}】</text> 提供</view>
+      </view>
+
+      <view class='title_pic'><image style='background-image:url({{iconURL}}/img_getcash_title.png)'></image></view>
+
+      <scroll-view class='cashCoupon_main' scroll-y="true">
+        <view class='card_bg row' wx:for="{{bonuslist}}" style='background-image:url({{iconURL}}/img_getcash_coupon.png)'>
+          <view class='coupon_left'><text class='coupon_left_text'>{{item.name}}</text></view>
+          <view class='coupon_right'>
+            <view class='coupon_right_price'><text class='symbol'>￥</text>{{item.value}}</view>
+            <view class='coupon_right_text'>{{item.description}}</view>
+          </view>
+          <view class='coupon_time'>有效期:{{item.use_start_time}}-{{item.use_end_time}}</view>
+        </view>
+      </scroll-view>
+
+      <!-- 一键领取按钮 -->
+      <view  class='cashCoupon_bottom' style='background-image:url({{iconURL}}/img_getcash_top.png)'>
+        <view class='cashCoupon_bottom_btn' bindtap='exchange' style='background-image:url({{iconURL}}/img_getcash_btn.png)'>一键领取</view>
+      </view>
+    </view>
+  </view>
+</view>

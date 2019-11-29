@@ -1,0 +1,63 @@
+<view class="curtain" wx:if="{{show}}"></view>
+<view class="envelopes" wx:if="{{show && showType == 1}}">
+  <view class="img-box">
+    <image class="img" src="{{iconURL}}/index-red-packet.png" mode="widthFix"></image>
+    <view class="msg">
+      <view class="t">获得一个下单红包</view>
+    </view>
+    <image bindtap="goWithdraw" class="btn-withdraw" src="{{iconURL}}/index-red-packet-btn.png" mode="widthFix"></image>
+  </view>
+</view>
+
+<view class="envelopes" wx:if="{{show && showType == 2}}">
+  <view class="img-box">
+    <image class="img" src="{{iconURL}}/index-red-packet.png" mode="widthFix" bindtap="goWithdraw"></image>
+    <view class="msg">
+      <view class="t">邀请好友成功下单</view>
+      <view class="t">可再开一个红包</view>
+    </view>
+    <view class="price">
+      <view class="price-number">
+        <i class="p">20</i>
+        <i class="t">元</i>
+      </view>
+      <view class="pirce-min">(最低5元)</view>
+    </view>
+    <form report-submit="true" wx:if="{{guideIsShowBtn}}" bindsubmit="showShareGuide" data-shareInfo="{{shareInfo}}">
+      <button form-type="submit" data-shareInfo="{{shareInfo}}" class="btn-share" style="background-image:url('{{iconURL}}/invitation-packet-btn.png')"></button>
+    </form>
+    <form report-submit="true" bindsubmit="hideShare" wx:if="{{!guideIsShowBtn}}" data-shareInfo="{{shareInfo}}">
+        <button open-type="share" form-type="submit" data-shareInfo="{{shareInfo}}" class="btn-share" style="background-image:url('{{iconURL}}/invitation-packet-btn.png')"></button>
+    </form>
+    <view class="log">邀请好友助力得惊喜大红包！</view>
+  </view>
+</view>
+
+<invitationGuide isShow="{{guideIsShow}}"></invitationGuide>
+
+
+<!-- 领取的是代金券时，直接弹出 -->
+<!-- <getTiketsuccess wx:if="{{show && tiketshow}}" bind:parentEvent="parentEvent" show="{{tiketshow}}" rid="{{tiketId}}"></getTiketsuccess> -->
+
+
+<!-- 邀请代金券 -->
+<view class="invitation-curtain" wx:if="{{show && showType == 3}}"></view>
+<view class="invitation-guide" wx:if="{{show && showType == 3}}" style="background-image: url('{{iconURL}}/getTiketsuccess_bg_tiket2.png')">
+  <view class="guide-box">
+    <view class="ticketContent">
+      <view class="tikiet_limit" >
+          <view class="amount" wx:if="{{moneytype}}">￥ <text>{{bonus}}</text></view>
+          <view class="amount" wx:if="{{!moneytype}}"><text>{{bonus}}</text><i>折</i></view>
+          <view class="tiketDetail">
+            <!-- <view class="tiket_use">{{tiketName}}</view> -->
+            <view class="decrip">{{description}}</view>
+            <view class="usable" >{{deadline}}</view>
+          </view>
+      </view>
+      <view class="btnrgroup">
+          <button bindtap="goback" class="Issure">立即领取</button>
+      </view>
+    </view>
+    <view class="tiketOut" bindtap="hide" style="background-image:url({{iconURL}}/btn-index-closs.png)"></view>
+  </view>
+</view>

@@ -1,0 +1,5 @@
+<view class="credits-rules">
+  <view class="rules-box" wx:for="{{rulesList}}" wx:key="{{index}}">
+    {{item}}
+  </view>
+</view>

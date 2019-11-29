@@ -1,0 +1,45 @@
+/* pages/recharge/record/record.wxss */
+page{
+  background-color: #fff;
+}
+
+.list{
+  padding: 0 24rpx;
+}
+.list .item{
+  height: 140rpx;
+  line-height: 140rpx;
+  border-bottom: 1rpx solid #ddd;
+  padding: 14rpx 0;
+  box-sizing: border-box;
+  position: relative;
+  padding-left: 100rpx;
+}
+.list .item .tel_icon{
+  width: 76rpx;
+  height: 76rpx;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.time,.des{
+  line-height: 55rpx;
+}
+.price{
+  position: absolute;
+  color: #eb3c39;
+  font-size: 40rpx;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.item .des{
+  width: 70%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block
+}

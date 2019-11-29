@@ -1,0 +1,189 @@
+<!--pages/confirm/confirm.wxml-->
+<view class="container with-tabbar">
+    <view class='tip' hidden='{{!tip_show.tip1}}' data-url='./map/map' data-pickup_img='{{consignee.pickup_img}}' bindtap='goMap'>
+        <text class='tip-text'>已享受免费代收服务，到货请至自提点取货</text>
+        <!-- <navigator class='goMap' url='./map/map?atitude={{consignee.atitude}}'>查看地图</navigator> -->
+        <!-- <view class='iconfont icon-btn_huangsetishiguanbix' catchtap='isShow' data-name='tip1'></view> -->
+    </view>
+    <!-- Address -->
+    <view class="confirm-address" wx:if="{{consignee && consignee.address_id||storageAddr}}">
+        <!-- 提货地址 -->
+        <view class='confirm-address-wrap' bindtap="touchAddress">
+            <image class='icon-img' src='{{iconURL}}/btn_smallAddr@2x01.png'></image>
+            <view class="address-detail">
+                <text class='leftName'>提货地址：</text>
+                <text class='ellipsis rightText' style='display:block'>{{consignee.cityName}} {{consignee.address}} {{consignee.pickup_address}}</text>
+                <view class="arrow">
+                    <view class="right-arrow iconfont icon-btn_xiangyoudajiantoux"></view>
+                </view>
+            </view>
+            <view class="address-detail" wx:if="{{consignee.pickup_contact||consignee.pickup_phone}}">
+                <text class='leftName'>店长：</text>
+                <text class='mr16'>{{consignee.pickup_contact}}</text>
+                <text>{{consignee.pickup_phone}}</text>
+            </view>
+        </view>
+        <!-- 预留信息 -->
+        <view class='confirm-address-wrap'>
+            <image class='icon-img' src='{{iconURL}}/btn_lxr@2x01.png'></image>
+            <view class='t4 address-detail'>提货人信息</view>
+            <view class="address-detail">
+                <text class='leftName' style='width:110rpx;'>姓名：</text>
+                <view class='addr_input_box'>
+                    <input type='text' class='addr_input' placeholder='请填写姓名' data-keyName='consignee' bindinput="editInput" value='{{consignee.consignee}}'></input>
+                </view>
+            </view>
+            <view class="address-detail">
+                <text class='leftName' style='width:110rpx;'>手机：</text>
+                <view class='addr_input_box'>
+                    <!-- <button wx:if="{{!is_bind_moble}}" class='addr_input btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">请填写手机号</button> -->
+                    <input type='number' class='addr_input' placeholder='请填写手机号' data-keyName='mobile' bindinput="editInput" value='{{consignee.mobile}}'></input>
+                </view>
+            </view>
+        </view>
+
+    </view>
+    <view class="confirm-address" wx:else bindtap="newAddress">
+        <view class="address-create danger">请点击填写地址</view>
+        <view class='iconfont icon-btn_xiangyoudajiantoux address-arrow'></view>
+        <!-- <view class='iconfont icon-img_dizhix '></view> -->
+        <!-- <image class="address-arrow" src="{{iconURL}}/icon_right_arrow.png"></image> -->
+    </view>
+
+    <!-- 订单明细 -->
+    <view class="confirm-form no-margin" wx:if="{{selectedGoods}}" style='margin-bottom:20rpx'>
+        <view class="form-item_nums row" style='padding:26rpx'>
+            <view class="item-title col-25 t4">订单明细</view>
+            <view class="item-price col-75  font-face-ios_Avenir t6">
+                该订单将免费帮您寄放于
+                <text class='red-font-color'>提货点</text>
+            </view>
+        </view>
+    </view>
+
+    <!-- Goods -->
+    <view class='good_list' style='background:#fff'>
+        <view class="order-main" wx:if="{{order_info.firstGoods.length}}">
+            <view class='order_tab'>次日达</view>
+            <view class="goods-item" wx:for='{{order_info.firstGoods}}' wx:for-item='productInfo' wx:key="{{index}}">
+                <view class="item-photo">
+                    <image src='{{productInfo.list_img}}'></image>
+                    <view class='inequacy' wx:if="{{productInfo.is_enough==0}}">
+                        <image  src='{{iconURL}}/inequacy02.png'></image>
+                    </view>
+
+                </view>
+                <view class="item-info">
+                    <view class="info-name">{{productInfo.score_goods_name}}</view>
+                    <view class="info-attr">{{productInfo.sku_key_name}}</view>
+                    <view class="info-price font-face-ios_Avenir credits-flex">
+                        {{productInfo.score_price}}
+                        <i class="score" style="color:#303030">积分</i>
+                        <!--<image src="{{iconURL}}/credits-icon01.png" class="credits-icon">-->
+
+                        <!--</image>-->
+                    </view>
+                    <view class="info-amount">x{{productInfo.amount}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="order-main" wx:if="{{order_info.secondGoods.length}}">
+            <view class='order_tab'>2-4日送达</view>
+            <view class="goods-item" wx:for='{{order_info.secondGoods}}' wx:for-item='productInfo'>
+                <view class="item-photo">
+                    <image src='{{productInfo.list_img}}'></image>
+                    <view class='inequacy' wx:if="{{productInfo.is_enough==0}}">
+                        <image  src='{{iconURL}}/inequacy02.png'></image>
+                    </view>
+                </view>
+                <view class="item-info">
+                    <view class="info-name">{{productInfo.score_goods_name}}</view>
+                    <view class="info-attr">{{productInfo.sku_key_name}}</view>
+                    <view class="info-price font-face-ios_Avenir">
+                        <i class='icon_rmb'>¥</i>{{productInfo.score_price}}
+                    </view>
+                    <view class="info-amount">x{{productInfo.amount}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <!-- Total -->
+    <view class="confirm-form no-margin" wx:if="{{selectedGoods}}">
+        <view class="form-item_nums row">
+            <view class="item-title col-25">商品合计</view>
+            <view class="item-price col-75 red-font-color font-face-ios_Avenir">
+                {{order_info.firstGoods[0].score_price || '0.00'}}
+                <i class="score">积分</i>
+                <!--<image src="{{iconURL}}/credits-icon01.png" class="credits-icon">-->
+
+                <!--</image>-->
+            </view>
+        </view>
+    </view>
+
+    <view class="confirm-submit">
+        <view class="submit-total">
+            <view class="total-price font-face-ios_Avenir credits-flex-right">
+                <text class='des'>实付：</text>
+                <text class="price font-face-ios_Arial">{{ order_info.firstGoods[0].score_price || '0.00'}}</text>
+                <i class="score">积分</i>
+                <!--<image src="{{iconURL}}/credits-icon01.png" class="credits-icon">-->
+
+                <!--</image>-->
+            </view>
+        </view>
+        <form class='toPay' bindsubmit="showConfirm" report-submit='true'>
+            <button formType='submit'>立即支付</button>
+        </form>
+    </view>
+    <!-- 订单确认弹窗 -->
+    <view class="drawer_screen" wx:if="{{order_confirm_show}}"></view>
+    <view class='order_confirm_wrap' wx:if="{{order_confirm_show}}">
+        <view class='t4 address-detail row'>
+            <image class='icon-img' src='{{iconURL}}/btn_smallAddr@2x01.png'></image>
+            <text>自提地址（此商品需要您前往提货点自提）</text>
+        </view>
+        <view class='confirm-address-wrap bb'>
+            <view class='address-detail padding-left'>
+                <text>{{consignee.cityName}} {{consignee.address}}</text>
+                <text class='address-detail-item'>{{consignee.pickup_address}}</text>
+            </view>
+        </view>
+        <view class='address-detail row' style='margin-bottom:30rpx;'>
+            <image class='icon-img' src='{{iconURL}}/btn_smallPrice@2x01.png'></image>
+            <text class='leftName t4'>商品金额：</text>
+            <text>{{order_info.firstGoods[0].score_price || '0.00'}}</text>
+            <i class="score">积分</i>
+            <!--<image src="{{iconURL}}/credits-icon01.png" class="credits-icon">-->
+
+            <!--</image>-->
+        </view>
+        <view class='btn-wrap'>
+            <form class='btn ' bindsubmit="hideConfirm" report-submit='true'>
+                <button class='base-font-color' formType='submit'>取消支付</button>
+            </form>
+            <form class='btn ' bindsubmit="touchSubmit" report-submit='true'>
+                <button class='base-font-color' style='color:#e71f19!important' formType='submit'>确认支付</button>
+            </form>
+            <!-- <view class='btn base-font-color'>确认支付</view> -->
+        </view>
+    </view>
+
+    <!-- 服务弹窗 -->
+    <view class="drawer_screen" bindtap="setModalBonus" wx:if="{{showBonusModal}}" bindtap="showCreditsModal"></view>
+</view>
+<!--售罄弹窗-->
+<view class="drawer_screen_credits" wx:if="{{isShowCredits}}"></view>
+<view class="credits-box" wx:if="{{isShowCredits}}">
+    <text>{{credits_text}}</text>
+    <view class="get-score" bindtap="goCredits">
+        <text>返回兑换商城</text>
+        <view class="iconfont icon-btn_xiangyoudajiantoux"></view>
+    </view>
+    <view class="welfare-closs" bindtap="closeWelfare" bindtap="showCreditsModal">
+        <image src="{{iconURL}}/btn-index-closs.png" mode="widthFix"></image>
+    </view>
+</view>
+
+<loading wx:if="{{loadingShow}}"></loading>

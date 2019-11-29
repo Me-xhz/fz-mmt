@@ -1,0 +1,99 @@
+<view class='container'>
+  <view class='container-header'>
+    <view class='header-row'>
+      <view class='row'>
+        <view class='integral-text row'>
+          <text class='integral-text-i'>积分余额：</text>
+          <text class='integral-text-p'>{{points}}</text>
+        </view>
+        <text bindtap='setRuleModalStatus' class='rule-btn'>规则</text>
+      </view>
+      <view class='row'>
+        <text class='integral-text-i'>今日免费抽奖次数：</text>
+        <text class='integral-text-p'>{{free}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="container-out">
+    <view class="circle" wx:for="{{circleList}}" style="top:{{item.topCircle}}rpx;left:{{item.leftCircle}}rpx;background-color: {{(index%2==0)?colorCircleFirst:colorCircleSecond}};"></view>
+    <view class="container-in">
+      <view class="content-out" wx:for="{{awardList}}" style="top:{{item.topAward}}rpx;left:{{item.leftAward}}rpx;background-color: {{(index==indexSelect)?colorAwardSelect:colorAwardDefault}};">
+        <image class="award-image" src="{{item.imageAward}}"></image>
+      </view>
+      <form report-submit='true' bindsubmit='startGame'>
+        <button class="start-btn" formType="submit" style=" background-color:{{isRunning?'#e7930a':'#ffe400'}}">开始</button>
+      </form>
+    </view>
+  </view>
+
+  <view class='container-msg'>
+    <text>每次抽奖消耗积分8积分</text>
+  </view>
+
+  <view class='container-footer'>
+    <view class='scrollText-header row'>
+      <view class='header-filter col row'>
+        <image class='header-icon-filter' src='{{iconURL}}/img_filter_icon.png'></image>
+        <text class='header-text'>中奖信息</text>
+      </view>
+      <view class='header-myprize col' bindtap='setModalBonus'>
+        <text class='header-myprize-text'>我的中奖记录</text>
+        <image class='header-myprize-icon-filter' src='{{iconURL}}/img_red_right.png'></image>
+      </view>
+    </view>
+    <view class='prize-scrollY'>
+      <view style='transform:translateY({{marquee}}px)'>
+        <view class='scrollText-items'>
+          <view class='scrollText-item row' wx:for="{{prize}}">
+            <text class='item-name col'>{{item.nick_name}}</text>
+            <text class='item-value col'>{{item.award_name}}</text>
+          </view>
+        </view>
+      </view>
+      <view class='filter'></view>
+    </view>
+  </view>
+</view>
+<!-- 规则弹窗 -->
+<view class="drawer_screen" bindtap="setRuleModalStatus" data-status="0" wx:if="{{showRuleModalStatus}}"></view>
+<view animation="{{animationData}}" style='opacity:0' class="modal-box" wx:if="{{showRuleModalStatus}}">
+  <view class='box-header'>游戏规则</view>
+  <view class='box-margin'>
+    <view class='box-text' wx:for="{{rules.rule_content}}" wx:key="{{index}}">{{item}}</view>
+    <view class='box-ps'>
+      注：
+      <view class='box-text' wx:for="{{rules.rule_tip}}" wx:key="{{index}}">{{item}}</view>
+    </view>
+  </view>
+  <view class='iconfont icon-btn_qiapianguanbianniux' data-status="0" bindtap='setRuleModalStatus'></view>
+</view>
+
+<!-- 中奖记录弹层 -->
+<view class="drawer_screen" bindtap="setModalBonus" wx:if="{{showBonusModal}}"></view>
+<view animation="{{animationData}}" style='opacity:0' class="modal-inner" wx:if="{{showBonusModal}}">
+  <!-- <view class="modal-inner-header modal-coupon-title">优惠券（{{shippingBonus.length}}张）</view> -->
+  <view class='modal-coupon-text'>我的中奖记录</view>
+  <view class='modal-conter'>
+    <view class='modal-subbar row'>
+      <text class='modal-subbar-item col'>奖品名称</text>
+      <text class='modal-subbar-item col'>获奖时间</text>
+    </view>
+    <view class='modal-list-box'>
+      <view class='modal-list row' wx:for="{{myPrize}}">
+        <text class='modal-list-item col'>{{item.award_name}}</text>
+        <text class='modal-list-item-taim col'>{{item.add_time}}</text>
+      </view>
+    </view>
+    <view class='modal-msg'>
+      <text>只能查询一个月内的中奖记录哦~</text>
+    </view>
+    <view class='modal-page-btns row'>
+      <button bindtap='myPrizeUp' class='page-btn-up'>上一页</button>
+      <button bindtap='myPrizeDown' class='page-btn-down'>下一页</button>
+    </view>
+  </view>
+  <view class='modal-close' bindtap="setModalBonus">
+    <button class='close-btn'>关闭</button>
+  </view>
+</view>

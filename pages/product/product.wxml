@@ -1,0 +1,734 @@
+<!--pages/index/detail.wxml-->
+<!-- <import src="../listdetailTemplate/listdetailTemplate.wxml" /> -->
+<!-- 滚动判断显示 -->
+<!-- navBar -->
+<!-- <view class="nav-bar-back" style="height:{{navBarHeight}}px">
+  <view bindtap="back" wx:if="{{showBack}}" class="iconfont icon-btn_fanhuizuojiantoux"></view>
+  <view class="navbar-box" style="height: {{navBarHeight}}px;opacity: {{navbarOpacity}}">
+    <view style="height: {{navBarHeight}}px"></view>
+    <view class="navbar-menu" style="height: {{navBarHeight}}px">
+      <view class="menu-left noborder">
+        <view bindtap="back" wx:if="{{showBack}}" class="iconfont icon-btn_fanhuizuojiantoux"></view>
+        <view bindtap="backHome" wx:if="{{!showBack}}" class="iconfont icon-btn_shangxiangshouyex"></view>
+      </view>
+      <view class="menu-title">
+        <view class="goods-name">{{itemData.goods_name}}</view>
+      </view>
+    </view>
+  </view>
+</view> -->
+<view class="product container" style="{{iphoneXBottom=='68rpx'?'padding-bottom:150rpx':''}}">
+  <!--subbar-->
+  <!-- <view class="product-sub-bar order-filter {{showSubbar ? ' show' : ''}}" id="topbar">
+    <view class="filter-item{{currentLocation == 1 ? ' active' : ''}}" bindtap='productGoSP'>
+      <text>商品</text>
+    </view>
+    <view class="filter-item{{currentLocation == 2 ? ' active' : ''}}" bindtap="productGoPJ">
+      <text>评价</text>
+    </view>
+    <view class="filter-item{{currentLocation == 3 ? ' active' : ''}}" bindtap="productGoXQ">
+      <text>详情</text>
+    </view>
+  </view> -->
+  <!--内容开始-->
+
+  <!-- 返回首页悬浮框/分享进入显示 -->
+  <view class='goHomeFixed' catchtap='gotoHome' wx:if="{{isShowGoHome}}">
+    <image src='{{iconURL}}/product-icon-leftReturn.svg' class='icon-leftReturn'></image>
+    <text>返回首页</text>
+  </view>
+
+  <!--suppress ALL -->
+  <view class="cont">
+    <!--<image class="tp_image" src="{{itemData.photo_d}}"></image>-->
+    <swiper wx:if="{{itemData.is_enough == 1}}" indicator-color="{{indicatorColor}}" circular="{{circular}}" indicator-active-color="{{indicatorActiveColor}}" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{bannerItem}}" wx:key='index'>
+        <swiper-item class='dufiltImage' style="background-image:url({{iconURL}}/img_dufilt_swiper.png)">
+          <image bindtap='setPreviewImage' data-current='{{item.src}}' bindload='swiperImageLoad' src="{{item.msrc}}" class="slide-image {{swiperImgBl == true ? 'loaded' : ''}}" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="bannerImg" wx:if="{{itemData.is_enough == 0}}">
+      <image  src="{{bannerItem[0].msrc}}" bindload='swiperImageLoad'></image>
+    </view>
+    <image wx:if='{{itemData.goods_video && itemData.goods_video != ""}}' data-current='{{itemData.goods_video}}' bindtap='setPreviewVideo' src="{{iconURL}}/product_video.png" class="slide-videoIcon" />
+    <view class="enough" wx:if="{{itemData.is_enough == 0}}">
+      <image src="{{iconURL}}/change-index-enough.png" mode="widthFix"></image>
+    </view>
+    <view class="limit-change-box bottom" wx:if="{{itemData.store_count > 0 || itemData.sale_num > 0}}">
+      <view class="limit-main">
+        <view class="store-count" wx:if="{{itemData.store_count > 0}}">
+          <view class="t">仅</view>
+          <view class="n">{{itemData.store_count}}</view>
+          <view class="t">份</view>
+        </view>
+        <view class="sale-num" wx:if="{{itemData.sale_num > 0}}">
+          <view class="t margin-right">已售</view>
+          <view class="s row">
+            <view class="doc" wx:for="{{actual_store_count}}" wx:key="{{index}}">{{item}}</view>
+          </view>
+        </view>
+        <view class="t">份</view>
+      </view>
+    </view>
+  </view>
+  <!-- 抢购信息 -->
+  <view class='ac_bar' wx:if="{{date_limite_bool&&activity_classfy==1&&promInfoData.activity_type==2}}" style='background-image:url("{{iconURL}}/product_ac_bg.png");'>
+    <view class="ac_bar-left">
+      <view class="sku-price">¥{{itemData.market_price}}</view>
+      <view class='text'>
+        <view class="price-text">活动价</view>
+        <view class='price'>
+          <i class="price-icon">¥</i>
+          <i class="price-start">{{activity_price_start}}</i>
+          <i class="price-end">.{{activity_price_end}}</i>
+        </view>
+      </view>
+    </view>
+    <view class="time-start" wx:if="{{!date_limite_ing}}">
+      <text class='des color'>{{activity_time_start.activity_time_start_month + "月" + activity_time_start.activity_time_start_date + "日"}}</text>
+      <view class='date color'>{{activity_time_start.activity_time_start_hours + ":" + activity_time_start.activity_time_start_min + "开抢"}}</view>
+      <image class="date-icon" src="{{iconURL}}/product_ac_bg_icon.png" mode="widthFix"></image>
+    </view>
+    <view class="time-end" wx:if="{{date_limite_ing && itemData.is_enough == 1}}">
+      <text class='des end'>距结束仅剩</text>
+      <view class='time-date'>
+        <view class="span">{{down_date_h || '00'}}</view>
+        <i>:</i>
+        <view class="span">{{down_date_m || '00'}}</view>
+        <i>:</i>
+        <view class="span">{{down_date_s || '00'}}</view>
+        <i>:</i>
+        <view class="span">{{down_date_ms || '0'}}</view>
+      </view>
+    </view>
+  </view>
+  <!-- 商品名称 -->
+  <view class="product-name-box">
+    <view class="info-name">
+      <view class="team-tips-box" wx:if="{{itemData.label_list.length>0}}">
+        <view wx:for="{{itemData.label_list}}" wx:for-item="tips" wx:for-index="tipsindex" class="team-tips {{tips.type==2?'tips-active':''}}" wx:key="{{tipsindex}}">{{tips.name}}</view>
+      </view>
+      <text>{{itemData.goods_name}}</text>
+    </view>
+    <view class="info-desc">
+      {{itemData.goods_remark}}
+    </view>
+  </view>
+  <!-- 商品价格 -->
+  <view class="product-info">
+    <view class="info-price">
+      <view class="is-vip">
+        <view class="is-vip_price font-face-ios_Avenir">
+          <view class='icon_rmb'>¥</view>
+          <view>{{itemData.shop_type == 0 ? itemData.shop_price : itemData.month_price + '/月'}}</view>
+          <view class='info-tab' wx:if="{{itemData.is_special_price==1}}">特价</view>
+          <!-- <view class='info-tab' wx:if="{{itemData.is_new==1}}">新品</view> -->
+          <view class='row little_price' wx:if="{{itemData.shop_type == 0 && itemData.shop_price != itemData.market_price}}">
+            <view class='color_gray text_content_small del_text'>{{itemData.cat_price_dec}}</view>
+            <view class='del color_gray text_content_small del_text'>¥{{itemData.market_price}}</view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{itemData.shop_type == 1}}" class='productSupplier'>{{itemData.suppliers_name}}</view>
+      <view class='to_share row' bindtap='shareTo'>
+        <image src='{{iconURL}}/product-icon-share.svg'></image>
+        <text>分享</text>
+      </view>
+    </view>
+    <!-- 商品服务 -->
+    <view class="newlyweds-img" bindtap='setfwModalStatus' wx:if="{{itemData.services_title.length > 0}}">
+      <view class="newlyweds-img-box">
+        <text class="iconfont icon-yuanzhuangzhengpin newLywds-icon"></text>
+        <text>{{itemData.services_title[0]}}</text>
+      </view>
+      <view class="newlyweds-img-box">
+        <text class="iconfont icon-img_jisutihuox newLywds-icon"></text>
+        <text>{{itemData.services_title[1]}}</text>
+      </view>
+      <view class="newlyweds-img-box">
+        <text class="iconfont icon-bianjietihuo newLywds-icon"></text>
+        <text>{{itemData.services_title[2]}}</text>
+      </view>
+      <view class="newlyweds-img-box">
+        <text class="iconfont icon-fangxingoumai newLywds-icon"></text>
+        <text>{{itemData.services_title[3]}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="gray-hr"></view>
+
+  <!-- 促销 -->
+  <view class="product-nums  bor-b" wx:if="{{activity_bool&activity_classfy==1}}" data-activity_id="{{promInfoData.activity_id}}">
+    <view class="row promotion">
+      <view class="col-15 nums-name t2">促销</view>
+      <view class="promotion_item nums-item-right">
+        {{promInfoData.prom_label}}
+      </view>
+    </view>
+  </view>
+  <view class="product-nums  bor-b" wx:if="{{activity_bool&activity_classfy==2}}" data-activity_id="{{promInfoData.activity_id}}" catchtap='to_activity'>
+    <view class="row promotion">
+      <view class="col-15 nums-name t2">促销</view>
+      <view class="promotion_item nums-item-right">
+        {{promInfoData.prom_label}}
+        <view class='iconfont icon-btn_xiangyoudajiantoux icon-right-arrow'></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 优惠券 -->
+  <view class="product-nums bor-b-16" bindtap="{{shippingBonus.length > 0?'setModalBonus':'goCouponList'}}">
+    <view class="row ">
+      <view class="col-15 nums-name t2">优惠券</view>
+      <view class="col nums-item-right">
+        <block wx:for="{{shippingBonus}}" wx:for-index="idx" wx:if="{{idx < 5}}" wx:key='index'>
+          <span class="item-left-exeimg">
+            <i class="item-icon_exeimg t3" wx:if="{{item.coupon_type==1}}" style="background-image:url({{iconURL}}/coupon02.png);color:#f23030!important">{{item.value}}折</i>
+            <i class="item-icon_exeimg t3" wx:else style="background-image:url({{iconURL}}/coupon02.png);color:#f23030!important">￥{{item.value}}</i>
+          </span>
+        </block>
+        <i class="team-coupon-text" wx:if="{{shippingBonus.length > 0}}">领取优惠券</i>
+        <i class="team-coupon-text team-coupon-text-none" wx:if="{{shippingBonus.length ==0}}">去领券中心</i>
+        <view class='iconfont icon-btn_xiangyoudajiantoux icon-right-arrow'></view>
+      </view>
+    </view>
+  </view>
+  <!-- 拼团优惠券 -->
+  <!--<view class="product-nums bor-b-16" bindtap="setModalBonus">-->
+  <!--<view class="row ">-->
+  <!--<view class="col-15 nums-name t2">优惠券</view>-->
+  <!--<view class="col nums-item-right">-->
+  <!--<block wx:for="{{shippingBonus}}" wx:for-index="idx" wx:if="{{idx < 5}}" wx:key='index'>-->
+  <!--<span class="item-left-exeimg">-->
+  <!--<i class="item-icon_exeimg t3" wx:if="{{item.coupon_type==0}}" style="background-image:url({{iconURL}}/coupon02.png);color:#f23030!important">￥{{item.value}}</i>-->
+  <!--<i class="item-icon_exeimg t3" wx:if="{{item.coupon_type==1}}" style="background-image:url({{iconURL}}/coupon02.png);color:#f23030!important">{{item.value}}折</i>-->
+  <!--</span>-->
+  <!--</block>-->
+  <!--<i class="team-coupon-text" wx:if="{{shippingBonus.length <= 3}}">领取优惠券</i>-->
+  <!--<i class="team-coupon-text-none" wx:if="{{shippingBonus.length > 3}}">去领券中心</i>-->
+  <!--<view class='iconfont icon-btn_xiangyoudajiantoux icon-right-arrow icon-right-arrow-team'></view>-->
+  <!--</view>-->
+  <!--</view>-->
+  <!--</view>-->
+
+  <!--选择SKU-->
+  <view class="product-nums-sku product-nums bor-b" bindtap="showSkuPopup" wx:if="{{itemData && itemData.shop_type==0 && canPurchase}}">
+    <view class="row ">
+      <view class="col nums-item-right">
+        <text class='t2'>选择</text>
+        <text class="nums-item_go">{{choosed_sku || '请选择规格'}}</text>
+        <view class='iconfont icon-btn_xiangyoudajiantoux icon-right-arrow'></view>
+      </view>
+    </view>
+    <!-- <view class='goToDiv' id='comment' wx:if="{{ipRecommend || ipRecommend.data.length <= 0}}"></view> -->
+  </view>
+  <!-- 配送时间 -->
+  <view class="product-nums">
+    <view class="row ">
+      <view class="col-15 nums-name t2">配送时间</view>
+      <view class="col nums-item-right">
+        <i class="icon-right-arrow">{{itemData.plan_shipping_time}}</i>
+      </view>
+    </view>
+  </view>
+
+  <!-- 租机信息开始 shop_type==1为租机商品-->
+  <!-- 图片 -->
+  <view class='rent_service_pic' wx:if="{{itemData.shop_type==1}}">
+    <image mode='widthFix' src='{{itemData.service_pic}}' style='width:100%;'></image>
+  </view>
+  <view class='rent_info' wx:if="{{itemData.shop_type==1}}">
+    <view class='title t4'>方案详情</view>
+    <view class='rent_tab'>
+      <view class='item {{rentToggleStatus==0?"active_item":""}}' bindtap='rentToggle' data-status='0'>随心租</view>
+      <view class='item {{rentToggleStatus==1?"active_item":""}}' bindtap='rentToggle' data-status='1'>年年租</view>
+    </view>
+    <view class='rent_table' wx:if="{{rentToggleStatus==0}}">
+      <view class='row t5' wx:for="{{itemData.rent_machine}}">
+        <view class='left'>{{item.name}}</view>
+        <view class='right'>{{item.value}}</view>
+      </view>
+    </view>
+    <view class='rent_table' wx:else>
+      <view class='row t5' wx:for="{{itemData.rent_machine_year}}">
+        <view class='left'>{{item.name}}</view>
+        <view class='right'>{{item.value}}</view>
+      </view>
+    </view>
+  </view>
+  <!-- 租机信息结束 -->
+  <!--IP推荐-->
+  <view class="product-sctite-box top-margin-line" wx:if="{{ipRecommend.data.length > 0}}">
+    <view class="row" bindtap="productGoTheme" data-brand="{{ipRecommend.brand.brand_id}}">
+      <view class="product-sctite-box_name">
+        {{ipRecommend.brand.name}}
+      </view>
+      <view class="product-sctite-box_right">
+        <span>{{ipRecommend.brand.total}}件商品 </span>
+        <image class="icon-right-arrow" src="{{iconURL}}/icon_right_arrow.png"></image>
+      </view>
+    </view>
+    <view class="recommended-content" wx:if="{{ipRecommend.data.length > 1 && ipRecommend.data}}">
+      <scroll-view lower-threshold='-60' bindscrolltolower='productGoTheme' data-brand="{{ipRecommend.brand.brand_id}}" scroll-x='true' class='content-ul'>
+        <view class='content-li' wx:for="{{ipRecommend.data}}" bindtap="productGoProduct" wx:key='index' data-id='{{item.goods_id}}'>
+          <view class="recommended-box">
+            <span class="recommended-img" style="background-image:url({{item.img}})"></span>
+          </view>
+          <p class="recommended-name">{{item.goods_name}}</p>
+        </view>
+        <view class='content-li li-noright' bindtap="productGoTheme" wx:if="{{ipRecommend.data.length > 3}}" data-brand="{{ipRecommend.brand.brand_id}}">
+          <image src='{{iconURL}}/icon_showMore-v2.png' mode='widthFix'></image>
+        </view>
+      </scroll-view>
+    </view>
+    <view class='goToDiv' id='comment'></view>
+  </view>
+
+  <!-- 为你推荐 -->
+  <view class='intro-header top-margin-line' id='content' wx:if="{{scgGoodsList.length>0}}">
+    <view class="swiper-tab title_bar t4">
+      为你推荐
+    </view>
+    <scroll-view scroll-x="true" class='gallery'>
+      <view class="good_card3" wx:for="{{scgGoodsList}}" wx:key="{{item.goods_id}}">
+        <navigator hover-class="none" url='/pages/product/product?entryType=external&productId={{item.goods_id}}'>
+          <view class='good_pic3 mb24 good_pic inequacy_wrap'>
+            <view class='inequacy' wx:if="{{item.is_enough==0}}">
+              <image src='{{iconURL}}/inequacy02.png'></image>
+            </view>
+
+            <image mode='aspectFit' src='{{item.list_img}}'></image>
+          </view>
+          <view class='good_info3'>
+            <view class='title mb12 t4'>{{item.goods_name}}</view>
+            <view class='price red-font-color mb32' style='text-align:{{align}}'>
+              <text class='mr6'>￥{{item.shop_price}}</text>
+              <view class='tab' wx:if="{{item.is_special_price}}">特价</view>
+              <!-- <view class='tab' wx:if="{{item.is_new}}">上新</view> -->
+              <text wx:if='{{item.shop_price != item.market_price}}' class='small ml6 sPrice'>¥{{item.market_price}}</text>
+            </view>
+          </view>
+        </navigator>
+      </view>
+
+    </scroll-view>
+  </view>
+  <!--评论-->
+  <!-- <view class="product-review-box top-margin-line" id="comment">
+    <view class="review-box_header" wx:if="{{comment.comment_sum > 0}}">
+      <span>商品评价</span>
+      <i>（{{comment.comment_sum}}）</i>
+    </view>
+    <view class="review-box_null" bindtap="productGoComment" wx:if="{{comment.length <= 0  || comment.comment_sum <= 0}}" data-productid="{{itemData.id}}">
+      <span>暂无评价</span>
+      <image class="icon-right-arrow" src="{{iconURL}}/icon_right_arrow.png"></image>
+    </view>
+    <block wx:for="{{comment.comment_info}}" wx:for-item='commentList' wx:key='index' wx:for-index="infoindex">
+      <view class="modul-review-manu{{commentList.class ? ' no-border' : ''}}" wx:if="{{comment.comment_sum > 0}}">
+        <view class="review-manu_header">
+          <image src="{{commentList.avatar}}"></image>
+          <view class="header-user_name">
+            <span>{{commentList.user_name}}</span>
+          </view>
+        </view>
+        <view class="review-manu_main">
+          <view class="manu_main_text" wx:if="{{commentList.content}}">
+            <i class='limitLineHeight{{commentList.wordsCut ? " cut" : ""}}'>{{commentList.content}}</i>
+            <view class='limit-words' wx:if="{{commentList.words}}" bindtap='limitWord' data-iscut='{{commentList.wordsCut}}' data-listnum='infoindex'>{{limitWords}}
+              <image class='show' wx:if="{{commentList.wordsCut}}"></image>
+              <image class='hidden' wx:if="{{!commentList.wordsCut}}"></image>
+            </view>
+          </view>
+          <view wx:if="{{commentList.imgInfo}}">
+            <block wx:for="{{commentList.imgInfo}}" wx:key="index">
+              <view class="manu_main_imgs" bindtap='setCommentImage' data-current='{{item.img}}'>
+                <span class="swiperphoto" style="background-image: url({{item.thumbImg}});"></span>
+              </view>
+            </block>
+          </view>
+        </view>
+        <view class="review-manu_reply" wx:if="{{isLoaded && commentList.office_info}}" opentoshowmore>
+          <i>小鹅回复：{{commentList.office_info}}</i>
+        </view>
+        <view class="review-manu_additional" wx:if="{{commentList.again_info}}">
+          <view class="manu_additional_header">
+            <i wx:if="{{commentList.ctime > 0}}">{{commentList.ctime}}天后追加评价</i>
+            <i wx:if="{{commentList.ctime == 0}}">当天追加评价</i>
+          </view>
+          <view class="manu_additional_text" wx:if="{{isLoaded && commentList.again_info.content}}" opentoshowmore>
+            <i>{{commentList.again_info.content}}</i>
+          </view>
+          <view wx:if="{{commentList.again_info.imgInfo}}">
+            <block wx:for="{{commentList.again_info.imgInfo}}" wx:key='index'>
+              <view class="manu_main_imgs" bindtap='setAgainImage' data-current='{{item.img}}'>
+                <span style="background-image: url({{item.thumbImg}});"></span>
+              </view>
+            </block>
+          </view>
+        </view>
+        <view class="review-manu_reply" wx:if="{{isLoaded && commentList.office_again_info}}">
+          <i>小鹅回复：{{commentList.office_again_info}}</i>
+        </view>
+        <view class="reviw-manu_attrs row">
+          <view class="col-70">
+            <i>{{commentList.attr_name}}</i>
+          </view>
+          <view class="col-30">
+            <i>{{commentList.add_time}}</i>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view class="review-box_bottom" bindtap="productGoComment" wx:if="{{comment.comment_sum > 2}}" data-productid="{{itemData.id}}">
+      <i>查看全部</i>
+      <image src="{{iconURL}}/icon_right_arrow.png"></image>
+    </view>
+    <view class='goToDiv' id='content'></view>
+  </view> -->
+
+  <!--图文详情头部-->
+  <view class="gray-hr"></view>
+  <view class='intro-header' id='content'>
+    <view class="swiper-tab title_bar t4">
+      商品详情
+    </view>
+    <view class='product-intro-images'>
+      <image lazy-load="true" src='{{item.width_img}}' wx:key="index" style='width:{{item.width}}rpx;height:{{item.height}}rpx;' wx:for="{{itemData.goods_content}}"></image>
+      <!-- <import src="../../wxParse/wxParse.wxml" />
+      <view class="wxParse">
+        <template is="wxParse" data="{{wxParseData:content.nodes}}" />
+      </view> -->
+    </view>
+  </view>
+
+  <!--分享领红包-->
+  <!-- <view class="share-get-cashgift" wx:if="{{productgift}}">
+    <view class="cashgift-title">{{productgift.msgtitle}}</view>
+    <view class="cashgift-ticket">
+      <view class="ticket-inner">
+        <view class="ticket-price {{giftNum}}">
+          <i>¥</i>{{productgift.allmoney}}</view>
+        <view class="ticket-content">
+          <view class="ticket-title">{{productgift.name}}</view>
+          <view class="ticket-desc" wx:if="{{productgift.isshare==0}}">{{productgift.msg}}</view>
+          <view class="ticket-desc" wx:if="{{productgift.isshare==1}}">可到个人中心红包查看哦</view>
+        </view>
+        <view class="ticket-button{{productgift.isshare ? ' disable' :''}}">
+          <button wx:if="{{productgift.isshare==0 && isshare==0}}" open-type="share" bindtap="shareTo">去分享</button>
+          <span wx:if="{{productgift.isshare==1 || isshare==1}}">已领取</span>
+        </view>
+      </view>
+    </view>
+  </view> -->
+
+  <!-- 常见问题 -->
+  <view class='intro'>
+    <import src="../../wxParse/wxParse.wxml" />
+    <view class="wxParse">
+      <template is="wxParse" data="{{wxParseData:introContent.nodes}}" />
+    </view>
+  </view>
+
+  <!-- 为你推荐 -->
+  <!-- <view id="theme" class="app-container top-margin-line" wx:if="{{shopList && shopList.length > 0}}">
+    <view class="productLis-header">
+      <text>为你推荐</text>
+    </view>
+    <template is="listDetail" data="{{shopList}}" />
+  </view> -->
+
+  <!-- 底部返回首页 -->
+  <!-- <navigator hover-class="none" url='../index/index' open-type='switchTab' class='footer-return tc'>
+    <view class='gohome'>去商城首页逛逛
+      <image class='icon-right-arrow' src='{{iconURL}}/icon_right_arrow.png'></image>
+    </view>
+  </navigator>  -->
+  <view class='back-button'>
+    <view catchtap='gotoPagetop' class='backtop' style='background-image:url({{iconURL}}/to_top01.png)' wx:if='{{showBackTop}}'></view>
+    <!-- <view catchtap='gotoHome' class='gohome' wx:if='{{showBackTop}}' style='background-image:url({{iconURL}}/gohome.png)'></view> -->
+  </view>
+  <pagebottom></pagebottom>
+</view>
+
+<!--微信分享提示弹层-->
+<!-- <view class="share-get-cashgift-modal modal-wx" wx:if="{{isShowModeWx}}" bindtap="closeShareWx">
+  <view class="drawer_screen" wx:if="{{isShowModeWx}}"></view>
+  <view class="icon-content">
+    <view class='share-content'>
+      <view class='share-title'>转发到</view>
+      <view class='share-icon row'>
+        <view>
+          <button class='big-icon' open-type='share'>
+            <view class='iconfont icon-weixin-copy big-icon'></view>
+          </button>
+          <view class='icon-text'>好友</view>
+        </view>
+        <view>
+          <button hover-class='none' data-wares_image="{{bannerItem[0].src}}" data-wares_logo="{{iconURL}}/basicprofile.png" data-wares_title="好又省团购" data-wares_content="{{itemData.share_title}}" data-wares_price="￥{{itemData.shop_price}}立即购买" data-template_key="c5e4a9f301035937e386d03ac23cb298" bindtap='aldminishare' class='big-icon'>
+            <view class='iconfont icon-pengyouquan-copy big-icon'></view>
+          </button>
+          <button class='big-icon' bindtap='drawPic'>
+            <view class='iconfont icon-pengyouquan-copy big-icon'></view>
+          </button>
+          <view class='icon-text'>朋友圈</view>
+        </view>
+      </view>
+      <view class='share-cancel'>取消</view>
+    </view>
+  </view>
+</view> -->
+
+<action-sheet hidden="{{!isShowModeWx}}" bindchange="closeShareWx">
+  <button class='share-btn' open-type="share" bindtap="clossShare">
+    <action-sheet-item open-type="share">
+      分享给好友
+    </action-sheet-item>
+  </button>
+  <!-- <button hover-class='none' data-wares_image="{{bannerItem[0].src}}" data-wares_logo="{{iconURL}}/basicprofile.png" data-wares_title="好又省团购" data-wares_content="{{itemData.share_title}}" data-wares_price="￥{{itemData.shop_price}}立即购买" data-template_key="c5e4a9f301035937e386d03ac23cb298"
+    bindtap='aldminishare' class='big-icon'>
+    <action-sheet-item>生成分享卡片</action-sheet-item>
+  </button> -->
+  <button class='share-btn' bindtap="drawPic">
+    <action-sheet-item>
+      生成分享卡片
+    </action-sheet-item>
+  </button>
+  <action-sheet-cancel>取消</action-sheet-cancel>
+</action-sheet>
+<!--分享领红包弹窗-->
+<!-- <view class="share-get-cashgift-modal" wx:if="{{isShowbox}}">
+  <view class="drawer_screen" wx:if="{{isShowbox}}"></view>
+  <view class="modal-content">
+    <view class="content-box">
+      <view class="box-top success"></view>
+      <view class="box-title">你已成功领取红包礼包</view>
+      <view class="box-text" bindtap="goBonusPage" role="button">
+        可去
+        <span>个人中心-红包</span>查看哦
+      </view>
+      <view class="box-button">
+        <view class="button-inner" bindtap="closeShareShowSku" role="button">
+          马上使用
+        </view>
+      </view>
+    </view>
+    <view class="content-close" bindtap="closeShareBox" role="button"></view>
+  </view>
+</view> -->
+
+<!--SKU弹窗-->
+<specifications goodsInfo="{{itemData}}" showSKUstatus="{{showSKUstatus}}" bindsubmitnew="skuSubmit" bindskuPopupHide="skuPopupHide"></specifications>
+
+<!-- 领取红包 -->
+<view class="drawer_screen" bindtap="setModalBonus" wx:if="{{showBonusModal}}"></view>
+<view animation="{{animationData}}" style="opacity:0;" class="modal-inner {{iphoneXBottom=='68rpx'?'mb-170':''}}" wx:if="{{showBonusModal}}">
+  <!-- <view class="modal-inner-header modal-coupon-title">红包（{{shippingBonus.length}}张）</view> -->
+  <view class="modal-coupon-close" bindtap="setModalBonus">
+    <view class='iconfont icon-btn_qiapianguanbianniux'></view>
+  </view>
+  <view class='modal-coupon-text'>选择优惠券</view>
+  <scroll-view class="modal-inner-main" scroll-y="true">
+    <view class="modal-inner-block modal-coupon-box">
+
+      <view class="box_list row" style='background-image:url({{iconURL}}/coupon_orange01.png)' wx:for="{{shippingBonus}}" wx:for-item="bonus" wx:key="index">
+        <!-- 左侧面额 -->
+        <view class='coupon_val  color-coupon' wx:if="{{bonus.coupon_type==1}}">
+          <text class="text">{{bonus.value}}</text>
+          <text class="icon">折</text>
+        </view>
+        <view class='coupon_val  color-coupon' wx:else>
+          <text class="icon">¥</text>
+          <text class="text">{{bonus.value}}</text>
+        </view>
+        <!-- 优惠券信息 -->
+        <view class="coupon_info color_gray_dark col-50">
+          <view class="list_title">{{bonus.name}}</view>
+          <view class="dom-attr">{{bonus.description}}</view>
+          <view class="list_time">{{bonus.use_end_date}}</view>
+        </view>
+        <!-- 右侧领取部位 -->
+        <form class="get_coupon_btn col-30" bindsubmit='getBonus' report-submit='true' data-typeid="{{bonus.id}}">
+          <button class='getCoupon' hover-class='none' wx:if="{{!bonus.is_used && !bonus.is_give_over}}" formType='submit' data-typeid="{{bonus.id}}">
+            <span class="get_coupon" wx:if="{{!bonus.is_used && !bonus.is_give_over}}">领取</span>
+          </button>
+        </form>
+        <span class="list_button_img" wx:if="{{bonus.is_used && !bonus.is_give_over}}">
+          <image bindtap='getBonus' data-typeid="{{bonus.id}}" mode='widthFix' src="{{iconURL}}/is_used_102.png"></image>
+        </span>
+        <span class="list_button_img" wx:if="{{bonus.is_give_over}}">
+          <image bindtap='getBonus' data-typeid="{{bonus.id}}" mode='widthFix' src="{{iconURL}}/receive_over02.png"></image>
+        </span>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+<!-- 服务弹窗 -->
+<view class="drawer_screen" bindtap="setfwModalStatus" data-status="0" wx:if="{{showfwModalStatus}}"></view>
+<view animation="{{animationData}}" style='opacity:0' class="fw_manu_box" wx:if="{{showfwModalStatus}}">
+  <view class='manu_header'>服务条款</view>
+  <view class='manu-margin'>
+    <view class='manu-fr'>
+      <view class='fr-a'>
+        <view class='iconfont icon-yuanzhuangzhengpin'></view>
+        <text>{{itemData.services_desc[0].name}}</text>
+      </view>
+      <view class='fr-b'>
+        <text>{{itemData.services_desc[0].desc}}</text>
+      </view>
+    </view>
+    <view class='manu-fr'>
+      <view class='fr-a'>
+        <view class='iconfont icon-img_jisutihuox'></view>
+        <text>{{itemData.services_desc[1].name}}</text>
+      </view>
+      <view class='fr-b'>
+        <text>{{itemData.services_desc[1].desc}}</text>
+      </view>
+    </view>
+    <view class='manu-fr'>
+      <view class='fr-a'>
+        <view class='iconfont icon-bianjietihuo'></view>
+        <text>{{itemData.services_desc[2].name}}</text>
+      </view>
+      <view class='fr-b'>
+        <text>{{itemData.services_desc[2].desc}}</text>
+      </view>
+    </view>
+    <view class='manu-fr'>
+      <view class='fr-a'>
+        <view class='iconfont icon-fangxingoumai'></view>
+        <text>{{itemData.services_desc[3].name}}</text>
+      </view>
+      <view class='fr-b'>
+        <text>{{itemData.services_desc[3].desc}}</text>
+      </view>
+    </view>
+  </view>
+  <view class='iconfont icon-btn_qiapianguanbianniux' data-status="0" bindtap='setfwModalStatus'></view>
+</view>
+
+<!-- 租机弹窗 -->
+<view class="drawer_screen" bindtap="setzjModalStatus" data-status="0" wx:if="{{showzjModalStatus}}"></view>
+<view animation="{{animationData}}" style='opacity:0' class="fw_manu_box" wx:if="{{showzjModalStatus}}">
+  <view class='manu_header'>租机提示</view>
+  <view class='manu-margin'>
+    <view class='zj-text'>该商品为租贷类商品，请至“买买提”APP进行购买，若并未下载，可扫描下方二维码进行下载</view>
+    <view class="zj-erweima">
+      <image src="{{iconURL}}/product_img_acode_v1.png"></image>
+    </view>
+  </view>
+  <view class='iconfont icon-btn_qiapianguanbianniux' data-status="0" bindtap='setzjModalStatus'></view>
+</view>
+<!-- 位置信息设置 -->
+<view class="drawer_screen" wx:if="{{showSettingModalStatus}}"></view>
+<view class="tc_manu_box" wx:if="{{showSettingModalStatus}}">
+  <view class='tc_manu_items'>
+    <view class='manu_header'>权限提示</view>
+    <view class='manu-margin'>
+      <view class='tc-text'>您未打开目前位置，部分功能将受到影响，请点击前往设置开启</view>
+    </view>
+    <view class='manu-buttons row'>
+      <button bindtap='settingModalStatus'>取消</button>
+      <button class='button-primary' bindtap='goSetting'>前往设置</button>
+    </view>
+  </view>
+</view>
+<!-- 分享图片 -->
+<view class="share-modal-pic" wx:if="{{isShowSharePic}}" bindtap="closeSharePic">
+  <view class="drawer_screen" wx:if="{{isShowSharePic}}"></view>
+  <view class='modal-content'>
+    <view class='share-img'>
+      <!-- 画布大小按需定制 -->
+      <canvas canvas-id="shareImg" style="width:283px;height:480px"></canvas>
+      <image src='{{preurl}}' mode='widthFix' class='show-img'></image>
+    </view>
+    <view class='share-btns row'>
+      <view class='share-button'>取消</view>
+      <view class='share-button btn-right' bindtap='saveSharePic'>保存图片</view>
+    </view>
+  </view>
+</view>
+<!-- 获取手机号弹窗 -->
+<view class="drawer_screen-phone" wx:if="{{showPhoneModal}}"></view>
+<view class="getPhoneModal" wx:if="{{showPhoneModal}}">
+  <view class="modal-text">
+    买买提将通过短信形式进行提醒，请允许授权手机号
+  </view>
+  <view class="btn-footer">
+    <button class="close-phone-btn" bindtap="closePhoneModal">
+      取消提醒
+    </button>
+    <button class="get-phone-btn" open-type='getPhoneNumber' bindgetphonenumber="getPhone">
+      允许授权
+    </button>
+  </view>
+</view>
+<!---底部开始-->
+<view class='footfixed {{swiperImgBl ? "footShow" : ""}}' style='padding-bottom:{{iphoneXBottom}}'>
+  <view class='left'>
+    <view class="submit-icon">
+      <image class="icon-ico" src="{{iconURL}}/sxsy.svg"></image>
+      <view class='text'>首页</view>
+    </view>
+    <view class="submit-icon" bindtap='goRegister'>
+      <image class="icon-ico" src="{{iconURL}}/product_contact_v2.svg"></image>
+      <view class='text'>客服</view>
+      <button open-type="contact" class='icon-contact' session-from='商品详情' send-message-title='{{itemData.goods_name}}' send-message-path='/pages/product/product?productId={{itemData.goods_id}}' send-message-img='{{itemData.gallery[0].msrc}}' show-message-card='true'
+        open-type='contact' wx:if="{{checkSessionKey}}"></button>
+    </view>
+    <view class="submit-icon">
+      <image class="icon-ico" src="{{iconURL}}/product_cart_v2.svg"></image>
+      <view class='text'>购物车</view>
+      <view class='cart-badge' wx:if='{{cartAmount <= 99 && cartAmount != 0}}'>{{cartAmount}}</view>
+      <view class='cart-badge max-length' wx:if="{{cartAmount > 99}}">99+</view>
+    </view>
+    <form bindsubmit='gotoHome' class='product-form-bottom home' report-submit='true'>
+      <button form-type='submit'></button>
+    </form>
+    <form bindsubmit='goToCart' class='product-form-bottom cart' report-submit='true'>
+      <button form-type='submit'></button>
+    </form>
+  </view>
+  <!-- hidden="{{!checkSessionKey}}" -->
+  <view>
+    <form bindsubmit='nowPurchase' wx:if='{{canPurchase && itemData.buy_now == 1}}' report-submit='true'>
+      <!-- 原先立即购买按钮 -->
+      <button type='primary' style='background-color:#ffe150;color:#303030;opacity:1' wx:if="{{itemData.shop_type==0}}" class="submit-button-big {{canPurchase ? 'block_theme' : ''}}" formType="submit">立即购买</button>
+      <!-- 租机按钮显示效果 -->
+      <button wx:else class="rent-button" formType="submit">
+        <view class='yellow_bg rent-btn'>￥{{itemData.rent_machine_year[1].value}}/年年租</view>
+        <view class='red_bg rent-btn'>￥{{itemData.rent_machine[1].value}}/随心租</view>
+      </button>
+    </form>
+    <view class='bottom-buttons row' wx:elif='{{canPurchase && itemData.cart_add_disable == 0 &&  date_limite_ing}}'>
+      <form bindsubmit='addShopCart' data-type="addcart" report-submit='true'>
+        <button type='primary' class="submit-button add-cart" formType="submit">加入购物车</button>
+      </form>
+      <form bindsubmit='nowPurchase' report-submit='true'>
+        <button type='primary' class="submit-button now-purchase" formType="submit">{{date_limite_bool&&activity_classfy==1&&promInfoData.activity_type==2 ? "马上抢" : "立即购买"}}</button>
+      </form>
+    </view>
+    <form report-submit="true" bindsubmit='activeChangeMe' wx:elif="{{date_limite_bool && activity_classfy==1 &&promInfoData.activity_type==2 && !date_limite_ing}}">
+      <button type='primary' style='background-color:{{!check_remind_activity ? "#FFE150" : "#aaaaaa"}};color:#303030;opacity:1'  class="submit-button-big" form-type="submit">{{!check_remind_activity ? '提醒我' : '取消提醒'}}</button>
+    </form>
+    <!-- 商品已抢光 -->
+    <button type='primary' bindtap="showEnoughPopup" style='background-color:#aaaaaa;color:#303030;opacity:1' wx:else class="submit-button-big">商品已抢光，正在补货中~</button>
+  </view>
+  <!-- <button type='primary' class="submit-button {{canPurchase ? 'block_theme' : ''}}" open-type="getPhoneNumber" bindgetphonenumber="getPhone" hidden='{{checkSessionKey}}'>加入购物车</button> -->
+</view>
+
+<!-- 商品售罄弹窗提示 -->
+<view class="isEnough-curtain" bindtap="hideEnoughPopup" wx:if="{{isEnoughPopupShow}}" catchtouchmove="bindtouchmove"></view>
+<view class="isEnough-popup-model" wx:if="{{isEnoughPopupShow}}" catchtouchmove="bindtouchmove">
+  <view class="title">来晚了，商品被抢空！</view>
+  <view class="msg">每日 <i>{{sellOutNoticeInfo.date}}</i> 商品开售 下次记得早点来~</view>
+  <button bindtap="goTomorrowProduct">查看明日爆款 ></button>
+  <image class="closs" bindtap="hideEnoughPopup" src="{{iconURL}}/btn-index-closs.png" mode="widthFix"></image>
+</view>
+
+<view class='top-mask' wx:if="{{showTopMask}}"></view>
+<!-- 红包-顶部通知消息 -->
+<notice type="2" unload="{{noticeUnload}}"></notice>
+<loading wx:if="{{loadingShow}}"></loading>

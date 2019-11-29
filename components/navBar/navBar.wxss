@@ -1,0 +1,70 @@
+/* components/navBar/navBar.wxss */
+@import "../../iconfont.wxss";
+.navbar-box{
+  width: 100%;
+  background-color: #fff;
+}
+.navbar-menu{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 99999;
+  display: flex;
+  align-items: flex-end;
+}
+.menu-left{
+  position: absolute;
+  bottom: 9px;
+  left: 4px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.menu-left.noborder{
+  border: 0;
+  margin-left: 0;
+}
+.menu-left > .iconfont {
+  width: 45px;
+  text-align: center;
+  position: relative;
+}
+.menu-left > .iconfont:nth-child(2) {
+  border-left: 1px solid rgba(0,0,0,0.08);  
+}
+.menu-left > .iconfont.icon-btn_shangxiangshouyex{
+  font-size: 22px;
+}
+
+.menu-title {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 15px;
+  line-height: 46px;
+  height: 46px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.menu-title .goods-name{
+  font-size: 15px;
+  line-height: 46px;
+  height: 46px;
+  width: 45%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-overflow: -o-ellipsis-lastline;
+}

@@ -1,0 +1,26 @@
+/* pages/pickup/citys/citys.wxss */
+@import "../../../utils/wxaSortPicker/wxaSortPicker.wxss";
+.location{
+  background-color: #fff;
+  padding: 16rpx 32rpx;
+  align-items: center;
+  font-size: 28rpx;
+}
+.location_city{
+  width: 200rpx;
+  height: 60rpx;
+  border: 1px solid #ebebeb;
+  font-size: 32rpx;
+  text-align: center;
+  line-height: 60rpx;
+  margin-top: 10rpx;
+  color: #46595F
+}
+.location_city .iconfont{
+  margin-right: 10rpx;
+  font-size: 28rpx;
+  color: #ffd122;
+}
+.location_city view{
+  display: inline-block;
+}

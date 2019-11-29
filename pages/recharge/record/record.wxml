@@ -1,0 +1,9 @@
+<!--pages/recharge/record/record.wxml-->
+<view class='list'>
+  <view class='item' wx:for="123456" wx:key='{{index}}'>
+    <image class='tel_icon' src='{{iconURL}}/btn_sjhsq@2x.png'></image>
+    <view class='des t4'>123</view>
+    <view class='time t2'>123</view>
+    <view class='price'>1</view>
+  </view>
+</view>

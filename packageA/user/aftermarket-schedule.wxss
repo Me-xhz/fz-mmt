@@ -1,0 +1,364 @@
+/* pages/user/aftermarket-schedule.wxss */
+
+.aftermarket-status {
+  position: relative;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 54rpx 0;
+}
+
+.aftermarket-box {
+  position: relative;
+  display: block;
+  padding: 0 26rpx 54rpx 120rpx;
+}
+
+.aftermarket-box .box-line {
+  position: absolute;
+  top: 0;
+  left: 66rpx;
+  width: 1px;
+  height: 100%;
+  background: #bbb;
+}
+
+.aftermarket-box .box-line:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 26rpx;
+  height: 26rpx;
+  background: #bbb;
+  border-radius: 50%;
+}
+
+.aftermarket-box.last .box-line {
+  height: 0;
+}
+
+.aftermarket-box.last .box-line:after {
+  background: #FF7F95;
+}
+
+.aftermarket-box.last.end .box-line:after {
+  background: #FF7F95;
+}
+
+.aftermarket-box .box-top {
+  line-height: 26rpx;
+  margin-bottom: 10rpx;
+}
+
+.aftermarket-box .box-top i {
+  font-size: 26rpx;
+  line-height: 26rpx;
+  color: #767676;
+}
+
+.aftermarket-box.last .box-top i {
+  color: #FF7F95;
+}
+
+.aftermarket-box.last.end .box-top i {
+  color: #FF7F95;
+}
+
+.aftermarket-box .box-main {
+  padding: 30rpx 26rpx;
+  background: #fff;
+  position: relative;
+}
+
+
+.aftermarket-box .box-main.revist:after {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  -webkit-transform: translate(-50%, -50%) rotate(45deg);
+  width: 22rpx;
+  height: 22rpx;
+  background: #fff;
+}
+
+.aftermarket-box .box-main.revive:after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  transform: translate(50%, -50%) rotate(45deg);
+  -webkit-transform: translate(50%, -50%) rotate(45deg);
+  width: 22rpx;
+  height: 22rpx;
+  background: #fff;
+}
+
+.aftermarket-box .box-main .main_title {
+  font-size: 30rpx;
+  line-height: 30rpx;
+  color: #030303;
+  padding-bottom: 16rpx;
+}
+
+.aftermarket-box .box-main .main_title.no-padding {
+  padding-bottom: 0;
+}
+
+.aftermarket-box .box-main .main_list_menu01 .main_list_menu01_p {
+  font-size: 26rpx;
+  padding-bottom: 4rpx;
+  line-height: 34rpx;
+  color: #767676;
+}
+
+.aftermarket-box .box-main .main_list_menu01 .main_list_munu01_btns {
+  padding-top: 20rpx;
+}
+
+.aftermarket-box .box-main .main_list_menu01 .main_list_munu01_btns button {
+  display: inline-block;
+  border: 1px #767676 solid;
+  border-width: 0.5px;
+  border-radius: 3px;
+  font-size: 30rpx;
+  min-width: 200rpx;
+  height: 66rpx;
+  color: #767676;
+  line-height: 66rpx;
+  margin-right: 22rpx;
+  background: #fff;
+}
+
+.aftermarket-box .box-main .main_list_menu02 .main_list_menu02_addmsg {
+  font-size: 26rpx;
+  line-height: 34rpx;
+  padding-bottom: 4rpx;
+  color: #767676;
+}
+
+.aftermarket-box .box-main .main_list_menu02 .main_list_menu02_add {
+  font-size: 26rpx;
+  line-height: 34rpx;
+  padding-bottom: 4rpx;
+  color: #767676;
+}
+
+.aftermarket-box .box-main .main_list_menu02 .main_list_menu02_p {
+  font-size: 26rpx;
+  line-height: 34rpx;
+  padding-bottom: 4rpx;
+  color: #767676;
+}
+
+.aftermarket-box .box-main .main_list_menu03 .main_list_menu03_inputs .inputs_wl-input {
+  position: relative;
+  margin-bottom: 10rpx;
+}
+
+.aftermarket-box .box-main .main_list_menu03 .main_list_menu03_inputs .inputs_wl-input input {
+  width: 100%;
+  height: 66rpx;
+  border: 1rpx #767676 solid;
+  color: #767676;
+  border-radius: 3px;
+  font-size: 28rpx;
+  padding: 2rpx 26rpx;
+  box-sizing: border-box;
+  background-color: transparent;
+}
+
+.aftermarket-box .box-main .main_list_menu03 .main_list_menu03_inputs .inputs_wl-input .item-img {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  right: 26rpx;
+}
+
+.aftermarket-box .box-main .main_list_menu03 .main_list_menu03_inputs .inputs_wl-input .item-img image {
+  width: 28rpx;
+}
+
+.aftermarket-box .box-main .main_list_menu03 .main_list_menu03_update_imgs {
+  display: inline-block;
+  width: 100%;
+}
+
+.aftermarket-box .box-main .main_list_menu03 .main_list_menu03_update_imgs .h1 {
+  font-size: 30rpx;
+  line-height: 30rpx;
+  color: #030303;
+  font-weight: normal;
+  padding: 8rpx 0;
+  padding-bottom: 22rpx;
+}
+
+.aftermarket-box .box-main .main_list_menu03 .main_list_menu03_update_imgs .h1>i {
+  color: #bbb;
+}
+
+.aftermarket-box .box-main .main_list_menu03 .main_list_menu03_update_imgs .box-img {
+  position: relative;
+  float: left;
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 10rpx;
+}
+
+.aftermarket-box .box-main .main_list_menu03 .main_list_menu03_update_imgs .box-img>image {
+  float: left;
+  width: 100%;
+  height: 100%;
+}
+
+.aftermarket-box .box-main .main_list_menu03 .main_list_menu03_update_imgs .box-img>image.img-del {
+  flex: none;
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+  width: 46rpx;
+  height: 46rpx;
+}
+
+.aftermarket-box .box-main .main_list_menu03 .main_list_menu03_update_imgs label {
+  float: left;
+  width: 120rpx;
+  height: 120rpx;
+  border: 1rpx dotted #bbb;
+  background-image: url('http://img.mall.surex.cn/cilicili_icons/btn_uploadImg.png');
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+
+.aftermarket-box .box-main .main_list_menu03 .main_list_menu03_update_imgs label input {
+  display: none;
+}
+
+.aftermarket-box .box-main .main_list_menu03 .main_list_menu03_upadate_button {
+  padding-top: 44rpx;
+}
+
+.aftermarket-box .box-main .main_list_menu03 .main_list_menu03_upadate_button button {
+  border: 1rpx #767676 solid;
+  border-radius: 3px;
+  font-size: 30rpx;
+  min-width: 180rpx;
+  height: 66rpx;
+  color: #767676;
+  line-height: 66rpx;
+  margin-right: 22rpx;
+  background: #fff;
+}
+
+.aftermarket-box .box-main .main_list_menu04 .main_list_menu04_shippingcompany {
+  font-size: 26rpx;
+  line-height: 34rpx;
+  padding-bottom: 4rpx;
+  color: #767676;
+}
+
+.aftermarket-box .box-main .main_list_menu04 .main_list_menu04_shippingodd {
+  font-size: 26rpx;
+  line-height: 34rpx;
+  color: #767676;
+}
+
+.aftermarket-box .box-main .main_list_menu04 .main_list_menu04_addimgs {
+  padding: 22rpx 0;
+}
+
+.aftermarket-box .box-main .main_list_menu04 .main_list_menu04_addimgs .addimgs_img {
+  margin-right: 10rpx;
+  width: 120rpx;
+  height: 120rpx;
+  background: #bbb;
+}
+
+.aftermarket-box .box-main .main_list_menu04 .main_list_menu04_addimgs image {
+  width: 100%;
+  height: 100%;
+}
+
+.aftermarket-box .box-main .main_list_menu04 .main_list_menu04_buttons {
+  padding-top: 44rpx;
+}
+
+.aftermarket-box .box-main .main_list_menu04 .main_list_menu04_buttons button {
+  border: 1rpx #dedfe0 solid;
+  border-radius: 3px;
+  font-size: 28rpx;
+  padding: 10rpx 22rpx;
+  margin-right: 10rpx;
+  background: #fff;
+}
+
+.aftermarket-box .box-main .main_list_menu05 .main_list_menu05_tkmonny {
+  font-size: 26rpx;
+  line-height: 34rpx;
+  padding-bottom: 4rpx;
+  color: #767676;
+}
+
+.aftermarket-box .box-main .main_list_menu05 .main_list_menu05_tkmonnymsg {
+  font-size: 26rpx;
+  line-height: 34rpx;
+  color: #767676;
+}
+
+.aftermarket-box .box-main .main_list_menu06 .main_list_menu06_shippingcompany {
+  font-size: 26rpx;
+  line-height: 34rpx;
+  padding-bottom: 4rpx;
+  color: #767676;
+}
+
+.aftermarket-box .box-main .main_list_menu06 .main_list_menu06_shippingodd {
+  font-size: 26rpx;
+  line-height: 34rpx;
+  color: #767676;
+}
+
+.aftermarket-box .box-main .main_list_menu06 .main_list_munu06_btns {
+  padding-top: 22rpx;
+}
+
+.aftermarket-box .box-main .main_list_menu06 .main_list_munu06_btns button {
+  border: 1rpx #767676 solid;
+  display: inline-block;
+  border-radius: 3px;
+  font-size: 30rpx;
+  width: 180rpx;
+  height: 66rpx;
+  color: #767676;
+  line-height: 66rpx;
+  margin-right: 22rpx;
+  background: #fff;
+}
+
+.aftermarket-box .box-main .main_list_menu08 .main_list_menu08_msg {
+  font-size: 26rpx;
+  line-height: 34rpx;
+  color: #767676;
+}
+
+.aftermarket-box .box-main .main_list_menu08 .main_list_menu08_buttons {
+  padding-top: 22rpx;
+}
+
+.aftermarket-box .box-main .main_list_menu08 .main_list_menu08_buttons button {
+  border: 1rpx #767676 solid;
+  border-radius: 3px;
+  font-size: 30rpx;
+  min-width: 180rpx;
+  height: 66rpx;
+  color: #767676;
+  line-height: 66rpx;
+  margin-right: 22rpx;
+  background: #fff;
+}

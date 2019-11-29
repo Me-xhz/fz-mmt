@@ -1,0 +1,175 @@
+<!--pages/order/detail.wxml-->
+<!-- 订单状态 -->
+<view class='container detail-loader'>
+  <!-- 返回首页悬浮框/分享进入显示 -->
+  <view class='goHomeFixed' catchtap='gotoHome' wx:if="{{isShowGoHome}}">
+    <image src='{{iconURL}}/product-icon-leftReturn.svg' class='icon-leftReturn'></image>
+    <text>返回首页</text>
+  </view>
+
+  <view class="order-info status-header">
+    <view class='info-price'>
+      <text class='header-status'>{{order.status_desc}}</text>
+    </view>
+    <view class='info-online'>
+      <!--待支付-->
+      <view class='iconfont icon-img_dengdaimaijiazhifux' wx:if="{{order.status==1}}"></view>
+      <!--已支付-->
+      <view class='iconfont icon-img_dengdaijiedanx' wx:if="{{order.status==2}}"></view>
+      <!--商家已接单，配货中-->
+      <view class='iconfont icon-img_peihuozhongx' wx:if="{{order.status==3}}"></view>
+      <!--配货完成 等待配送-->
+      <view class='iconfont icon-img_dengdaishangpinpeisongx1' wx:if="{{order.status==4}}"></view>
+      <!--配送中-->
+      <view class='iconfont icon-img_dengdaishangpinpeisongx' wx:if="{{order.status==5}}"></view>
+      <!--取货成功-->
+      <view class='iconfont icon-img_img_quhuochenggongx' wx:if="{{order.status==7}}"></view>
+      <!--已退款-->
+      <view class='iconfont icon-img_tuikuanchenggongx' wx:if="{{order.status==8}}"></view>
+      <!-- 订单已拒绝，已退款 -->
+      <view class='iconfont icon-img_tuikuanchenggongx' wx:if="{{order.status==9}}"></view>
+      <image class="group-bag" wx:if="{{order.status == 12}}" src="{{iconURL}}/group-bagicon.png"></image>
+    </view>
+  </view>
+  <!-- 收货信息 -->
+  <view class="order-address ">
+    <view class="address-contact">
+      <span class="info-leftshift">{{order.consignee.name}} {{order.consignee.mobile}}</span>
+    </view>
+    <view class="address-detail ellipsis">
+      <span class="info-leftshift ">{{order.consignee.address}} {{order.consignee.address_extra}}</span>
+    </view>
+     <view class="summury-detail order_time" wx:if="{{order.shop_shipping_time!=''}}">
+      预约时间 {{order.shop_shipping_time}}
+    </view>
+    <view class="address-detail" wx:if="{{(order.consignee.pickup_contact||order.consignee.pickup_phone)}}">
+      <span class='info-leftshift t2'>便利店店主：</span>
+      <span class="info-leftshift t2">{{order.consignee.pickup_contact}} {{order.consignee.pickup_phone}}</span>
+    </view>
+    <view class='storeManager' wx:if="{{(order.consignee.pickup_contact||order.consignee.pickup_phone)}}" catchtap='callManager' data-tel='{{order.consignee.pickup_phone}}'>
+      <image class='tel_icon' src='{{iconURL}}/phone_blue.png'></image>
+      <text>联系店主</text>
+    </view>
+    <view class='address-tab iconfont icon-btn_dizhix '>
+    </view>
+  </view>
+  <!-- 商品信息 -->
+  <view class='order-list'>
+    <view class='list-item'>
+      <view class='order-main pt-24'>
+        <view class="pd-24">
+          <view class="goods-title">
+            <view class="flash-shop">
+              闪送
+            </view>
+            <view class="shop-text" wx:if="{{order.back_reason==''||order.status==9}}">
+              请保持手机通畅
+            </view>
+            <view class="back-reason" wx:else>
+              {{order.back_reason}}
+            </view>
+          </view>
+          <view class='goods-item' bindtap='goprodcut' data-product-id='{{goods.goods_id}}' wx:for='{{order.products}}' wx:for-item='goods'>
+            <view class='item-photo'>
+              <image src='{{goods.header_img}}'></image>
+            </view>
+            <view class='item-info'>
+              <view class='info-name'>
+                <text>{{goods.goods_name}}</text>
+              </view>
+              <view class="info-price">
+                <i class="icon-rmb">¥</i>{{goods.shop_price}}
+              </view>
+              <view class="info-amount">x{{goods.amount}}</view>
+              <view class="info-return" catchtap="go_application_return" data-goods='{{goods}}' wx:if="{{goods.back_info.back_btn == 1}}">
+                {{goods.back_info.show_back_status}}
+              </view>
+            </view>
+            <view class="back-num" wx:if="{{goods.back_num>0&&order.status!=9}}">
+              已退款{{goods.back_num}}件
+            </view>
+          </view>
+        </view>
+
+      </view>
+      <view class="item-footer">
+        <view class="footer-sum">
+          <view>
+            <i class="sum-nums">共计{{order.goods_count}}件商品</i>
+          </view>
+        </view>
+      </view>
+      <view class="footer-fix" wx:if="{{order.order_btn.back_btn==1 || order.order_btn.pay_btn == 1 || order.order_btn.cancel_btn == 1 || order.order_btn.comment_again_btn == 1 || order.order_btn.comment_btn == 1 || order.order_btn.receive_btn == 1}}">
+        <button type='default' class="footer-button" wx:if="{{order.order_btn.cancel_btn == 1}}" catchtap='touchCancel' data-order-id='{{order.order_id}}'>取消订单</button>
+        <button style="background-color:#ffe150;color:#555!important" class="footer-button" wx:if="{{order.order_btn.pay_btn == 1}}" catchtap="touchPay" data-order-id='{{order.order_id}}'>
+          立即支付
+        </button>
+        <button class="footer-button y-button" wx:if="{{order.order_btn.receive_btn == 1}}" catchtap="touchConfirm" data-order-id='{{order.order_id}}'>确认收货</button>
+        <button type='default' class="footer-button back-order-btn" wx:if="{{order.order_btn.comment_btn == 1}}" data-status='1' data-order-id='{{order.order_id}}' open-type="contact" session-from="goodBuy" catchtap="unLoad">联系客服</button>
+        <!-- <button  class="footer-button y-button" wx:if="{{order.order_btn. comment_btn == 1}}"  catchtap='touchComment' data-order-id='{{order.order_id}}'>立即评价</button>
+                <button  class="footer-button y-button" wx:if="{{order.order_btn.comment_again_btn == 1}}" catchtap='touchSubComment' data-order-id='{{order.order_id}}'>追加评价</button> -->
+        <button type='default' class="footer-button back-order-btn" wx:if="{{order.order_btn.back_btn == 1}}" data-status='1' data-order-id='{{order.order_id}}' catchtap='phoneCall'>联系商家</button>
+        <!--<button type='default' class="footer-button" wx:if="{{order.order_btn.back_btn == 1}}" catchtap='phoneCall' data-order-id='{{order.order_id}}'>申请退款</button>-->
+      </view>
+    </view>
+  </view>
+
+  <view class="order-summury">
+    
+    <view class="summury-detail">
+      商品合计
+      <span class="total-price">
+        <i class='icon_rmb'>¥</i>{{order.total_goods_price}}
+      </span>
+    </view>
+    <view class="summury-detail" wx:for="{{order.prom_info}}" wx:key="{{index}}">
+      {{item.prom_name}}
+      <span class="total-price">{{item.value}}
+      </span>
+    </view>
+    <view class="summury-detail">
+      配送费
+      <span class="total-price">￥{{order.shipping_info.fee}}</span>
+    </view>
+
+    <!-- <view class="summury-detail">
+          运费
+          <span class="total-price"><i class='icon_rmb' wx:if='{{order.shipping_info.show_type == 1}}'>¥</i>{{order.shipping_info.value}}</span>
+        </view> -->
+    <view class="summury-total">
+      实付款
+      <span class="total-price">
+        <i class='icon_rmb'>¥</i>{{order.order_amount}}
+      </span>
+    </view>
+  </view>
+  <view class="comment">
+    备注：{{order.user_note}}
+  </view>
+  <view class="order-info">
+    <view class='info-text'>
+      <text>下单时间：<text class="add-time">{{order.add_time}}</text> </text>
+    </view>
+    <view class='info-text'>
+      <text>订单编号：<text class="add-time">{{order.order_sn}}</text></text>
+      <view class='info-Clip' bindtap='setClipboard'>
+        <button type='default' hover-class='none'>复制单号</button>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+
+<!--申请原因-->
+<view class="drawer_screen" catchtouchmove='true' catchtap="setModalStatus" data-status="0" wx:if="{{showfwModalStatus}}" wx:if="{{showfwModalStatus}}"></view>
+<view class='action-modal' animation="{{animationData}}" wx:if="{{showfwModalStatus}}">
+  <view class='title'>选择申请原因</view>
+  <picker-view class='modal-inner' indicator-class="pick_item" value="{{value}}">
+    <picker-view-column>
+      <view wx:for="{{reasons}}" class="pick_item" catchtap='setReasonBefore' data-status="1" data-item='{{item}}'>{{item}}</view>
+    </picker-view-column>
+  </picker-view>
+</view>
+
+<loading wx:if="{{loadingShow}}"></loading>

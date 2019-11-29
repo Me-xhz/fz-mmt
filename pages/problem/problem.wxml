@@ -1,0 +1,72 @@
+<!--pages/problem/problem.wxml-->
+<view class='problemBox'>
+  <scroll-view class='outermost' scroll-y="{{true}}" >
+    <view class='problem'>
+      <!-- 问题列表 -->
+      <view class='problem-block' wx:for="{{questionList.textList}}" wx:key="index">
+        <view class='question-name row' bindtap='showToggle' data-id="{{index}}">
+          <view class='contant-lf'>
+            <text class='problemTitle'>{{item.name}}</text>
+            <text class='subtitle'>{{item.title}}</text>
+          </view>
+          <view class='contant-rf'>
+            <view class="iconfont icon-btn_xiangxiajiantouhongx down {{item.isSubShow?'uprotate':'uprotate2'}} "></view>
+          </view>
+        </view>
+        <!-- 二级列表=>问题内容 -->
+        <view class='second-list' wx:if="{{item.isSubShow}}">
+          <view class='' wx:for="{{item.subItems}}" wx:for-item="subItem" wx:key="index">
+            <view class='question-row row' bindtap='showThirdToggle' data-id="{{index}}">
+              <text class='subText'>{{subItem.name}}  </text>
+              <view class="iconfont icon-btn_xiangyoudajiantoux right {{subItem.isThirdShow?'downRotate':'downRotate2'}}"></view>
+            </view>
+            <!-- 三级列表=>解决方案 -->
+            <view class='third-list' wx:if="{{subItem.isThirdShow}}">
+              <view class='third-question' wx:for="{{subItem.threeItem}}" wx:for-item="third" wx:key="index">
+                <text class='subText width647'>{{third.answer}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='problem'>
+      <!-- 视频列表 -->
+      <view class='problem-block' wx:for="{{questionList.videoList}}" wx:key="index">
+        <view class='question-name row' bindtap='openVideo' data-src="{{item.src}}">
+          <view class='video-lf'>
+            <text class='problemTitle'>{{item.name}}</text>
+            <text class='subtitle'>{{item.title}}</text>
+          </view>
+          <view class='video-rf'>
+            <view class='right-play color_theme iconfont icon-btn_bofangx' style='color:#555'></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 服务 -->
+  <view class='serveBox'>
+    <!-- <view class='qr_wrap'>
+      <view class='qr'><image src='/images/img/qrcode_for_gh_5851c2478fb8_258.jpg'></image></view>
+      <view class='qr_text'>请扫描二维码,关注"买买提APP"公众号进行在线客服反馈;或点击下方留言反馈按钮,进行问题描述,我们会尽快为您处理</view>
+    </view> -->
+    <text class="serveTime">服务时间：9:00-18:00</text>
+
+    <!-- 联系客服 -->
+     <view class='contact' bindtap='callPhone'>
+      <text class="text">联系客服:0591-62751447</text>
+    </view>
+
+    <!-- 留言反馈按钮 -->
+    <view class='confirm-btn' bindtap='toFeedBook'>
+      <text class="txt" >留言反馈</text>
+    </view>
+  </view>
+
+  <view class='full-video' wx:if="{{showVideo}}">
+    <video src="{{videoSrc}}" autoplay = "true"></video>
+    <view class='video-close iconfont icon-btn_qiapianguanbianniux' bindtap='closeVideo'></view>
+  </view>
+</view>

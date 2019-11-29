@@ -1,0 +1,54 @@
+<view class="order-back-list container">
+  <view class="list-item" wx:for="{{orders}}" wx:for-item='order'>
+    <view class="item-header">
+      <view class="header-back">
+        <span class="back-title">售后单号：</span>
+        <span class="back-text">{{order.back_sn}}</span>
+        <span class="back-status{{order.show_order_status.type == 1 ? 'danger' : ''}} {{order.show_order_status.type == 2 ? 'success' : ''}}">{{order.show_order_status.title}}</span>
+      </view>
+      <!-- <view class="header-back" wx:if="{{order.back_status != 1 && order.back_amount && order.back_amount != '0.00'}}">
+        <span class="back-title">退款金额：</span>
+        <span class="back-text"><i class='icon_rmb'>¥</i>{{order.back_amount || '0.00'}}
+        </span>
+        <span class="back-yunfei" wx:if="{{order.showback_fee}}">含运费
+          <i wx:if="{{order.showback_fee == 2}}">
+            <i>-</i><i class='icon_rmb'>¥</i>{{order.back_fee}}
+          </i>
+        </span>
+        <span class="back-yunfei" wx:if="!{{order.showback_fee}}">不含运费</span>
+      </view> -->
+      <!--<view class='date_wrap' style='position: relative;padding: 0;padding-top:24rpx;'>-->
+        <!--<view class='tab'>申请时间</view>-->
+        <!--<view class='des'>{{order.add_time}}</view>-->
+      <!--</view>-->
+    </view>
+    <view class="order-back-goods" >
+      <view class="goods-item" bindtap="go_order_return_detail" data-back_sn='{{order.back_id}}'>
+        <view class="item-photo">
+          <image src="{{order.products[0].header_img}}" />
+        </view>
+        <view class="item-info">
+          <view class="info-name">{{order.products[0].goods_name}}</view>
+          <view class="info-attr">{{order.products[0].sku_key_name}}</view>
+          <view class="info-amount">x{{order.products[0].amount}}</view>
+          <view class="info-price"><i class='icon_rmb'>¥</i>{{order.products[0].shop_price || '0.00'}}</view>
+          <view class="info-wrap">申请时间:{{order.add_time}}</view>
+          <!-- <view class="info-button" catchtap="go_aftermarketSchedule" data-back_sn='{{order.back_id}}' wx:if="{{order.is_history_show == 1}}">查看进度</view> -->
+        </view>
+      </view>
+      <view class='goods-bar' wx:if="{{order.is_button_show==1}}">
+        <view class='qx' bindtap='cancel_back' data-back_sn='{{order.back_id}}'>取消售后</view>
+        <view class='ck' bindtap="go_order_return_detail" data-back_sn='{{order.back_id}}'>查看详情</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='empty' wx:if='{{orders && orders.length <= 0}}'>
+  <view class='empty-item'>
+    <image class="item-logo" src="{{iconURL}}/icon_order_empty02.png" mode='widthFix'></image>
+    <view class="item-text">暂无订单</view>
+  </view>
+</view>
+
+<loading wx:if="{{loadingShow}}"></loading>

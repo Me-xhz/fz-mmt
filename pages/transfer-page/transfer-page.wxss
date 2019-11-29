@@ -1,0 +1,48 @@
+/* packageB/transfer-page/transfer-page.wxss */
+page{
+  overflow: hidden;
+}
+.transfer-page{
+  width: 100%;
+  height: 100vh;
+  background-color: #313241;
+  text-align: center;
+  padding-top: 132rpx;
+}
+.transfer-page .animation{
+  width: 270rpx;
+  height: 270rpx;
+  border: 15px solid #434451;
+  border-radius: 50%;
+}
+.transfer-page .top-logo{
+  width: 370rpx;
+  height: 177rpx;
+  margin-top: 40rpx;
+}
+.transfer-page .bottom-image{
+  position: absolute;
+  bottom: 70rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+}
+.transfer-page .bottom-image image{
+  width: 161rpx;
+  height: 48rpx;
+}
+.transfer-page .btn{
+  position: absolute;
+  bottom: 195rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  width: 420rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  border-radius: 50px;
+  font-size: 36rpx;
+  color: #313241;
+  background-color: #FFFFFF;
+}

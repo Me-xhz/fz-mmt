@@ -1,0 +1,24 @@
+<!--pages/confirm/selectCoupons/selectCoupons.wxml-->
+
+<view class="cashgift-list select-padding" wx:if="{{cashgifts && cashgifts.length}}">
+  <view class="cashgift-list-box" wx:for="{{cashgifts}}" wx:for-item='cashgift'>
+    <view class="list-item {{coupon_id == cashgift.id ? 'active' : '' }}" bindtap="touchCashgift" data-item='{{cashgift}}'>
+      <view class="info-ac">
+        <view class="ac-icon"></view>
+      </view>
+      <view class="item-info select-bg">
+        <view class="color_theme info-name">
+          {{cashgift.name}}
+        </view>
+        <view class="info-attr">
+          {{cashgift.description}}
+        </view>
+        <view class="color_theme info-expires">{{cashgift.use_end_date}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="footbtn footbtn-return">
+  <button type='warn' class="submit" bindtap='touchClear'>不使用优惠券</button>
+</view>

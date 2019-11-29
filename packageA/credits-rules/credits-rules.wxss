@@ -1,0 +1,15 @@
+/* packageA/credits-rules/credits-rules.wxss */
+page{
+  background-color: #fff;
+}
+.credits-rules{
+  width: 100%;
+    padding: 24rpx ;
+    box-sizing: border-box;
+}
+.credits-rules .rules-box{
+  width: 100%;
+  font-size: 28rpx;
+  color:#303030;
+  margin: 12rpx 0;
+}

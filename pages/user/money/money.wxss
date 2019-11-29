@@ -1,0 +1,54 @@
+/* pages/user/money/money.wxss */
+page{
+  background-color: #fff;
+}
+
+.list{
+  padding: 0 24rpx;
+}
+.list .item{
+  height: 128rpx;
+  line-height: 128rpx;
+  border-bottom: 1rpx solid #ddd;
+  padding: 14rpx 0;
+  box-sizing: border-box;
+  position: relative;
+}
+.time,.des{
+  line-height: 50rpx;
+}
+.price{
+  position: absolute;
+  color: #eb3c39;
+  font-size: 40rpx;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.item .des{
+  width: 70%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block
+}
+.empty{
+  height: 600rpx;
+  
+}
+.empty .empty-item {
+height:333rpx;
+
+  position: absolute;
+  left: 0;
+  top: 50%;
+  display: block;
+  /* margin-top: 70rpx; */
+}
+
+.empty .empty-item image {
+  display: block;
+  width:288rpx !important;
+  height:190rpx !important;
+}

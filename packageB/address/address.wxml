@@ -1,0 +1,76 @@
+<view class="container">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <view class='box'>
+      <view class="section">
+        <view class='item-title'>收货人：</view>
+        <view class='item-input'>
+          <input type="text" placeholder="姓名" hidden="true" value="{{consignee}}" name="consignee" />
+          <!-- <input type="text" name="name" placeholder="姓名" /> -->
+        </view>
+      </view>
+      <view class="section">
+        <view class='item-title'>联系电话：</view>
+        <view class='item-input'>
+          <input type="text" name="phone" placeholder="手机或固定电话" value="{{mobile}}" />
+        </view>
+      </view>
+      <view class="addressView" hidden="{{hidden}}">
+        <view class="addressList" wx:if="{{thischooseAdd}}">
+          <div wx:for="{{thischooseAdd}}" wx:key="item.id">
+            {{item.name}}
+          </div>
+        </view>
+        <view class="addressList" wx:else>
+          请选择
+        </view>
+        <scroll-view class="scrollView" scroll-y="true" scroll-top="{{scrollTop}}">
+          <view class="marginView">
+            <view class="addressList" bindtap="chooseAdd" data-item="{{item}}" wx:for="{{addressArr}}" wx:key="item.id" style="display:block">{{item.name}}</view>
+          </view>
+        </scroll-view>
+        <view class="cancelView">
+          <view class="cancel" catchtap="hiddendrop">取消</view>
+        </view>
+      </view>
+      <view class="section" bindtap="showScrollView">
+        <view bindchange="bindPickerChangeshengArr" value="{{shengIndex}}" range="{{shengArr}}">
+          <view class="picker">
+            <text>详细地址：</text>
+            <label wx:if="{{chooseAdd}}">
+              <div wx:for="{{chooseAdd}}" wx:key="item.id">
+                {{item.name}}
+              </div>
+            </label>
+            <div class="addArea" wx:else>
+                <text class="addDetail">省/市/区</text>
+            </div>
+            <input hidden="true" placeholder="省/市/区" name="province" value="{{shengArr[shengIndex] !='请选择' ? shengArr[shengIndex] : shengName}}" />
+          </view>
+        </view>
+      </view>
+      <view class="section address-detail">
+        <input type="text" class="ww" name="address" maxlength="120" bindinput="addressNumber" placeholder="请填写详细地址(街道、小区、门牌等)" value="{{address}}" />
+      </view>
+      <view class='inputnum'>{{textNum}}字</view>
+      <view>
+        <view class='switch-title'>默认地址</view>
+        <!-- 如果是默认地址，或者是用户新增的第一个地址，则消默认地址按键不能操作 -->
+        <view class='switch-item' wx:if="{{disabled == true || defaulAddress == 1}}">
+          <switch class="addrSwitch" checked="{{defaulAddress}}" disabled="{{true}}" bindchange="switchChecked" />
+        </view>
+        <view class='switch-item' wx:else>
+          <switch class="addrSwitch" checked="{{defaulAddress}}"  bindchange="switchChecked" />
+        </view>
+      </view>
+    </view>
+    <view class="btn-area">
+      <button type='warn' class='submit' formType="submit">保存地址</button>
+    </view>
+    <view class="btn-delete" wx:if="{{address_id != -1}}">
+      <button type='primary' class='submit' bindtap="deleteAdd">删除地址</button>
+    </view>
+  </form>
+</view>
+<view class="shade" hidden="{{hidden}}" catchtap="hiddendrop">
+
+</view>

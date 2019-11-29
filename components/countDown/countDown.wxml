@@ -1,0 +1,13 @@
+<!--components/countDown/countDown.wxml-->
+<view class='countDown_wrap'>
+  <view class="d item time-text" wx:if="{{d != '00' && type != 2}}">{{d}}</view>
+  <view class="doc doc-text" wx:if="{{d != '00' && type != 2}}">天</view>
+  <view class='h item time-text'>{{h}}</view>
+  <view class="doc doc-text">{{type == 1 ? '时' : ':'}}</view>
+  <view class='m item time-text'>{{m}}</view>
+  <view class="doc doc-text">{{type == 1 ? '分' : ':'}}</view>
+  <view class='s item time-text'>{{s}}</view>
+  <view class="doc doc-text" wx:if="{{type == 1}}">秒</view>
+  <view class="doc doc-text" wx:if="{{isShowMs}}">:</view>
+  <view class="s item time-text" wx:if="{{isShowMs}}">{{ms}}</view>
+</view>

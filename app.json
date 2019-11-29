@@ -1,0 +1,164 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/category/category",
+    "pages/cart/cart",
+    "pages/user/user",
+    "pages/product/product",
+    "pages/search/search",
+    "pages/listdetail/listdetail",
+    "pages/pageUrl/pageUrl",
+    "pages/listdetailTemplate/listdetailTemplate",
+    "pages/confirm/confirm",
+    "pages/confirm/selectCoupons/selectCoupons",
+    "pages/confirm/invoice/invoice",
+    "pages/confirm/paymentStatus/paymentStatus",
+    "pages/comment/comment",
+    "pages/activity/activity",
+    "pages/address-edit/address-edit",
+    "pages/pickup/pickup",
+    "pages/flashSale/flashSale",
+    "pages/projectPage/projectPage",
+    "pages/address/address",
+    "pages/address/addressList/addressList",
+    "pages/couponCenter/couponCenter",
+    "pages/sign/sign",
+    "pages/problem/problem",
+    "pages/problem/feedBook/feedBook",
+    "pages/confirm/map/map",
+    "pages/coupon/coupon",
+    "pages/address/addressEdit/addressEdit",
+    "pages/user/money/money",
+    "pages/pickup/citys/citys",
+    "pages/cashCoupon/cashCoupon",
+    "pages/user/invitation/invitation",
+    "pages/sign/integral/integral",
+    "pages/register/register",
+    "pages/recharge/recharge",
+    "pages/recharge/record/record",
+    "pages/newExclusive/newExclusive",
+    "pages/index/configureModelPage/configureModelPage",
+    "pages/transfer-page/transfer-page",
+    "pages/credits-exchange/credits-exchange"
+  ],
+  "subPackages": [
+    {
+      "root": "packageA",
+      "pages": [
+        "user/dingdan",
+        "user/shoucang",
+        "user/detail",
+        "user/application-return",
+        "user/order-return-detail",
+        "user/aftermarket-schedule",
+        "user/my-order-return",
+        "user/returnSQA",
+        "user/order-express",
+        "user/order-review",
+        "user/add-order-review",
+        "logistics/index",
+        "logistics/delivery",
+        "logistics/arrival",
+        "logistics/arrivalOrder",
+        "logistics/orderdetile",
+        "logistics/nodelivery",
+        "logistics/cancel-record",
+        "select/select",
+        "groupbuy/groupbuy",
+        "bargain/bargain",
+        "mybargain/mybargain",
+        "bargainshare/bargainshare",
+        "takeout-shop/takeout-shop",
+        "takeout-order/takeout-order",
+        "takeout-order/check-takeout-order",
+        "takeout-order/order-detail",
+        "takeout-order/order-back",
+        "team-list/team-list",
+        "takeout-coupon/takeout-coupon",
+        "packet/packet",
+        "logistics/nodelivery_detail",
+        "team-product/team-product",
+        "logistics/invitationWrite",
+        "credits-record/credits-record",
+        "credits-product/credits-product",
+        "check-credits-order/check-credits-order",
+        "credits-rules/credits-rules",
+        "credits-payment/credits-payment",
+        "my-pickup-code/my-pickup-code",
+        "cancel-order/cancel-order"
+      ]
+    },
+    {
+      "root": "packageB",
+      "pages": [
+        "question/question",
+        "rituall/rituall",
+        "address/user-address/user-address",
+        "address/address",
+        "tools/turntable",
+        "topay/topay",
+        "invitation-share/invitation-share",
+        "withdraw/withdraw",
+        "invitation-code/invitation-code",
+        "invitation-code-share/invitation-code-share",
+        "share-page/share-page",
+        "welfare-share/welfare-share"
+      ]
+    }
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置将用于进行收货地址的确认"
+    }
+  },
+  "window": {
+    "enablePullDownRefresh": false,
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "买买提",
+    "navigationBarTextStyle": "black",
+    "onReachBottomDistance": 100
+  },
+  "networkTimeout": {
+    "request": 10000
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wxd947200f82267e58"
+  ],
+  "usingComponents": {
+    "loading": "./components/loading/loading",
+    "pagebottom": "./components/pageBottomLogo/pageBottomLogo",
+    "notice": "./components/notice/notice",
+    "envelopes": "./components/envelopes/envelopes",
+    "invitationGuide": "./components/invitationGuide/invitationGuide",
+    "navbar": "./components/navBar/navBar",
+    "getTiketsuccess": "./components/getTiketsuccess/getTiketsuccess"
+  },
+  "tabBar": {
+    "custom": false,
+    "backgroundColor": "#fff",
+    "color": "#888",
+    "selectedColor": "#555",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/icons/tab_dayhotoff.png",
+        "selectedIconPath": "images/icons/tab_dayhoton.png",
+        "text": "每日爆款"
+      },
+      {
+        "pagePath": "pages/credits-exchange/credits-exchange",
+        "iconPath": "images/icons/tab-game-off.png",
+        "selectedIconPath": "images/icons/tab-game-on.png",
+        "text": "积分商城"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "iconPath": "images/icons/tab_myoff.png",
+        "selectedIconPath": "images/icons/tab_myon.png",
+        "text": "我的购买"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,51 @@
+<!--pages/address/addressList/addressList.wxml-->
+<view class='addressList'>
+  <view class='addressList-block' data-consignee='{{item}}' data-index="{{index}}" catchtap='navTo' wx:for='{{address}}' wx:key="{{item.address_id}}" wx:if="{{address.length >= 0}}">
+    <view class='addressListUp'>
+      <!-- 收货人地址 -->
+      <view class='textBox'>
+        <text class='text-address'>{{item.regions[1].name}} {{item.address}} {{item.pickup_address}} {{item.pick_up_label
+}}  {{item.address_extra}}</text>
+        <!-- 默认 -->
+        <text class='text-default' wx:if="{{item.is_default == 1}}">默认</text>
+      </view>
+      <view class='textBox '>
+        <!-- 收货人姓名 -->
+        <text class='text-name'>{{item.consignee}}</text>
+        <!-- 收货人电话 -->
+        <text class='text-phone'>{{item.mobile}}</text>
+      </view>
+
+      <view class='address-rt' wx:if="{{isshow}}">
+        <view class='address-Image row'>
+          <!-- 编辑按钮 -->
+          <!-- <view data-idcheck="{{item.address_id}}"  data-index="{{index}}" catchtap="editAddress" class=''>
+            <image src='{{iconURL}}/btn_address_edit.png' ></image>
+          </view> -->
+
+
+          <!-- 删除按钮 -->
+          <view data-idcheck="{{item.address_id}}" catchtap='delAddress' class='mg-l72'>
+            <image src='{{iconURL}}/btn_address_del.png' ></image>
+          </view>
+
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 暂无收货地址 -->
+  <view class='noAddress' wx:if="{{address.length <= 0}}">
+    <view class='noaddress-header'>
+      <image src='{{iconURL}}/img_noAddress02.png'></image>
+    </view>
+
+    <text class='noaddress-text'>暂无收货地址</text>
+  </view>
+
+  <!-- 添加地址按钮 -->
+  <view class='confirm-btn'>
+    <text class='txt' catchtap='addAddress'>添加收货地址</text>
+  </view>
+</view>
+
+<loading wx:if="{{loadingShow}}"></loading>

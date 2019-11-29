@@ -1,0 +1,18 @@
+<template name="listDetail">
+  <view wx:for="{{shopList}}" wx:for-item="lists" wx:key="index">
+    <div class="goodsCard {{'goodsCard'+indexs}}" wx:for="{{lists}}" wx:for-index="indexs" wx:key="item.goods_id">
+      <navigator hover-class="none" url="../product/product?entryType=external&productId={{item.goods_id}}">
+        <view class="images" style="background-image: url({{item.img}})"></view>
+        <view class="goodsName text_content_little color_large_dark_gray">{{item.goods_name}}</view>
+        <view class="price text_content_normal color_large_dark_gray">
+          <div class="shop_price">
+            <i class='icon_rmb'>¥</i>{{item.shop_price}}</div>
+          <div class="market_price color_gray text_content_small">¥{{item.market_price}}</div>
+        </view>
+        <view class='Videoimg' wx:if='{{item.has_video == 1}}'>
+          <image src='http://img.mall.surex.cn/cilicili_icons/icon_listVideo.png'></image>
+        </view>
+      </navigator>
+    </div>
+  </view>
+</template>

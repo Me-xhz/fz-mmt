@@ -1,0 +1,59 @@
+<!--pages/address/address.wxml-->
+<view class='content'>
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <view class='address'>
+      <view class='address-block row'>
+        <text class='lf-text'>选择城市</text>
+        <navigator hover-class="none" class='addressInput flex' url='../pickup/citys/citys'>
+          <text>{{city.cityName}}</text>
+        </navigator>
+        <text class='iconfont icon-btn_gerenzhongxinyoujiantoux'></text>
+      </view>
+      <view class='address-block row'>
+        <text class='lf-text'>选择工厂</text>
+        <navigator hover-class="none" class='addressInput flex' url='../pickup/pickup'>
+          <text>{{pickup.pickup_id>0?pickup.cityName:''}}</text>
+        </navigator>
+        <text class='iconfont icon-btn_gerenzhongxinyoujiantoux'></text>
+      </view>
+      <view class='address-block row' wx:if="{{pickup.cityName.length>0&&pickup.pickup_address.length>0}}">
+        <text class='lf-text'></text>
+        <view class='o-text flex t2'>{{pickup.pickup_address}}</view>
+      </view>
+      <view wx:if="{{has_shop==1}}">
+       <view class='address-block row address_tag'>
+        <text class='lf-text'>闪送地址</text>
+        <input wx:if="{{address_tag.length==0}}" type='text'  name="address_extra" placeholder='请输入详细宿舍地址' class='addressInput flex' bindinput="addressInput"  value='{{address_extra}}'></input>
+        <view wx:if="{{address_tag&&address_tag.length>0}}" wx:for="{{address_tag}}"  class="ad_tag {{index==tag_num?'tag_active':''}}  {{(index+1)%5==0?'ml-20':''}}" bindtap="change_tag" data-tagnum="{{index}}" data-label_id="{{item.pick_up_label_id}}" wx:key="{{index}}">
+            {{item.name}}
+        </view>
+      </view>
+      <view class='row' wx:if="{{address_tag&&address_tag.length>0}}">
+        <text class='lf-text'></text>
+        <input type='text'  name="address_extra" placeholder='如 2层201' placeholder-style="color:#aaa"  class='addressInput flex' bindinput="addressInput"  value='{{address_extra}}'></input>
+      </view>
+      </view>
+     
+      <view class='address-block row'>
+        <text class='lf-text'>提货人</text>
+        <input type='text' maxlength='10' name="consignee" placeholder='请输入姓名' class='addressInput flex' bindinput="nameInput"  value='{{consignee}}'></input>
+      </view>
+      <view class='address-block row'>
+        <text class='lf-text'>手机号码</text>
+        <input type='number'  placeholder='请输入手机号码' class='addressInput flex' name="mobile" bindinput='phoneInput' value='{{mobile}}' name="phone" data-val="phone"></input>
+      </view>
+
+      <view class='address-block-default row flex'>
+        <text class='lf-text '>默认地址</text>
+        <view class="item-toggle col">
+          <!-- <switch wx:if="{{!canchangeDefault}}" bindchange="switchChange" /> -->
+          <switch checked='{{is_default}}' bindchange="switchChange" />
+        </view>
+      </view>
+    </view>
+    <!-- 保存地址按钮 -->
+      <view class="confirm-btn">
+        <text class="txt" bindtap='addAddress'>保存地址</text>
+      </view>
+  </form>
+</view>

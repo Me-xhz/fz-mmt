@@ -1,0 +1,313 @@
+<!--pages/confirm/confirm.wxml-->
+<view class="container with-tabbar">
+  <view class='tip'>
+    <text class='tip-text'>店铺专享送货上门，记得保持电话通畅喔～</text>
+  </view>
+  <!-- Address -->
+  <view class="confirm-address" wx:if="{{consignee && consignee.address_id||storageAddr}}" bindtap="touchAddress">
+    <!-- 预留信息 -->
+    <view class='confirm-address-wrap'>
+      <view class='t4 address-detail address-get'>
+
+        <image class='icon-img' src='{{iconURL}}/btn_smallAddr@2x01.png'></image>
+        提货地址:
+        <view class="arrow">
+          <text class="pick-address ellipsis" wx:if="{{consignee.address}}">{{consignee.address}}</text>
+          <text class="pick-address ellipsis" wx:else>{{consignee.cityName}}</text>
+          <view>
+            <view class="right-arrow iconfont icon-btn_xiangyoudajiantoux"></view>
+          </view>
+        </view>
+
+      </view>
+      <view class='t4 address-detail pickuper'>
+        <image class='icon-img' src='{{iconURL}}/btn_lxr@2x01.png'></image>提货人信息</view>
+      <view class="address-detail">
+        <text class='leftName'>姓名：</text>
+        <view class='addr_input_box'>
+          <input type='text' placeholder-class="placeholder-color" class='addr_input' placeholder='请填写姓名' data-keyName='consignee' bindinput="editInput" catchtap="unLoad" value='{{consignee.consignee}}'></input>
+        </view>
+      </view>
+      <view class="address-detail mt-32">
+        <text class='leftName'>手机：</text>
+        <view class='addr_input_box'>
+          <input type='number' placeholder-class="placeholder-color" class='addr_input' placeholder='请填写手机号' data-keyName='mobile' bindinput="editInput" catchtap="unLoad" value='{{consignee.mobile}}'></input>
+        </view>
+      </view>
+      <view wx:if="{{has_shop==1}}">
+        <view class="flash-input  {{address_tag.length==0?'mt-24':''}}" catchtap="{{showChooseTag?'changeChooseTag':''}}">
+          <view class="address-detail padding-none address_tag">
+            <view class="iconfont icon-shansongdizhix flash-icon {{address_tag.length==0?'top':''}} {{showChooseTag?'':'icon-top'}}" ></view>
+              <text class='flash-font'>闪送地址：</text>
+            <view wx:if="{{address_tag.length==0}}" class='addr_input_box'>
+              <input type='text' placeholder-class="placeholder-color" class='addr_input' placeholder='请填写详细宿舍地址' data-keyName='address_extra' bindinput="editInput" catchtap="unLoad" value='{{consignee.address_extra}}'></input>
+            </view>
+            <view wx:if="{{address_tag&&address_tag.length>0&&!showChooseTag}}" wx:for="{{address_tag}}" class="ad_tag {{index==tag_num?'tag_active':''}} {{index==0?'ml-16':''}} {{(index+1)%5==0?'ml-20':''}}" catchtap="change_tag" data-tagnum="{{index}}" data-label_id="{{item.pick_up_label_id}}"
+              data-label_name="{{item.name}}" wx:key="{{index}}">
+              {{item.name}}
+            </view>
+          </view>
+          <view wx:if="{{showChooseTag}}">
+            <view class="address-tag-text">
+              已选{{label_name}}
+            </view>
+            <view class="right-arrow-time-address iconfont icon-btn_xiangyoudajiantoux"></view>
+          </view>
+
+        </view>
+        <view class="flash-input pt-24 {{showChooseTag?'pt-32':''}}" wx:if="{{address_tag&&address_tag.length>0}}">
+          <view class="address-detail padding-none address_tag">
+            <text class='flash-font'>详细地址：</text>
+            <view class='addr_input_box'>
+              <input type='text' placeholder-class="placeholder-color" class='addr_input' placeholder='请填写详细宿舍地址' data-keyName='address_extra' bindinput="editInput" catchtap="unLoad" value='{{consignee.address_extra}}'></input>
+            </view>
+          </view>
+        </view>
+      </view>
+
+
+      <view class="flash-tips">
+        请填写准确宿舍地址信息[如:3楼2层201]方便配送人员进行配送
+      </view>
+    </view>
+
+  </view>
+  <view class="confirm-address" wx:else bindtap="newAddress">
+    <view class="address-create danger">请点击填写地址</view>
+    <view class='iconfont icon-btn_xiangyoudajiantoux address-arrow'></view>
+    <!-- <view class='iconfont icon-img_dizhix '></view> -->
+    <!-- <image class="address-arrow" src="{{iconURL}}/icon_right_arrow.png"></image> -->
+  </view>
+  <!--预约时间-->
+  <view class="confirm-form no-margin mb-20" bindtap="{{selectedGoods.is_in_shipping_time==0?'showWindow':''}}">
+    <view class="form-item_nums row">
+      <view class="item-title col-25 t4">送达时间:</view>
+      <view class="item-price col-75  font-face-ios_Avenir t6" wx:if="{{selectedGoods.is_in_shipping_time==1}}">
+        尽快送达
+      </view>
+      <view class="order-time-little" wx:if="{{selectedGoods.is_in_shipping_time==0}}">
+        {{orderTimeText.shopping_time_text}}
+      </view>
+      <view class="right-arrow-time iconfont icon-btn_xiangyoudajiantoux" wx:if="{{selectedGoods.is_in_shipping_time==0}}"></view>
+    </view>
+  </view>
+  <!-- 订单明细 -->
+  <!-- <view class="confirm-form no-margin mb-20" wx:if="{{selectedGoods}}">
+    <view class="form-item_nums row">
+      <view class="item-title col-25 t4">订单明细</view>
+      <view class="item-price col-75  font-face-ios_Avenir t6">
+        该订单将由工作人员配送至闪送地址
+      </view>
+    </view>
+  </view> -->
+
+  <!-- Goods -->
+  <view class='good_list' style='background:#fff'>
+    <view class="goods-title">
+      <view class="flash-shop">
+        闪送
+      </view>
+      <view class="shop-text">
+        仅限厂内送货上门
+      </view>
+    </view>
+    <view class="order-main" wx:if="{{order_info}}">
+
+      <view class="goods-item" wx:for='{{order_info}}' wx:for-item='productInfo' wx:key="index">
+        <view class="item-photo">
+          <image src='{{productInfo.list_img}}'></image>
+          <view class='inequacy' wx:if="{{productInfo.is_enough==0}}">
+            <image  src='{{iconURL}}/inequacy02.png' ></image>
+          </view>
+
+        </view>
+        <view class="item-info">
+          <view class="info-name">{{productInfo.goods_name}}</view>
+          <view class="info-attr">{{productInfo.sku_key_name}}</view>
+          <view class="info-price font-face-ios_Avenir">
+            <i class='icon_rmb'>¥</i>{{productInfo.shop_price}}
+          </view>
+          <view class="info-amount">x{{productInfo.amount}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- Total -->
+  <view class="confirm-form no-margin" wx:if="{{selectedGoods}}">
+    <view class="form-item_nums row">
+      <view class="item-title col-25 font-55">商品合计</view>
+      <view class="item-price col-75 red-font-color font-face-ios_Avenir">
+        <i class="icon_rmb">¥</i>{{selectedGoods.product_price || '0.00'}}
+      </view>
+    </view>
+    <view class="form-item_nums row" hidden='{{selectedGoods.dis_price=="0.00"}}'>
+      <view class="item-title col-25">活动优惠金额</view>
+      <view class="item-price col-75 red-font-color font-face-ios_Avenir">
+        <i class="icon_rmb">-¥</i>{{selectedGoods.dis_price}}
+      </view>
+    </view>
+    <view class="form-item_nums row" hidden='{{selectedGoods.coupon_fee=="0.00"}}'>
+      <view class="item-title col-25">红包金额</view>
+      <view class="item-price col-75 red-font-color font-face-ios_Avenir">
+        <i class="icon_rmb">-¥</i>{{selectedGoods.coupon_fee}}
+      </view>
+    </view>
+  </view>
+
+  <!--unred-->
+  <view class="confirm-form">
+    <view class="form-item" wx:if="{{cashgift}}" bindtap="setModalBonus">
+      <view class="row border-b">
+        <view class="item-title gift-border col">选择红包
+          <span wx:if="{{selectedGoods.coupons_can_use && selectedGoods.coupons_can_use > 0}}" class="item-cashgift-count">
+            （{{selectedGoods.coupons_can_use}}个可用）
+          </span>
+        </view>
+        <view class="item-value col" wx:if="{{cashgift}}">{{cashgift ? cashgift.name : '暂无可用红包'}}</view>
+        <view class="item-arrow iconfont icon-btn_xiangyoudajiantoux"></view>
+      </view>
+    </view>
+    <view class="coupos-msg">
+      <view class="activity-coupon mb-30" wx:if="{{selectedGoods.dis_price != 0}}">
+        <text>活动优惠金额</text>
+
+        <span>¥{{selectedGoods.dis_price}}</span>
+      </view>
+      <view class="activity-coupon">
+        <text>配送费</text>
+        <span>¥{{selectedGoods.shipping_info.fee}}</span>
+      </view>
+    </view>
+  </view>
+  <view class="remark">
+    <view class="remark-font">
+      备注
+    </view>
+    <textarea wx:if="{{!order_confirm_show&&!showBonusModal&&!timeOrderCheck}}" class="to-remark" placeholder="请输入其他需要顺带的商品，或者其他建议" placeholder-class="pfont" bindinput="getMessage" value="{{message}}">
+
+    </textarea>
+    <view wx:if="{{order_confirm_show||showBonusModal||timeOrderCheck}}" class="to-remark {{message==''?'pfont':''}}">
+      {{message==""?"请输入其他需要顺带的商品，或者其他建议":message}}
+    </view>
+  </view>
+
+  <cover-view class="confirm-submit confirm-submit-active" style="padding-bottom:{{iphoneXBottom}}" wx:if="{{!showOrderWindow}}">
+    <cover-view class="submit-total">
+      <cover-view class="total-price font-face-ios_Avenir row">
+        <cover-view class='des'>实付：</cover-view>
+        <cover-view class="price font-face-ios_Arial topay-money">
+          <cover-view class="i">¥</cover-view>{{selectedGoods.total_price || '0.00'}}</cover-view>
+      </cover-view>
+      <cover-view class="total-yunfei font-face-ios_Avenir" wx:if='{{selectedGoods.shipping_info.value != ""}}'>
+        {{selectedGoods.shipping_info.value}}
+      </cover-view>
+      <!-- <view class="total-yunfei font-face-ios_Avenir" wx:if='{{selectedGoods.shipping_info.value != "包含特殊商品免运费"}}'>
+        含运费：
+        <i class="font-face-ios_Arial">¥</i>{{selectedGoods.shipping_info.value}}
+      </view> -->
+    </cover-view>
+
+    <button class='toPay' bindtap='showConfirm'>立即支付</button>
+  </cover-view>
+  <!-- 订单确认弹窗 -->
+  <view class="drawer_screen" wx:if="{{order_confirm_show}}"></view>
+  <view class='order_confirm_wrap' wx:if="{{order_confirm_show}}">
+    <view class='t4 address-detail row'>
+      <image class='icon-img' src='{{iconURL}}/btn_smallAddr@2x01.png'></image>
+      <text>闪送地址（此商品将配送至闪送地址）</text>
+    </view>
+    <view class='confirm-address-wrap bb'>
+      <view class='address-detail padding-left'>
+        <text>{{consignee.cityName}} {{consignee.address}}</text>
+        <text wx:if="{{address_tag.length>0}}">{{label_name}}</text>
+        <text class='address-detail-item'>  {{consignee.address_extra}}</text>
+      </view>
+      <view class="padding-left order-time-text" wx:if="{{selectedGoods.is_in_shipping_time==0}}">
+        预约时间：{{orderTimeText.shopping_time_text}}
+      </view>
+    </view>
+
+    <view class='address-detail row mt-12'>
+      <image class='icon-img' src='{{iconURL}}/btn_smallPrice@2x01.png'></image>
+      <text class='leftName t4'>商品金额：</text>
+      <text>¥{{selectedGoods.total_price || '0.00'}}</text>
+      <text class='feel'>含配送费:¥{{selectedGoods.shipping_info.fee}}</text>
+    </view>
+    <view class='msg mt-24'>（仅限厂内送货上门）</view>
+    <view class='btn-wrap'>
+      <form class='btn ' bindsubmit="hideConfirm" report-submit='true'>
+        <button class='base-font-color' formType='submit'>取消支付</button>
+      </form>
+      <form class='btn ' bindsubmit="touchSubmit" report-submit='true'>
+        <button class='base-font-color' style='color:#e71f19!important' formType='submit' disabled="{{!canPurchase}}">确认支付</button>
+      </form>
+      <!-- <view class='btn base-font-color'>确认支付</view> -->
+    </view>
+  </view>
+
+  <!-- 弹窗 -->
+  <view class="drawer_screen" bindtap="setModalBonus" wx:if="{{showBonusModal}}"></view>
+  <view animation="{{animationData}}" style='opacity:0' class="modal-inner" wx:if="{{showBonusModal}}">
+    <view class="modal-inner-header modal-coupon-title">选择红包</view>
+
+    <scroll-view class="modal-inner-main" scroll-y="true">
+      <view class="modal-inner-block modal-coupon-box">
+        <view class="box_list row" style='background-image:url({{iconURL}}/coupon_orange01.png)' wx:for="{{cashgifts}}" wx:for-item="bonus" wx:if="{{cashgifts.length>0}}" wx:key="index">
+          <!-- 左侧面额 -->
+          <view class='coupon_val color-coupon' wx:if="{{bonus.coupon_type==1}}">
+            <text class="text">{{bonus.value}}</text>
+            <text class="icon">折</text>
+          </view>
+          <view class='coupon_val  color-coupon' wx:else>
+            <text class="icon">¥</text>
+            <text class="text">{{bonus.value}}</text>
+          </view>
+          <!-- 红包信息 -->
+          <view class="coupon_info color_gray_dark col-50">
+            <view class="list_title">{{bonus.name}}</view>
+            <view class="dom-attr">{{bonus.description}}</view>
+            <view class="list_time">{{bonus.use_end_date}}</view>
+          </view>
+          <!-- 右侧领取部位 -->
+          <form class="get_coupon_btn col-30">
+            <button class='getCoupon' style='background-color:#ffe150' bindtap='touchCashgift' data-id='{{bonus.id}}'>
+              <span class="get_coupon">去使用</span>
+            </button>
+          </form>
+        </view>
+        <view class='no_coupon' wx:if="{{cashgifts.length==0}}">
+          <image src='{{iconURL}}/img_coupon_empty02.png'></image>
+          <text class="none_font">暂无红包</text>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="noUserBtn">
+      <button style='' class='noUsecoupon' data-id='-1' bindtap='touchCashgift'>不使用红包</button>
+    </view>
+  </view>
+
+  <!-- 预约下单弹窗 -->
+  <view class="drawer_screen" wx:if="{{showOrderWindow}}" catchtouchmove="stopMove"></view>
+  <view class="order_window" wx:if="{{showOrderWindow}}" catchtouchmove="stopMove">
+    <view class="window-header">
+      <view class="window-header-box">
+        <view class="i">
+          选择预约配送时间
+        </view>
+        <view class="s" wx:for="{{title_text}}" wx:key="{{index}}">
+          {{item}}
+        </view>
+      </view>
+    </view>
+    <scroll-view class="time-list" scroll-y="true">
+      <view class="order_time {{orderTimeId==item.shop_shipping_time_id?'order_active':''}}" wx:for="{{selectedGoods.shipping_time}}" data-item="{{item}}" wx:key="{{index}}" bindtap="changeOrderTime">
+        {{item.shopping_time_text}}
+      </view>
+    </scroll-view>
+    <view class="window-bottom" bindtap="hideWindow">
+      确定
+    </view>
+  </view>
+</view>
+<loading wx:if="{{loadingShow}}"></loading>

@@ -1,0 +1,8 @@
+/* components/pageBottomLogo.wxss */
+/* 页面底部LOGO */
+.page-bottom-logo{
+  padding: 48rpx 0;
+}
+.page-bottom-logo image{
+  width: 100%;
+}

@@ -1,0 +1,75 @@
+.arrival-header{
+  background-color: #ffffff;
+  padding: 40rpx 0;
+}
+.arrival-input{
+  width: 450rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border: 1rpx #AAAAAA solid;
+  margin-left: 50rpx;
+  padding: 0 20rpx;
+}
+.arrival-list {
+  text-align: center;
+  padding: 20rpx 0;
+  background-color: #ffffff;
+  margin-bottom: 20rpx;
+}
+.arrival-time {
+  font-size: 35rpx;
+  color: #000000;
+}
+.arrival-box {
+  width: 750rpx;
+}
+.arrival-icon {
+  font-size: 140rpx;
+  width: 250rpx;
+  margin-top: 20rpx;
+  color: #EB3C39;
+  text-align: center;
+}
+.icon-color {
+  color: #AAAAAA;
+}
+.arrival-name {
+  position: absolute;
+  top: 85rpx;
+  left: 75rpx;
+  width: 100rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #AAAAAA;
+}
+.arrival-name .box-number{
+  font-size: 30rpx;
+}
+.arrival-orderNum{
+  position: absolute;
+  top: 0;
+  right: 10rpx;
+  width: 50rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border-radius: 50rpx;
+  background-color: #EB3C39;
+  text-align: center;
+  font-size: 28rpx;
+  color: #ffffff;
+}
+.active {
+  color: #ffffff;
+}
+.sys-btn{
+  background-color:  #EB3C39;
+  width: 140rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  color: #ffffff;
+  margin-left: 20rpx;
+}
+.positionR{
+  position: relative;
+}

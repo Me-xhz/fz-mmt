@@ -1,0 +1,4 @@
+/* pages/index/configureModelPage/configureModelPage.wxss */
+page{
+  background-color: #fff !important;
+}

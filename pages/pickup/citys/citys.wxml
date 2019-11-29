@@ -1,0 +1,12 @@
+<!--pages/pickup/citys/citys.wxml-->
+<view>
+  <view class='location'>
+    <view>定位</view>
+    <view class='location_city'>
+      <view class='iconfont icon-btn_dizhix'></view>
+      <view class='cityName'>{{city.cityName?city.cityName:'选择城市'}}</view>
+    </view>
+  </view>
+  <import src="../../../utils/wxaSortPicker/wxaSortPicker.wxml" />
+  <template is="wxaSortPicker" data="{{wxaSortPickerData,dataType}}" bindtap="handleclick" />
+</view>

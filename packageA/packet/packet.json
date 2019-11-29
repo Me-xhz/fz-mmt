@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "countDown": "/components/countDown/countDown"
+  }
+}

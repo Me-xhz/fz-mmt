@@ -1,0 +1,51 @@
+<!--components/teamList/teamList.wxml-->
+<swiper class="team-list {{teamList.length==1?'list-height':''}}" autoplay="true" interval="5000" vertical="true">
+    <swiper-item class="team-list-item" wx:for="{{teamList}}" wx:key="index" wx:if="{{index%2==0}}">
+        <view class="join-list {{teamList.length==1?'bottom-none':''}}">
+            <image class="join-list-img" src="{{teamList[index].head_pic}}">
+
+            </image>
+            <view class="join-list-name">
+                {{teamList[index].nickname}}
+            </view>
+            <view class="join-list-right">
+                <view class="join-list-less">
+                    <view>
+                        还差 <text class="i">{{teamList[index].surplus}}人</text>拼成
+                    </view>
+                    <view class="count-time">
+                        剩余<countDown time-text="time-text" doc-text="doc-text" timestamp="{{teamList[index].found_end_time*1000}}" type="2"></countDown>
+                    </view>
+                </view>
+                <form report-submit='true' bindsubmit="toAddTeam" data-alpha-beta="0" data-found_id="{{teamList[index].found_id}}" data-team_id="{{teamList[index].team_id}}" >
+                    <button form-type='submit' class="join-list-btn" >
+                        去拼团
+                    </button>
+                </form>
+            </view>
+        </view>
+        <view class="join-list bottom-none" wx:if="{{index<teamList.length-1}}">
+            <image class="join-list-img" src="{{teamList[index+1].head_pic}}">
+
+            </image>
+            <view class="join-list-name">
+                {{teamList[index+1].nickname}}
+            </view>
+            <view class="join-list-right">
+                <view class="join-list-less">
+                    <view>
+                        还差 <text class="i">{{teamList[index+1].surplus}}人</text>拼成
+                    </view>
+                    <view class="count-time">
+                        剩余<countDown time-text="time-text" doc-text="doc-text" timestamp="{{teamList[index+1].found_end_time*1000}}" type="2"></countDown>
+                    </view>
+                </view>
+                <form report-submit='true' bindsubmit="toAddTeam" data-alpha-beta="0" data-found_id="{{teamList[index+1].found_id}}" data-team_id="{{teamList[index+1].team_id}}" >
+                    <button form-type='submit' class="join-list-btn" >
+                        去拼团
+                    </button>
+                </form>
+            </view>
+        </view>
+    </swiper-item>
+</swiper>

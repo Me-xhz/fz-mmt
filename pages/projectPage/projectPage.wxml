@@ -1,0 +1,18 @@
+<!--pages/projectPage/projectPage.wxml-->
+<!-- 返回首页悬浮框/分享进入显示 -->
+<view class='goHomeFixed' catchtap='gotoHome' wx:if="{{isShowGoHome}}">
+  <image src='{{iconURL}}/product-icon-leftReturn.svg' class='icon-leftReturn'></image>
+  <text>返回首页</text>
+</view>
+<view class='head_box' wx:if="{{type==3}}" style='background-image:url({{iconURL}}/cstp.png)'><image class='head_pic' src='{{head_info.prom_img}}'></image></view>
+<view class='head_box' wx:else style='background-image:url({{iconURL}}/cstp.png)'><image class='head_pic' src='{{head_info.header_img}}'></image></view>
+<view class='goodList white-bg-color'>
+  <goodList list="{{lists}}" type="2" align="left"></goodList>
+  <!-- <view class='no_more' hidden='{{lists.length!=total}}'>没有更多了~</view> -->
+</view>
+<button class='to_share' open-type="share">
+  <image src='{{iconURL}}/button-icon-share01.png'></image>
+</button>
+<!-- 红包-顶部通知消息 -->
+<pagebottom wx:if="{{lists.length>0&&checkShowBottom}}"></pagebottom>
+<loadingBottom wx:if="{{checkBottomLoading}}"></loadingBottom> 

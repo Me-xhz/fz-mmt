@@ -1,0 +1,34 @@
+<!--pages/select/select.wxml-->
+<!-- 导航切换 -->
+<!-- <view class='select_header'>
+  <view class='col-3 nav-bar' wx:for="{{selectBar}}" wx:key="{{index}}">
+    <view class='actives'>{{item.name}}</view>
+  </view>
+</view> -->
+
+<!-- 返回首页悬浮框/分享进入显示 -->
+<view class='goHomeFixed' catchtap='gotoHome' wx:if="{{isShowGoHome}}">
+    <image src='{{iconURL}}/product-icon-leftReturn.svg' class='icon-leftReturn'></image>
+    <text>返回首页</text>
+</view>
+
+<!-- 提示 -->
+<view class='remind'>
+    <view class='t4'>
+      <text>{{activity_detail.rule}}</text>
+    </view>
+    <view class='t8' wx:if="{{activity_detail.diff != '' && activity_detail.diff}}">
+      <text>({{activity_detail.diff}})</text>
+    </view>
+</view>
+
+<!-- <view class='goods_header'>
+      <text>88元选两件</text>
+</view> -->
+
+  <!-- 商品显示 -->
+  <view class='col-12 allgoods'>
+    <goodList list="{{shopList}}" type="2" align="left"></goodList>
+  </view>
+
+

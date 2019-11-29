@@ -1,0 +1,9 @@
+<!--packageB/share-page/share-page.wxml-->
+<view class="share-list">
+    <view class="share-box" bindtap="toShare" data-url="/packageB/invitation-code-share/invitation-code-share">
+        邀请码分享
+    </view>
+    <view class="share-box" bindtap="toShare" data-url="/packageB/welfare-share/welfare-share">
+        福利红包分享
+    </view>
+</view>

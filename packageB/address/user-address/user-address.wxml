@@ -1,0 +1,73 @@
+<!--地址管理-->
+<!-- <radio-group class="radio-group" wx:for="{{address}}">
+<view hidden="{{hiddenAddress}}" class="address" >
+  <view class="address-icon" bindtap="setDefault" data-id="{{item.id}}">
+    <radio checked="{{item.is_default==1?true:false}}" value="{{index}}" />
+  </view>
+  
+  <view class="address-detail">
+    <view class="address-name-phone">
+      <text class="address-name">{{item.name}}</text>
+      <text class="address-phone">{{item.tel}}</text>
+    </view>
+    <view class="address-info">{{item.address_xq}}</view>
+    <view class="address-edit">
+      <view>
+        <icon></icon>
+        <text hidden="{{item.is_default==0?false:true}}"></text>
+      </view>
+      <view>
+        <text hidden="{{item.is_default==0?false:true}}" bindtap="setDefault" data-id="{{item.id}}">设置默认</text>
+        <text hidden="{{item.is_default==0?false:true}}"> | </text>
+        <text data-id="{{item.id}}" bindtap="delAddress">删除</text>
+      </view>
+    </view>
+  </view>
+</view>
+</radio-group> -->
+<view class='app-content'>
+  <view class='top-info'>
+    <view class='info-text'>管理你的收货地址</view>
+    <view class='info-button ng-scope' wx:if="{{address.length > 0}}">
+      <view class='button-text' bindtap="edit">{{editType ? '编辑': '完成'}}</view>
+    </view>
+  </view>
+  <view class='my-address ng-scope' wx:if="{{address && address.length > 0}}">
+    <view class="list-item readonly {{address_id == item.address_id && editType ? 'checkOrder' : ''}} {{editType == false ? 'paddingleft' : ''}}" data-addid="{{item.address_id}}" data-item="{{item}}" wx:for="{{address}}" 
+    wx:key="{{item.address_id}}" bindtap="choose">
+      <view class='item-info'>
+        <icon class="user-item-checkbox {{item.checked ? 'user-active' : ''}}"></icon>
+        <!-- <icon class="manu-right-icon iconfont icon-rightjiantou" hidden="{{!editType}}"></icon> -->
+        <image class="item-arrow" wx:if='{{!address_id}}' src="{{iconURL}}/icon_right_arrow.png"></image>
+        <view class='info-contact'>
+          <text>{{item.consignee}}</text>
+          <text>{{item.mobile}}</text>
+          <span class="defaults" wx:if="{{item.is_default}}">默认</span>
+          <!-- <text class='contact-default ng-scope'>默认</text> -->
+        </view>
+        <view class='info-detail'>
+          <text wx:for="{{item.regions}}" wx:for-item="chril" wx:key="chril.id">{{chril.name}}</text>
+          <text class="addInfo">{{item.address}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:if='{{address && address.length <= 0}}' class="address-empty">
+    <view class="empty-item">
+      <image src="{{iconURL}}/icon_address_empty.png" mode='widthFix'></image>
+      <text>暂无收货地址</text>
+    </view>
+  </view>
+  <view hidden="{{!editType}}" class="add-address" bindtap="add_address">
+    <!-- <image class="add-address-icon" src="#"></image> -->
+    <button type='warn' class='submit'>添加收货地址</button>
+  </view>
+  <view bindtap="delAddress">
+    <view hidden="{{editType}}" class="add-address delete">
+      <!-- <image class="add-address-icon" src="#"></image> -->
+      <button type='primary' class='submit'>删除收货地址</button>
+    </view>
+  </view>
+</view>
+
+<loading wx:if="{{loadingShow}}"></loading>

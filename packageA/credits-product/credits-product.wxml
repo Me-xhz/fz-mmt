@@ -1,0 +1,211 @@
+<view class="product container" style="{{iphoneXBottom=='68rpx'?'padding-bottom:150rpx':''}}">
+  <!-- 返回首页悬浮框/分享进入显示 -->
+  <view class='goHomeFixed' catchtap='gotoHome' wx:if="{{isShowGoHome}}">
+    <image src='{{iconURL}}/product-icon-leftReturn.svg' class='icon-leftReturn'></image>
+    <text>返回首页</text>
+  </view>
+  <!--suppress ALL -->
+  <view class="cont">
+    <swiper wx:if="{{itemData.is_enough == 1}}" indicator-color="{{indicatorColor}}" circular="{{circular}}" indicator-active-color="{{indicatorActiveColor}}" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{bannerItem}}" wx:key='index'>
+        <swiper-item class='dufiltImage' style="background-image:url({{iconURL}}/img_dufilt_swiper.png)">
+          <image bindtap='setPreviewImage' data-current='{{item}}' bindload='swiperImageLoad' src="{{item}}" class="slide-image {{swiperImgBl == true ? 'loaded' : ''}}" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="bannerImg" wx:if="{{itemData.is_enough == 0}}">
+      <image src="{{bannerItem[0]}}" bindload='swiperImageLoad'></image>
+    </view>
+    <image wx:if='{{itemData.goods_video && itemData.goods_video != ""}}' data-current='{{itemData.goods_video}}' bindtap='setPreviewVideo' src="{{iconURL}}/product_video.png" class="slide-videoIcon" />
+  </view>
+  <!-- 商品名称 -->
+  <view class="product-name-box" wx:if="{{itemData.score_goods_name != ''}}">
+    <view class="info-name">
+      {{itemData.score_goods_name}}
+    </view>
+  </view>
+  <!-- 商品价格 -->
+  <view class="product-info" wx:if="{{itemData.score_price != ''}}">
+    <view class="info-price">
+      <view class="is-vip">
+        <view class="is-vip_price">
+          {{itemData.score_price || '0.00'}}
+          <i class="score">积分</i>
+          <!--<image src="{{iconURL}}/credits-icon01.png"></image>-->
+        </view>
+        <view class="limit-box" wx:if="{{itemData.is_enough==1&&itemData.is_on_sale==1}}">
+          <text class="t">仅剩</text>
+          <text class="n">{{itemData.surplus || 0}}</text>
+          <text>份</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="gray-hr"></view>
+  <!-- 配送时间 -->
+  <view class="product-nums" wx:if="{{itemData.plan_shipping_time != ''}}">
+    <view class="row ">
+      <view class="col-15 nums-name t2">配送时间</view>
+      <view class="col nums-item-right">
+        <i class="icon-right-arrow">{{itemData.plan_shipping_time}}</i>
+      </view>
+    </view>
+  </view>
+  <!--图文详情头部-->
+  <view class="gray-hr"></view>
+  <view class='intro-header' id='content'>
+    <view class="swiper-tab title_bar t4">
+      商品详情
+    </view>
+    <view class='product-intro-images'>
+      <image lazy-load="true" src='{{item.width_img}}' wx:key="index" style='width:{{item.width}}rpx;height:{{item.height}}rpx;' wx:for="{{itemData.goods_content}}"></image>
+    </view>
+  </view>
+  <!-- 常见问题 -->
+  <view class='intro'>
+    <import src="../../wxParse/wxParse.wxml" />
+    <view class="wxParse">
+      <template is="wxParse" data="{{wxParseData:introContent.nodes}}" />
+    </view>
+  </view>
+  <view class='back-button'>
+    <view catchtap='gotoPagetop' class='backtop' style='background-image:url({{iconURL}}/to_top01.png)' wx:if='{{showBackTop}}'></view>
+  </view>
+  <pagebottom></pagebottom>
+</view>
+<!-- 分享弹层 -->
+<action-sheet hidden="{{!isShowModeWx}}" bindchange="closeShareWx">
+  <button class='share-btn' open-type="share" bindtap="clossShare">
+    <action-sheet-item open-type="share">
+      分享给好友
+    </action-sheet-item>
+  </button>
+  <button class='share-btn' bindtap="drawPic">
+    <action-sheet-item>
+      生成分享卡片
+    </action-sheet-item>
+  </button>
+  <action-sheet-cancel>取消</action-sheet-cancel>
+</action-sheet>
+
+<!--兑换完弹窗-->
+<view class="drawer_screen_credits" wx:if="{{isShowCredits}}" bindtap="showCreditsModal" catchtouchmove="preventdefault"></view>
+<view class="credits-box" wx:if="{{isShowCredits}}">
+  <text>{{credits_msg}}</text>
+  <view class="get-score" bindtap="showScoreTask">
+    <text>获取积分</text>
+    <view class="iconfont icon-btn_xiangyoudajiantoux"></view>
+  </view>
+  <view class="welfare-closs" bindtap="showCreditsModal">
+    <image src="{{iconURL}}/btn-index-closs.png" mode="widthFix"></image>
+  </view>
+</view>
+
+<!-- 位置信息设置 -->
+<view class="drawer_screen" wx:if="{{showSettingModalStatus}}"></view>
+<view class="tc_manu_box" wx:if="{{showSettingModalStatus}}">
+  <view class='tc_manu_items'>
+    <view class='manu_header'>权限提示</view>
+    <view class='manu-margin'>
+      <view class='tc-text'>您未打开目前位置，部分功能将受到影响，请点击前往设置开启</view>
+    </view>
+    <view class='manu-buttons row'>
+      <button bindtap='settingModalStatus'>取消</button>
+      <button class='button-primary' bindtap='goSetting'>前往设置</button>
+    </view>
+  </view>
+</view>
+
+<!-- 分享图片 -->
+<view class="share-modal-pic" wx:if="{{isShowSharePic}}" bindtap="closeSharePic">
+  <view class="drawer_screen" wx:if="{{isShowSharePic}}"></view>
+  <view class='modal-content'>
+    <view class='share-img'>
+      <!-- 画布大小按需定制 -->
+      <canvas canvas-id="shareImg" style="width:283px;height:480px"></canvas>
+      <image src='{{preurl}}' mode='widthFix' class='show-img'></image>
+    </view>
+    <view class='share-btns row'>
+      <view class='share-button'>取消</view>
+      <view class='share-button btn-right' bindtap='saveSharePic'>保存图片</view>
+    </view>
+  </view>
+</view>
+<!--积分领取弹窗-->
+<view class="drawer_screen_credits" wx:if="{{showScore}}" bindtap="showScoreModal" catchtouchmove="preventdefault"></view>
+<view class="get-score-modal" style="background-image:url({{iconURL}}/credits-task-bg.png) " animation="{{animationData}}" wx:if="{{showScore}}">
+  <image class="close-credits" src="{{iconURL}}/close-credits-task.png" bindtap="showScoreModal"></image>
+  <view class="score-title">
+    海量积分轻松得
+  </view>
+  <view class="score-list">
+    <view class="score-box" wx:for="{{scoreTaskList}}">
+      <image class="score-icon" src="{{item.icon_img}}">
+
+      </image>
+      <view class="score-list-name">
+        {{item.name}}({{item.achieve_num}}/{{item.can_num}})
+      </view>
+      <view class="score-list-btn">
+        <view class="score-btn" wx:if="{{item.state==0&&item.id!=4}}" bindtap="{{item.id==1?'creditsSign':item.id==2?'gotoHome':item.id==3?'gotoHome':''}}">
+          {{item.state_desc}}
+        </view>
+        <view class="score-btn-text" wx:else>
+          {{item.state_desc}}
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!---底部开始-->
+<view class='footfixed  {{swiperImgBl ? "footShow" : ""}}' style='padding-bottom:{{iphoneXBottom}}'>
+  <view class='left'>
+    <view class="submit-icon">
+      <image class="icon-ico" src="{{iconURL}}/sxsy.svg"></image>
+      <view class='text'>首页</view>
+    </view>
+    <view class="submit-icon" bindtap='goRegister'>
+      <image class="icon-ico" src="{{iconURL}}/product_contact_v2.svg"></image>
+      <view class='text'>客服</view>
+      <button open-type="contact" class='icon-contact' session-from='商品详情' send-message-title='{{itemData.score_goods_name}}' send-message-path='/pages/product/product?productId={{itemData.goods_id}}' send-message-img='{{itemData.gallery[0].src}}' show-message-card='true'
+        open-type='contact' wx:if="{{checkSessionKey}}"></button>
+    </view>
+    <form bindsubmit='gotoHome' class='product-form-bottom home' report-submit='true'>
+      <button form-type='submit'></button>
+    </form>
+  </view>
+  <view wx:if="{{itemData.is_on_sale==1}}">
+    <view class='bottom-buttons row' wx:if="{{itemData.is_enough==1&&itemData.exchange_type==1}}">
+      <form bindsubmit='nowPurchase' data-type="addcart" report-submit='true'>
+        <button type='primary' class="submit-button-big" formType="submit">立即兑换</button>
+      </form>
+    </view>
+    <view class='bottom-buttons row' wx:if="{{itemData.is_enough==1&&itemData.exchange_type==2}}">
+      <form bindsubmit='getCoupon' data-type="addcart" report-submit='true'>
+        <button type='primary' class="submit-button-big" formType="submit">立即兑换</button>
+      </form>
+    </view>
+    <!-- 商品已抢光 -->
+    <button type='primary' style='background-color:#aaaaaa;opacity:1' class="submit-button-big" wx:if="{{itemData.is_enough==0}}">补货中</button>
+  </view>
+  <view wx:else>
+    <button type='primary'  style='background-color:#aaaaaa;opacity:1' class="submit-button-big">商品已下架</button>
+  </view>
+</view>
+
+<view class='top-mask' wx:if="{{showTopMask}}"></view>
+
+<loading wx:if="{{loadingShow}}"></loading>
+<!--敬请期待弹窗-->
+<view class="drawer_screen_credits" wx:if="{{showTaskForward}}" bindtap="closeTaskForward"   catchtouchmove="preventdefault"></view>
+<view class="credits-task-none" wx:if="{{showTaskForward}}">
+  <view>获取积分通道更新中</view>
+  <view>敬请期待</view>
+  <view class="get-score-none" bindtap="closeTaskForward">
+    <text>确定</text>
+    <view class="iconfont icon-btn_xiangyoudajiantoux"></view>
+  </view>
+  <view class="welfare-closs" bindtap="closeTaskForward">
+    <image src="{{iconURL}}/btn-index-closs.png" mode="widthFix"></image>
+  </view>
+</view>

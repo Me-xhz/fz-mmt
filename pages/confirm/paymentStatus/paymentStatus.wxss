@@ -1,0 +1,189 @@
+/* pages/confirm/paymentStatus/paymentStatus.wxss */
+
+.payment_header{
+  padding: 20rpx;
+  background: #fff;
+}
+.payment_header text{
+  line-height: 60rpx;
+}
+.payment_box{
+  /* margin-top: 20rpx; */
+
+  background: #fff;
+
+  text-align: center;
+}
+.payment_box .title_wrap{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50rpx;
+  padding: 52rpx 0;
+
+  color: #555555;
+
+}
+.payment_box .iconfont{
+  margin-right: 16rpx;
+}
+.payment_box .btns{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20rpx 96rpx 50rpx 96rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.payment_box .btns .btn{
+  flex: 0 0 200rpx;
+  width: 200rpx;
+  height: 76rpx;
+  line-height: 76rpx;
+  border: 1rpx solid #303030;
+  box-sizing: border-box;
+  padding: 0;
+  font-size: 28rpx;
+  font-weight: 600;
+  /* background: #eb3c39; */
+  color: #555;
+  border-radius: 40rpx;
+}
+.payment_box .btns .onPay{
+  background: #fff;
+  color: #555555;
+}
+
+/* 推荐商品 */
+.recommend {
+  background: #fff;
+  padding:0 25rpx;
+}
+.title{
+  /* height: 140rpx; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 29.7rpx 0;
+}
+.title image{
+  width: 488rpx;
+  height: 30rpx;
+}
+
+/* 新人优惠券弹窗 */
+
+.nc_manu_box {
+  width: 564rpx;
+  /* overflow: hidden; */
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform:translate(-50%, -50%);
+  opacity: 0;
+  z-index: 1200;
+  border-radius: 16rpx;
+}
+.nc_manu_box .new-coupon-img{
+  width: 100%;
+}
+.nc_manu_box .new-coupon-btn{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.nc_manu_box .new-coupon-btn button{
+  background-color: #fff;
+  color: #AAAAAA;
+  font-size: 30rpx;
+  height: 100rpx;
+}
+.nc_manu_box .icon-btn_qiapianguanbianniux{
+  position: absolute;
+  right: 5rpx;
+  top: 15rpx;
+  font-size: 14rpx;
+  transform: translateX(-50%);
+  color: #aaa;
+  padding: 8rpx;
+  border: 2rpx solid #aaa;
+  border-radius: 50%;
+}
+.user-ad{
+  width: 100%;
+  background-color: #fff;
+  padding:0 24rpx 24rpx 24rpx;
+  box-sizing: border-box;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+.swipers.newSwipers swiper{
+  height: 232rpx;
+}
+.swipers swiper swiper-item{
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.adImg{
+  display: block;
+  width: 100%;
+  height: 400rpx;
+}
+.newAdimg{
+  display: block;
+  width:100%;
+  height: 232rpx;
+}
+.index-from-indexAd{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.index-from-indexAd button{
+  width: 750rpx;
+  height: 400rpx;
+  background-color: transparent;
+}
+.index-from-indexAd.new button{
+  height: 232rpx;
+}
+
+.order_confirm_notice_wrap {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  width: 70%;
+  background-color: #fff;
+  padding: 60rpx 60rpx 0 60rpx;
+  border-radius: 20rpx;
+}
+
+/* .order_confirm_notice_wrap .order_confirm_notice_content {
+  font-size: 36rpx;
+  font-weight: bold;
+} */
+
+.order_confirm_notice_wrap .order_confirm_notice_btn {
+  text-align: center;
+}
+
+.order_confirm_notice_wrap .order_confirm_notice_btn .btn {
+  width: 248rpx;
+  color: #905521;
+  height: 76rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  line-height: 76rpx;
+  margin: 60rpx auto;
+  background:rgba(255,225,80,1);
+  box-shadow:0px 4rpx 4rpx 0px rgba(20,15,12,0.05);
+  border-radius:38rpx;
+  color:rgba(144,85,33,1);
+}
+
+.order_confirm_notice_wrap .order_confirm_notice_content image {
+  width: 100%;
+}

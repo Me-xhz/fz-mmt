@@ -1,0 +1,328 @@
+/* components/specifications/specifications.wxss */
+/* 幕布 */
+
+.drawer_screen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.6);
+  overflow: hidden;
+  z-index: 1999;
+  color: #fff;
+}
+/*SKU弹窗*/
+
+.drawer_attr_box {
+  width: 100%;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  z-index: 2000;
+  background: #fff;
+}
+.drawer_attr_box.show{
+  opacity: 1;
+  animation: fadeInUp 0.5s;
+}
+.close_icon {
+  position: absolute;
+  right: 30rpx;
+  top: 30rpx;
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.close_icon wx-image {
+  position: absolute;
+  right: 0rpx;
+  top: 0rpx;
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.drawer_attr_content {
+  padding-bottom: 100rpx;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  min-height: 600rpx;
+}
+
+.drawer_attr_content .buy_now_btn {
+  width: 100%;
+  height: 96rpx;
+  line-height: 96rpx;
+  background-color: #ffe150;
+  border-radius: 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 34rpx;
+  color: #555;
+}
+
+.text_center {
+  width: 90%;
+  box-sizing: border-box;
+  height: 168rpx;
+  padding: 40rpx;
+  padding-left: 190rpx;
+  margin: 0 30rpx;
+  /* border-bottom: 1rpx #e4e4e4 solid; */
+}
+
+.product-SKU {
+  width: 100%;
+  vertical-align: top;
+  display: inline-block;
+  margin-left: 24rpx;
+}
+
+.product-SKU .product-price {
+  font-size: 32rpx;
+  font-weight: 700;
+  line-height: 36rpx;
+  color: #f23030;
+}
+.product-SKU .product-price .text{
+  font-size: 30rpx;
+  font-weight: 700;
+  line-height: 36rpx;
+  color: #f23030;
+}
+.product-SKU .product-price .small {
+  color: #b5b5b5;
+  font-size: 18rpx;
+  margin-left: 10rpx;
+  text-decoration: line-through;
+}
+
+.product-SKU .product-choose {
+  font-size: 28rpx;
+  line-height: 1;
+  color: #767676;
+  padding-top: 18rpx;
+}
+
+.drawer_image {
+  position: absolute;
+  top: -40rpx;
+  left: 30rpx;
+  width: 180rpx;
+  height: 180rpx;
+  background-color: rgb(247, 244, 244);
+  border: 1rpx solid #e4e4e4;
+  overflow: hidden;
+}
+
+.drawer_image image {
+  width: 180rpx;
+  height: 180rpx;
+}
+
+.drawer_desc {
+  font-size: 28rpx;
+  margin: 20rpx;
+  height: 150rpx;
+  width: 100%;
+}
+
+.group-name {
+  font-size: 26rpx;
+  box-sizing: border-box;
+  color: #979797;
+  text-align: left;
+  line-height: 50rpx;
+}
+
+.group-name.attr_num_txt {
+  width: 70%;
+}
+
+/*分类选择*/
+
+/* .title {
+  padding: 10rpx 0rpx;
+  margin: 10rpx 0;
+  border-left: 4rpx solid #ccc;
+} */
+
+/*每组属性的主盒子*/
+
+.attr-margin {
+  padding-top: 20rpx;
+  max-height: 500rpx;
+  overflow: hidden;
+}
+
+.attr_main {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 30rpx;
+}
+
+.attr_main.sku-height {
+  max-height: 400rpx;
+  overflow: auto;
+}
+
+/*数量*/
+
+.group-click {
+  width: 30%;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: right;
+  align-self: center;
+}
+
+.attr-amount {
+  width: 90%;
+  padding: 0;
+  display: flex;
+  padding-top: 40rpx;
+  margin: 10rpx 30rpx 140rpx 30rpx;
+  /* border-top: 1rpx #e4e4e4 solid; */
+}
+
+.amount-button {
+  color: #555;
+  background-color: #f7f7f7;
+  border: none;
+}
+
+.amount-input {
+  border: none;
+}
+
+/*全部属性的主盒子*/
+
+.commodity_attr_list {
+  display: inline-block;
+  width: 100%;
+  background: #fff;
+}
+
+.attr_box {
+  width: 100%;
+}
+
+/*属性名*/
+
+.attr_name {
+  float: left;
+  display: block;
+  font-size: 24rpx;
+  line-height: 50rpx;
+  border-radius: 10rpx;
+  color: #303030;
+  padding: 0 20rpx;
+  font-weight: 500;
+  margin: 0 20rpx 20rpx 0;
+  min-width: 144rpx;
+  border-width: 0.5px;
+  overflow: hidden;
+  text-align: center;
+  box-sizing: border-box;
+  background-color: #e4e4e4;
+  /* border: 1rpx #e4e4e4 solid; */
+}
+
+.attr_name.active {
+  /* border: 1rpx #ffe150 solid; */
+  color: #303030;
+  background-color: #ffe150;
+}
+
+.attr_name.disable, .attr_name.active.disable {
+  background-color: #eeeeee;
+  color: #cccccc;
+}
+
+.font_24{
+  font-size: 24rpx
+}
+
+.bt-68 {
+  bottom: -68rpx !important;
+}
+
+/* 数量输入框 */
+
+.amount-input {
+  display: block;
+  float: left;
+  width: 70rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  min-height: 50rpx;
+  color: #767676;
+  font-size: 26rpx;
+  font-weight: 400;
+  text-align: center;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.amount-button {
+  display: block;
+  background-color: #f7f7f7;
+  float: left;
+  box-sizing: border-box;
+  width: 50rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  overflow: hidden;
+  padding: 0;
+}
+.amount-button.left{
+  border-top-left-radius: 4rpx;
+  border-bottom-left-radius: 4rpx;
+}
+.amount-button.right{
+  border-top-right-radius: 4rpx;
+  border-bottom-right-radius: 4rpx;
+}
+.amount-button.left button{
+  padding: 0;
+  border-radius: 0;
+  line-height: 1.3;
+  height: 50rpx;
+}
+.amount-button.right button{
+  padding: 0;
+  border-radius: 0;
+  line-height: 1.3;
+  height: 50rpx;
+}
+.amount-icon{
+  opacity: 1
+}
+
+@keyframes fadeInUp{
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+@keyframes fadeOutDown{
+
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+}

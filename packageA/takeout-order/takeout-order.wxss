@@ -1,0 +1,133 @@
+/* packageA/takeout-order/takeout-order.wxss */
+.tab-bar{
+    height:86rpx;
+    width: 100%;
+    display: flex;
+    background-color: #fff;
+    position: fixed;
+    z-index: 999;
+}
+.tab-bar .change-tab{
+    flex: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:#555;
+    font-size: 28rpx;
+    border-bottom: 2rpx solid #f0f0f0;
+    font-weight: 600;
+    position: relative;
+    height:86rpx;
+}
+.tab-bar .active{
+    color:#333!important;
+}
+.tab-bar  .active::after{
+    content: '';
+    position: absolute;
+    display: block;
+    height:4rpx;
+    width:76rpx;
+    background-color: #ffe150;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.back-num{
+  font-size: 24rpx;
+  color:#EB3C39;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.order-list {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    padding-top:86rpx;
+}
+
+.order-list .list-item {
+    margin-top: 20rpx;
+}
+
+.header-row {
+    padding: 0 24rpx;
+    background: #fff;
+}
+.order-main{
+  border: none;
+}
+.header-lf {
+    font-size: 28rpx;
+    color: #767676;
+}
+
+.header-rg {
+    font-size: 24rpx;
+    color: #555;
+    font-weight: 600;
+    text-align: right;
+}
+.less-order{
+    background-color:#fff!important;
+    border:2rpx solid #ddd;
+}
+.back-order-btn{
+    background-color: #fff!important;
+    border: 1rpx solid #aaa!important;
+    color:#555!important;
+    font-weight: 600!important;
+    font-size: 24rpx!important;
+}
+.to-comment{
+    background-color:#ffe150;
+    color:#555!important
+}
+.w35{
+  width:38%;
+}
+.show-back-time{
+    position: absolute;
+    bottom: 0;
+    right:0;
+    font-size: 24rpx;
+    color:#aaa;
+}
+.empty {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.empty.address-empty {
+    height: 600rpx;
+    background: #fff;
+}
+
+.empty .empty-item {
+    position: absolute;
+    left: 50%;
+    /*top: 50%;*/
+    display: block;
+    width: 100%;
+    transform: translateX(-50%);
+}
+
+.empty .empty-item .item-logo {
+    display: block;
+    margin: 0 auto;
+    width: 288rpx;
+    height: 128rpx;
+}
+.border-b{
+  border-bottom: 2rpx solid #f0f0f0;
+  width: 100%;
+  height:88rpx;
+  line-height: 88rpx;
+}
+.b-bottom{
+  border-top:2rpx solid #f0f0f0;
+}

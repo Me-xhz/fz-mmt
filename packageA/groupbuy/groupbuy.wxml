@@ -1,0 +1,286 @@
+<!--拼团详情页-->
+<!--顶部商品信息-->
+<view class="goods-msg">
+  <view class="goods-box" bindtap='payAgain'>
+    <image class="goods-img" src="{{teamFound.sku_img}}"></image>
+    <view class="goods-none" wx:if="{{teamFound.is_enough==0}}">
+      <image src="{{iconURL}}/inequacy02.png"></image>
+    </view>
+    <view class="goods-news">
+      <view class="goods-name t10">{{teamFound.goods_name}}</view>
+      <view class="goods-standrad">{{teamFound.spec_key_name}}</view>
+      <view class="group-price">
+        <view class="user-new-tips" wx:if="{{teamMsg.is_new_activity_user==1}}">新人专享</view>
+        <text class="price-sign">￥</text>
+        <text class="price">{{teamFound.price}}</text>
+        <text class="cost-price">￥{{teamFound.goods_price}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!--团员信息-->
+<view class="group-msg">
+  <view class="group-time">
+    <view class="short" wx:if="{{teamFound.status==2&& order_id == 0 &&teamList.length>0 }}">此团已结束，可参加其他人的团</view>
+    <view class="short" wx:elif="{{teamFound.status==2&& order_id == 0 &&teamList.length<=0 }}">拼单已满</view>
+    <view class="short" wx:else>{{teamFound.status_desc}}</view>
+    <view class="short-time" wx:if="{{teamFound.status==1}}">距拼团结束
+      <view class="time-box">
+        <text>{{h}}</text>
+      </view>
+      <text class="dot">:</text>
+      <view class="time-box">
+        <text>{{m}}</text>
+      </view>
+      <text class="dot">:</text>
+      <view class="time-box">
+        <text>{{s}}</text>
+      </view>
+    </view>
+    <view class='group-success' wx:if="{{teamFound.status == 2 && order_id != 0}}">货品将尽快发出，请留意短信消息</view>
+    <view class='group-success' wx:if="{{teamFound.status == 2 && order_id == 0&& teamList.length<=0 }}">来晚啦，该拼单已被人抢先一步</view>
+    <view class='group-success' wx:if="{{teamFound.status == 3 && order_id != 0}}">钱款将原路退回</view>
+  </view>
+
+  <!-- 拼团参加列表 -->
+  <view class="join-team" wx:if="{{(teamFound.status==3&& order_id == 0 && teamFoundStatus == 0&& teamList.length>0) || (teamFound.status==2 && order_id == 0 && teamFoundStatus == 0&& teamList.length>0)}}">
+    <view class="team-list-box">
+      <!--拼团列表组件-->
+      <team-list teamList="{{teamList}}" bindgetinfo="getNewTeamInfo"></team-list>
+    </view>
+  </view>
+  <view class="group-team" wx:if="{{ teamFound.status==1 || order_id!= 0 ||teamList.length<=0}}">
+    <view class="member">
+      <view class="captain">团长</view>
+      <image style='background-image:url({{iconURL}}/default_pic.png)' src="{{teamFound.head_pic}}"></image>
+    </view>
+    <view class="member" wx:for="{{teamFollow}}" wx:key="index">
+      <image style='background-image:url({{iconURL}}/default_pic.png)' src="{{item.follow_user_head_pic}}"></image>
+    </view>
+    <view class="member" wx:for="{{teamFound.surplus}}" wx:if="{{teamFound.surplus > 0 && teamFound.status == 1}}" wx:key="index">
+      <view class="add-member">
+        <view class="row">
+
+        </view>
+        <view class="col">
+
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <form report-submit='true' bindsubmit="toShare" wx:if="{{teamFound.status==1 && order_id != 0}}">
+    <button form-type='submit' class="get-group" open-type="share">
+      分享邀请工友参团
+    </button>
+  </form>
+  <form report-submit='true' bindsubmit="delegation" wx:if="{{teamFound.status==1 && order_id==0}}">
+    <button form-type='submit' class="get-group">
+      一键参团
+    </button>
+  </form>
+  <form report-submit='true' bindsubmit="delegation" wx:if="{{teamFound.status==2 && order_id != 0 && teamFoundStatus == 0}}">
+    <button form-type='submit' class="get-group">
+      继续开个团
+    </button>
+  </form>
+  <form report-submit='true' bindsubmit="delegation" wx:if="{{teamFound.status==2 && order_id == 0 && teamFoundStatus == 0}}">
+    <button form-type='submit' class="get-group">
+      我来开个团
+    </button>
+  </form>
+  <form report-submit='true' bindsubmit="delegation" wx:if="{{teamFound.status==3 && teamFoundStatus == 0}}">
+    <button form-type='submit' class="get-group">
+      重新下单
+    </button>
+  </form>
+  <form wx:if="{{teamFound.status != 1 && teamFoundStatus != 0}}">
+    <button class="get-group go-home" style='margin-top: 0'>
+      拼团活动已结束
+    </button>
+  </form>
+  <form report-submit='true' bindsubmit="gotoHome">
+    <button form-type='submit' class="get-group go-home">
+      返回首页
+    </button>
+  </form>
+</view>
+
+<!--查看拼单详情-->
+<view class="my-group" bindtap='showOrder' wx:if="{{teamFound.status==1 && order_id != 0}}">
+  查看拼单详情
+  <text class="t2 iconfont icon-btn_gerenzhongxinyoujiantoux"></text>
+</view>
+<!--拼团规则-->
+<view class="my-group" bindtap="showButton" wx:if="{{teamFound.status==1 && order_id==0}}">
+  {{rule.rule_desc}}
+  <text class="t2 iconfont icon-btn_gerenzhongxinyoujiantoux"></text>
+</view>
+<!--广告图-->
+<view class='user-ad'>
+  <view class="swipers newSwipers indexAd white-bg-color" id="topHeight" wx:if="{{adList[0].ad_link != ''}}">
+    <swiper indicator-color="{{indicatorColor}}" current="{{indexAdcurrent}}" indicator-active-color="#ffbb44" indicator-dots="{{indicatorDots}}" circular="{{circular}}" autoplay="{{!autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <swiper-item wx:for="{{adList}}" wx:key="{{item.ad_id}}" style="{{item.ad_code?'':'background-image:url({{iconURL}}/cstp.png)'}}">
+        <image mode="aspectFill" class="adImg newAdimg" src='{{item.ad_code}}'></image>
+        <form class='index-from-indexAd new' bindsubmit='goWebView' data-type='2' data-item='{{item}}' report-submit='true'>
+          <button form-type='submit'></button>
+        </form>
+      </swiper-item>
+    </swiper>
+  </view>
+</view>
+<!-- 位置信息设置 -->
+<view class="drawer_screen" wx:if="{{showSettingModalStatus}}"></view>
+<view class="tc_manu_box" wx:if="{{showSettingModalStatus}}">
+  <view class='tc_manu_items'>
+    <view class='manu_header'>权限提示</view>
+    <view class='manu-margin'>
+      <view class='tc-text'>您未打开目前位置，部分功能将受到影响，请点击前往设置开启</view>
+    </view>
+    <view class='manu-buttons row'>
+      <button bindtap='settingModalStatus'>取消</button>
+      <button class='button-primary' bindtap='goSetting'>前往设置</button>
+    </view>
+  </view>
+</view>
+
+<!-- 开团提示弹窗 -->
+<view class="drawer_screen" wx:if="{{showStartTeamModal}}"></view>
+<view class='tc-start-team-box' wx:if="{{showStartTeamModal}}">
+  <view class='tc-start-team'>
+    <view class='tc-start-header-text'>
+      <i class="iconfont icon-img_tongyongchenggongx"></i>开团成功</view>
+    <view class='tc-start-msg'>还差一步，再邀请
+      <i class="i">{{teamFound.surplus}}</i>位同厂工友参团</view>
+    <view wx:if="{{teamLabel.count_type!=2}}">
+      <view wx:if="{{teamLabel.time_type==0}}">
+        <view class='tc-start-number' wx:if="{{teamLabel.count_type==0}}">
+          （您仅剩开团
+          <i class="i"> {{teamLabel.found_limit}} </i>次，参团
+          <i class="i"> {{teamLabel.follow_limit}} </i>次）
+        </view>
+        <view class='tc-start-number' wx:if="{{teamLabel.count_type==1}}">
+          （您仅剩拼团
+          <i class="i"> {{teamLabel.total_team_limit}} </i>次)
+        </view>
+      </view>
+      <view wx:if="{{teamLabel.time_type==1}}">
+        <view class='tc-start-number' wx:if="{{teamLabel.count_type==0}}">
+          （您今日仅剩开团
+          <i class="i"> {{teamLabel.found_limit}} </i>次，参团
+          <i class="i"> {{teamLabel.follow_limit}} </i>次）
+        </view>
+        <view class='tc-start-number' wx:if="{{teamLabel.count_type==1}}">
+          （您今日仅剩拼团
+          <i class="i"> {{teamLabel.total_team_limit}} </i>次)
+        </view>
+      </view>
+    </view>
+    <form report-submit='true' bindsubmit="toShare">
+      <button form-type='submit' class="get-group" open-type="share">
+        喊同厂工友来参团
+      </button>
+    </form>
+    <view class='tc-start-ts'>分享到微信群，成团更快喔</view>
+  </view>
+</view>
+
+<!-- 参团提示弹窗 -->
+<view class="drawer_screen" wx:if="{{showInTeamModal}}"></view>
+<view class='tc-start-team-box' wx:if="{{showInTeamModal}}">
+  <view class='tc-start-team'>
+    <view class='tc-start-header-text'>
+      <i class="iconfont icon-img_tongyongchenggongx"></i>参团次数已用完</view>
+    <view class='tc-start-number'>仅剩
+      <i class="i"> {{teamLabel.found_limit}} </i>次开团，抓紧开团抢购</view>
+    <form report-submit='true' bindsubmit="payAgain">
+      <button form-type='submit' class="get-group">
+        我要开团
+      </button>
+    </form>
+    <view class='tc-start-ts'>分享到微信群，成团更快喔</view>
+  </view>
+</view>
+
+<!-- 活动规则弹窗 -->
+<view class="rules-pop-hold {{showRules?'hide':'show'}}">
+  <view class="rules-pop">
+    <view class='rules-content'>
+      <view class='rules-title'>{{rule.title}}</view>
+      <view class='rules-line'></view>
+      <!-- 活动规则内容 -->
+      <scroll-view class='rules-text-box' scroll-y="true">
+        <view class='rules-text' wx:for="{{rule.rule_content}}" wx:key="{{item.id}}">
+          <text>{{item}}</text>
+        </view>
+        <text>注:</text>
+        <view class='rules-text' wx:for="{{rule.rule_tip}}" wx:key="{{item.id}}">
+          <text>{{item}}</text>
+        </view>
+      </scroll-view>
+      <form report-submit='true' bindsubmit='showButton'>
+        <button class="iconfont icon-btn_guanbianniux icon-closs {{showRules?'hide':'show'}}" form-type='submit'></button>
+      </form>
+    </view>
+  </view>
+  <view class='rules-pop-md' bindtap='showButton'></view>
+</view>
+
+<!-- SKU弹窗 -->
+<view class="drawer_screen" catchtap="setModalStatus" wx:if="{{showModalStatus}}"></view>
+<view animation="{{animationData}}" style="opacity:1;z-index:2000;" class="drawer_attr_box" wx:if="{{showModalStatus}}">
+  <view class="close_icon" catchtap="setModalStatus">
+    <image src="{{iconURL}}/icon_modal_closs.png"></image>
+  </view>
+  <view class="drawer_attr_content">
+    <view class="text_center">
+      <view class='drawer_image'>
+        <image class="" mode='widthFix' src="{{skuImages}}"></image>
+      </view>
+      <view class="product-SKU">
+        <view class='product-price'>
+          <i class='font_24'>¥</i>
+          <text>{{skuSvipCurrent}}</text>
+          <text wx:if="{{skuSvipCurrent != skuCurrent}}" class='small'>￥{{skuCurrent}}</text>
+        </view>
+        <view class='product-choose'>{{choosed_sku}}</view>
+      </view>
+    </view>
+    <scroll-view class='attr-margin' scroll-y='true'>
+      <view class='attr_main sku-height' wx:for='{{teamFound.properties}}' wx:for-item='property' wx:key='index'>
+        <view class="group-name">{{property.spec_name}}</view>
+        <view class="commodity_attr_list">
+          <view class="attr_box" wx:for="{{property.attrs}}" wx:for-item="attr" catchtap='attrValueselest' data-property='{{property}}' data-attr='{{attr}}' wx:key='index'>
+            <view class="attr_name {{attr.class}}">
+              {{attr.item}}
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="attr-amount attr_main">
+      <!-- <view class="group-name attr_num_txt">购买数量</view> -->
+      <view class="group-click">
+        <!-- 减号 -->
+        <form report-submit='true' bindsubmit="changeNum" data-alpha-beta="0">
+          <button class="amount-button" form-type='submit'>
+            <i class='amount-icon {{undel ? "cant-del" : ""}}'>-</i>
+          </button>
+        </form>
+
+        <!-- 数值 -->
+        <view class="amount-input">{{buynum}}</view>
+        <!-- 加号 -->
+        <form report-submit='true' bindsubmit="changeNum" data-alpha-beta="1">
+          <button class="amount-button" form-type='submit'>
+            <i class='amount-icon {{unadd ? "cant-del" : ""}}'>+</i>
+          </button>
+        </form>
+      </view>
+    </view>
+    <button class='buy_now_btn' catchtap='delegation'>确定</button>
+  </view>
+</view>
+
+<loading wx:if="{{loadingShow}}"></loading>

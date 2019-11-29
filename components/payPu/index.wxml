@@ -1,0 +1,30 @@
+<!-- components/payPu/index.wxml -->
+<view class="paypu" wx:if="{{isShow}}" catchtouchmove="touchHandler">
+    <view class=" {{ isImg ?  'content active' : 'content'}}">
+        <view class="head">
+            <text bindtap="cancal" class="iconfont icon-btn_qiapianguanbianniux close-right">
+            </text>
+        </view>
+        <view class="body">
+            <text class="body_text1">定位显示您不在</text>
+            <view class="body_text2">
+                <text class="iconfont icon-btn_dizhix"></text>
+                {{loacl}}
+            </view>
+        </view>
+        <view class="title">是否继续下单？</view>
+        <view class="btn">
+            <view class="btn_no" catchtap="cancal">取消</view>
+            <view class="btn_off" catchtap="confim">继续购买</view>
+        </view>
+
+            <image wx:if="{{isImg}}" class="payImage"  src='{{iconURL}}/popupImg_loacltion.png'  />
+              
+
+        <view class="pay_btm" bindtap="setImg"> 
+            如何修改提货点
+            <view wx:if="{{!isImg}}" class="iconfont icon-btn_xiangxiajiantouhongx down uprotate2"></view>
+            <view wx:if="{{isImg}}" class="iconfont icon-btn_xiangxiajiantouhongx down uprotate"></view>
+        </view>
+    </view>
+</view>

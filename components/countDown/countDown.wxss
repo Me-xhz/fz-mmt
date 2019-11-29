@@ -1,0 +1,28 @@
+/* components/countDown/countDown.wxss */
+.countDown_wrap{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22rpx;
+  text-align: center;
+}
+/* .countDown_wrap .item{
+  background-color: #813F00;
+  border-radius:8rpx;
+  display: flex;
+  min-width: 44rpx;
+  padding: 0 6rpx;
+  box-sizing: border-box;
+  height:36rpx;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+  font-weight: 600;
+  color:#fff;
+  margin: 0 8rpx;
+}
+.countDown_wrap .doc{
+  font-size: 24rpx;
+  text-align: center;
+  color: #555;
+} */

@@ -1,0 +1,69 @@
+<!-- 返回首页悬浮框/分享进入显示 -->
+<view class='goHomeFixed' catchtap='gotoHome' wx:if="{{isShowGoHome}}">
+    <image src='{{iconURL}}/product-icon-leftReturn.svg' class='icon-leftReturn'></image>
+    <text>返回首页</text>
+</view>
+<view class="code-record" bindtap="goRecord">
+    <view>提货</view>
+    <view>记录</view>
+</view>
+<view class="pickup-code-box">
+    <view class="pickup-code">
+        <view class="code">
+            <!--<view class="code-text">-->
+            <!--<i>提货码:</i>-->
+            <!--<text>{{pickup_sn}}</text>-->
+            <!--</view>-->
+            <view class="code-img">
+                <canvas class='canvas' style="width:{{qrcodeWidth}}px; height:{{qrcodeWidth}}px;" canvas-id='canvas' bindlongtap='save'></canvas>
+            </view>
+            <view class="reload-btn" bindtap="reloadCode" data-code="{{item.user_code}}">
+                <image class="reload-img" src="{{iconURL}}/reload-btn.png">
+
+                </image>
+                <text class="reload-text">刷新</text>
+            </view>
+        </view>
+        <view class="pickup-num">
+            可提货商品<i>{{itemData.total_num}}</i>件
+        </view>
+    </view>
+</view>
+<view class="pickup-list"  wx:if='{{itemData.goodCount.length > 0}}'>
+    <view class="pickup-box" wx:for="{{itemData.goodCount}}" wx:key="{{index}}">
+        <view class="pickup-name">
+            <text>提货地点：{{item.pickup_name}}</text>
+            <!--<view class="pickup_btn" bindtap="getQrcode" data-code="{{item.get_sn}}" wx:if="{{itemData.goodCount.length>1}}">-->
+            <!--<image src="{{iconURL}}/pickup-logo.png">-->
+
+            <!--</image>-->
+            <!--生成提货码-->
+            <!--</view>-->
+        </view>
+        <view class="goods-list" wx:for="{{item.list}}" wx:for-item="goods" wx:for-index="num" wx:key="{{num}}">
+            <view class="goods-box">
+                <image class="goods-img" src="{{goods.sku_img}}">
+
+                </image>
+                <view class="goods-msg">
+                    <view class="goods-name">
+                        {{goods.goods_name}}
+                    </view>
+                    <view class="goods-content">
+                        {{goods.spec_key_name}}
+                    </view>
+                    <view class="goods-num">
+                        <i>×</i>
+                        <text>{{goods.goods_num}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class='empty-box' wx:if='{{itemData.goodCount.length <= 0}}'>
+    <view class='empty-new-item'>
+        <image class="item-logo" src="{{iconURL}}/pickup-none-new.png" mode='widthFix'></image>
+        <view class="item-text">暂无可取商品</view>
+    </view>
+</view>

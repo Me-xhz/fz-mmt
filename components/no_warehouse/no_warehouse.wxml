@@ -1,0 +1,41 @@
+<!--components/no_warehouse/no_warehouse.wxml-->
+<view class='no_warehouse'>
+  <view class="navbar-box" style="height: {{navBarHeight}}px">
+    <view style="height: {{navBarHeight}}px"></view>
+    <view class="navbar-menu" style="height: {{navBarHeight}}px">
+      <navigator hover-class="none" url='../pickup/pickup'>
+        <view class='warehouse'>
+          <view class='wrap'>
+            <view class='iconfont icon-btn_dizhix'></view>
+            <text>{{city.cityName?city.cityName:'请选择提货点'}}</text>
+            <view class='iconfont icon-btn_sanjiaoxiaojiantoux'></view>
+          </view>
+        </view>
+        <view class='city-guide-box'>
+          <image class="city-guide-gif" src='{{iconURL}}/img_city_select_gif.gif'></image>
+          <view class='city-guide-msg'>
+            <image class='city-guide-msg-bg' src='{{iconURL}}/img_city_select_bg01.png'></image>
+            <text class='city-guide-msg-text'>戳一戳,选择提货点</text>
+          </view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+
+  <view class='no_data' wx:if="{{!isAuthorization}}">
+    <image src='{{iconURL}}/dwsb02.png' style='width:280rpx;height:200rpx;'></image>
+    <view class='text'>定位失败，请选择城市或者开启定位授权</view>
+    <button class='set_btn' bindtap='openSet'>开通定位</button>
+  </view>
+  <view class='no_data' wx:else>
+    <image src='{{iconURL}}/dwsb02.png' style='width:280rpx;height:200rpx;'></image>
+    <navigator class='wrap' hover-class="none" url='../pickup/pickup'>
+      <view class='text' wx:if="{{!check_city}}">当前城市暂未开通服务，请
+        <text class='color_theme'>更换城市</text>
+      </view>
+      <view class='text' wx:else>当前城市已开通服务，请
+        <text class='color_theme'>选择所在工厂</text>
+      </view>
+    </navigator>
+  </view>
+</view>

@@ -1,0 +1,4 @@
+<!--components/pageBottomLogo.wxml-->
+<view class="page-bottom-logo">
+  <image src="{{iconURL}}/pageBottom-logo.png" mode="widthFix"></image>
+</view>

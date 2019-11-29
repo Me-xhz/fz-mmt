@@ -1,0 +1,374 @@
+.address-form {
+  position: relative;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border-top: #f2f2f2 1rpx solid;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+}
+
+.address-form .form-item {
+  position: relative;
+  display: block;
+  min-height: 94rpx;
+  overflow: hidden;
+  box-sizing: border-box;
+  border-bottom: #f2f2f2 1rpx solid;
+  margin-left: 32rpx;
+}
+
+.toggle-item {
+  position: relative;
+  width: 100%;
+  padding-left: 32rpx;
+  height: 94rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+  margin-bottom: 36rpx;
+}
+
+.address-form .form-item .item-title {
+  float: left;
+  display: block;
+  width: 25.6%;
+  height: 94rpx;
+  box-sizing: border-box;
+  color: #030303;
+  font-size: 32rpx;
+  font-weight: normal;
+  text-align: left;
+  line-height: 94rpx;
+}
+
+.toggle-item .item-title {
+  width: 25%;
+  height: 88rpx;
+  box-sizing: border-box;
+  color: #030303;
+  font-size: 32rpx;
+  font-weight: normal;
+  text-align: left;
+  line-height: 90rpx;
+}
+
+.toggle-item .item-toggle {
+  position: relative;
+  text-align: right;
+  margin-right: 32rpx;
+}
+
+.toggle-item .item-toggle switch {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  right: -8rpx;
+}
+
+.address-form .form-item .item-title.padding-left {
+  padding-left: 108rpx;
+  width: 75%;
+}
+
+.address-form .form-item .item-value {
+  float: left;
+  display: block;
+  width: 70%;
+  height: 94rpx;
+  box-sizing: border-box;
+  color: #030303;
+  font-size: 32rpx;
+  font-weight: normal;
+  text-align: left;
+  line-height: 94rpx;
+  padding-right: 80rpx;
+  overflow: hidden;
+}
+
+.address-form .form-item .item-select {
+  float: left;
+  display: block;
+  width: 70%;
+  height: 94rpx;
+  box-sizing: border-box;
+  color: #888;
+  font-size: 32rpx;
+  font-weight: normal;
+  text-align: left;
+  line-height: 94rpx;
+  padding-right: 80rpx;
+  overflow: hidden;
+}
+
+.address-form .form-item .item-arrow {
+  position: absolute;
+  right: 32rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  display: block;
+  width: 24rpx;
+  height: 18rpx;
+  line-height: 40rpx;
+  box-sizing: border-box;
+}
+
+.address-form .form-item .item-input {
+  float: left;
+  display: block;
+  width: 70%;
+  box-sizing: border-box;
+  padding-right: 80rpx;
+  height: 94rpx;
+}
+
+.address-form .form-item .item-input input {
+  display: block;
+  width: 100%;
+  height: 64rpx;
+  margin: 14rpx 0;
+  box-sizing: border-box;
+  background-color: #fff;
+  border: none;
+  text-align: left;
+  color: #030303;
+  font-size: 32rpx;
+  font-weight: normal;
+  line-height: 64rpx;
+}
+
+.address-form .form-item .item-addrepeat {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  margin-top: -2rpx;
+  right: 30rpx;
+}
+
+.address-form .form-item .item-addrepeat image {
+  width: 32rpx;
+}
+
+.address-form .form-item .item-textarea {
+  float: left;
+  position: relative;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.address-form .form-item .item-textarea .inputnum {
+  font-size: 24rpx;
+  color: #999;
+  padding: 26rpx 0;
+  padding-right: 30rpx;
+  background: #fff;
+  position: relative;
+  width: 100%;
+  text-align: right;
+  box-sizing: border-box;
+}
+
+.address-form .form-item .item-textarea textarea {
+  display: block;
+  width: 100%;
+  min-height: 150rpx;
+  height: auto;
+  padding: 28rpx 0;
+  box-sizing: border-box;
+  background-color: #fff;
+  border: none;
+  text-align: left;
+  overflow: hidden;
+  color: #030303;
+  font-size: 32rpx;
+  font-weight: normal;
+  line-height: 30rpx;
+}
+
+.address-form .form-item .item-checkbox {
+  position: absolute;
+  top: 50%;
+  left: 34rpx;
+  margin-top: -20rpx;
+  width: 36rpx;
+  height: 36rpx;
+  background-image: url("http://img.mall.surex.cn/cilicili_icons/icon_check_off.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.address-form .form-item.active .item-checkbox {
+  background-image: url("http://img.mall.surex.cn/cilicili_icons/check-on-single.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.address-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  z-index: 2500;
+}
+
+.address-picker {
+  position: fixed;
+  top: auto;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: 554rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-top: #f2f2f2 1rpx solid;
+  border-bottom: #f2f2f2 1rpx solid;
+  overflow: hidden;
+  z-index: 3000;
+  -webkit-transition: 0.5s linear all;
+  -moz-transition: 0.5s linear all;
+  -o-transition: 0.5s linear all;
+  transition: 0.5s linear all;
+}
+
+.address-picker .picker-header {
+  display: block;
+  width: 100%;
+  height: 80rpx;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: #f2f2f2 1rpx solid;
+  text-align: center;
+  overflow: hidden;
+  color: #030303;
+  font-size: 32rpx;
+  font-weight: normal;
+  line-height: 80rpx;
+}
+
+.address-picker .picker-list {
+  display: block;
+  width: 100%;
+  height: 360rpx;
+  box-sizing: border-box;
+  border-bottom: #f2f2f2 1rpx solid;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.address-picker .picker-list .list-loading {
+  display: block;
+  width: 100%;
+  height: 360rpx;
+  box-sizing: border-box;
+  border-bottom: #e2d2e2 1rpx solid;
+  border: none;
+  text-align: center;
+  overflow: hidden;
+  color: #404245;
+  font-size: 26rpx;
+  font-weight: normal;
+  line-height: 382rpx;
+}
+
+.address-picker .picker-list .list-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 80rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-bottom: #f8f8f8 1rpx solid;
+  text-align: center;
+  overflow: hidden;
+  color: #030303;
+  font-size: 32rpx;
+  padding-right: 44rpx;
+  line-height: 80rpx;
+}
+
+.address-picker .picker-list .list-item .item-arrow {
+  position: absolute;
+  right: 22rpx;
+  top: 28rpx;
+  display: block;
+  width: 12rpx;
+  height: 22rpx;
+  line-height: 40rpx;
+  box-sizing: border-box;
+}
+
+.address-picker .picker-cancel {
+  position: relative;
+  margin: 18rpx;
+  height: 80rpx;
+  box-sizing: border-box;
+  background-color: #f7f7f7;
+  text-align: center;
+  color: #030303;
+  font-size: 26rpx;
+  font-weight: normal;
+  line-height: 80rpx;
+}
+
+.address-action {
+  /*position: fixed;
+	z-index: 100;
+	bottom: 0;
+	left: 0;
+	background: #FFFFFF;*/
+  padding: 0 20rpx;
+  padding-bottom: 20rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.address-action .bar-cancel {
+  position: relative;
+  display: inline-block;
+  margin-left: 36rpx;
+  width: 42%;
+  height: 80rpx;
+  box-sizing: border-box;
+  background-color: #a2a6ad;
+  text-align: center;
+  color: #fff;
+  font-size: 26rpx;
+  font-weight: normal;
+  line-height: 80rpx;
+}
+
+.address-action .bar-save {
+  width: 100%;
+  height: 80rpx;
+  box-sizing: border-box;
+  background-color: #f9ae08;
+  border: 1rpx #f9ae08 solid;
+  border-radius: 6rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: normal;
+  line-height: 80rpx;
+}
+
+.address-action .bar-delete {
+  width: 100%;
+  height: 80rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 6rpx;
+  border: 1rpx #dedfe0 solid;
+  text-align: center;
+  color: #030303;
+  font-size: 30rpx;
+  font-weight: normal;
+  line-height: 80rpx;
+}

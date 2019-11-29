@@ -1,0 +1,1128 @@
+/* pages/confirm/confirm.wxss */
+
+.tip {
+    height: 64rpx;
+    line-height: 66rpx;
+    font-size: 24rpx;
+    padding: 0 22rpx;
+    background: #FFFBE6;
+    font-weight: 500;
+    color: #FFB400;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.tip2 {
+    position: fixed !important;
+    z-index: 100;
+    bottom: 100rpx;
+    left: 0;
+    width: 100%;
+}
+
+.tip-text {
+    font-size: 28rpx;
+}
+
+.tip .goMap {
+    float: right;
+    margin-right: 50rpx;
+    text-decoration-line: underline;
+}
+
+.tip .icon-btn_huangsetishiguanbix {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 22rpx;
+}
+
+.with-tabbar {
+    padding-bottom: 150rpx;
+}
+
+.del::before {
+    position: absolute;
+    content: "";
+    display: block;
+    top: 50%;
+    height: 1rpx;
+    background-color: #bbb;
+    left: 0;
+    right: 0;
+}
+
+/* 商品详情 */
+
+.good_list {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 26rpx;
+}
+
+.good_list .order_tab {
+    width: 110rpx;
+    height: 32rpx;
+    line-height: 32rpx;
+    text-align: center;
+
+    background: #ffe150;
+    color: #555555;
+
+    font-size: 20rpx;
+    border-radius: 5rpx;
+    position: absolute;
+    top: 14rpx;
+    left: 0;
+}
+
+.inequacy {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background:rgba(0,0,0,0.3) ;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*background-color: transparent !important;*/
+}
+.inequacy image{
+    width: 126rpx!important;
+    height:52rpx!important;
+    background: none!important;
+}
+
+/*********** Order confirm ***********/
+
+.confirm-address {
+    position: relative;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 30rpx 0 30rpx 80rpx;
+    border-top: 1rpx #e9e9e9 solid;
+    border-width: 1rpx;
+    background-color: #fff;
+}
+
+.confirm-address::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 8rpx;
+    width: 100%;
+    background-image: -webkit-linear-gradient(135deg, transparent 23%, #fefefe 23%, #fefefe 26%, #d9534f 26%, #d9534f 49%, #fefefe 49%, #fefefe 52%, transparent 52%, transparent 75%, #fefefe 75%, #fefefe 78%, #d9534f 78%, #d9534f);
+    background-size: 136rpx 136rpx;
+    background-color: #12b7f5;
+}
+
+.confirm-address-wrap {
+    position: relative;
+}
+
+.confirm-address-wrap .icon-img {
+    display: block;
+    width: 36rpx;
+    height: 36rpx;
+    position: absolute;
+    left: -55rpx;
+    top: 18rpx;
+}
+
+.confirm-address-wrap .addr_input_box {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.confirm-address-wrap .addr_input {
+    width: 100%;
+    height: 60rpx;
+    line-height: 60rpx;
+    padding: 0 10rpx;
+    background-color: #f7f7f7;
+}
+.confirm-address-wrap .addr_input.btn{
+    font-size: 26rpx;
+    padding: 0 10rpx;
+    color: #767676;
+    text-align: left;
+    border-radius: 0;
+}
+.confirm-address .address-contact {
+    box-sizing: border-box;
+    color: #545454;
+    font-size: 26rpx;
+    line-height: 32rpx;
+    font-weight: normal;
+    text-align: left;
+}
+
+.confirm-address .address-contact span {
+    color: #545454;
+    font-weight: normal;
+    font-size: 26rpx;
+    line-height: 32rpx;
+    text-align: left;
+}
+
+.confirm-address .address-contact .address-contact_mobile {
+    padding-left: 40rpx;
+}
+
+.bb {
+    border-bottom: 1rpx solid #dcdcdc;
+}
+
+.confirm-address .leftName {
+    display: inline-block;
+    width: auto;
+    /* width: 240rpx;
+    position: absolute;
+    left: 0; */
+}
+
+.confirm-address .rightText {
+    display: inline-block;
+    max-width: 400rpx;
+    color:#333;
+    font-weight: 500;
+}
+
+.confirm-address .getAddr_tab {
+    padding: 0 20rpx;
+    color: #e71f19;
+    border: 1rpx solid #e71f19;
+    border-radius: 10rpx;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 40rpx;
+    line-height: 40rpx;
+}
+
+.confirm-address .address-detail {
+    box-sizing: border-box;
+    color: #545454;
+    font-size: 28rpx;
+    font-weight: normal;
+    text-align: left;
+    height: 70rpx;
+    line-height: 70rpx;
+    /* padding-left: 240rpx; */
+    padding-right: 30rpx;
+    position: relative;
+    display: flex;
+}
+.confirm-address .address-detail .arrow {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.confirm-address .address-detail .arrow .right-arrow {
+    font-size: 20rpx;
+    color: #555;
+}
+.address-detail-item {
+    padding-left: 10rpx;
+    height: 70rpx;
+}
+
+.confirm-address .address-detail:last-child {
+    border-bottom: 0;
+}
+
+.confirm-address .address-create {
+    height: 116rpx;
+    box-sizing: border-box;
+    color: #404245;
+    font-size: 36rpx;
+    font-weight: normal;
+    text-align: center;
+    line-height: 116rpx;
+}
+
+.confirm-address .address-arrow {
+    position: absolute;
+    right: 20rpx;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    display: block;
+    box-sizing: border-box;
+    color: #9a9a9a;
+}
+
+.confirm-address .address-tab {
+    color: #e71f19;
+    font-size: 20rpx;
+    position: absolute;
+    left: 20rpx;
+    top: 30rpx;
+    display: block;
+    box-sizing: border-box;
+}
+
+.confirm-form {
+    position: relative;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+    margin-top: 15rpx;
+}
+
+.confirm-form.no-margin {
+    margin: 0;
+}
+
+.confirm-form .form-item {
+    position: relative;
+    height: 92rpx;
+    padding: 0 26rpx;
+    margin-bottom: 15rpx;
+    box-sizing: border-box;
+    border-bottom: #e9e9e9 1rpx solid;
+    border-width: 1rpx;
+}
+
+.confirm-form .form-item .no-border {
+    border: 0;
+}
+
+.confirm-form .form-item .item-title {
+    display: block;
+    height: 92rpx;
+    box-sizing: border-box;
+    color: #555;
+    font-size: 24rpx;
+    font-weight: normal;
+    text-align: left;
+    line-height: 92rpx;
+}
+
+.confirm-form .form-item .item-checkbox {
+    width: 33rpx;
+    height: 33rpx;
+    line-height: 33rpx;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 26rpx;
+}
+
+.confirm-form .form-item .item-checkbox image {
+    width: 100%;
+    height: 100%;
+}
+
+.confirm-form .form-item .item-cashgift-count {
+    color: #767676;
+    font-size: 28rpx;
+}
+
+.confirm-form .form-item .item-value {
+    display: block;
+    height: 92rpx;
+    box-sizing: border-box;
+    color: #303030;
+    font-size: 28rpx;
+    font-weight: normal;
+    text-align: right;
+    line-height: 92rpx;
+    padding-right: 50rpx;
+}
+.confirm-form .form-item .item-value.red{
+    color: #EB3C39;
+}
+.confirm-form .form-item .item-arrow {
+    position: absolute;
+    right: 26rpx;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    display: block;
+    font-size: 20rpx;
+    box-sizing: border-box;
+}
+
+.confirm-form .form-item_nums {
+    position: relative;
+    padding: 30rpx 26rpx 16rpx 26rpx;
+    box-sizing: border-box;
+}
+
+.confirm-form .form-item_nums .item-title {
+    font-size: 24rpx;
+    line-height: 28rpx;
+    color: #545454;
+    text-align: left;
+}
+
+.confirm-form .form-item_nums .item-price {
+    text-align: right;
+    font-size: 28rpx;
+    line-height: 28rpx;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.confirm-form .form-item_yunfei {
+    position: relative;
+    padding: 0 26rpx 16rpx 26rpx;
+    box-sizing: border-box;
+}
+
+.confirm-form .form-item_yunfei.mount {
+    padding-bottom: 30rpx;
+}
+
+.confirm-form .form-item_yunfei .item-title {
+    font-size: 24rpx;
+    color: #030303;
+    text-align: left;
+}
+
+.confirm-form .form-item_yunfei .item-title-radio {
+    display: inline-block;
+    width: 32rpx;
+    height: 32rpx;
+    background-image: url('http://img.mall.surex.cn/cilicili_icons/check-off-sf.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.confirm-form .form-item_yunfei .item-title-radio.checked {
+    background-image: url('http://img.mall.surex.cn/cilicili_icons/check-on-sf.png');
+}
+
+.confirm-form .form-item_yunfei .item-price {
+    font-size: 28rpx;
+    line-height: 28rpx;
+    color: #030303;
+    text-align: right;
+}
+
+.confirm-form .form-item_yunfei .item-price .item-price_lotyf {
+    color: #ff4222;
+}
+
+.confirm-form .item-textarea {
+    position: relative;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.confirm-form .item-textarea .inputnum {
+    font-size: 24rpx;
+    color: #999;
+    padding: 26rpx 0;
+    padding-right: 30rpx;
+    background: #fff;
+    position: relative;
+    width: 100%;
+    text-align: right;
+    box-sizing: border-box;
+}
+
+.confirm-form .item-textarea textarea {
+    display: block;
+    width: 100%;
+    min-height: 108rpx;
+    padding: 24rpx 26rpx;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: none;
+    text-align: left;
+    overflow: hidden;
+    color: #767676;
+    font-size: 26rpx;
+    font-weight: normal;
+    line-height: 30rpx;
+}
+
+.paytype-list {
+    margin-top: 20rpx;
+}
+
+.paytype-list .list-header {
+    margin-left: 26rpx;
+    font-size: 28rpx;
+    line-height: 28rpx;
+    color: #767676;
+    padding: 30rpx 0 14rpx 0;
+}
+
+.paytype-list .list-content {
+    background-color: #fff;
+}
+
+.paytype-list .list-item {
+    position: relative;
+    height: 92rpx;
+    display: block;
+    margin-left: 26rpx;
+    border-bottom: #e9e9e9 1rpx solid;
+    border-width: 1rpx;
+}
+
+.paytype-list .list-item image {
+    width: 50rpx;
+    height: 50rpx;
+}
+
+.paytype-list .list-item.no-border {
+    border: 0;
+}
+
+.paytype-list .list-item .item-icon {
+    width: 50rpx;
+}
+
+.paytype-list .list-item .item-txt {
+    line-height: 92rpx;
+    font-size: 32rpx;
+    color: #030303;
+    padding-left: 20rpx;
+    vertical-align: middle;
+}
+
+.paytype-list .list-item .item-checked {
+    width: 32rpx;
+    height: 22rpx;
+    position: absolute;
+    top: 50%;
+    right: 26rpx;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+
+.paytype-list .list-item input {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+radio+.item-checked {
+    display: none;
+}
+
+radio:checked+.item-checked {
+    display: inline;
+}
+
+/*********** Dialog ***********/
+
+.mask {
+    position: fixed;
+    z-index: 101;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+}
+
+.dialog {
+    z-index: 1079;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    width: 80%;
+    max-width: 554rpx;
+    -webkit-transform: translate(-50%, -30%);
+    transform: translate(-50%, -30%);
+    background-color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    border-radius: 10rpx;
+    overflow: hidden;
+}
+
+.dialog .dialog-content {
+    position: relative;
+    width: 100%;
+    padding: 96rpx 0 74rpx 0;
+    color: #030303;
+    font-size: 34rpx;
+    overflow: hidden;
+    line-height: 34rpx;
+    box-sizing: border-box;
+}
+
+.dialog .dialog-content:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1rpx;
+    border-top: 1rpx solid #d5d5d6;
+    color: #d5d5d6;
+}
+
+.dialog .dialog-closs {
+    position: absolute;
+    top: 18rpx;
+    right: 18rpx;
+}
+
+.dialog .dialog-closs img {
+    width: 36rpx;
+}
+
+.dialog .dialog-button {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.dialog .dialog-button .button {
+    float: left;
+    position: relative;
+    display: block;
+    width: 50%;
+    box-sizing: border-box;
+    color: #030303;
+    font-size: 32rpx;
+    font-weight: normal;
+    text-align: center;
+    padding: 30rpx 0;
+}
+
+.dialog .dialog-button .button.left {
+    font-weight: normal;
+}
+
+.dialog .dialog-button .button.right {
+    font-weight: bold;
+    color: #fdaa17;
+}
+
+.dialog .dialog-button .button.right:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1rpx;
+    bottom: 0;
+    border-left: 1rpx solid #d5d5d6;
+    color: #d5d5d6;
+}
+
+.confirm-form .item-textarea {
+    position: relative;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.confirm-form .item-textarea .inputnum {
+    font-size: 26rpx;
+    color: #999;
+    padding: 28rpx 0;
+    padding-right: 32rpx;
+    background: #fff;
+    position: relative;
+    width: 100%;
+    text-align: right;
+    box-sizing: border-box;
+}
+
+.confirm-form .item-textarea input {
+    display: block;
+    width: 100%;
+    height: 120rpx;
+    min-height: 120rpx;
+    padding: 26rpx 28rpx;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: none;
+    text-align: left;
+    overflow: hidden;
+    color: #767676;
+    font-size: 28rpx;
+    font-weight: normal;
+    line-height: 32rpx;
+    word-break: break-all;
+}
+
+.confirm-submit {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    width: 100%;
+    height: 110rpx;
+    box-sizing: border-box;
+    border-top: #f2f2f2 1rpx solid;
+    background-color: #fff;
+}
+
+.confirm-submit .submit-total {
+    float: left;
+    position: relative;
+    display: block;
+    width: 65%;
+    height: 100%;
+    box-sizing: border-box;
+    color: #e71f19;
+    font-size: 30rpx;
+    font-weight: normal;
+    text-align: right;
+    background-color: #fff;
+    padding-right: 20rpx;
+}
+
+.confirm-submit .submit-total .total-yunfei {
+    color: #bbb;
+    font-size: 22rpx;
+    line-height: 22rpx;
+    padding-top: 8rpx;
+}
+
+.confirm-submit .submit-total .total-price {
+    width: 100%;
+    color: #e71f19;
+    font-size: 32rpx;
+    text-align: right;
+    display: block;
+    line-height: 100rpx;
+}
+
+.confirm-submit .submit-total .total-price .des {
+    color: #030303;
+    font-size: 28rpx;
+    font-weight: normal;
+}
+
+.confirm-submit .submit-total .total-price i {
+    font-size: 28rpx;
+    padding-right: 5rpx;
+}
+
+.toPay {
+    width: 200rpx;
+    height: 76rpx;
+    line-height: 76rpx;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 24rpx;
+    overflow: hidden;
+    border-radius: 38rpx;
+}
+
+.toPay button {
+    width: 100%;
+    height: 100%;
+    line-height: 76rpx;
+    font-size: 30rpx;
+    background-color: #ffe150;
+    color:#555555!important;
+    font-weight: 500;
+}
+
+/* .toPay button[disabled]{
+  color: #555;
+} */
+
+.confirm-submit .submit-button {
+    float: left;
+    position: relative;
+    display: block;
+    width: 35%;
+    height: 100%;
+    font-size: 30rpx;
+    box-sizing: border-box;
+    color: #f6f6f6;
+    background-color: #f7f7f7;
+    line-height: 90rpx;
+    text-align: center;
+    opacity: 0.25;
+}
+
+.confirm-submit .submit-button.active {
+    opacity: 1.0;
+}
+
+.confirm-submit .submit-button.dark {
+    color: #fff;
+    background-color: #555;
+}
+
+.confirm-submit .submit-button.dark.active {
+    color: #fff;
+    background-color: #f9ae08;
+}
+
+.col-75 {
+    width: 75%;
+    text-align: right;
+}
+
+.col-60 {
+    width: 60%;
+}
+
+.col-50 {
+    width: 50%;
+}
+
+.col-40 {
+    width: 40%;
+}
+
+.col-34 {
+    width: 34%;
+}
+
+.col-25 {
+    width: 25%;
+}
+
+.col-6 {
+    width: 6%;
+}
+
+/* 领取优惠券 */
+
+.modal-inner {
+    position: fixed;
+    bottom: 0;
+    padding-bottom: 0;
+    padding-top: 0rpx;
+    width: 100%;
+    z-index: 1200;
+    opacity: 0;
+    background: #f2f2f2;
+    border-radius:16px 16px 0px 0px;
+    overflow: hidden;
+}
+
+.modal-inner .modal-inner-header {
+    font-size: 32rpx;
+    line-height: 32rpx;
+    padding: 60rpx 0 40rpx 0;
+    text-align: center;
+}
+
+.modal-inner .modal-coupon-title {
+    font-size: 34rpx;
+    height:120rpx;
+    line-height: 120rpx;
+    padding: 0;
+    text-align: center;
+    color: #333;
+    font-weight: 500;
+    background-color: #fff;
+}
+.modal-inner .more-bouns{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    margin-top: 24rpx;
+    padding: 24rpx 48rpx 24rpx 24rpx;
+    color:#333;
+    font-size: 28rpx;
+    font-weight: 500;
+}
+.leave-modal{
+    font-size: 34rpx;
+    color:#333;
+    position: absolute;
+    top:4rpx;
+    left: 50rpx;
+}
+.modal-inner .more-bouns .btn{
+    text-align: center;
+    font-size: 32rpx;
+    color: #303030;
+    width: 380rpx;
+    height: 80rpx;
+    border-radius: 80rpx;
+    /* background-color: #ffe150; */
+    line-height: 80rpx;
+}
+.modal-inner .modal-coupon-close {
+    position: absolute;
+    right: 20rpx;
+    top: 20rpx;
+}
+
+.modal-inner .modal-coupon-close image {
+    width: 30rpx;
+    height: 30rpx;
+}
+
+.modal-inner .modal-inner-main {
+    min-height: 400rpx;
+    max-height: 800rpx;
+    position: relative;
+}
+
+.modal-inner .modal-inner-main .modal-coupon-box {
+    padding: 0 24rpx;
+    padding-bottom: 168rpx;
+}
+
+.modal-inner .modal-inner-main .modal-coupon-box .no_coupon {
+    text-align: center;
+    padding: 20rpx 0 40rpx 0;
+    font-size: 30rpx;
+    color: #575757;
+}
+
+.modal-inner .modal-inner-main .modal-coupon-box .no_coupon image {
+    width: 280rpx;
+    height: 200rpx;
+    margin: 20rpx auto;
+    display: block;
+}
+.modal-inner .modal-inner-main .modal-coupon-box .no-set-bouns{
+    display: flex;
+    width: 100%;
+    flex: 1;
+    align-items: center;
+    background-color: #fff;
+    padding: 24rpx 48rpx 24rpx 24rpx;
+    margin-top: 24rpx;
+    box-sizing: border-box;
+}
+.modal-inner .modal-inner-main .modal-coupon-box .no-set-bouns .icon-img-coupon{
+    height:40rpx;
+    width: 40rpx;
+}
+.modal-inner .modal-inner-main .modal-coupon-box .no-set-bouns .no-set-bouns-text{
+    font-size: 28rpx;
+    color:#333;
+    font-weight: 500;
+    flex: 1;
+}
+.modal-inner .modal-inner-main .modal-coupon-box .no-set-bouns .iconfont{
+    font-size: 40rpx;
+    flex: 1;
+    text-align: right;
+    color:#aaa;
+    /* margin-right: 70rpx; */
+}
+.modal-inner .modal-inner-main .modal-coupon-box .no-set-bouns .iconfont.icon-btn_xuanzhongx{
+    color: #ffe150;
+}
+.none_font{
+    font-size: 32rpx;
+    font-weight: 600;
+    color:#303030
+}
+.modal-inner .modal-inner-main .modal-inner-block {
+    padding: 0 26rpx 0rpx 26rpx;
+    box-sizing: border-box;
+}
+.modal-inner .modal-coupon-box .noBouns-title{
+    font-size: 24rpx;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24rpx 0;
+    box-sizing: border-box;
+}
+.modal-inner .modal-coupon-box .noBouns-title .hr{
+    width: 170rpx;
+    height:2rpx;
+    background-color:#b6b5b5;
+}
+.close-right{
+    position: absolute;
+    right:34rpx;
+    top:0;
+    font-size: 22rpx;
+}
+
+
+.list_button_img {
+    position: absolute;
+    right: 0;
+    top: 18rpx;
+}
+
+.list_button_img image {
+    width: 180rpx;
+    height: 180rpx;
+}
+.noUserBtn{
+    width:100%;
+    background-color: #fff;
+}
+.noUsecoupon {
+    background-color: #ffe150;
+    border-radius: 0;
+    height: 80rpx;
+    line-height: 80rpx;
+    font-size: 30rpx;
+    border:none;
+    margin: 0 auto;
+    color:#555;
+    width:100%;
+}
+
+/* 确认订单弹窗 */
+
+.order_confirm_wrap {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 80%;
+    background-color: #fff;
+    padding: 50rpx 20rpx 0 20rpx;
+    border-radius: 20rpx;
+}
+
+.order_confirm_wrap .confirm-address-wrap {
+    padding: 20rpx 0;
+}
+
+.order_confirm_wrap  .icon-img {
+    display: inline-block;
+    width: 32rpx;
+    height: 32rpx;
+}
+
+.order_confirm_wrap .bb {
+    border-bottom: 1rpx dashed #ddd;
+}
+
+.order_confirm_wrap .address-detail {
+    box-sizing: border-box;
+    align-items: center;
+    color: #e71f19;
+    font-weight: 600;
+    font-size: 28rpx;
+    text-align: left;
+    line-height: 70rpx;
+    padding-right: 30rpx;
+    position: relative;
+    overflow: hidden;
+}
+
+.order_confirm_wrap  .btn-wrap {
+    display: flex;
+}
+
+.order_confirm_wrap  .btn-wrap .btn {
+    flex: 1;
+    text-align: center;
+    line-height: 100rpx;
+}
+
+.order_confirm_wrap  .btn-wrap .btn button {
+    background-color: transparent;
+}
+
+.padding-left {
+    padding-left: 50rpx;
+}
+
+.margin-top20{
+    margin-top: 20rpx;
+}
+.credits-icon{
+    width: 36rpx;
+    height:36rpx;
+}
+.credits-flex{
+    display: flex!important;
+    align-items: center;
+}
+.credits-flex-right{
+    display: flex!important;
+    align-items: center;
+    justify-content: flex-end;
+}
+.drawer_screen_credits{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.6);
+    overflow: hidden;
+    z-index: 2000;
+    color: #fff;
+}
+.credits-box{
+    position: fixed;
+    padding: 100rpx 72rpx;
+    box-sizing: border-box;
+    z-index:2000;
+    top: 50%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    background-color: #fff;
+    width: 550rpx;
+    height:448rpx;
+    border-radius:8px;
+    display: flex;
+    justify-content: center;
+    font-size:40rpx;
+    color:#303030;
+    font-weight: 500;
+}
+.credits-box .welfare-closs {
+    position: absolute;
+    bottom: -120rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+}
+.credits-box .welfare-closs image{
+    width:72rpx;
+    height:72rpx;
+}
+.credits-box .get-score{
+    position: absolute;
+    bottom: 46rpx;
+    left: 50%;
+    font-weight: 600;
+    transform: translateX(-50%);
+    width: 300rpx;
+    height:76rpx;
+    display: flex;
+    justify-content: center;
+    /*align-items: center;*/
+    border-radius: 38rpx;
+    background-color: #ffe150;
+    box-shadow:0px 2px 2px 0px rgba(20,15,12,0.05);
+    color:#905521;
+    font-size: 28rpx;
+    line-height: 76rpx;
+}
+.credits-box .get-score .iconfont{
+    font-size: 28rpx;
+}
+.score{
+    font-size: 24rpx;
+    margin-left: 8rpx;
+    color:#EB3C39;
+}
+.order-main .goods-item .item-info .info-price{
+    line-height: 28rpx;
+}

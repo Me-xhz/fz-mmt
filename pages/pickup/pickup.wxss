@@ -1,0 +1,247 @@
+/* pages/pickup/pickup.wxss */
+@import "../../utils/wxaSortPicker/wxaSortPicker.wxss";
+page{
+  background-color: #fff;
+  overflow: hidden;
+}
+.tip{
+  width: 100%;
+  height: 100rpx;
+  background-color:#FFFBE6 ;
+  padding: 12rpx 24rpx;
+  box-sizing: border-box;
+  color:#FFB400;
+  font-size:28rpx;
+  font-weight: 500;
+}
+
+.search {
+  padding: 15rpx 50rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+  /* position: fixed;
+  top: 0;
+  left: 0; */
+  width: 100%;
+  z-index: 100;
+  display: flex;
+}
+.cityName{
+  font-size: 26rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  width: 170rpx;
+  background-color: #f3f3f3;
+  position: relative;
+}
+/* .cityName text{
+  width: 55rpx;
+} */
+.cityName .bb{
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 30rpx;
+  width: 0;
+  border-right: 1rpx solid #ddd;
+}
+.cityName .icon-btn_sanjiaoxiaojiantoux{
+  display: inline-block;
+  font-size: 20rpx;
+  margin-left: 8rpx;
+}
+.flexs{
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 480rpx;
+}
+
+.searchbar {
+  width: 710rpx;
+  background: #f3f3f3;
+  box-sizing: border-box;
+  padding: 0 64rpx;
+  height: 60rpx;
+  z-index: 1;
+  font-size: 26rpx;
+}
+.w90{
+  width: 90%;
+}
+.cancelSearch{
+  box-sizing: border-box;
+  position: absolute;
+  left: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -50rpx;
+  z-index: 2;
+  text-align: center;
+  width: 100rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  background-color: transparent;
+  color: #555;
+  font-size: 26rpx;
+  padding: 0;
+}
+.cancelSearch>image{
+  height: 100%;
+  width: 100%;
+}
+
+.search .search_icon{
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  left: 0;
+  width: 66rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  background-color: transparent;
+}
+.search button::after {
+  content: none;
+}
+
+.search .icon-img_sousuox {
+  color: #555;
+  position: relative;
+  height: 50rpx;
+  z-index: 10;
+}
+
+
+.pos_bar{
+  padding: 30rpx 20rpx;
+  font-size: 24rpx;
+  background-color: #fff;
+}
+.pos_bar .title{
+  color: #888;
+  margin-bottom: 20rpx;
+}
+.now_pos{
+  padding: 15rpx 20rpx;
+  display: inline-block;
+  background-color: #fff;
+  border: 1rpx solid #ddd;
+}
+.now_pos .iconfont{
+  display: inline-block;
+  color: #eebc34;
+  margin-right: 10rpx;
+}
+
+
+/* 无数据 */
+.no_data{
+  margin-top: 150rpx;
+  text-align: center;
+  
+}
+.no_data .text{
+  font-size: 32rpx;
+  color: #555;
+  font-weight: 600;
+  margin-top: 48rpx;
+}
+.no_data .set_btn{
+  width: 240rpx;
+  height: 76rpx;
+  line-height: 76rpx;
+  font-size: 32rpx;
+  color: #555555;
+  background-color: #FFE150;
+  display: block;
+  border-radius: 30rpx;
+  margin-top: 24rpx;
+}
+.pickList{
+  padding: 0 32rpx;
+  background-color: #fff;
+}
+.pickList .item{
+  height:88rpx;
+  line-height:88rpx;
+  border-bottom:1px solid #DEE4E4;
+  color:#46595F;
+  font-size:32rpx;
+}
+.search-list-header{
+  font-size: 28rpx;
+  color: #555555;
+  padding: 25rpx 25rpx 10rpx 0;
+  background-color: #ffffff;
+}
+.color_theme {  /* 主色调 */
+  color: #555;
+}
+
+/* 指引 */
+
+.city-guide-box{
+  position: fixed;
+  top: 140rpx;
+  left: 120rpx;
+}
+
+.city-guide-box .city-guide-gif{
+  width: 80rpx;
+  height: 80rpx;
+}
+.city-guide-box .city-guide-msg{
+  position: relative;
+}
+.city-guide-box .city-guide-msg-bg{
+  width: 238rpx;
+  height: 54rpx;
+}
+
+.city-guide-box .city-guide-msg-text{
+  position: absolute;
+  top: 10rpx;
+  left: 20rpx;
+  font-size: 28rpx;
+  color: #555555;
+}
+
+/* 选择工厂指引 */
+
+.pick-guide{
+  position: absolute;
+  top: 160rpx;
+  left: 20rpx;
+  z-index: 9999;
+}
+.pick-guide .pick-guide-box{
+  position: relative;
+}
+.pick-guide .pick-guide-box .pick-guide-img{
+  width: 296rpx;
+  height: 54rpx;
+}
+.pick-guide .pick-guide-box .pick-guide-text{
+  position: absolute;
+  top: 8rpx;
+  left: 20rpx;
+  font-size: 24rpx;
+  color: #555555;
+}
+
+.pick-guide .pick-guide-box .pick-guide-closs{
+  position: absolute;
+  top: 15rpx;
+  right: 20rpx;
+  width: 24rpx;
+  height: 24rpx;
+}
+.wxaSortPickerItem-box{
+  padding: 0
+}
+.wxaSortPickerTemTags{
+  top: 35%;
+}

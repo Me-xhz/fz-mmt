@@ -1,0 +1,133 @@
+<view wx:for="{{goodsList}}" wx:key="{{index}}">
+  <view wx:if="{{item.style==2}}" class="team-list-big-box {{index==0?'':'mt-24'}}" catchtap="goProduct" data-goods_id="{{item.goods_id}}" data-type='{{type}}'>
+    <view class="team-big-img">
+      <image class="team-big-img" lazy-load="true" src="{{item.original_img}}">
+
+      </image>
+      <!-- <view class="inequacy-big" wx:if="{{item.is_enough==0}}">
+        <image src='{{iconURL}}/inequacy02.png'></image>
+      </view> -->
+
+      <view class="count-time" wx:if="{{item.end_time!=0&&type!=2}}">
+        <text class="count-time-font">距活动结束</text>
+        <countDown time-text="time-text" doc-text="doc-text" timestamp="{{item.end_time * 1000}}"></countDown>
+      </view>
+      <view class="count-time" wx:if="{{item.start_time!=0&&type==2}}">
+        <text class="count-time-font">距活动开始</text>
+        <countDown time-text="time-text" doc-text="doc-text" timestamp="{{item.start_time * 1000}}"></countDown>
+      </view>
+    </view>
+
+    <view class="team-big-msg">
+      <view class="team-list-big-name">
+        {{item.goods_name}}
+      </view>
+      <view class="team-list-big-desc">
+        {{item.goods_remark}}
+      </view>
+      <view class="team-list-big-all-tip">
+        <view wx:for="{{item.label_list}}" wx:if="{{item.label_list.length>0}}" wx:for-item="tips" wx:for-index="tipsindex" class="tips {{tips.type==2?'tips-active':''}} {{tipsindex>0?'mr-6':''}}" wx:key="{{tipsindex}}">
+          {{tips.name}}
+        </view>
+        <view class="limit-tips {{item.label_list.length>0?'mr-6':''}}" wx:if="{{item.is_limit==1}}">
+          限量{{item.store_count}}件
+        </view>
+      </view>
+      <view class="team-list-big-price">
+        <view class="team-big-price-title" wx:if="{{item.is_new_activity_user==0}}">{{type==1?'最低价':'拼团价'}}</view>
+        <view class="user-new-tips" wx:if="{{item.is_new_activity_user==1}}">新人专享</view>
+        <view class="team-big-price-num">
+          <i>¥</i>{{item.shop_price}}</view>
+        <text class="market_price">¥{{item.market_price}}</text>
+      </view>
+      <view wx:if="{{item.is_enough==1}}">
+        <view class="bargain-btn-big" wx:if="{{type==0}}">
+          立即买
+        </view>
+        <view class="bargain-btn-big" wx:if="{{type==1}}">
+          马上抢
+        </view>
+        <!-- <view class="team_will-big" wx:if="{{type==2}}">
+          即将开团
+        </view> -->
+        <view wx:if="{{type==2}}">
+          <view class="team_will-big" wx:if="{{item.is_notice==1}}" data-index="{{index}}" data-check="{{item.is_notice}}" data-team_id="{{item.team_id}}" catchtap="change_team">
+            取消提醒
+          </view>
+          <view class="team-remind-big" wx:if="{{item.is_notice==0}}" data-index="{{index}}" data-check="{{item.is_notice}}" data-team_id="{{item.team_id}}" catchtap="change_team">
+            <text>提醒我</text>
+            <!-- <text class="iconfont icon-btn_xiangyoudajiantoux right-icon"></text> -->
+          </view>
+        </view>
+      </view>
+
+      <view class="team_empty" wx:if="{{item.is_enough==0}}">
+        已抢光
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{item.style==1}}" class="team-list-little-box" catchtap="goProduct" data-goods_id="{{item.goods_id}}" data-type='{{type}}'>
+    <view class="team-list-little-msg">
+      <image lazy-load="true" class="team-list-little-img" src="{{item.original_img}}">
+
+      </image>
+      <view class="inequacy-little" wx:if="{{item.is_enough==0}}">
+        <image src='{{iconURL}}/inequacy02.png'></image>
+      </view>
+
+      <view class="team-list-little-news">
+        <view class="team-list-little-name">
+          {{item.goods_name}}
+        </view>
+        <view class="team-list-little-desc">
+          {{item.goods_remark}}
+        </view>
+        <view class="team-list-big-all-tip">
+          <view wx:for="{{item.label_list}}" wx:if="{{item.label_list.length>0}}" wx:for-item="tips" wx:for-index="tipsindex" class="tips {{tips.type==2?'tips-active':''}} {{tipsindex>0?'mr-6':''}}" wx:key="{{tipsindex}}">
+            {{tips.name}}
+          </view>
+          <view class="limit-tips {{item.label_list.length>0?'mr-6':''}}" wx:if="{{item.is_limit==1}}">
+            限量{{item.store_count}}件
+          </view>
+        </view>
+        <view class="team-list-little-price">
+          <view class="bargain-font" wx:if="{{item.is_new_activity_user==0}}">{{type==1?'最低价':'拼团价'}}</view>
+          <view class="user-new-tips" wx:if="{{item.is_new_activity_user==1}}">新人专享</view>
+          <!-- <i>￥</i> -->
+
+          <view class="price-box">
+            <view class="price">
+              <i>¥</i>{{item.shop_price}}</view>
+            <view class="market_price-little">¥{{item.market_price}}</view>
+          </view>
+        </view>
+        <view wx:if="{{item.is_enough==1}}">
+          <view class="bargain-btn" wx:if="{{type==0}}">
+            立即买
+          </view>
+          <view class="bargain-btn" wx:if="{{type==1}}">
+            马上抢
+          </view>
+          <!-- <view class="team_will" wx:if="{{type==2}}">
+            即将开团
+          </view> -->
+          <view wx:if="{{type==2}}">
+            <view class="team_will" wx:if="{{item.is_notice==1}}" data-index="{{index}}" data-check="{{item.is_notice}}" data-team_id="{{item.team_id}}" catchtap="change_team">
+              取消提醒
+            </view>
+            <view class="team-remind" wx:if="{{item.is_notice==0}}" data-index="{{index}}" data-check="{{item.is_notice}}" data-team_id="{{item.team_id}}" catchtap="change_team">
+              <text>提醒我</text>
+              <!-- <text class="iconfont icon-btn_xiangyoudajiantoux right-icon"></text> -->
+            </view>
+          </view>
+        </view>
+
+        <view class="team_empty" wx:if="{{item.is_enough==0}}">
+          已抢光
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<loading wx:if="{{loadingShow}}"></loading>

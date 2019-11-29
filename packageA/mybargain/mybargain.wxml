@@ -1,0 +1,56 @@
+<view class="goods-box" wx:if='{{bargainList && bargainList.length > 0}}'>
+    <view wx:for="{{bargainList}}" wx:key="index" data-activity-bargain-id='{{item.activity_bargain_id}}'  data-id='{{item.id}}' bindtap="{{item.status==1||item.status==0||item.status==3?'loadBrangin':'loadProduct'}}">
+      <view class="goods-box-msg">
+        <image class="goods-img" src="{{item.goods_img}}"></image>
+        <view class="goods-news">
+            <view class="goods-name t10">{{item.goods_name}}</view>
+            <view class="goods-standrad">{{item.spec_name}}</view>
+            <view class="group-price">
+                <text class="bargain-font">最低价：</text>
+                <text class="price-sign">¥</text><text class="price">{{item.floor_price}}</text>
+            </view>
+            <view class="to-bargain">
+                <form  report-submit='true' wx:if="{{item.status==2}}">
+                    <button class="bargain-btn"  form-type='submit'>
+                        <text>重砍一次</text>
+                    </button>
+                </form>
+                <form  report-submit='true' wx:if="{{item.status==1}}">
+                    <button class="bargain-btn"  form-type='submit'>
+                        <text>查看详情</text>
+                    </button>
+                </form>
+                <form  report-submit='true' wx:if="{{item.status==3}}">
+                    <button class="bargain-btn"  form-type='submit'>
+                        <text>查看详情</text>
+                    </button>
+                </form>
+                <form  report-submit='true' wx:if="{{item.status==0}}">
+                    <button class="bargain-btn"  form-type='submit'>
+                        <text>继续砍价</text>
+                    </button>
+                </form>
+                <form  report-submit='true' wx:if="{{item.status==4}}">
+                    <button class="bargain-btn"  form-type='submit'>
+                        <text>重砍一次</text>
+                    </button>
+                </form>
+            </view>
+            <view class="bargain-status">
+                <text wx:if="{{item.status==0}}" class="bargain-in">砍价中</text>
+                <text wx:if="{{item.status==1}}" class="bargain-success">砍价成功</text>
+                <text wx:if="{{item.status==2}}" class="bargain-fail">砍价失败</text>
+                <text wx:if="{{item.status==3}}" class="bargain-success">砍价成功</text>
+                <text wx:if="{{item.status==4}}" class="bargain-fail">支付超时</text>
+            </view>
+        </view>
+      </view>
+    </view>
+</view>
+
+<view class='empty' wx:if='{{bargainList && bargainList.length <= 0}}'>
+    <view class='empty-item'>
+        <image class="item-logo" src="{{iconURL}}/icon_order_empty02.png" mode='widthFix'></image>
+        <view class="item-text">暂无订单</view>
+    </view>
+</view>

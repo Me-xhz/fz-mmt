@@ -1,0 +1,41 @@
+<!--packageA/cancel-order/cancel-order.wxml-->
+<view class='goHomeFixed' catchtap='gotoHome' wx:if="{{isShowGoHome}}">
+    <image src='{{iconURL}}/product-icon-leftReturn.svg' class='icon-leftReturn'></image>
+    <text>返回首页</text>
+</view>
+<view class="cancel-list" wx:if="{{cancelList.length>0}}">
+    <view class="cancel-box" wx:for="{{cancelList}}" wx:key="{{index}}">
+        <view class="cancel-num-box">
+            <view class="cancel-num-text">
+                提货数
+            </view>
+            <view class="cancel-num">
+                共计<i>{{item.total_num}}</i>件
+            </view>
+        </view>
+        <view class="cancel-time-box">
+            <view class="cancel-time-text">
+                提货时间
+            </view>
+            <view class="cancel-time">
+                {{item.order_confirm_time}}
+            </view>
+        </view>
+        <view class="goods-list goods-active" wx:for="{{item.list}}" wx:for-item="goods" wx:for-index="num" wx:key="{{num}}">
+            <view class="goods-name">
+                {{goods.goods_name}}
+            </view>
+            <view class="goods-num">
+                <i>×</i>{{goods.goods_num}}
+            </view>
+        </view>
+    </view>
+    <view class="credits-bottom" wx:if="{{cancelList.length>0&&!showBottomLoading}}">~ 到底啦！~</view>
+    <loadingBottom wx:if="{{showBottomLoading}}"></loadingBottom>
+</view>
+<view class='empty' wx:if='{{cancelList.length<=0}}'>
+    <view class='empty-item'>
+        <image class="item-logo" src="{{iconURL}}/icon_order_empty02.png" mode='widthFix'></image>
+        <view class="item-text">暂无提货记录</view>
+    </view>
+</view>

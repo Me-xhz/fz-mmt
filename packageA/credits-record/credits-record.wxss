@@ -1,0 +1,77 @@
+/* packageA/credits-record/credits-record.wxss */
+page{
+    background-color: #fff;
+}
+.credits-record{
+    width: 100%;
+    padding-left: 24rpx ;
+    box-sizing: border-box;
+}
+.credits-record .credits-box{
+    width: 100%;
+    padding:32rpx 24rpx 32rpx 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2rpx solid #f0f0f0;
+}
+.credits-record .credits-box .credits-left .credits-title{
+    font-size: 28rpx;
+    color:#555;
+    font-weight: 500;
+}
+.credits-record .credits-box .credits-left .credits-time{
+    font-size: 24rpx;
+    color:#aaa;
+    font-weight: 500;
+}
+.credits-record .credits-box .credits-right{
+    flex: 1;
+}
+.credits-record .credits-box .credits-right .credits-price{
+    font-size: 40rpx;
+    color:#EB3C39;
+    font-weight: 600;
+    text-align: right;
+}
+.credits-record .credits-box .credits-right .credits-price image{
+    width: 48rpx;
+    height:48rpx;
+    margin-left:12rpx;
+}
+.empty {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.empty.address-empty {
+  height: 600rpx;
+  background: #fff;
+}
+
+.empty .empty-item {
+  position: absolute;
+  left: 50%;
+  /*top: 50%;*/
+  display: block;
+  width: 100%;
+  transform: translateX(-50%);
+}
+
+.empty .empty-item .item-logo {
+  display: block;
+  margin: 0 auto;
+  width: 288rpx;
+  height: 128rpx;
+}
+.score{
+    font-size: 24rpx;
+    margin-left: 8rpx;
+    color:#303030;
+    font-weight: 600;
+    line-height: 40rpx;
+}

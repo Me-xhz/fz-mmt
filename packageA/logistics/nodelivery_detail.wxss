@@ -1,0 +1,101 @@
+/* packageA/logistics/nodelivery_detail.wxss */
+.nodelivery-detail{
+  padding-bottom: 96rpx;
+}
+.header-status{
+  display: flex;
+  padding: 30rpx 24rpx;
+  background-color: #ffffff;
+}
+.header-status .time{
+  background-color: #1DA1F2;
+  color: #ffffff;
+  padding: 10rpx;
+  font-size: 24rpx;
+}
+
+.header-status .stutas{
+  background-color: #1DA1F2;
+  color: #ffffff;
+  padding: 10rpx;
+  font-size: 24rpx;
+  margin-left: 20rpx
+}
+
+.detail-menu{
+  margin-top: 20rpx;
+  background-color: #ffffff;
+  padding: 20rpx 24rpx;
+}
+.detail-menu .title{
+  padding: 20rpx 0;
+  font-size: 32rpx;
+}
+.detail-menu .stutas{
+  position: absolute;
+  right: 0;
+  top: 20rpx;
+  background-color: #1DA1F2;
+  color: #ffffff;
+  padding: 10rpx;
+  font-size: 24rpx;
+  margin-left: 20rpx
+}
+.detail-menu .detail-box{
+  position: relative;
+  border: 1px #aaa dotted;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+.detail-menu .detail-box .detail-item{
+  font-size: 28rpx;
+  line-height: 32rpx;
+  padding: 10rpx 0;
+}
+.detail-menu .detail-box .detail-img{
+  width: 200rpx;
+  height: 200rpx;
+  background-color: #f2f2f2;
+}
+.detail-menu .detail-box .detail-goods-info{
+  margin-left: 20rpx;
+}
+.detail-menu .detail-box .detail-goods-info .goods-name{
+  font-size: 30rpx;
+  color: #303030;
+  max-width: 400rpx;
+}
+.detail-menu .detail-box .detail-goods-info .goods-desc{
+  color: #aaa;
+  font-size: 28rpx;
+}
+.detail-menu .detail-box .detail-goods-info .goods-price{
+  position: absolute;
+  bottom: 20rpx;
+  color: red;
+  font-size: 30rpx;
+}
+.detail-menu .detail-box .detail-goods-info .goods-number{
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+  font-size: 32rpx;
+  color: #303030;
+}
+
+.footer-button{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%
+}
+.footer-button .back-btn{
+  width: 100%;
+  height: 96rpx;
+  background-color: #1DA1F2;
+  color: #ffffff;
+  border-radius: 0;
+}
+.color-blue{
+  color: #1DA1F2
+}

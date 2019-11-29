@@ -1,0 +1,111 @@
+<view class="container">
+  <!-- Goods -->
+  <view class="review-goods {{goodsIndex==0?'':'review-active'}}" wx:for="{{orderReview}}" wx:for-index="goodsIndex" wx:key="index">
+    <view class="goods-item">
+      <view class="row row-center item-inner">
+        <view class="item-photo w20">
+          <image src="{{item.itemImg}}" />
+        </view>
+        <view class="item-comment">
+          <view class="all-review">
+            综合评价：
+          </view>
+          <view class="row row-top">
+            <view class="col comment-item" catchtap="setGrade" data-init='1' data-checked-id="{{item.checkedId}}">
+              <view class="row row-bottom text-center">
+                <view>
+                  <image class="reputation-img"  src="{{item.comment_rank==1?iconURL+'/good-active.png':iconURL+'/good-reputation.png'}}" ></image>
+                </view>
+                <span class="grade-name {{item.comment_rank == 1 ? 'active' : ''}}">好评</span>
+              </view>
+            </view>
+            <view class="col comment-item" catchtap="setGrade" data-init='2' data-checked-id="{{item.checkedId}}">
+              <view class="row row-bottom text-center content-middle">
+                <view>
+                  <image class="reputation-img"  src="{{item.comment_rank==2?iconURL+'/normal-active.png':iconURL+'/normal-reputation.png'}}"></image>
+                </view>
+                <span class="grade-name {{item.comment_rank == 2 ? 'active' : ''}}">中评</span>
+              </view>
+            </view>
+            <view class="col comment-item" catchtap="setGrade" data-init='3' data-checked-id="{{item.checkedId}}">
+              <view class="row row-bottom text-center content-right">
+                <view>
+                  <image class="reputation-img"  src="{{item.comment_rank==3?iconURL+'/bad-active.png':iconURL+'/bad-reputation.png'}}"></image>
+                </view>
+                <span class="grade-name {{item.comment_rank == 3 ? 'active' : ''}}">差评</span>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="item-textarea">
+        <!-- <view class="textarea-toast" wx:if="{{toast && (item.comment_rank == 2 || item.comment_rank == 3)}}">
+          <view class="toast-text" wx:if="{{item.comment_rank == 3}}">很抱歉给您的购物带来不好的体验，请提建议给我们哦！</view>
+          <view class="toast-text" wx:if="{{item.comment_rank == 2}}">请告诉我们哪里做的不好，我们会努力改进哒！</view>
+          <image class="toast-close" src="" />
+        </view> -->
+        <textarea maxlength="500" type="text" placeholder="对商品是否满意呢？请输入文字描述，2-500字" data-checked-id="{{item.checkedId}}" bindinput="comments"></textarea>
+      </view>
+      <view class="upload-img-box clearfix add-imgs">
+        <view class="box-img" wx:for="{{item.uploadImg}}" wx:for-item='img' wx:for-index="index" wx:key='index'>
+          <image src="{{img}}"></image>
+          <view class='img-del iconfont icon-btn_huangsetishiguanbix' bindtap="delUploadImg" data-index='{{index}}' data-checked-id="{{item.checkedId}}" ></view>
+          <!-- <image class="img-del" src="{{iconURL}}/btn_delImg.png" bindtap="delUploadImg" data-index='{{index}}' data-checked-id="{{item.checkedId}}" /> -->
+        </view>
+        <label class="lable-bg" wx:if="{{item.uploadImg.length < 3}}" bindtap='updataimg' data-checked-id="{{item.checkedId}}"></label>
+      </view>
+
+      <!--<view class='anonymous_wrap'>-->
+        <!--<view class='left'>-->
+          <!--<view class="item-checkbox" data-idx='{{index}}' bindtap="isAnonymous" >-->
+            <!--<image src='{{iconURL}}/gouxuan03.png' hidden='{{!item.anonymous}}'></image>-->
+            <!--<image src='{{iconURL}}/weixuanzhong.svg' hidden='{{item.anonymous}}'></image>-->
+          <!--</view>-->
+          <!--<text>匿名</text>-->
+        <!--</view>-->
+        <!--<view class='right'>-->
+          <!--你的评论能帮助其他小伙伴哟-->
+        <!--</view>-->
+      <!--</view>-->
+    </view>
+  </view>
+  <!--server grade-->
+  <view class="review-grades">
+    <view class="row row-center grade-line">
+      <view class="col-20 line-title">服务态度</view>
+      <view class="col-50 line-stars">
+        <view class="row">
+          <view class="col stars" wx:for="{{attitude}}" wx:key="{{item.id}}" catchtap="attitude" data-id="{{item.id}}">
+            <image class="grade-icon" src="{{item.img}}" />
+          </view>
+        </view>
+      </view>
+      <!--<view class="col-30 line-subtxt">{{atti_service}}</view>-->
+    </view>
+    <view class="row row-center grade-line">
+      <view class="col-20 line-title">物流服务</view>
+      <view class="col-50 line-stars">
+        <view class="row">
+          <view class="col stars" wx:for="{{logistics}}" wx:key="{{itme.id}}" catchtap="logistics" data-id="{{item.id}}">
+            <image class="grade-icon" src="{{item.img}}" />
+          </view>
+        </view>
+      </view>
+      <!--<view class="col-30 line-subtxt">{{lgoi_service}}</view>-->
+    </view>
+  </view>
+  <view class="review-submit-box">
+    <button  class="review-submit" bindtap="submitImg">提交</button>
+  </view>
+</view>
+<!-- Dialog -->
+<view id="dialog" hidden="{{true}}">
+  <view class="mask"></view>
+  <view class="dialog danger">
+    <view class="dialog-content">确定放弃本次评价？</view>
+    <view class="dialog-button">
+      <view class="button left" bindtap="touchDialogCancel">取消</view>
+      <view class="button right" bindtap="touchDialogConfirm">确认</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,337 @@
+/* pages/user/order-return-detail.wxss */
+
+.order-sns {
+  position: relative;
+  background: #fff;
+  padding: 22rpx 26rpx 22rpx 26rpx;
+  border: 0;
+  margin-bottom: 20rpx;
+}
+.sns-header{
+  height: 130rpx;
+  line-height: 130rpx;
+  padding: 0 24rpx;
+  background-color: #ffe150;
+  color: #555555;
+  font-size: 32rpx;
+  position: relative;
+}
+.sns-header .message{
+  width: 160rpx;
+  text-align: center;
+  height: 50rpx;
+  line-height: 50rpx;
+  border: 1rpx solid #555555;
+  color: #555555 !important;
+  border-radius: 20rpx;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 26rpx;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+/* .order-sns .sns-header {
+  padding-bottom: 10rpx;
+}
+
+.order-sns .sns-header .header-img {
+  padding-right: 10rpx;
+}
+
+.order-sns .sns-header .header-img>image {
+  width: 40rpx;
+  height: 40rpx;
+  vertical-align: text-top;
+}
+
+.order-sns .sns-header .header-status {
+  font-size: 30rpx;
+  color: #12b7f5;
+}
+
+.order-sns .sns-header .header-status.danger {
+  color: #ff4222;
+}
+
+.order-sns .sns-header .header-button {
+  font-size: 30rpx;
+  border: 1rpx solid #767676;
+  height: 60rpx;
+  min-width: 180rpx;
+  color: #767676;
+  text-align: center;
+  line-height: 60rpx;
+  box-sizing: border-box;
+  border-radius: 3px;
+} */
+
+
+
+
+.order-sns p {
+  display: inline-block;
+  width: 100%;
+  font-size: 0;
+  padding-bottom: 10rpx;
+}
+.order-sns p:last-child{
+  padding-bottom: 0;
+}
+.order-sns p i {
+  float: left;
+  color: #000;
+  font-size: 30rpx;
+  line-height: 30rpx;
+}
+
+.order-sns p i.sns-title {
+  width: 160rpx;
+  color: #000;
+}
+
+.order-sns p i.sns-txt {
+  color: #000;
+}
+
+.order-sns p.no-padding {
+  padding: 0;
+}
+
+.order-sns p span {
+  font-size: 30rpx;
+  line-height: 30rpx;
+  color: #e71f19;
+}
+
+.order-msg-box {
+  width: 100%;
+  position: relative;
+  background: #fff;
+  border-left: 0;
+  border-right: 0;
+  margin: 22rpx 0;
+}
+
+.order-msg {
+  padding-right: 26rpx;
+  margin-left: 26rpx;
+  box-sizing: border-box;
+  height: 100rpx;
+  line-height: 100rpx;
+  border-bottom: 1rpx solid #f2f2f2;
+}
+
+.order-msg.border-top {
+  border-top: 1rpx #f2f2f2 solid;
+}
+
+.order-msg.end {
+  margin-bottom: 34rpx;
+  border-bottom: 1rpx #f2f2f2 solid;
+  background: #fff;
+  margin-top: 22rpx;
+  padding: 32rpx;
+}
+
+.order-msg .msg-header {
+  font-size: 0;
+  color: #000;
+}
+
+.order-msg.end .msg-header {
+  padding-bottom: 40rpx;
+}
+
+.order-msg .msg-header .header-title {
+  font-size: 34rpx;
+}
+
+.order-msg .msg-header .header-price {
+  font-size: 30rpx;
+  text-align: right;
+  padding-left: 20rpx;
+  color: #000;
+}
+
+.order-msg .msg-header .header-price .font-bold {
+  /* font-weight: bold; */
+  color: #dc0805;
+}
+
+.order-msg .msg-header .header-txt {
+  font-size: 28rpx;
+  color: #767676;
+}
+
+.order-msg .msg-header .header-txt_del {
+  font-size: 24rpx;
+  padding-left: 10rpx;
+  color: #bbb;
+}
+
+.order-msg-mainbox {
+  border: 0;
+  padding: 36rpx 26rpx;
+  padding-left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  margin-left: 26rpx;
+}
+
+.order-msg-mainbox .msg-header {
+  font-size: 34rpx;
+  line-height: 34rpx;
+  padding-bottom: 16rpx;
+}
+
+.order-msg-mainbox .msg-imgbox {
+  display: inline-block;
+  width: 100%;
+  padding-top: 16rpx;
+}
+
+.order-msg-mainbox .msg-imgbox .box-img {
+  float: left;
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 10rpx;
+}
+
+.order-msg-mainbox .msg-imgbox .box-img>image {
+  float: left;
+  width: 100%;
+  height: 100%;
+}
+
+.order-msg-mainbox text {
+  width: 100%;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  font-size: 30rpx;
+  line-height: 40rpx;
+  color: #767676;
+}
+
+.order-msg p {
+  margin-top: 26rpx;
+  color: #999;
+  font-size: 28rpx;
+  line-height: 28rpx;
+}
+
+.order-msg .wl-input {
+  position: relative;
+  margin-bottom: 16rpx;
+}
+
+.order-msg .wl-input .item-img {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  right: 36rpx;
+}
+
+.order-msg .wl-input .item-img img {
+  width: 28rpx;
+}
+
+.order-msg .wl-input select {
+  background: #f6f6f6;
+  font-size: 26rpx;
+  color: #333;
+  box-shadow: 0;
+  border: 1px #f2f2f2 solid;
+  height: 80rpx;
+  line-height: 80rpx;
+  width: 98%;
+}
+
+.order-msg .wl-input input {
+  background: #f6f6f6;
+  font-size: 28rpx;
+  color: #333;
+  box-shadow: 0;
+  border: 1px #f2f2f2 solid;
+  border-radius: 2px;
+  height: 96rpx;
+  line-height: 96rpx;
+  width: 72rpx;
+  padding-left: 26rpx;
+}
+
+.order-msg .end-text .end-text-row {
+  padding-bottom: 28rpx;
+}
+
+.order-msg .end-text .end-text-name {
+  font-size: 28rpx;
+  line-height: 28rpx;
+  color: #767676;
+}
+
+.order-msg .end-text .end-text-msg {
+  font-size: 28rpx;
+  line-height: 28rpx;
+  color: #000;
+}
+
+
+.kf{
+  
+}
+
+
+
+/* 不知道怎么命名的操作 */
+.idontk{
+  text-align: center;
+  padding: 30rpx 0;
+}
+.idontk .btn{
+  padding: 5rpx 0;
+  width: 120rpx;
+  background-color: #eb3c39;
+  margin: 0 auto;
+  margin-top: 30rpx;
+  border-radius: 20rpx;
+}
+
+
+/* 提货码 */
+.qrCode{
+  text-align: center;
+  background: #fff;
+  padding: 32rpx 0;
+  margin-bottom: 20rpx;
+}
+.qrCode .qr{
+  width: 328rpx;
+  height: 328rpx;
+  margin: 0 auto;
+}
+.qrCode .qr image{
+  width: 100%;
+  height: 100%;
+}
+.qrCode .code{
+  font-size: 40rpx;
+  line-height: 70rpx;
+}
+.qrCode .code .small{
+  font-size: 30rpx;
+}
+.qrCode .des{
+  font-size: 25rpx;
+  line-height: 30rpx;
+  border: 1rpx dashed #979797;
+  width: 520rpx;
+  margin: 0 auto;
+  padding: 20rpx 0;
+}
+.refuse_remark{
+  padding: 10rpx 26rpx;
+  background-color: #fff;
+  margin-bottom: 15rpx;
+}

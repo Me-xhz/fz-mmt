@@ -1,0 +1,58 @@
+<!--pages/pickup/pickup.wxml-->
+<view class='pickup'>
+  <view class='tip'>
+    特别提醒：请正确选择您工作或生活所在工厂，以免发生无法进入而不能提货的情况。
+  </view>
+  <!-- 搜索框 -->
+  <view class="search df">
+  <view class='cityName' bindtap='goToCity'>
+    <text wx:if="{{city.cityName}}">{{city.cityName}}</text><text wx:else>选择城市</text>
+    <view class='iconfont icon-btn_sanjiaoxiaojiantoux'></view>
+    <view class='bb'></view>
+  </view>
+    <view class="flexs">
+      <input class="searchbar {{searchValue?'w90':''}}" placeholder='请输入工厂名称' confirm-type="search" value="{{searchValue}}" bindinput="searchValueInput" />
+      <button class='cancelSearch' bindtap="cancelSearch" wx:if="{{searchValue}}">取消</button>
+      <button class='search_icon' bindtap="doSearch">
+        <view class='iconfont icon-img_sousuox'></view>
+      </button>
+    </view>
+  </view>
+  <!-- 定位框 -->
+  <!-- <view class='pos_bar'>
+    <view class='title'>定位</view>
+    <view class='now_pos' bindtap='getNowPos'>
+      <view class='iconfont icon-img_dizhix'></view><text>{{nowAddress.cityName}}</text>
+    </view>
+  </view> -->
+  <view class='pick-guide' wx:if="{{pickList.length > 0 && pickGuide}}">
+    <view class='pick-guide-box'>
+      <image class='pick-guide-img' src='{{iconURL}}/img_pick_select_bg01.png'></image>
+      <text class='pick-guide-text'>选择自己所在的工厂</text>
+      <image bindtap='pickGuideCloss' class='pick-guide-closs' src='{{iconURL}}/btn_pick_select-closs.png'></image>
+    </view>
+  </view>
+  <view class='pickList'>
+    <view wx:if="{{pickList.length > 0}}" class="search-list-header">全部工厂</view>
+    <import src="../../utils/wxaSortPicker/wxaSortPicker.wxml" />
+    <template is="wxaSortPicker" data="{{wxaSortPickerData,dataType}}" bindtap="handleclick" />
+    <!-- <view class='item' wx:for="{{pickList}}" wx:key="index" bindtap='tapPick' data-citys='{{item}}'>{{item.cityName}}</view> -->
+  </view>
+  <view class='city-guide-box' bindtap='goToCity' wx:if="{{pickList.length <= 0}}">
+    <image class="city-guide-gif" src='{{iconURL}}/img_city_select_gif.gif'></image>
+    <view class='city-guide-msg'>
+      <image class='city-guide-msg-bg' src='{{iconURL}}/img_city_select_bg01.png'></image>
+      <text class='city-guide-msg-text'>戳一戳,选择城市</text>
+    </view>
+  </view>
+  <view class='no_data' hidden="{{isAuthorization||city.warehouse_id}}">
+    <image src='{{iconURL}}/dwsb02.png' style='width:280rpx;height:200rpx;'></image>
+    <view class='text'>定位失败，请选择城市或者开启定位授权</view>
+    <button class='set_btn' bindtap='openSet'>开通定位</button>
+  </view> 
+  <view class='no_data' wx:if='{{(isAuthorization||city.warehouse_id)&&baseList.length==0}}'>
+    <image src='{{iconURL}}/img_noAddress02.png' style='width:280rpx;height:200rpx;'></image>
+    <view class='text'>当前城市暂未开通服务，请<text bindtap='goToCity' class='color_theme'>更换城市</text></view>
+  </view>
+  
+</view>

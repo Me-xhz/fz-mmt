@@ -1,0 +1,100 @@
+/* components/no_warehouse/no_warehouse.wxss */
+@import "../../iconfont.wxss";
+/* 无仓库时显示 */
+.no_warehouse{
+  height: 100vh;
+  background-color: #fff;
+}
+.no_warehouse .warehouse{
+  margin: 0 auto;
+  text-align: center;
+  font-size: 34rpx;
+}
+.no_warehouse .warehouse .wrap{
+  position: relative;
+  display: inline-block;
+  padding: 20rpx 30rpx;
+}
+.no_warehouse .warehouse .icon-btn_dizhix{
+  position: absolute;
+  left: 0;
+  transform: translateY(-50%);
+  top: 50%;
+  font-size: 22rpx;
+}
+.no_warehouse .warehouse .icon-btn_sanjiaoxiaojiantoux{
+  position: absolute;
+  right: 0;
+  transform: translateY(-50%);
+  top: 50%;
+  font-size: 28rpx;
+}
+.no_data{
+  margin-top: 281rpx;
+  text-align: center;
+}
+.no_data .text{
+  font-size: 32rpx;
+  color: #555;
+  margin-top: 48rpx;
+  font-weight: 600;
+}
+.no_data .set_btn{
+  width: 240rpx;
+  height: 76rpx;
+  line-height: 76rpx;
+  font-size: 32rpx;
+  color: #555;
+  background-color: #FFE150;
+  display: block;
+  border-radius: 30rpx;
+  margin-top: 24rpx;
+  font-weight: 600;
+}
+.color_theme {  /* 主色调 */
+  color: red;
+}
+
+/* 指引 */
+
+.city-guide-box{
+  position:absolute;
+  top: 60rpx;
+  right: 80rpx;
+}
+
+.city-guide-box .city-guide-gif{
+  width: 80rpx;
+  height: 80rpx;
+}
+.city-guide-box .city-guide-msg{
+  position: relative;
+}
+.city-guide-box .city-guide-msg-bg{
+  width: 238rpx;
+  height: 54rpx;
+}
+
+.city-guide-box .city-guide-msg-text{
+  position: absolute;
+  top: 10rpx;
+  left: 15rpx;
+  font-size: 26rpx;
+  color: #555;
+}
+
+.navbar-box{
+  width: 100%;
+  background-color: #fff;
+}
+.navbar-menu{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 99999;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}

@@ -1,0 +1,17 @@
+<!--components/invitationGuide/invitationGuide.wxml-->
+<view class="invitation-curtain" wx:if="{{isShow}}"></view>
+<view class="invitation-guide" wx:if="{{isShow}}">
+  <view class="guide-box">
+    <image class="invitation-img" src="{{iconURL}}/invitation-guide1.png" mode="widthFix" wx:if="{{!imgUrl}}"></image>
+    <image class="invitation-img" src="{{iconURL}}/invitationGuide_bg_awardTip02.png" mode="widthFix" wx:if="{{imgUrl}}"></image>
+    <view class="iconfont icon-btn_qiapianguanbianniux" bindtap="hide"></view>
+    <form report-submit="true" bindsubmit="goShare" data-shareInfo="{{shareInfo}}">
+      <button class="invitation-share" open-type="share" form-type="submit" data-shareInfo="{{shareInfo}}">去邀请</button>
+    </form>
+    <view class="no-prompt" bindtap="setPrompt">
+      <view class="iconfont icon-btn_weixuanzhongx" wx:if="{{!promptStatus}}"></view>
+      <view class="iconfont icon-btn_xuanzhongx" wx:if="{{promptStatus}}"></view>
+      <view class="text">不再提示</view>
+    </view>
+  </view>
+</view>

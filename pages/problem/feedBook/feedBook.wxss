@@ -1,0 +1,82 @@
+/* pages/problem/feedBook/feedBook.wxss */
+page{
+  background-color: #ffffff;
+}
+.main{
+  padding: 48rpx 24rpx;
+}
+.mainTitle{
+  font-size: 28rpx;
+}
+.contant{
+  position: relative;
+  margin-top: 24rpx;
+  height: 292rpx;
+  background-color: #f9f9f9;
+}
+.textarea{
+  /* background-color: #f9f9f9; */
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  padding: 32rpx 0;
+  height: 292rpx;
+  color: #555555;
+  margin: 0 24rpx;
+  width: auto;
+  /* tint-color: $itemColor; */
+}
+.maxlength{
+  position: absolute;
+  right: 24rpx;
+  bottom:32rpx;
+  color: #a4a4a4;
+  font-size: 26rpx;
+}
+.tips{
+  margin-top: 30rpx;
+  line-height: 100rpx;
+}
+.upload{
+  margin-top: 30rpx
+}
+.picture{
+  border:0.5rpx solid #a4a4a4;
+  background-color: #ffffff;
+  width: 200rpx;
+  height: 200rpx;
+  line-height: 200rpx;
+  text-align: center;
+  color: #999999;
+}
+.contactPhone{
+  margin-top: 48rpx;
+}
+.contactText{
+  font-size: 28rpx;
+}
+.phoneNum{
+  background-color: #f9f9f9;
+  height: 72rpx;
+  line-height: 72rpx;
+  margin-top: 24rpx;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  padding-left: 24rpx;
+  color: #555555;
+  /* tint-color: $itemColor; */
+}
+.sub-btn-bgc{
+  background-color: #FFE150;
+  height: 72rpx;
+  border-radius: 50rpx;
+  margin: 0 24rpx;
+  margin-top: 300rpx;
+}
+.sub-txt{
+  line-height: 72rpx;
+  text-align: center;
+  color: #555;
+  font-weight: 600;
+  font-size: 28rpx;
+  display: block;
+}

@@ -1,0 +1,136 @@
+/* components/payPu/index.wxss */
+@import "/iconfont.wxss";
+
+.paypu{
+  position: fixed;
+  top: 0rpx;
+  left: 0rpx;
+  right: 0rpx;
+  bottom: 0rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, .3)
+}
+.uprotate{
+  transform: rotate(-180deg);
+  transition: all 0.4s ease;
+  margin-left: 15rpx;
+  font-size: 18rpx;
+}
+.head{
+  margin-top: 24rpx;
+  height: 33rpx;
+}
+.close-right{
+  width:22rpx;
+  height:22rpx;
+  float: right;
+  z-index: 1000;
+  margin-right: 26rpx;
+  color: black;
+}
+.content{
+  width:640rpx;
+  height:558rpx;
+  background:rgba(255,255,255,1);
+  border-radius:16rpx;
+  background-color: #ffffff;
+  text-align: center;
+  overflow: hidden;
+}
+.active{
+  height: 884rpx;
+}
+.btn{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 24rpx;
+  margin-top: 52rpx;
+}
+.payImage{
+  width: 484rpx;
+  height: 220rpx;
+  margin: 0px auto;
+  text-align: center;
+  margin-top: 60rpx;
+  
+}
+.btn >view{ 
+  width:284rpx;
+  height:84rpx;
+  border-radius:42rpx;
+  text-align: center;
+  color:rgba(144,85,33,1);
+  line-height: 80rpx;
+  font-weight:600;
+}
+.btn_no{
+  background:rgba(255,251,234,1);
+
+}
+.btn_off{
+  background:rgba(255,225,80,1);
+
+}
+.body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50rpx;
+
+}
+.icon-btn_dizhix{
+  height: 22rpx;
+  width: 22rpx;
+  font-size: 22rpx;
+  color: black;
+}
+.body_text1{
+  font-size:32rpx;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  color:rgba(48,48,48,1);
+  line-height:44rpx;
+  margin-right: 20rpx;
+}
+.body_text2{
+  width:260rpx;
+  height:54rpx;
+  background:rgba(255,225,80,1);
+  border-radius:30rpx;
+  font-size:28rpx;
+  font-family:PingFangSC-Medium,PingFang SC;
+  color:rgba(48,48,48,1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.title{
+  font-size:40rpx;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  color:rgba(48,48,48,1);
+  line-height:56rpx;
+  text-align: center;
+  margin-top: 88rpx;
+}
+.pay_btm{
+  font-size:28rpx;
+font-family:PingFangSC-Medium,PingFang SC;
+font-weight:500;
+color:rgba(170,170,170,1);
+line-height:40rpx;
+display: flex;
+align-items: center;
+text-align: center;
+justify-content: center;
+margin-top: 48rpx;
+margin-bottom: 40rpx;
+}
+.uprotate2{
+  margin-left: 15rpx;
+  font-size: 18rpx;
+}

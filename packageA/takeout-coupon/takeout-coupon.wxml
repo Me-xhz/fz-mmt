@@ -1,0 +1,98 @@
+<!-- 返回首页悬浮框/分享进入显示 -->
+<view class='goHomeFixed' catchtap='gotoHome' wx:if="{{isShowGoHome}}">
+  <image src='{{iconURL}}/product-icon-leftReturn.svg' class='icon-leftReturn'></image>
+  <text>返回首页</text>
+</view>
+<view id='coupon'>
+  <!-- 红包头部导航 -->
+  <view class='coupon-top row'>
+    <text class="top-block flex {{currentTab == 0 ? 'top-active' : ''}}" data-current="0" catchtap='swichNav'>未使用</text>
+    <text class="top-block flex {{currentTab == 1 ? 'top-active' : ''}}" data-current="1" catchtap='swichNav'>已使用</text>
+    <text class="top-block flex {{currentTab == 2 ? 'top-active' : ''}}" data-current="2" catchtap='swichNav'>已失效</text>
+    <view class="top-active-line {{currentTab == 0 ? 'top-active-line-0' : ''}}"></view>
+    <view class="top-active-line {{currentTab == 1 ? 'top-active-line-1' : ''}}"></view>
+    <view class="top-active-line {{currentTab == 2 ? 'top-active-line-2' : ''}}"></view>
+  </view>
+
+  <!-- 红包主体 -->
+  <view class="coupon-content">
+    <!-- 红包列表 -->
+    <view class='list' wx:if="{{vou && vou.length > 0}}">
+        <view  wx:for="{{vou}}" wx:for-item="bonus" wx:key="{{bonus.id}}">
+            <!-- 未使用列表 -->
+            <view class="box_list row" style='background-image:url({{iconURL}}/coupon_orange01.png)'  wx:if="{{currentTab == 0}}">
+                <!-- 左侧面额 -->
+                <view class='coupon_val  color-coupon' wx:if="{{bonus.coupon_type==1}}">
+                    <text class="text">{{bonus.value}}</text>
+                    <text class="icon">折</text>
+                </view>
+                <view class='coupon_val  color-coupon' wx:else>
+                    <text class="icon">¥</text>
+                    <text class="text">{{bonus.value}}</text>
+                </view>
+                <!-- 即将过期标识 -->
+                <view class='coupon-tag' wx:if="{{bonus.overdue}}">
+                    <text class='coupon-tag-font'>{{bonus.overdue}}</text>
+                </view>
+                <!-- 优惠券信息 -->
+                <view class="coupon_info color_gray_dark col-50">
+                    <view class="list_title">{{bonus.name}}</view>
+                    <view class="dom-attr">{{bonus.description}}</view>
+                    <view class="list_time">{{bonus.use_end_date}}</view>
+                </view>
+                <!-- 右侧领取部位 -->
+                <form class="get_coupon_btn col-30" bindsubmit="goShop" data-shop_id="{{bonus.shop_id}}">
+                    <button class='getCoupon' form-type="submit">
+                        <span class="get_coupon">去使用</span>
+                    </button>
+                </form>
+            </view>
+
+            <!--已使用、已失效-->
+            <view class="box_list row" style='background-image:url({{iconURL}}/coupon_gray01.png)' wx:else>
+                <!-- 左侧面额 -->
+                <view class='coupon_val' wx:if="{{bonus.coupon_type==1}}">
+                    <text class="text">{{bonus.value}}</text>
+                    <text class="icon">折</text>
+                </view>
+                <view class='coupon_val' wx:else>
+                    <text class="icon">¥</text>
+                    <text class="text">{{bonus.value}}</text>
+                </view>
+                <!-- 即将过期标识 -->
+                <view class='coupon-tag' wx:if="{{bonus.overdue}}">
+                    <text class='coupon-tag-font'>{{bonus.overdue}}</text>
+                </view>
+                <!-- 优惠券信息 -->
+                <view class="coupon_info color_gray_dark col-50">
+                    <view class="list_title">{{bonus.name}}</view>
+                    <view class="dom-attr">{{bonus.description}}</view>
+                    <view class="list_time">{{bonus.use_end_date}}</view>
+                </view>
+                <!-- 右侧领取部位 -->
+                <span class="list_button_img" wx:if="{{currentTab==1}}">
+        <image  mode='widthFix'  src='{{iconURL}}/img_conpon_use01.png'></image>
+        </span>
+                <span class="list_button_img" wx:if="{{currentTab==2}}">
+        <image  mode='widthFix' src='{{iconURL}}/img_conpon_invalid01.png' ></image>
+        </span>
+            </view>
+        </view>
+    </view>
+
+    <!-- 暂无红包 -->
+    <view wx:if='{{vou && vou.length <= 0 }}'>
+      <view class='coupon-empty'>
+        <view class='coupon-empty-image'>
+          <image src='{{iconURL}}/img_coupon_empty02.png'></image>
+        </view>
+        <text class='coupon-empty-text'>暂无红包</text>
+      </view>
+    </view>
+    <view class="refreshEnd" wx:if="{{!refresh}}">
+      <text>没有更多啦~</text>
+    </view>
+  </view>
+</view>
+
+<loading wx:if="{{loadingShow}}"></loading>

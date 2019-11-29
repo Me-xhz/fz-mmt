@@ -1,0 +1,16 @@
+
+.share-buttons{
+    padding: 24rpx;
+}
+.share-buttons button{
+    background-color: #fff;
+    margin-bottom: 20rpx;
+}
+.share-buttons button .left{
+    width: 50%;
+    text-align: left;
+}
+.share-buttons button .right{
+    width: 50%;
+    text-align: right;
+}

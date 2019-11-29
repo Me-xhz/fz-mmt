@@ -1,0 +1,95 @@
+<!--pages/comment/comment.wxml-->
+<scroll-view class="app-content" scroll-y="true" bindscrolltolower="getComments" style='height: 100%;'>
+  <view class="product-comment-box">
+    <view class="product-comment-buttons">
+      <view bindtap="getCommentType" class="{{grade == 0 ? 'active' : ''}}" data-type='0'>全部{{subtotal.total}}</view>
+      <view bindtap="getCommentType" class="{{grade == 3 ? 'active' : ''}}" data-type='3'>好评{{subtotal.good}}</view>
+      <view bindtap="getCommentType" class="{{grade == 2 ? 'active' : ''}}" data-type='2'>中评{{subtotal.medium}}</view>
+      <view bindtap="getCommentType" class="{{grade == 1 ? 'active' : ''}}" data-type='1'>差评{{subtotal.bad}}</view>
+      <view bindtap="getCommentType" class="{{grade == 4 ? 'active' : ''}}" data-type='4'>有图{{subtotal.picture}}</view>
+      <view bindtap="getCommentType" class="{{grade == 5 ? 'active' : ''}}" data-type='5'>追加{{subtotal.again}}</view>
+    </view>
+    <view class="modul-review-manu conment" wx:for="{{commentsList}}" wx:for-item="commentList" wx:key="index" wx:for-index="lidx">
+      <view class="review-manu_header">
+        <image src="{{commentList.author.avatar}}"></image>
+        <view class="header-user_name">
+          <span>{{commentList.author.nickname}}</span>
+        </view>
+      </view>
+      <view class="review-manu_main">
+        <view class="manu_main_text">
+          <i class='limitLineHeight{{commentList.wordsCut ? " cut" : ""}}'>{{commentList.content}}</i>
+          <!-- wx:if="{{commentList.words}}" -->
+          <view class='limit-words' wx:if="{{commentList.words}}" bindtap='limitWord' data-iscut='{{commentList.wordsCut}}' data-listnum='infoindex'>{{limitWords}}
+            <image class='show' wx:if="{{commentList.wordsCut}}"></image>
+            <image class='hidden' wx:if="{{!commentList.wordsCut}}"></image>
+          </view>
+        </view>
+        <view wx:if="{{commentList.imgInfo}}">
+          <view class="manu_main_imgs" wx:for="{{commentList.imgInfo}}" wx:key="index" wx:for-item="img" bindtap='setCommentImage' data-current='{{img.img}}' data-idx='{{lidx}}'>
+            <span src="{{img.img}}" style="background-image: url({{img.thumbImg}});"></span>
+          </view>
+        </view>
+      </view>
+      <view class="review-manu_reply" wx:if="{{commentList.office_info}}">
+        <i class='limitLineHeight{{commentList.wordsCut ? " cut" : ""}}'>小鹅回复：{{commentList.office_info}}</i>
+        <!-- wx:if="{{commentList.words}}" -->
+        <view class='limit-words' wx:if="{{commentList.words}}" bindtap='limitWord' data-iscut='{{commentList.wordsCut}}' data-listnum='infoindex'>{{limitWords}}
+          <image class='show' wx:if="{{commentList.wordsCut}}"></image>
+          <image class='hidden' wx:if="{{!commentList.wordsCut}}"></image>
+        </view>
+      </view>
+      <view class="review-manu_additional" wx:if="{{commentList.again_info}}">
+        <view class="manu_additional_header">
+          <view class="manu_additional_header">
+            <i wx:if="{{commentList.ctime > 0}}">{{commentList.ctime}}天后追加评价</i>
+            <i wx:if="{{commentList.ctime == 0}}">当天追加评价</i>
+          </view>
+          <view class="manu_additional_text" wx:if="{{commentList.again_info.content}}">
+            <i class='limitLineHeight{{commentList.wordsCut ? " cut" : ""}}'>{{commentList.again_info.content}}</i>
+            <!-- wx:if="{{commentList.words}}" -->
+            <view class='limit-words' wx:if="{{commentList.words}}" bindtap='limitWord' data-iscut='{{commentList.wordsCut}}' data-listnum='infoindex'>{{limitWords}}
+              <image class='show' wx:if="{{commentList.wordsCut}}"></image>
+              <image class='hidden' wx:if="{{!commentList.wordsCut}}"></image>
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{commentList.again_info.imgInfo}}">
+          <view class="manu_main_imgs" wx:for="{{commentList.again_info.imgInfo}}" wx:key="index" wx:for-item="img" bindtap='setAgainImage' data-current='{{img.img}}' data-idx='lidx'>
+            <span swiper-src="{{img.img}}" style="background-image: url({{img.thumbImg}});"></span>
+          </view>
+        </view>
+      </view>
+      <view class="review-manu_reply" wx:if="{{commentList.office_again_info}}">
+        <i class='limitLineHeight{{commentList.wordsCut ? " cut" : ""}}'>小鹅回复：{{commentList.office_again_info}}</i>
+        <!-- wx:if="{{commentList.words}}" -->
+        <view class='limit-words' wx:if="{{commentList.words}}" bindtap='limitWord' data-iscut='{{commentList.wordsCut}}' data-listnum='infoindex'>{{limitWords}}
+          <image class='show' wx:if="{{commentList.wordsCut}}"></image>
+          <image class='hidden' wx:if="{{!commentList.wordsCut}}"></image>
+        </view>
+      </view>
+      <view class="reviw-manu_attrs row">
+        <view class="col-70">
+          <i>{{commentList.attr_name}}</i>
+        </view>
+        <view class="col-30">
+          <i>{{commentList.created_at}}</i>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading-more theme-loading" wx:if="{{isLoading && !isLastPage}}">正在加载...</view>
+  <view class="loading-more theme-loading" wx:if="{{!isLoading && isLastPage && commentsList.length > 0}}">没有更多啦~</view>
+
+  <view class="product-comment-null" wx:if="{{!isLoading && commentsList.length <= 0}}">
+    <view class="null-header-img">
+      <image src="{{iconURL}}/icon-payment-lose.png"></image>
+    </view>
+    <view class="null-text">
+      OOPS~~~暂无评价
+    </view>
+  </view>
+</scroll-view>
+
+<loading wx:if="{{loadingShow}}"></loading>

@@ -1,0 +1,126 @@
+<!--pages/user/dingdan.wxml-->
+   <!-- 返回首页悬浮框/分享进入显示 -->
+  <view class='goHomeFixed' catchtap='gotoHome' wx:if="{{isShowGoHome}}">
+    <image src='{{iconURL}}/product-icon-leftReturn.svg' class='icon-leftReturn'></image>
+    <text>返回首页</text>
+  </view>
+<view class="order-filter">
+  <view class="filter-item {{currentTab==0 ? 'active' : ''}}" data-current="0" bindtap="swichNav">
+    <text>全部</text>
+  </view>
+  <view class="filter-item {{currentTab==1 ? 'active' : ''}}" data-current="1" bindtap="swichNav">
+    <text>待支付</text>
+  </view>
+  <view class="filter-item {{currentTab==4 ? 'active' : ''}}" data-current="4" bindtap="swichNav">
+    <text>待成团</text>
+  </view>
+  <view class="filter-item {{currentTab==2 ? 'active' : ''}}" data-current="2" bindtap="swichNav">
+    <text>待提货</text>
+  </view>
+  <view class="filter-item {{currentTab==3 ? 'active' : ''}}" data-current="3" bindtap="swichNav">
+    <text>待评价</text>
+  </view>
+</view>
+
+<view class='order-list' wx:if='{{orders && orders.length > 0}}'>
+  <view class='list-item' wx:for='{{orders}}' wx:key='index' wx:for-item='order' bindtap='goOrderDetail' data-orderid='{{order.order_id}}'>
+    <!-- 订单头部信息 -->
+    <view class='header-row row'>
+      <view class="border-b row">
+        <view class='header-lf w70'>
+          <text>订单号:</text>
+          <text>{{order.order_sn}}</text>
+        </view>
+        <view class='header-rg w30'>
+          <text>{{order.status_desc}}</text>
+        </view>
+      </view>
+    </view>
+    <!-- 商品列表 -->
+    <view class='order-main'>
+      <!-- <view
+        class='goods-fms'
+        wx:if="{{order.status == ORDER_STATUS.DELIVERING || order.status == ORDER_STATUS.DELIVERIED || order.status == ORDER_STATUS.FINISHED}}">
+        <span class="fms-no">包裹{{delivery_id + 1}}</span>
+        <span class="fms-num">({{goods_formate.delivery_goods_num}}件商品)</span>
+        <span catchtap="touchExpress" wx:if="{{goods_formate.is_send != 0}}" data-order='{{order}}' data-delivery_id='{{goods_formate.delivery_id}}'>
+          <span class="fms-check">查看物流</span>
+          <image class="fms-arrow" mode='widthFix' src="{{iconURL}}/icon_right_arrow.png" />
+        </span>
+        <span wx:else>
+          <span class="fms-check">尚未发货</span>
+        </span>
+      </view> -->
+      <view class='date_wrap' wx:if="{{order.status == ORDER_STATUS.PAID||order.status == ORDER_STATUS.PREPARING||order.status == ORDER_STATUS.PICKING}}">
+          <view class='tab footer-button'>{{order.shippingTimeDesc}}</view>
+          <!-- <view class='des'>{{order.shippingTimeDesc}}</view> -->
+        </view>
+      <view class='goods-item' wx:for='{{order.products}}' wx:for-item='goods'>
+        <view class='item-photo'>
+          <image lazy-load='true' src='{{goods.header_img}}'></image>
+        </view>
+        <view class='item-info'>
+          <view class='info-name'>
+            {{goods.goods_name}}
+          </view>
+          <view class='info-attr'>
+            {{goods.sku_key_name}}
+          </view>
+          <view class="info-price-credits" wx:if="{{order.order_prom_type==8}}"  >
+            {{goods.score_price }}
+            <i class="score" style="color:#303030">积分</i>
+            <!--<image src="{{iconURL}}/credits-icon01.png" class="credits-icon">-->
+
+            <!--</image>-->
+          </view>
+          <view class="info-price" wx:else>
+            <i class='icon_rmb'>¥</i>{{goods.shop_price}}
+          </view>
+
+          <view class="info-amount">x{{goods.amount}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="item-footer border-bottom {{order.status != ORDER_STATUS.CREATED && order.status != ORDER_STATUS.DELIVERING && order.status != ORDER_STATUS.DELIVERIED && order.status != ORDER_STATUS.FINISHED ? 'no-border' : ''}} {{order.order_source=='qqwallet' ? 'multi-line' : ''}}">
+        <view class="footer-sum b-bottom">
+          <view>
+            <i class="sum-nums">共计{{order.goods_count}}件，</i>
+            <span>
+              <i class="sum-text">实付款 </i>
+              <i class="sum-credits" wx:if="{{order.order_prom_type==8}}">
+                <i class="p">{{order.score_price}}</i>
+                 <i class="score">积分</i>
+                <!--<image src="{{iconURL}}/credits-icon01.png" class="credits-icon">-->
+
+              <!--</image>-->
+              </i>
+              <i class="sum" wx:else>
+                <i class='icon_rmb'>¥</i>
+                <i class="p">{{order.order_amount}}</i>
+              </i>
+            </span>
+          </view>
+        </view>
+      </view>
+      <view class="item-footer buttons" wx:if="{{order.order_btn.pay_btn == 1 || order.order_btn.cancel_btn == 1 || order.order_btn.comment_again_btn == 1 ||order.order_btn.back_btn == 1|| order.order_btn.comment_btn == 1 || order.order_btn.receive_btn == 1}}">
+        <button style='background-color:#ffe150;color:#555!important' class="footer-button" wx:if="{{order.order_btn.pay_btn == 1}}" catchtap="touchPay" data-order-id='{{order.order_id}}'>
+          立即支付
+        </button>
+        <button type='default' style='background-color: #fff！important;border: 1rpx solid #ddd;' class="footer-button" wx:if="{{order.order_btn.cancel_btn == 1}}" catchtap='touchCancel' data-order-id='{{order.order_id}}'>取消订单</button>
+        <!-- <button type='default' style='background-color: #fff;border: 1rpx solid #ddd;' class="footer-button"  wx:if="{{order.order_btn.back_btn == 1}}" catchtap='setModalStatus' data-status='1' data-order-id='{{order.order_id}}'>申请退款</button> -->
+        <!-- wx:if="{{order.order_btn.back_btn == 1}}" -->
+         <button class="footer-button" wx:if="{{order.order_btn.receive_btn == 1}}" catchtap="touchConfirm" data-order-id='{{order.order_id}}'>确认收货</button>
+        <button  style='background-color:#ffe150;color:#555!important' class="footer-button" wx:if="{{order.order_btn.comment_btn == 1}}" catchtap='touchComment' data-order-id='{{order.order_id}}'>立即评价</button>
+        <button  class="footer-button" wx:if="{{order.order_btn.comment_again_btn == 1}}" catchtap='touchSubComment' data-order-id='{{order.order_id}}'>追加评价</button>
+      </view>
+  </view>
+</view>
+
+<view class='empty' wx:if='{{orders && orders.length <= 0}}'>
+  <view class='empty-item'>
+    <image class="item-logo" src="{{iconURL}}/icon_order_empty02.png" mode='widthFix'></image>
+    <view class="item-text">暂无订单</view>
+  </view>
+</view>
+
+<loading wx:if="{{loadingShow}}"></loading>

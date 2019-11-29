@@ -1,0 +1,61 @@
+/*  listdetailTemplate.wxss */
+
+.goodsCard {
+  position: relative;
+  width: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  font-size: 0;
+  background: #fff;
+  padding-right: 2rpx;
+}
+.goodsCard.goodsCard1 {
+  float: right;
+  border: 0
+}
+.goodsCard .images {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  background-position: 50%;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgb(247, 244, 244);
+}
+.goodsCard .goodsName {
+  width: 100%;
+  height: 110rpx;
+  line-height: 38rpx;
+  font-family: PingFang;
+  display: inline-block;
+  box-sizing: border-box;
+  text-align: left;
+  overflow: hidden;
+  padding:32rpx 24rpx 8rpx 24rpx;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  white-space:normal;
+  text-overflow:inherit;
+  display:-webkit-box;
+
+}
+.goodsCard .price {
+  padding: 10rpx 0 40rpx 24rpx;
+}
+.goodsCard .price .shop_price{
+  font-weight: 600
+}
+.goodsCard .price .market_price {
+  text-decoration: line-through;
+  margin-left:16rpx;
+}
+.Videoimg{
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+}
+.Videoimg image{
+  width: 88rpx;
+  height: 32rpx;
+}

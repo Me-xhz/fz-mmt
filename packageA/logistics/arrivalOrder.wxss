@@ -1,0 +1,36 @@
+.arrival-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 750rpx;
+  height: 160rpx;
+  background-color: #EB3C39;
+}
+.order-number{
+  font-size: 60rpx;
+  font-weight: 500rpx;
+  color: #ffffff;
+  text-align: center;
+}
+.order-number-title{
+  font-size: 30rpx;
+  color: #ffffff;
+  margin-top: 30rpx;
+  text-align: center;
+}
+.order-list{
+  padding: 20rpx;
+  width: 750rpx;
+  box-sizing: border-box;
+  margin-top: 160rpx;
+}
+.order-item{
+  background-color: #dddddd;
+  padding: 20rpx 40rpx;
+  border-radius: 8rpx;
+  margin-bottom: 10rpx;
+}
+.order-item-text{
+  padding: 8rpx 0;
+  font-size: 34rpx;
+}

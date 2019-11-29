@@ -1,0 +1,19 @@
+<!--pages/register/register.wxml-->
+<view>
+  <view class='view_block'>
+    <image src='{{iconURL}}/img_dltt@2x01.png' class='dltt'></image>
+  </view>
+  <view class="btns-box">
+    <button class='login_btn out'  wx:if="{{!isFace}}" bindtap="routerOut">
+      <text class='login_text'>取消</text>
+    </button>
+    <button  class='login_btn'  open-type='getUserInfo' bindgetuserinfo="onGotUserInfo">
+      <text class='login_text'>登录</text>
+    </button>
+  </view>
+  <image src='{{iconURL}}/dlwz@2x01.png' class='dlwz'></image>
+  <!-- <button class='btn' open-type='getUserInfo' bindgetuserinfo="onGotUserInfo">马上登录</button> -->
+  
+</view>
+
+<loading wx:if="{{loadingShow}}"></loading>

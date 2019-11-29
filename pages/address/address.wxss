@@ -1,0 +1,84 @@
+/* pages/address/address.wxss */
+.row{
+  flex-direction: row;
+  align-items: center;
+}
+.flex {
+    flex: 1;
+}
+.address{
+  background-color: #fff;
+  padding: 0 24rpx;
+}
+.address-block {
+  /* justify-content: space-between; */
+  border-top: 0.5rpx solid #e4e4e4;
+}
+.lf-text {
+  width: 180rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 28rpx;
+}
+.o-text{
+  line-height: 50rpx;
+  font-size: 28rpx;
+}
+.addressInput{
+  vertical-align: bottom;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 28rpx;
+}
+.address-block-default{
+  justify-content: space-between;
+  border-top: 0.5rpx solid #e4e4e4;
+}
+.item-toggle{
+  text-align: right;
+}
+.confirm-btn{
+  margin:24rpx 20rpx;
+}
+.txt{
+
+  background-color: #ffe150;
+  border-radius: 50rpx;
+  text-align: center;
+  color: #555555;
+  line-height: 72rpx;
+  height: 72rpx;
+  font-size: 28rpx;
+  width: 100%;
+  display: block;
+}
+.address-block .iconfont{
+  font-size: 30rpx;
+  color: #aaa
+}
+.address_tag{
+  display: flex;
+  flex-wrap: wrap;
+}
+.ad_tag{
+  width:108rpx;
+  height:52rpx;
+  border: 2rpx solid #aaa;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  color:#555;
+  border-radius: 30rpx;
+  box-sizing: border-box;
+  font-weight: 600;
+  margin: 12rpx 22rpx 12rpx 0;
+}
+.tag_active{
+  border: none;
+  background-color: #ffe150;
+}
+.ml-20{
+  margin-left: 50rpx;
+}

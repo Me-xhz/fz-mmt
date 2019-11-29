@@ -1,0 +1,417 @@
+<!-- index.wxml -->
+<!-- 广告弹窗显示 带优惠券及公告 -->
+<wxs module="toFix" src="../../utils/filters.wxs"></wxs>
+<view class='Advertisement' wx:if="{{showAdver && showPage && advertisementAd[0].media_type == 16}}">
+  <view class='AdvertisementAbs'>
+    <view wx:if="{{advertisementAd[0].media_type_nine_coupon && advertisementAd[0].media_type_nine_coupon.length > 0}}">
+      <image mode='widthFix' class='index-dialog-background' src='{{iconURL}}/index-dialog-notice-{{advertisementAd[0].ad_link.length}}.png'></image>
+      <view class="index-dialog-box" style="height: 72%;">
+        <view class="index-dialog-text">
+          <import src="../../wxParse/wxParse.wxml" />
+          <view class="wxParse">
+            <template is="wxParse" data="{{wxParseData:advertisementAdText.nodes}}" />
+          </view>
+        </view>
+        <view class="index-dialog-coupons" style="margin-top:{{advertisementAd[0].ad_link.length == 3?'64rpx':''}}">
+          <view class="coupon-{{advertisementAd[0].ad_link.length}}" wx:for="{{advertisementAd[0].media_type_nine_coupon}}" wx:key="{{index}}">
+            <view class="denomination">
+              <image src='{{iconURL}}/index-dialog-coupon-get.png' class='index-dialog-coupon-get'></image>
+              <i>¥</i>
+              <text class="hot">{{toFix.toFix(1,item.money)}}</text>
+            </view>
+            <view wx:if="{{advertisementAd[0].ad_link.length == 3}}" class="remark-3">仅限<view></view>{{item.use_end_time}}前使用</view>
+            <view wx:else class="remark-1">仅限{{item.use_end_time}}前使用</view>
+            <!-- <view class="{{advertisementAd[0].ad_link.length == 3?'remark-3' : 'remark-1'}}">仅限<view></view>11月28日前使用</view> -->
+          </view>
+        </view>
+        <form report-submit='true' class='index-dialog-btn-box' bindsubmit='advertisementOut'>
+          <button class='index-dialog-btn' data-ad_id='{{advertisementAd[0].ad_id}}' formType='submit'>我知道了</button>
+        </form>
+        <!-- 关闭按钮 -->
+        <form report-submit='true' class='' bindsubmit='advertisementOut'>
+          <button class='index-dalog-close' data-ad_id='{{advertisementAd[0].ad_id}}' style="background-image:url({{iconURL}}/btn-index-closs.png)" formType='submit'></button>
+        </form>
+      </view>
+    </view>
+    <view wx:else>
+      <image mode='widthFix' class='index-dialog-background' src='{{iconURL}}/index-dialog-notice.png'></image>
+      <view class="index-dialog-box" style="height: 68%;">
+        <view class="index-dialog-text">{{advertisementAd[0].ad_text}}</view>
+        <form report-submit='true' class='index-dialog-btn-box' bindsubmit='advertisementOut'>
+          <button class='index-dialog-btn' data-ad_id='{{advertisementAd[0].ad_id}}' formType='submit'>我知道了</button>
+        </form>
+          <!-- 关闭按钮 -->
+        <form report-submit='true' class='' bindsubmit='advertisementOut'>
+          <button class='index-dalog-close' data-ad_id='{{advertisementAd[0].ad_id}}' style="background-image:url({{iconURL}}/btn-index-closs.png)" formType='submit'></button>
+        </form>
+        <!-- <view class="index-dalog-close" style="background-image:url({{iconURL}}/btn-index-closs.png)"></view> -->
+      </view>
+    </view>
+   
+  </view>
+</view>
+<!-- 广告弹窗显示备份 -->
+<view class='Advertisement' wx:if="{{showAdver && showPage && advertisementAd[0].media_type != 16}}">
+  <view class='AdvertisementAbs'>
+    <view class='AdimageBox'>
+      <image mode='widthFix' class='AdvertisementImg' src='{{advertisementAd[0].ad_code}}'></image>
+      <form report-submit='true' class='AdvertisementOut-view' bindsubmit='advertisementOut'>
+        <button class='AdvertisementOut' data-ad_id='{{advertisementAd[0].ad_id}}' style="background-image:url({{iconURL}}/btn-index-closs.png)" formType='submit'></button>
+      </form>
+    </view>
+    <form report-submit='true' class='reportIndex-view' bindsubmit='goWebView' data-item='{{advertisementAd[0]}}' data-type='1'>
+      <button class='reportIndex-btn' formType='submit'></button>
+    </form>
+  </view>
+</view>
+<!-- 优惠券领取成功后显示 -->
+<view class='Advertisement' wx:if="{{showCouponsSuccess && showPage}}">
+  <view class='AdvertisementAbs'>
+    <view class='AdimageBox'>
+      <image mode='widthFix' class='AdvertisementImg' src='{{advertisementAd[0].close_img}}'></image>
+      <form report-submit='true' class='AdvertisementOut-view' bindsubmit='advertisementOut'>
+        <button class='AdvertisementOut' style="background-image:url({{iconURL}}/btn-index-closs.png)" formType='submit'></button>
+      </form>
+    </view>
+    <view class="coupon-box">
+      <scroll-view scroll-y='true' class='coupon-box-scroll'>
+        <view class='coupon-wrap' style='background-image:url({{iconURL}}/img_qdhbyhqkp@2x.png)' wx:for="{{popupCouponsList}}" wx:key="{{index}}">
+          <view class='left' wx:if="{{item.coupon_type == 0}}">
+            <text class='price1'>¥</text>
+            <text class='price2'>{{item.value}}</text>
+          </view>
+          <view class='left' wx:if="{{item.coupon_type == 1}}">
+            <text class='price2'>{{item.value}}</text>
+            <text class='price1'>折</text>
+          </view>
+          <view class='right'>
+            <view class='text1 ellipsis'>{{item.name}}</view>
+            <view class='text2 ellipsis'>{{item.description}}</view>
+            <view class='text2' style='white-space:nowrap;'>{{item.use_end_date}}</view>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="shadow"></view>
+    </view>
+  </view>
+</view>
+<!-- 添加小程序提示 -->
+<view class="add-tips" bindtap="toShowTips" style="top: {{navBarHeight - 8}}px" wx:if="{{showTips && pickup.pickup_id}}">
+  <image src='{{iconURL}}/xiaochengxutixing02.png' mode="widthFix"></image>
+  <text class='tip-text'>添加到「我的小程序」购物更方便</text>
+</view>
+<view class="drawer_screen" wx:if="{{showMoreTips}}" catchtap="closeAllTips"></view>
+<view class="showAddTips" scroll-y="true" wx:if="{{showMoreTips}}" style="top: {{navBarHeight}}px">
+  <view class="addTipsBox" catchtap="closeAllTips">
+    <view class="tips-font">1、点击</view>
+    <image class="tips-img-add" src='{{iconURL}}/clickAddTips.png'></image>
+    <image src="{{iconURL}}/guidethearrow01.png" class="tip-img-arrow"></image>
+  </view>
+  <view class="addTipsBox">
+    <view class="tips-font">2、点击添加到“我的小程序”</view>
+    <image class="tips-img-to-add" src='{{iconURL}}/addToMyTips.png'></image>
+  </view>
+  <view class="addTipsBox">
+    <view class="tips-font">3、在微信首页下拉，从“我的小程序” 快速进入“买买提”</view>
+    <image class="tips-img-third" src='{{iconURL}}/addHint01.png'></image>
+  </view>
+  <view class="addTipsBtnBox">
+    <view class="addTipsBtn" bindtap="closeAllTips">我知道了</view>
+  </view>
+</view>
+<!-- 轮播指示器版首页 -->
+<view class="page indicator-page" wx:if="{{showPage && pickup.pickup_type == 0}}" id="indicatorPage" catchtouchend="changeIndexMove">
+  <form report-submit='true' bindsubmit='goTissue' wx:if="{{showTissue}}">
+    <view class='index-tissue'>
+      <button formType='submit' class='tissue-button'></button>
+      <image class='tissue' src='{{iconURL}}/index-tissue03.gif'></image>
+    </view>
+  </form>
+  <view class="navbar-box" style="height: {{navBarHeight}}px">
+    <view style="height: {{navBarHeight}}px"></view>
+    <view class="navbar-menu" style="height: {{navBarHeight}}px">
+      <view class="navbar-left">
+        <navigator hover-class="none" class='pickup' url='../pickup/pickup'>
+          <view class='iconfont icon-btn_dizhix'></view>
+          <text class='pickup_content'>{{pickup.cityName||city.cityName}}</text>
+          <image class='right_icon' style='background-image:url({{iconURL}}/btn_xyh_12@2x.png)'></image>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  <view class="swiper-box">
+    <view class="radius-half"></view>
+    <view class="swipers changeIndex indexAd" id="changeIndexSwiper" wx:if="{{adList[0].ad_link != ''}}">
+      <swiper indicator-color="{{indicatorColor}}" current="{{indexAdcurrent}}" indicator-active-color="#ffbb44" indicator-dots="{{indicatorDots}}" circular="{{circular}}" autoplay="{{!autoplay}}" interval="{{interval}}" duration="{{duration}}">
+        <swiper-item wx:for="{{adList}}" wx:key="{{index}}">
+          <image mode="aspectFill" class="adImg changeAdimg" src='{{item.ad_code}}'></image>
+          <form class='index-from-indexAd change' bindsubmit='goWebView' data-type='2' data-item='{{item}}' report-submit='true'>
+            <button form-type='submit'></button>
+          </form>
+        </swiper-item>
+      </swiper>
+    </view>
+    <view class="swiper-indicator" id="chang-index-tab">
+      <scroll-view class="time-list {{changeIndexTabFixed ? 'on' : ''}}" style="top: {{navBarHeight}}px" enable-flex scroll-x scroll-with-animation scroll-left="{{scrollLeftNum}}rpx">
+        <view class="time-item {{index == newIndexIndicator ? 'active' : ''}}" bindtap="onSwiperIndicator" data-index="{{index}}" wx:for="{{activityAdIndexInfo.list}}" wx:key="index">
+          <view class="time">{{item.date}}</view>
+          <view class="text">
+            <view>{{item.activity_text}}</view>
+          </view>
+          <view class="right-border" wx:if="{{index!=activityAdIndexInfo.list.length-1}}"></view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="swiper-drawer_screen" wx:if="{{showSwiperScreen}}"></view>
+    <swiper class="indicator-index-swiper" duration="400" easing-function="{{newIndexEasingFunction}}" current="{{newIndexAdcurrent}}" bindchange="indicatorIndexSwiper" style="height: calc({{newIndexAdImageH}}rpx * {{activityAdIndexInfo.list[newIndexAdcurrent].value.length}} - 32rpx);">
+      <swiper-item wx:for="{{activityAdIndexInfo.list}}" wx:for-index="k" wx:key="k">
+        <view class="indicator-index-images">
+          <view class="indicator-goods-box" wx:for="{{item.value}}" wx:for-index="i" wx:key="i" wx:for-item="items" bindtap="goChangeGoods" data-item="{{items}}">
+            <view class="indicator-goods-img">
+              <image class="indicator-goods-image" lazy-load="true" src='{{items.logo}}'></image>
+              <image class="sale-image" src="{{iconURL}}/indicator_sale.png" wx:if="{{items.is_enough == 0 && item.activity_status != 4}}"></image>
+              <image class="sale-image" src="{{iconURL}}/indicator_end.png" wx:elif="{{item.activity_status == 4}}"></image>
+            </view>
+            <view class="indicator-goods-msg">
+              <view class="indicator-goods-name">{{items.goods_name}}</view>
+              <view class="indicator-goods-progress">
+                <block wx:for="{{stortInfo.list[k].value}}" wx:for-item="store" wx:for-index="storeIndex" wx:if="{{store.store_count > 0 && (item.activity_status == 1 || item.activity_status == 3) && store.activity_id == items.activity_id}}" wx:key="storeIndex">
+                  <view class="goods-progress">
+                    <view class="progress" style="width:{{store.percent}}%"></view>
+                  </view>
+                  <view class="indicator-goods-sale-num" wx:if="{{items.is_enough==1}}">
+                    已售{{store.sale_num}}份
+                  </view>
+                  <view class="indicator-goods-sale-num" wx:else>{{store.sale_num}}份已售罄</view>
+                </block>
+              </view>
+              <view class="indicator-goods-price-box">
+                <view class="indicator-goods-price">
+                  <view class="indicator-goods-shop-price">
+                    <view class="indicator-goods-price-title">买买提价:</view>
+                    {{items.shop_price}}
+                    <i>¥</i>
+                  </view>
+                  <view class="goods-price-hr">
+                    <view class="hr"></view>
+                  </view>
+                  <view class="indicator-market-price">
+                    <view>{{items.price_text}}</view>
+                    <view class="indicator-market-price-num">
+                      {{items.market_price}}
+                      <i>¥</i>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="indicator-goods-btn" wx:if="{{(item.activity_status == 1 || item.activity_status == 3) && items.is_enough != 0&& items.media_type != 4}}">
+              <view>立即</view>
+              <view>购买</view>
+            </view>
+            <view class="indicator-goods-btn" wx:if="{{item.activity_status == 2 && items.media_type != 4}}">
+              <view>开售</view>
+              <view>提醒</view>
+            </view>
+            <view class="indicator-goods-sale-btn" wx:if="{{items.is_enough == 0 && item.activity_status != 4}}">
+              <view>已</view>
+              <view>售罄</view>
+            </view>
+            <view class="indicator-goods-sale-btn" wx:if="{{item.activity_status == 4}}">
+              <view>已</view>
+              <view>结束</view>
+            </view>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+  <view class="indicator-pagebottom" wx:if="{{showPage && activityAdIndexInfo.list.length > 0}}">
+    ~ 到底啦！~
+  </view>
+  <view class="indicator-new-pack {{takeoutAnimation ? 'sidebar-active' : ''}}" wx:if="{{couponEntry.is_show}}" bindtap="showWelfare">
+    <image class="new-pack-image01" src="{{iconURL}}/indicator-index-newpack-1.png" mode="widthFix"></image>
+    <image class="new-pack-image02 {{!takeoutAnimation ? 'active' : ''}}" src="{{iconURL}}/indicator-index-newpack-2.png" mode="widthFix"></image>
+    <image class="new-pack-image03" src="{{iconURL}}/indicator-index-newpack-3.png" mode="widthFix"></image>
+  </view>
+  <!-- 本厂福利弹窗 -->
+  <view class="welfare-box" wx:if="{{isShowWelfare && couponEntry.is_show}}" catchtouchmove="bindtouchmove">
+    <view class="drawer_screen" bindtap="closeWelfare" catchtouchmove="bindtouchmove"></view>
+    <view class="welfare-card {{isShowWelfare ? 'welfare-animation' : ''}}">
+      <image class="coupon-list-top-bg" src="{{iconURL}}/coupon-list-top-bg.png"></image>
+      <image class="coupon-list-top" src="{{iconURL}}/coupon-list-top.png"></image>
+      <scroll-view scroll-y class="coupon-list">
+        <view class="coupon-box" style="background-image:url('{{iconURL}}/sign-coupon01.png')" wx:for="{{couponEntry.coupon_info}}" wx:key="index">
+          <view class="coupon-money" wx:if="{{item.coupon_type == 1}}">
+            <text>{{item.value}}</text>
+            <i>折</i>
+          </view>
+          <view class="coupon-money" wx:else>
+            <i>¥</i>
+            <text>{{item.value}}</text>
+          </view>
+          <view class="coupon-msg">
+            <view class="coupon-help-type">
+              剩余
+              <i>{{item.surplus_num}}</i>
+              张
+            </view>
+            <view class="coupon-status">{{item.use_end_date}}</view>
+          </view>
+          <view class="coupon-empty" wx:if="{{item.give_status==1}}" style="background-image:url('{{iconURL}}/welfare_coupon_empty.png')"></view>
+          <view class="coupon-empty" wx:if="{{item.give_status==2}}" style="background-image:url('{{iconURL}}/is_save_coupon.png')"></view>
+        </view>
+      </scroll-view>
+      <image class="coupon-list-bottom-bg" src="{{iconURL}}/coupon-list-bottom-bg.png"></image>
+      <view class="get-goupon {{couponEntry.status == 2 ? 'active' : ''}}" bindtap="getWelfareCoupon">
+        领取红包
+      </view>
+      <view class="get-text">(可至我的红包中查看)</view>
+      <view class="welfare-closs" bindtap="closeWelfare">
+        <image src="{{iconURL}}/btn-index-closs.png" mode="widthFix"></image>
+      </view>
+    </view>
+  </view>
+  <!-- 下拉引导 -->
+  <view class="down-guide" wx:if="{{showDownGuide}}" animation="{{downGuideanimation}}">
+    <image mode="widthFix" src="{{iconURL}}/change-index-down-guide.png"></image>
+  </view>
+</view>
+<!-- 新厂首页 -->
+<view class='index-newlyweds' wx:elif="{{showPage && pickup.pickup_type == 1}}">
+  <view class="navbar-box" style="height: {{navBarHeight}}px">
+    <view style="height: {{navBarHeight}}px"></view>
+    <view class="navbar-menu" style="height: {{navBarHeight}}px">
+      <view class="navbar-left">
+        <navigator hover-class="none" class='pickup' url='../pickup/pickup'>
+          <view class='iconfont icon-btn_dizhix'></view>
+          <text class='pickup_content'>{{pickup.cityName||city.cityName}}</text>
+          <image class='right_icon' style='background-image:url({{iconURL}}/btn_xyh_12@2x.png)'></image>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  <image class="swiper-header-bg" src="{{iconURL}}/index-swiper-bg.png" wx:if="{{adList[0].ad_link != ''}}"></image>
+  <view class='index-newlyweds-list'>
+    <!-- 过渡版本广告 -->
+    <view class="swipers newSwipers indexAd" id="topHeight" wx:if="{{adList[0].ad_link != ''}}">
+      <swiper indicator-color="{{indicatorColor}}" current="{{indexAdcurrent}}" indicator-active-color="#ffbb44" indicator-dots="{{indicatorDots}}" circular="{{circular}}" autoplay="{{!autoplay}}" interval="{{interval}}" duration="{{duration}}">
+        <swiper-item wx:for="{{adList}}" wx:key="{{index}}">
+          <image mode="aspectFill" class="adImg newAdimg" src='{{item.ad_code}}'></image>
+          <form class='index-from-indexAd new' bindsubmit='goWebView' data-type='2' data-item='{{item}}' report-submit='true'>
+            <button form-type='submit'></button>
+          </form>
+        </swiper-item>
+      </swiper>
+    </view>
+    <view class="newlyweds-img">
+      <view class="newlyweds-img-box">
+        <view class="iconfont icon-yuanzhuangzhengpin newLywds-icon"></view>
+        <view class="newLywds-text">原装正品</view>
+      </view>
+      <view class="newlyweds-img-box">
+        <view class="iconfont icon-img_jisutihuox newLywds-icon"></view>
+        <view class="newLywds-text">次日送达</view>
+      </view>
+      <view class="newlyweds-img-box">
+        <view class="iconfont icon-bianjietihuo newLywds-icon"></view>
+        <view class="newLywds-text">便捷提货</view>
+      </view>
+      <view class="newlyweds-img-box">
+        <view class="iconfont icon-fangxingoumai newLywds-icon"></view>
+        <view class="newLywds-text">放心购买</view>
+      </view>
+    </view>
+    <!-- 首页专题广告 -->
+    <view class="subject-ad-list" wx:if="{{subjectAdList.length>=2}}">
+      <view class="subject-ad-li" wx:for="{{subjectAdList}}" wx:if="{{index<2}}" wx:key="{{index}}">
+        <image class="subject-ad-li" src="{{item.ad_code}}"></image>
+        <form class='index-from-indexAd new' bindsubmit='goWebView' wx:if="{{index<2}}" data-type='2' data-item='{{item}}' report-submit='true'>
+          <button form-type='submit'></button>
+        </form>
+      </view>
+    </view>
+    <!-- 活动tab切换 -->
+    <view class="team-tab-box" id="slider-bar-team">
+      <view class="team-tab {{sliderBarFixed ? 'on' : ''}}" style="top: {{sliderBarFixed ? navBarHeight : ''}}px">
+        <view class="team-tab-li {{teamNum==0?'team-active':''}}" data-num="0" bindtap="change_team_tab">
+          正在拼团
+        </view>
+        <view class="team-tab-li {{teamNum==1?'team-active':''}}" data-num="1" bindtap="change_team_tab">
+          正在砍价
+        </view>
+        <view class="team-tab-li {{teamNum==2?'team-active':''}}" data-num="2" bindtap="change_team_tab">
+          即将开团
+        </view>
+      </view>
+    </view>
+    <view class="team-box" wx:if="{{teamGoodsList.length>0}}">
+      <pickUpGoods goodsList="{{teamGoodsList}}" type="{{teamNum}}" bind:showPhoneModal="toShowPhoneModal" getRemind="{{getRemind}}"></pickUpGoods>
+    </view>
+    <view class="team-box-none" wx:else>
+      <image class="team-img-none" src="{{iconURL}}/buhuoindex.png"></image>
+      <view class="goods_none">小提正在努力补货中，敬请期待~</view>
+    </view>
+    <view class="index-footer-img">
+      <image src="{{item.image}}" mode="widthFix" wx:for="{{pickUpActivity.index_footer_img}}" wx:key="{{index}}"></image>
+    </view>
+    <!-- 获取手机号弹窗 -->
+    <view class="drawer_screen" wx:if="{{showPhoneModal}}"></view>
+    <view class="getPhoneModal" wx:if="{{showPhoneModal}}">
+      <view class="modal-text">买买提将通过短信形式进行提醒，请允许授权手机号</view>
+      <view class="btn-footer">
+        <button class="close-phone-btn" bindtap="closePhoneModal">取消提醒</button>
+        <button class="get-phone-btn" open-type='getPhoneNumber' bindgetphonenumber="getPhone">
+          允许授权
+        </button>
+      </view>
+    </view>
+  </view>
+  <!-- 闪送按钮 -->
+  <view>
+    <view class="conpun-postion-box {{takeoutAnimation ? 'takeout-active' : ''}}" wx:if="{{shop_id!=0}}">
+      <view class="conpun-postion-img" bindtap="goTakeoutShop">
+        <image class="imgbox" src="{{iconURL}}/bargain-conpun-ad-imgbox.png"></image>
+        <image class="imgbtn" src="{{iconURL}}/bargain-conpun-ad-imgbtn.png"></image>
+        <view class="text">红包天天送</view>
+      </view>
+    </view>
+  </view>
+  <pagebottom wx:if="{{showPage && teamGoodsList.length>0 && checkShowBottom}}"></pagebottom>
+</view>
+<no_warehouse wx:else city="{{city}}" isAuthorization="{{isAuthorization}}" bindopenevent="openSet"></no_warehouse>
+<view class="drawer_screen" wx:if="{{choosePickupShow}}"></view>
+<view class="choosePickup-model" wx:if="{{choosePickupShow}}">
+  <view class="model-title">温馨提示</view>
+  <view class="row model-desc">
+    <view class="iconfont icon-gantanhao desc-icon"></view>
+    <view class="desc-text">当前位置存在多个工厂服务</view>
+  </view>
+  <view class="model-msg-title">请选择您所在的工厂：</view>
+  <view class="row model-box-main" bindtap="choosePickupChange" data-index="{{index}}" wx:for="{{choosePickupList}}" wx:key="{{index}}">
+    <view class="model-text">{{item.cityName}}</view>
+    <view class="iconfont {{chooseSelectIndex == index ? 'icon-btn_xuanzhongx' : 'icon-btn_weixuanzhongx'}}"></view>
+  </view>
+  <view class="model-btn" bindtap="choosePickupSubmit">确定</view>
+</view>
+<loadingBottom wx:if="{{showBottomLoading}}"></loadingBottom>
+<!-- 公众号组件 -->
+<official-account wx:if="{{showOfficial}}" class='official' bindload="gzhBindload" binderror="gzhBindload"></official-account>
+<!-- 红包-顶部通知消息 -->
+<notice type="1" bind:click="getHomeSituation"></notice>
+<!-- 红包-侧边栏提示信息 -->
+<view class="redEnvelops-sidebar msg {{takeoutAnimation ? 'sidebar-active' : ''}}" wx:if="{{homeSituation.is_show == 1 && pickup.pickup_type == 0}}">
+  <view class="sidebar-box" bindtap="getEnvelopes" data-item="{{homeSituation}}">
+    <view class="redEnvelops-sidebar-red-pack">
+      <image class="img-msg {{(homeSituation.status == 3 || homeSituation.status == 4) && !takeoutAnimation ? 'pulse' : ''}} {{(homeSituation.status == 1 || homeSituation.status == 2) && !takeoutAnimation ? 'pulseMax' : ''}}" src="{{homeSituation.show_img}}" mode="widthFix"></image>
+    </view>
+    <view class="number" wx:if="{{homeSituation.status == 3}}">
+      {{homeSituation.notice_msg_num}}
+    </view>
+  </view>
+</view>
+<!-- 红包-可领取红包 -->
+<envelopes bind:click="getHomeSituation"  tiketId="{{tiket_id}}" show="{{showRedEnvel}}" status="{{homeSituation.status}}" rid="{{homeSituation.red_packet_id}}"  showType="{{showRedEnvelType}}" ></envelopes>
+
+<!-- loading -->
+<loading wx:if="{{loadingShow}}"></loading>

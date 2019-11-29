@@ -1,0 +1,60 @@
+<block wx:if="{{showSKUstatus}}">
+  <view class="drawer_screen" catchtap="skuPopupHide" catchtouchmove="bindtouchmove"></view>
+  <view class="drawer_attr_box {{showSKUstatus ? 'show' : ''}} {{iphoneXBottom=='68rpx'?'bt-68':''}}" catchtouchmove="bindtouchmove">
+    <view class="close_icon" catchtap="skuPopupHide">
+      <image src="{{iconURL}}/icon_modal_closs.png"></image>
+    </view>
+    <view class="drawer_attr_content">
+      <view class="text_center">
+        <view class='drawer_image'>
+          <image class="" mode='widthFix' src="{{goodsInfoNew.header_img || goodsInfo.header_img}}"></image>
+        </view>
+        <view class="product-SKU">
+          <view class='product-price' wx:if="{{!isShowNumber}}">
+            <i class="text">砍完</i>
+            <i class='font_24'>¥</i>
+            <text>{{goodsInfoNew.floor_price || goodsInfo.floor_price}}</text>
+            <text class='small'>¥{{goodsInfoNew.shop_price || goodsInfo.shop_price}}</text>
+          </view>
+          <view class='product-price' wx:if="{{isShowNumber}}">
+            <i class='font_24'>¥</i>
+            <text>{{goodsInfoNew.shop_price || goodsInfo.shop_price}}</text>
+            <text wx:if="{{goodsInfoNew.shop_price != goodsInfoNew.market_price}}" class='small'>¥{{goodsInfoNew.market_price || goodsInfo.market_price}}</text>
+          </view>
+          <view class='product-choose'>{{skutitlename}}</view>
+        </view>
+      </view>
+      <scroll-view class='attr-margin' scroll-y='true'>
+        <view class='attr_main sku-height' wx:for='{{goodsInfo.properties}}' wx:for-index="n" wx:for-item='ProductItem' wx:key='{{n}}'>
+          <view class="group-name">{{ProductItem.spec_name}}</view>
+          <view class="commodity_attr_list">
+            <view class="attr_box" wx:for="{{ProductItem.attrs}}" wx:for-item="oItem" catchtap='specificationBtn' data-spec_value_id='{{oItem.id}}' data-n='{{n}}' data-index="{{index}}" data-isShow='{{oItem.isShow}}' data-spec_name="{{ProductItem.spec_name}}" wx:key='{{index}}'>
+              <view class="attr_name {{subIndex[n] == index ? 'active' : ''}} {{oItem.isShow ? '' : 'disable'}}">
+                {{oItem.item}}
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="attr-amount attr_main" wx:if="{{isShowNumber}}">
+        <view class="group-click">
+          <!-- 减号 -->
+          <form report-submit='true' bindsubmit="changeNum" data-alpha-beta="0">
+            <button class="amount-button" form-type='submit'>
+              <i class='amount-icon {{undel ? "cant-del" : ""}}'>-</i>
+            </button>
+          </form>
+          <!-- 数值 -->
+          <view class="amount-input">{{buynum}}</view>
+          <!-- 加号 -->
+          <form report-submit='true' bindsubmit="changeNum" data-alpha-beta="1">
+            <button class="amount-button" form-type='submit'>
+              <i class='amount-icon {{unadd ? "cant-del" : ""}}'>+</i>
+            </button>
+          </form>
+        </view>
+      </view>
+      <button class='buy_now_btn' catchtap='submitnew'>确定</button>
+    </view>
+  </view>
+</block>

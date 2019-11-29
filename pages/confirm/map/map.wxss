@@ -1,0 +1,4 @@
+/* pages/confirm/map/map.wxss */
+.map_content image{
+  width: 100%;
+}

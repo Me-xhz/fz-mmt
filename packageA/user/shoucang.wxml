@@ -1,0 +1,35 @@
+<!--pages/user/shoucang.wxml-->
+<view class="page attend">
+  <view class="empty" wx:if="{{productData.length <= 0 && showIcon}}">
+    <view class="empty-item">
+      <image class="item-logo" src="{{iconURL}}/icon_like_empty.png" mode='widthFix'></image>
+      <view class="item-text">暂时还没有收藏/(ㄒoㄒ)/~~</view>
+    </view>
+  </view>
+  <view wx:else class='container'>
+    <view class='top-subbar'>
+      <view class='w50 fl'>共收藏{{attentionNum}}件商品</view>
+      <view class='w50 fr tr' bindtap="edit">{{editType ? '编辑' : '完成'}}</view>
+    </view>
+    <view class="list-item {{left ? 'marginLeft' : ''}}" wx:for="{{productData}}" wx:for-item="items" wx:key="items.good_id" catchtap="choose" data-id="{{items.goods_id}}">
+      <icon class="user-item-checkbox {{items.checked ? 'radio-icon-active' : ''}}"></icon>
+      <image class="item-image" src="{{items.img}}"></image>
+      <view class="item-info">
+        <view class="info-price">{{items.goods_name}}</view>
+        <view class="info-name"><i class='icon_rmb'>¥</i>{{items.market_price}}</view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{loaded && productData.length > 0 && !showIcon}}" class="loaded">
+    没有更多啦~
+  </view>
+</view>
+<view class="bottomTab" wx:if="{{left}}">
+  <view class="selectIcon" catchtap="chooseAll">
+    <icon class="user-item-checkbox {{checkbox ? 'radio-icon-active' : ''}}"></icon>
+  </view>
+  <view class="selectAll">
+    <span class="chooseAll" catchtap="chooseAll">全选</span>
+  </view>
+  <button type='warn' class='cancelAtten' catchtap="removeFavorites">取消收藏</button>
+</view>

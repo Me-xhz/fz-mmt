@@ -1,0 +1,161 @@
+/* components/goodList3/goodList3.wxss */
+@import "/wxParse/suui/suui.wxss";
+
+.configureModel{
+  width: 100%;
+}
+.homeBlock {
+  padding-bottom: 25rpx;
+  background-color: #fefefe;
+}
+.item-block {
+  width: 750rpx;
+}
+.block-image-cover {
+  display: block;
+  width: 750rpx;
+  height: 360rpx;
+}
+.block-image {
+  display: block;
+  width: 700rpx;
+  height: 320rpx;
+  margin: 25rpx 25rpx 0rpx 25rpx;
+}
+.block-product {
+  margin-top: 25rpx;
+  width: 750rpx;
+  padding: 0 24rpx;
+  box-sizing:border-box;
+}
+.header-bar {
+  position: relative;
+  height: 104rpx;
+  width: 750rpx;
+}
+.bar-image {
+  width: 700rpx;
+  height: 72rpx;
+  margin: 25rpx 25rpx 0 25rpx;
+}
+.bar-more {
+  position: absolute;
+  top: 50rpx;
+  right: 20rpx;
+}
+.block-margin {
+  margin-top: 25rpx;
+  padding: 0 25rpx;
+  box-sizing: border-box;
+}
+.block-merge-horizontal {
+  justify-content: space-between;
+}
+.block-merge-width {
+  flex-wrap: wrap;
+}
+.block-image-1 {
+  width: 700rpx;
+  height: 420rpx;
+}
+.block-image-2 {
+  width: 347rpx;
+  height: 420rpx;
+}
+.block-image-3 {
+  width: 347rpx;
+  height: 206rpx;
+}
+.block-image-bottom {
+  margin-bottom: 6rpx;
+}
+.block-image-right {
+  margin-right: 4rpx;
+}
+
+
+/* 优惠券 */
+.coupon_wrap {
+  width: 700rpx;
+  height: 144rpx;
+  margin: 16rpx auto;
+  /* margin-bottom: 16rpx; */
+  background: #eb3c39;
+  border-radius: 8rpx;
+  padding: 12rpx 10rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+.coupon_wrap .cover_img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 44rpx;
+  height: 144rpx;
+}
+.scroll_wrap {
+  width: 500rpx;
+  height: 120rpx;
+  white-space: nowrap;
+}
+
+.scroll_wrap .coupon {
+  display: inline-block;
+  width: 216rpx;
+  height: 120rpx;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.scroll_wrap .coupon .price {
+  color: #bb803b;
+  font-size: 52rpx;
+  font-weight: 600;
+  text-align: center;
+}
+
+.scroll_wrap .coupon .price .small {
+  font-size: 20rpx;
+  color: #bb803b;
+}
+
+.scroll_wrap .coupon .tab {
+  font-size: 20rpx;
+  color: #fff;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 4rpx;
+}
+
+.scroll_wrap .coupon .tab .text {
+  min-width: 130rpx;
+  height: 30rpx;
+  border-radius: 20rpx;
+  background: #bb803b;
+  padding: 0 10rpx;
+}
+
+.coupon_wrap .total_box {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20rpx;
+}
+
+.coupon_wrap .total_box .total_price {
+  font-size: 55rpx;
+  color: #fff;
+  text-align: center;
+}
+
+.coupon_wrap .total_box .small {
+  font-size: 20rpx;
+}
+
+.coupon_wrap .total_box .get_btn {
+  width: 160rpx;
+  height: 42rpx;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

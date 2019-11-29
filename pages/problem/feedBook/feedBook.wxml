@@ -1,0 +1,20 @@
+<!--pages/problem/feedBook/feedBook.wxml-->
+<view class="leaveMsg">
+  <view class='main'>
+    <text class='mainTitle'>问题和意见</text>
+    <view class='contant'>
+      <textarea class='textarea' placeholder='请简要描述您的问题和意见，至少6个字' maxlength='120' bindinput='inputs' value='{{feedbackContent}}'></textarea>
+      <text class='maxlength'>{{currentWordNumber|0}}/120</text>
+    </view>
+
+    <!-- 联系电话 -->
+    <view class='contactPhone'>
+      <text class='contactText'>联系电话</text>
+      <input class='phoneNum' placeholder='请输入您的联系方式' bindinput='feedbackPhone' type='number' value='{{feedbackPhone}}'></input>
+    </view>
+  </view>
+
+  <view class='sub-btn-bgc' bindtap='feedBackAdd'>
+    <text class='sub-txt'>留言反馈</text>
+  </view>
+</view>

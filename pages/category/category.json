@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "分类",
+  "usingComponents": {
+    "no_warehouse": "/components/no_warehouse/no_warehouse"
+  }
+}

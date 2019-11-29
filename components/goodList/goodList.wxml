@@ -1,0 +1,39 @@
+<!--components/goodList/goodList.wxml-->
+<!-- 列表组件 -->
+<view class='goodList clearfix'>
+  <view class='row {{type==2?"between":""}}' wx:for="{{recommend_goods}}" wx:key="{{index}}" wx:for-item="good_list">
+    <view hover-class="none" class="good_card{{type}} {{type==3?'mr4':''}}" wx:for="{{good_list}}" wx:key="{{item.goods_id}}">
+      <view class='good_pic{{type}} mb12 good_pic inequacy_wrap' style="background-image:url({{iconURL}}/cstp.png)">
+          <image class='goods_lable' wx:if="{{item.goods_lable.length>0}}" src='{{item.goods_lable}}'></image>
+          <view class='discount_label' wx:if="{{item.img_content&&item.img_content.length>0 && type != 3}}">{{item.img_content}}</view>
+        
+        <image lazy-load="true" mode='scaleToFill' src='{{item.list_img}}'></image>
+        <view class='inequacy' wx:if="{{item.is_enough==0}}">
+          <image  src='{{iconURL}}/inequacy02.png'></image>
+        </view>  
+        
+        <!-- <view class='prom_info' wx:if="{{item.prom_info.prom_label}}">{{item.prom_info.prom_label}}</view> -->
+      </view>
+      <view class='good_info{{type}}'>
+        <view class='title mb12'>
+          <view class="team-tips-box" wx:if="{{item.label_list.length>0}}">
+            <view  wx:for="{{item.label_list}}" wx:for-item="tips"  wx:for-index="tipsindex"  class="team-tips {{tips.type==2?'tips-active':''}}"  wx:key="{{tipsindex}}">{{tips.name}}</view>
+          </view>
+          {{item.goods_name}}
+        </view>
+        <view class='price red-font-color mb24' style='text-align:{{align}}'>
+          <text class='{{symbolSize}}' style="font-size:26rpx;">¥</text>
+          <text class="{{symbolSize=='small'?'font_16w':''}}">{{item.shop_type==0?item.shop_price:item.month_price+'/月'}}</text>
+          <view class='tab' wx:if="{{item.is_special_price}}">特价</view>
+          <!-- <view class='tab' wx:if="{{item.is_new}}">上新</view> -->
+          <text wx:if="{{item.shop_type == 0 && item.shop_price != item.market_price && !(type == 3 && item.is_special_price)}}" class='small sPrice'>¥{{item.market_price}}</text>
+        </view>
+      </view>
+      <form bindsubmit='goToProduct' class='index-from-goodsCard index-from-goodsCard{{type}}' data-name="{{item.goods_name}}" data-goodsId='{{item.goods_id}}' data-type='{{item.type}}' report-submit='true'>
+        <button form-type='submit'></button>
+      </form>
+    </view>
+  </view>
+</view>
+
+<!-- class="good_card{{type}} {{(index+1)%type==0 ? '' : space}}" wx:for="{{list}}" wx:key="{{item.goods_id}}" -->

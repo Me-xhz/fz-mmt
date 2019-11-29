@@ -1,0 +1,135 @@
+/* packageA/cancel-order/cancel-order.wxss */
+.cancel-list{
+    width: 100%;
+    padding: 0 24rpx;
+    margin-bottom: 30rpx;
+    box-sizing: border-box;
+}
+.cancel-list .cancel-box{
+    width: 100%;
+    background-color: #fff;
+    border-radius: 12rpx;
+    padding:12rpx 24rpx 28rpx 24rpx;
+    box-sizing: border-box;
+    margin-top: 24rpx;
+}
+.cancel-list .cancel-box .cancel-num-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.cancel-list .cancel-box .cancel-num-box .cancel-num{
+    font-size: 28rpx;
+    font-weight: 500;
+    color:#303030;
+    line-height: 40rpx;
+}
+.cancel-list .cancel-box .cancel-num-box .cancel-num i{
+    color:#EB3C39;
+    font-size: 48rpx;
+    margin: 0 12rpx;
+    line-height: 66rpx;
+}
+.cancel-num-text{
+    font-size: 28rpx;
+    color:#303030;
+    line-height: 50rpx;
+}
+.cancel-list .cancel-box .cancel-time-box{
+    line-height: 40rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    /* border-bottom: 2rpx solid #aaa; */
+    margin-top: 10rpx;
+    margin-bottom: 14rpx;
+}
+.cancel-list .cancel-box .cancel-time-box .cancel-time-text{
+    font-size: 28rpx;
+    color:#303030;
+    line-height: 40rpx;
+
+}
+.cancel-list .cancel-box .cancel-time-box .cancel-time{
+    line-height: 40rpx;
+    font-size: 28rpx;
+    font-weight: 500;
+    color:#303030
+}
+.cancel-list .cancel-box .goods-list{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    padding: 10rpx 24rpx;
+    box-sizing: border-box;
+    margin-top: 12rpx;
+    border-radius: 10rpx;
+}
+.cancel-list .cancel-box .goods-active{
+
+  background-color: #f2f2f2;
+}
+.cancel-list .cancel-box .goods-list .goods-name{
+    font-size:36rpx;
+    width: 84%;
+    font-weight: 500;
+    line-height: 60rpx;
+    color:#303030;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    text-align: left;
+    overflow: hidden;
+
+}
+.cancel-list .cancel-box .goods-list .goods-num{
+    font-size: 48rpx;
+    line-height: 66rpx;
+    font-weight: 500;
+    color:#EB3C39;
+}
+.cancel-list .cancel-box .goods-list .goods-num i{
+  font-size: 24rpx;
+  line-height: 0rpx;
+
+}
+.empty {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.empty.address-empty {
+    height: 600rpx;
+    background: #fff;
+}
+
+.empty .empty-item {
+    position: absolute;
+    left: 50%;
+    /*top: 50%;*/
+    display: block;
+    width: 100%;
+    transform: translateX(-50%);
+}
+
+.empty .empty-item .item-logo {
+    display: block;
+    margin: 0 auto;
+    width: 288rpx;
+    height: 128rpx;
+}
+.credits-bottom{
+    font-size: 24rpx;
+    color: #CBCFD6;
+    text-align: center;
+    padding: 40rpx 0;
+}
+.credits-bottom image{
+    width: 94rpx;
+    height:80rpx;
+}

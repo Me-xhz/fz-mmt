@@ -1,0 +1,168 @@
+<!--pages/newExclusive/newExclusive.wxml-->
+<!-- 返回首页悬浮框/分享进入显示 -->
+  <view class='goHomeFixed' catchtap='gotoHome' wx:if="{{isShowGoHome}}">
+    <image src='{{iconURL}}/product-icon-leftReturn.svg' class='icon-leftReturn'></image>
+    <text>返回首页</text>
+  </view>
+<view wx:for="{{indexModel}}" wx:for-item="modelGroup">
+  <view wx:for="{{modelGroup}}">
+    <view class='ad' wx:if="{{item.type==2}}" >
+      <image class='ad_img' src='{{item.title}}' mode='widthFix'></image>
+    </view>
+    <view class='ad' wx:if="{{item.type==1&&item.route.url!='coupon'}}" bindtap='goWebView' data-param='{{item.route.param}}'>
+      <image class='ad_img' src='{{item.pic}}' mode='widthFix'></image>
+    </view>
+    <!-- 优惠券 -->
+    <view class='coupon_wrap' wx:if="{{item.type==1&&item.route.url=='coupon'}}">
+      <image class='cover_img' src='{{iconURL}}/img_ztyhqzz@2x.png'></image>
+      <scroll-view scroll-x='true' class='scroll_wrap'>
+        <view class='coupon' style='background-image:url({{iconURL}}/img_xrzxyhqbg@2x.png)' wx:for="{{item.route.param}}" wx:for-item="coupon">
+          <view class='price'>
+            <text class='small'>￥</text>{{coupon.money}}</view>
+          <view class='tab'><text class='text'>{{coupon.use_type}}</text></view>
+        </view>
+      </scroll-view>
+      <view class='total_box'>
+        <view class='total_price'>
+          <text class='small'>￥</text>{{item.route.total}}</view>
+        <view class='get_btn' wx:if="{{item.route.take==1}}" catchtap='akeyToGet' data-ad_id='{{item.route.ad_id}}' data-param='{{item.route.param}}' style="background-image:url({{iconURL}}/btn_yjlq@2x.png)"></view>
+        <view class='get_btn' wx:if="{{item.route.take==2}}" style="background-image:url({{iconURL}}/yilingqu.png)"></view>
+      </view>
+    </view>
+
+
+    <!-- 新人商品 -->
+    <view class='ac_new_person good_list_wrap' wx:if="{{item.type==3&&item.goodscss==1}}" style="background-image:url({{iconURL}}/home-newlyweds2@2x.png)">
+      <!-- <view class='iconfont icon-btn_xianshifengqiangguizex'></view> -->
+      <view class='good_list'>
+        <view class='good_box {{index!=2?"mr6":""}}' wx:for="{{item.goods}}" wx:for-item="good" >
+          <view class='good_info' catchtap='goToProduct' data-goodsId='{{good.goods_id}}'>
+            <view class='good_pic inequacy_wrap'>
+              <image class='goods_lable' wx:if="{{good.goods_lable.length>0}}" src='{{good.goods_lable}}'></image>
+              <view class='discount_label' wx:if="{{good.img_content&&good.img_content.length>0 && type != 3}}">{{good.img_content}}</view>
+              <image src='{{good.list_img}}'></image>
+              <view class='inequacy'  wx:if="{{good.is_enough==0}}">
+                <image src='{{iconURL}}/inequacy02.png'></image>
+              </view>
+
+            </view>
+            <view class='title'>{{good.goods_name}}</view>
+            <view class='price'>
+              <text class='small'>￥</text>{{good.shop_price}}
+              <text class='false_price'>{{good.market_price}}</text>
+            </view>
+          </view>
+          <view class='add_cart'>
+            <form bindsubmit='addShopCart' wx:if="{{good.buy_now == 0}}" data-buyNow='0' data-type="bottomcart" data-productId='{{good.goods_id}}' data-type="addcart" report-submit='true'>
+              <button class='addToShopCart' formType='submit'>
+                <text>加入购物车 <text class='iconfont icon-btn_shangxianggouwuchex'></text></text>
+              </button>
+            </form>
+            <form bindsubmit='nowPurchase' wx:if="{{good.buy_now == 1}}" data-buyNow='1' data-type="bottomcart" data-productId='{{good.goods_id}}' data-type="addcart" report-submit='true'>
+              <button class='addToShopCart' formType='submit'>
+                <text>立即购买 <text class='iconfont icon-btn_shangxianggouwuchex'></text></text>
+              </button>
+            </form>
+
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 普通商品 -->
+    <view wx:if="{{item.type==3&&item.goodscss==2}}">
+      <view class='common_good good_list_wrap' wx:for="{{item.goods}}" wx:for-item="row">
+        <view class='good_list'  style='padding-bottom:12rpx'>
+          <view class='good_box {{index!=2?"mr6":""}}' wx:for="{{row}}" wx:for-item="good" >
+            <view class='good_info' catchtap='goToProduct' data-goodsId='{{good.goods_id}}'>
+              <view class='good_pic inequacy_wrap'>
+                <image class='goods_lable' wx:if="{{good.goods_lable.length>0}}" src='{{good.goods_lable}}'></image>
+                <view class='discount_label' wx:if="{{good.img_content&&good.img_content.length>0 && type != 3}}">{{good.img_content}}</view>
+                <image src='{{good.list_img}}'></image>
+                <view class='inequacy'  wx:if="{{good.is_enough==0}}">
+                  <image src='{{iconURL}}/inequacy02.png'></image>
+                </view>
+              </view>
+              <view class='title'>{{good.goods_name}}</view>
+              <view class='price'>
+                <text class='small'>￥</text>{{good.shop_price}}
+                <text class='false_price'>{{good.market_price}}</text>
+              </view>
+            </view>
+            <view class='add_cart'>
+              <form bindsubmit='addShopCart' wx:if="{{good.buy_now == 0}}" data-buyNow='0' data-type="bottomcart" data-productId='{{good.goods_id}}' data-type="addcart" report-submit='true'>
+                <button class='addToShopCart' formType='submit' style='background-image:url({{iconURL}}/btn_jrgwc@2x.png)'>
+                  <text class='color_white'>加入购物车 <text class='iconfont icon-btn_shangxianggouwuchex'></text></text>
+                </button>
+              </form>
+              <form bindsubmit='nowPurchase' wx:if="{{good.buy_now == 1}}" data-buyNow='1' data-type="bottomcart" data-productId='{{good.goods_id}}' data-type="addcart" report-submit='true'>
+                <button class='addToShopCart' formType='submit' style='background-image:url({{iconURL}}/btn_jrgwc@2x.png)'>
+                  <text class='color_white'>立即购买 <text class='iconfont icon-btn_shangxianggouwuchex'></text></text>
+                </button>
+              </form>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>
+<view class='iconfont icon-btn_shangxianggouwuchex toCart' catchtap='toCart'></view>
+
+<!--SKU弹窗-->
+<view class="drawer_screen" catchtap="setModalStatus" wx:if="{{showModalStatus}}"></view>
+<view animation="{{animationData}}" style="opacity:1;z-index:{{itemData.buy_now==1?'2000':'1200'}};" class="drawer_attr_box" wx:if="{{showModalStatus}}">
+  <view class="close_icon" catchtap="setModalStatus">
+    <image src="{{iconURL}}/icon_modal_closs.png"></image>
+  </view>
+  <view class="drawer_attr_content">
+    <view class="text_center">
+      <view class='drawer_image'>
+        <image class="" mode='widthFix' src="{{skuImages}}"></image>
+      </view>
+      <view class="product-SKU">
+        <view class='product-price'>
+          <i class='icon_rmb'>¥</i>
+          <text>{{skuSvipCurrent}}</text>
+          <text class='small'>¥{{skuCurrent}}</text>
+        </view>
+        <view class='product-choose'>{{choosed_sku}}</view>
+      </view>
+    </view>
+    <scroll-view class='attr-margin' scroll-y='true'>
+      <view class='attr_main sku-height' wx:for='{{itemData.properties}}' wx:for-item='property' wx:key='index'>
+        <view class="group-name">{{property.spec_name}}</view>
+        <view class="commodity_attr_list">
+          <view class="attr_box" wx:for="{{property.attrs}}" wx:for-item="attr" catchtap='attrValueselest' data-property='{{property}}' data-attr='{{attr}}' wx:key='index'>
+            <view class="attr_name {{attr.class}}">
+              {{attr.item}}
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="attr-amount attr_main">
+      <!-- <view class="group-name attr_num_txt">购买数量</view> -->
+      <view class="group-click">
+        <!-- 减号 -->
+        <button class="amount-button" data-alpha-beta="0" catchtap='changeNum'>
+          <i class='amount-icon {{undel ? "cant-del" : ""}}'>-</i>
+        </button>
+        <!-- 数值 -->
+        <view class="amount-input">{{buynum}}</view>
+        <!-- 加号 -->
+        <button class="amount-button" data-alpha-beta="1" catchtap="changeNum">
+          <i class='amount-icon {{unadd ? "cant-del" : ""}}'>+</i>
+        </button>
+      </view>
+    </view>
+    <form wx:if="{{buy_now == 0}}" bindsubmit='addShopCart' data-type="bottomcart" data-productId='{{productid}}' report-submit='true'>
+      <button type='primary' class="buy_now_btn" data-productId='{{productid}}' formType='submit' data-type="bottomcart">加入购物车</button>
+    </form>
+    <form wx:if="{{buy_now == 1}}" bindsubmit='nowPurchase' data-type="bottomcart" data-productId='{{productid}}' report-submit='true'>
+      <button type='primary' class="buy_now_btn" data-productId='{{productid}}' formType='submit' data-type="bottomcart">立即购买</button>
+    </form>
+    <!-- <button class='buy_now_btn' wx:if="{{itemData.buy_now==1}}" catchtap='nowPurchase'>立即购买</button> -->
+  </view>
+</view>
+<loading wx:if="{{loadingShow}}"></loading>

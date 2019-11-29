@@ -1,0 +1,49 @@
+<!-- 引入通用模板 -->
+<import src="../listdetailTemplate/listdetailTemplate.wxml" />
+<view class="list">
+  <!-- 作品类头部样式 -->
+  <view wx:if="{{showTitleType == 1}}">
+    <view class="titleImg">
+      <image mode='widthFix' src='{{titleList.brand_header_img}}'></image>
+    </view>
+    <view class="titleText">
+      {{titleList.name}}
+      <!-- <view class="brand_more" bindtap='gotoHome'>更多周边
+        <image class="icon-right-arrow" src="{{iconURL}}/icon_right_arrow.png"></image>
+      </view> -->
+    </view>
+    <view class="titleDescribe">
+      <text class='describe {{titleList.wordsCut ? "cut" : ""}}'>{{titleList.desc}}</text>
+      <view class='limit-words' wx:if="{{titleList.words}}" bindtap='limitWord' data-iscut='{{titleList.wordsCut}}'>{{limitWords}}
+        <image class='show' wx:if="{{titleList.wordsCut}}"></image>
+        <image class='hidden' wx:if="{{!titleList.wordsCut}}"></image>
+      </view>
+      <view class='attr-shadow {{titleList.wordsCut ? "show" : ""}}'></view>
+    </view>
+  </view>
+  <!--商品类头部样式 -->
+  <view wx:if='{{showTitleType != 1}}' class='mod-margin'>
+    <scroll-view scroll-x="true" class='mod-nav'>
+      <ur class='nav-ul'>
+        <li bindtap="titleTap" data-titleid="0" class="{{catId == activeid ? 'actives' : ''}}">
+          <span>全部</span>
+        </li>
+        <li wx:for="{{titleList}}" class="{{item.cat_id == activeid ? 'actives' : ''}}" wx:key="item.cat_id" bindtap="titleTap" data-titleid="{{item.cat_id}}">
+          <span>{{item.name}}</span>
+        </li>
+      </ur>
+    </scroll-view>
+  </view>
+  <!-- 商品列表 -->
+  <template is="listDetail" data="{{shopList}}"/>
+  <!-- wx:if="{{isLoaded && !isLastPage && !isEmpty}}" -->
+  <view class="cate-list-more" wx:if="{{!isLoaded}}">正在加载...</view>
+  <!-- wx:if="{{isLoaded && isLastPage && !isEmpty && themeModel.isLoaded && themeModel.isLastPage && !themeModel.hasIpStation}}" -->
+  <view class="cate-list-more" wx:if="{{isLoaded}}">没有更多啦~</view>
+  <view wx:if="{{showTitleType == 1}}" class='back-button'>
+    <view catchtap='gotoPagetop' class='backtop' wx:if='{{showBackTop}}'></view>
+    <view catchtap='gotoHome' class='gohome'></view>
+  </view>
+</view>
+
+<loading wx:if="{{loadingShow}}"></loading>

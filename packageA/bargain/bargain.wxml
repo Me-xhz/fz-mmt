@@ -1,0 +1,342 @@
+<paypu  isShow="{{isShow}}" loacl="{{newlocal}}"  bind:confim="confim" bind:cancal="cancal">
+ </paypu>
+
+
+<view class="nav-bar-back" style="height:{{navBarHeight}}px">
+  <view bindtap="back" wx:if="{{showBack}}" class="iconfont icon-btn_fanhuizuojiantoux"></view>
+  <view class="navbar-box" style="height: {{navBarHeight}}px;opacity: {{navbarOpacity}}">
+    <view style="height: {{navBarHeight}}px"></view>
+    <view class="navbar-menu" style="height: {{navBarHeight}}px">
+      <view class="menu-left noborder">
+        <view bindtap="back" wx:if="{{showBack}}" class="iconfont icon-btn_fanhuizuojiantoux"></view>
+        <view bindtap="backHome" wx:if="{{!showBack}}" class="iconfont icon-btn_shangxiangshouyex"></view>
+      </view>
+      <view class="menu-title">
+        <view class="goods-name">{{itemData.goods_name}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 分享按钮 -->
+<!-- <form report-submit='true' bindsubmit='shareFromId'>
+  <button class='team-share row' form-type='submit' open-type='share'>
+    <image src='{{iconURL}}/product-icon-share.svg'></image>
+    <text>分享</text>
+  </button>
+</form> -->
+<view class='container {{itemData.gallery ? "show" : ""}}'>
+  <view class='goHomeFixed' catchtap='gotoHome' wx:if="{{isShowGoHome}}">
+    <image src='{{iconURL}}/product-icon-leftReturn.svg' class='icon-leftReturn'></image>
+    <text>返回首页</text>
+  </view>
+  <!-- 轮播商品图片 -->
+  <view class="goods-img-box">
+    <image wx:if="{{itemData.is_enough == 0}}" bindload='swiperImageLoad' class="goods-img" src="{{itemData.gallery[0].src}}"></image>
+    <swiper wx:else class="goods-img" indicator-dots="{{indicatorDots}}" indicator-active-color="#ffe150">
+      <swiper-item wx:for="{{itemData.gallery}}" wx:key="index">
+        <image bindtap='setPreviewImage' data-current='{{item.src}}' bindload='swiperImageLoad' src="{{item.msrc}}" class="slide-image {{swiperImgBl == true ? 'loaded' : ''}}">
+          <view class="enough" wx:if="{{itemData.is_enough == 0}}">
+            <image src="{{iconURL}}/change-index-enough03.png" mode="widthFix"></image>
+          </view>
+          <view class="enough" wx:if="{{itemData.time_status == 2}}">
+            <image src="{{iconURL}}/change-index-enough04.png" mode="widthFix"></image>
+          </view>
+        </image>
+      </swiper-item>
+    </swiper>
+    <!-- <view class="limit-box"  wx:if="{{itemData.is_limit==1 && itemData.actual_store_count > 0}}">
+      <view class="limit-bargain">
+        <view class="limit-num {{itemData.time_status == 0 ? 'not' : ''}}">
+          限量{{itemData.store_count}}件
+        </view>
+        <view wx:if="{{itemData.time_status != 0}}" class="limit-only" style="background-image:url({{iconURL}}/limit-only.png) ">
+          仅剩<i>{{itemData.actual_store_count}}</i>件
+        </view>
+      </view>
+    </view> -->
+    <view class="limit-change-box bottom" wx:if="{{itemData.store_count > 0 || itemData.sale_num > 0}}">
+      <view class="limit-main">
+        <view class="store-count" wx:if="{{itemData.store_count > 0}}">
+          <view class="t">仅</view>
+          <view class="n">{{itemData.store_count}}</view>
+          <view class="t">份</view>
+        </view>
+        <view class="sale-num" wx:if="{{itemData.sale_num > 0}}">
+          <view class="t margin-right">已售</view>
+          <view class="s row">
+            <!-- <view class="doc goods-doc" wx:for="{{actual_store_count}}" wx:key="{{index}}">{{item}}</view> -->
+            <view class="doc goods-doc">{{actual_store_count}}</view>
+          </view>
+          <view class="t">份</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='goods-header-price'>
+    <view class="bargain-new-box">
+      <view class="bargain-new row" wx:if="{{itemData.is_new_activity_user==1}}">
+        <view class="i">新人专享</view>
+      </view>
+      <view class="goods-price">
+        <view class="goods-price-left">
+          <view class="less-title">砍完</view>
+          <view class="i">¥</view>
+        </view>
+        <view class="less-price">{{itemData.floor_price}}</view>
+        <view class="shop-price-box">
+          <view class="shop-price-box-tips">{{itemData.price_text}}</view>
+          <view class="shop-price-box-price">¥{{itemData.shop_price}}</view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{itemData.time_status != 2 && itemData.is_enough == 1}}" class='goods-header-right'>
+      <view class='text'>{{itemData.time_status == 1 ? "距活动结束" : "距活动开始"}}</view>
+      <view class='time'>
+        <span wx:if="{{ad != '00'}}">{{ad}}</span>
+        <i wx:if="{{ad != '00'}}">天</i>
+        <span>{{ah}}</span>
+        <i>时</i>
+        <span>{{am}}</span>
+        <i>分</i>
+        <span>{{as}}</span>
+        <i>秒</i>
+      </view>
+    </view>
+    <view wx:if="{{itemData.time_status == 2}}" class='goods-header-right'>
+      <view class='text' style="font-size:36rpx">活动已结束</view>
+    </view>
+    <view wx:elif="{{itemData.is_enough == 0}}" class='goods-header-right'>
+      <view class='text' style="font-size:36rpx">商品已售罄</view>
+    </view>
+    <!-- <image class="goods-header-price-image" style="left:0;z-index:1" src="{{iconURL}}/goods-price-background01.png" mode="aspectFit"></image>
+    <image class="goods-header-price-image" style="left:-2%" src="{{iconURL}}/goods-price-background.png" mode="aspectFit"></image> -->
+    <image class="goods-header-price-image" style="left:{{ad == '00'?'0':itemData.is_enough == 0?'0':itemData.time_status == 2?'0':'-8%'}};z-index:1" src="{{iconURL}}/goods-price-background01.png" mode="aspectFit"></image>
+    <image class="goods-header-price-image" style="left:{{ad == '00'?'-2%':itemData.is_enough == 0?'-2%':itemData.time_status == 2?'-2%':'-10%'}}" src="{{iconURL}}/goods-price-background.png" mode="aspectFit"></image>
+  </view>
+  <view class="goods-name-box">
+    <view class="goods-name">
+      <view class="team-tips-box" wx:if="{{itemData.label_list.length>0}}">
+        <view wx:for="{{itemData.label_list}}" wx:for-item="tips" wx:for-index="tipsindex" class="team-tips {{tips.type==2?'tips-active':''}}" wx:key="{{tipsindex}}">
+          {{tips.name}}
+        </view>
+      </view>
+      <text>{{itemData.goods_name}}</text>
+    </view>
+    <view class="goods-desc">{{itemData.goods_remark}}</view>
+    <view class="row bargain-num">
+      <view class="goods-quota-box">
+        <view class="text">每人限购{{itemData.limit_number}}份</view>
+      </view>
+      <view class="count-num" wx:if="{{itemData.bargain_coupon_num > 0}}">
+        拥有
+        <i>{{itemData.bargain_coupon_num}}</i>
+        张砍价券
+      </view>
+      <!-- <view class="all-bargain-font">
+        每个用户仅<i class="i">{{itemData.limit_number}}</i>次机会购买该砍价商品
+      </view>
+      <view class="now-bargain-num">
+        当前可用：砍价<i class="i">{{itemData.bargain_count}}</i>次，今日剩余帮砍<i class="i">{{itemData.help_count}}</i>次
+      </view> -->
+    </view>
+    <view class="newlyweds-img" wx:if="{{itemData.services_title.length > 0}}">
+      <view class="newlyweds-img-box">
+        <text class="iconfont icon-yuanzhuangzhengpin newLywds-icon"></text>
+        <text>{{itemData.services_title[0]}}</text>
+      </view>
+      <view class="newlyweds-img-box">
+        <text class="iconfont icon-img_jisutihuox newLywds-icon"></text>
+        <text>{{itemData.services_title[1]}}</text>
+      </view>
+      <view class="newlyweds-img-box">
+        <text class="iconfont icon-bianjietihuo newLywds-icon"></text>
+        <text>{{itemData.services_title[2]}}</text>
+      </view>
+      <view class="newlyweds-img-box">
+        <text class="iconfont icon-fangxingoumai newLywds-icon"></text>
+        <text>{{itemData.services_title[3]}}</text>
+      </view>
+    </view>
+  </view>
+  <!-- 选择SKU -->
+  <view class="product-nums-sku bor-b" bindtap="showSkuPopup" wx:if="{{!itemData.is_bargain && itemData.stock.length != 1 && itemData.time_status == 1}}">
+    <view class="row ">
+      <view class="col nums-item-right">
+        <text class='t2'>选择</text>
+        <text class="nums-item_go">{{choosed_sku || '请选择规格'}}</text>
+        <view class='iconfont icon-btn_xiangyoudajiantoux icon-right-arrow'></view>
+      </view>
+    </view>
+  </view>
+  <!-- 低价规则 -->
+  <view class="rule" bindtap="showRule">
+    <!-- <text>低价攻略:  邀请好友帮忙砍价，即享最低价 >></text> -->
+    <image src="{{iconURL}}/change-index-rule.png" mode="aspectFit"></image>
+  </view>
+  <!-- 商品详情 -->
+  <view class="goods-product">
+    <view class="product-font">
+      <text>商品详情</text>
+      <!-- <view class="iconfont icon-xiala"></view> -->
+      <image src="{{iconURL}}/goods-product-pulldown.png" mode="aspectFit"></image>
+    </view>
+    <image class="product-img" wx:for="{{itemData.goods_content}}" style="height:{{item.height}}rpx" src="{{item.width_img}}" wx:key="index"></image>
+  </view>
+  <!-- 浮动按钮 -->
+  <view class="bottom-box" style="padding-bottom:{{iphoneXBottom}}">
+    <view class="box-left">
+      <view class="load-icon" bindtap='gotoHome'>
+        <image src="{{iconURL}}/sxsy.svg"></image>
+        <text>首页</text>
+      </view>
+      <view class="load-icon">
+        <image src="{{iconURL}}/product_contact_v2.svg"></image>
+        <text>客服</text>
+        <button open-type="contact" class='icon-contact' session-from='商品详情' send-message-title='{{itemData.goods_name}}' send-message-path='/packageA/bargain/bargain?activity_bargain_id={{itemData.activity_bargain_id}}' send-message-img='{{itemData.gallery[0].msrc}}' show-message-card='true' open-type='contact'></button>
+      </view>
+    </view>
+    <view class="box-right">
+      <view class='row' wx:if="{{!buttonDisplay && itemData.is_floor_price == 0 && itemData.time_status != 0}}">
+        <form report-submit='true' bindsubmit='goShop' data-shop-type="0">
+          <button class="direct-buy" form-type='submit'>
+            <view class="direct-price-buy">购买(¥{{itemData.buy_price}})</view>
+          </button>
+        </form>
+        <form report-submit='true' bindsubmit='isNewLocation' wx:if="{{!itemData.is_bargain && itemData.bargain_count != 0 && itemData.bargain_activity_status == 1 && itemData.time_status == 1}}">
+          <button class="to-bargain to-bargain-lineH" form-type='submit' >
+            <!-- style="line-height: {{itemData.bargain_coupon_num > 0 ? '32px' : '16px'}}" -->
+            <view class="m">
+              <text>¥</text>
+              {{itemData.floor_price}}
+            </view>
+            <view class="i">{{itemData.is_new_activity_user==1?'新人最低价':'砍破最低价'}}</view>
+            <view class="msg" wx:if="{{itemData.bargain_coupon_num > 0}}">(砍价券可帮砍一刀)</view>
+          </button>
+        </form>
+        <form wx:elif="{{!itemData.is_bargain && itemData.bargain_count == 0 && itemData.bargain_activity_status == 1 && itemData.time_status == 1}}">
+          <button class="to-bargain no-cont">次数已用完</button>
+        </form>
+        <form wx:elif="{{!itemData.is_bargain && itemData.bargain_count != 0 && itemData.bargain_activity_status == 1 && itemData.time_status == 0}}">
+          <button class="to-bargain no-cont">即将开抢</button>
+        </form>
+        <form report-submit='true' bindsubmit='goBranging' wx:if="{{itemData.is_bargain}}">
+          <button class="direct-buy ing" form-type='submit'>
+            <view class="direct-end">
+              <view class="direct-price">继续砍价</view>
+              <view class="direct-font">距砍价结束仅剩 {{h}}:{{m}}:{{s}}</view>
+            </view>
+          </button>
+        </form>
+      </view>
+      <form report-submit='true' bindsubmit='goShop' data-shop-type="1" wx:if="{{!buttonDisplay && itemData.is_floor_price == 1 && itemData.is_bargain}}">
+        <button class="direct-buy over" form-type='submit'>
+          <view class="direct-end">
+            <view class="direct-price">
+              已砍最低，立即支付
+              <i class="i">¥</i>
+              {{itemData.buy_price}}
+            </view>
+            <view class="direct-font">支付倒计时 {{h}}:{{m}}:{{s}}</view>
+          </view>
+        </button>
+      </form>
+      <form report-submit='true' bindsubmit='shareRedEnvelopes' wx:if="{{!buttonDisplay && !itemData.is_bargain && itemData.bargain_count != 0 && itemData.bargain_activity_status == 1 && itemData.time_status == 0 && !itemData.is_notice}}">
+        <button class="direct-buy over" form-type='submit' open-type="{{is_login && itemData.coupon_price > 0 ? '' : ''}}">
+          <span wx:if="{{itemData.coupon_price > 0}}">
+            分享领
+            <i style="color: #eb3c39">{{itemData.coupon_price}}</i>
+            元礼包
+          </span>
+          <span wx:if="{{itemData.coupon_price == 0}}">立即订阅</span>
+        </button>
+      </form>
+      <button class="bargin-btn-display" disabled wx:if="{{!buttonDisplay && !itemData.is_bargain && itemData.bargain_count != 0 && itemData.bargain_activity_status == 1 && itemData.time_status == 0 && itemData.is_notice}}">
+        {{itemData.notice_text}}
+      </button>
+      <button class="bargin-btn-display" bindtap="showEnoughPopup" wx:if="{{buttonDisplay}}">
+        {{buttonDisplayText}}
+      </button>
+    </view>
+  </view>
+</view>
+<!-- SKU弹层 -->
+<specifications goodsInfo="{{itemData}}" showSKUstatus="{{showSKUstatus}}" isShowNumber="{{false}}" bindsubmitnew="skuSubmit" bindskuPopupHide="skuPopupHide"></specifications>
+<!-- 我的砍价按钮 -->
+<view class='my-brangin-btn' wx:if="{{itemData.time_status}}" bindtap='goMyBrangin'>
+  <view class='i'>我的</view>
+  <view>砍价</view>
+</view>
+<!-- 规则黑透弹窗 -->
+<view class="rules-pop-hold {{showRules?'hide':'show'}}">
+  <view class="rules-pop">
+    <view class='rules-content'>
+      <view class='rules-title'>低价购买攻略</view>
+      <view class='rules-line'></view>
+      <!-- 活动规则内容 -->
+      <scroll-view class='rules-text-box' scroll-y="true">
+        <view class='rules-text' wx:for="{{rule.rule_content}}" wx:key="{{index}}">
+          <text>{{item}}</text>
+        </view>
+      </scroll-view>
+    </view>
+    <form report-submit='true' bindsubmit='showRule'>
+      <button class="iconfont icon-btn_guanbianniux icon-closs {{showRules?'hide':'show'}}" form-type='submit'></button>
+    </form>
+  </view>
+  <view class='rules-pop-md' bindtap='showRule'></view>
+</view>
+<!-- 位置信息设置 -->
+<view class="drawer_screen" wx:if="{{showSettingModalStatus}}"></view>
+<view class="tc_manu_box" wx:if="{{showSettingModalStatus}}">
+  <view class='tc_manu_items'>
+    <view class='manu_header'>权限提示</view>
+    <view class='manu-margin'>
+      <view class='tc-text'>您未打开目前位置，部分功能将受到影响，请点击前往设置开启</view>
+    </view>
+    <view class='manu-buttons row'>
+      <button bindtap='settingModalStatus'>取消</button>
+      <button class='button-primary' bindtap='goSetting'>前往设置</button>
+    </view>
+  </view>
+</view>
+<!-- 获得分享红包弹窗 -->
+<view class="curtain" wx:if="{{popupShow}}" catchtouchmove="bindtouchmove"></view>
+<view class="popup-model {{popupShow ? 'show' : ''}}" catchtouchmove="bindtouchmove">
+  <view class="title">分享成功</view>
+  <image class="bargain-red-img" src="{{iconURL}}/bargain-share-red.png" mode="widthFix"></image>
+  <view class="text-log">
+    获得
+    <i style="color: #eb3c39;font-size: 36rpx">{{itemData.coupon_price}}元</i>
+    优惠券礼包
+  </view>
+  <view class="row popup-footer-btn">
+    <view class="btn left" bindtap="goBargainCoupon">前往查看</view>
+    <view class="btn right" bindtap="hideRedPopup">确定</view>
+  </view>
+</view>
+<!-- 获取手机号弹窗 -->
+<view class="drawer_screen-phone" wx:if="{{showPhoneModal}}"></view>
+<view class="getPhoneModal" wx:if="{{showPhoneModal}}">
+  <view class="modal-text">买买提将通过短信形式进行提醒，请允许授权手机号</view>
+  <view class="btn-footer">
+    <button class="close-phone-btn" bindtap="closePhoneModal">取消提醒</button>
+    <button class="get-phone-btn" open-type='getPhoneNumber' bindgetphonenumber="getPhone">
+      允许授权
+    </button>
+  </view>
+</view>
+<!-- 商品售罄弹窗提示 -->
+<view class="isEnough-curtain" bindtap="hideEnoughPopup" wx:if="{{isEnoughPopupShow}}" catchtouchmove="bindtouchmove"></view>
+<view class="isEnough-popup-model" wx:if="{{isEnoughPopupShow}}" catchtouchmove="bindtouchmove">
+  <view class="title">来晚了，商品被抢空！</view>
+  <view class="msg">
+    每日
+    <i>{{sellOutNoticeInfo.date}}</i>
+    商品开售 下次记得早点来~
+  </view>
+  <button bindtap="goTomorrowProduct">查看明日爆款 ></button>
+  <image class="closs" bindtap="hideEnoughPopup" src="{{iconURL}}/btn-index-closs.png" mode="widthFix"></image>
+</view>
+<view class='top-mask' wx:if="{{showTopMask}}"></view>
+<loading wx:if="{{loadingShow}}"></loading>
+ 

@@ -1,0 +1,69 @@
+<!--components/goodList/goodList.wxml-->
+<!-- 列表组件 -->
+<view class='configureModel clearfix'>
+  <view id="homeBlock">
+    <view class="homeBlock" wx:for="{{block_list}}" wx:for-item='list' wx:key='index'>
+      <view wx:for="{{list}}" wx:key='index'>
+        <view class="item-block" wx:if="{{(item.type == 1 || item.type == 2)&&item.route.url!='coupon'}}">
+          <image class="{{item.imgcss==1?'block-image-cover':'block-image'}}" bindtap="goThePage" data-type="{{item.type}}" data-route='{{item.route}}' src="{{item.pic}}" wx:if="{{item.type == 1}}"></image>
+          <image class="bar-image" bindtap="goThePage" data-type="{{item.type}}" data-route='{{item.route}}' src="{{item.title}}" wx:if="{{item.type == 2}}"></image>
+        </view>
+        <!-- 优惠券 -->
+        <view class='coupon_wrap' wx:if="{{(item.type == 1 || item.type == 2)&&item.route.url=='coupon'}}">
+          <image class='cover_img' src='{{iconURL}}/img_ztyhqzz@2x.png'></image>
+          <scroll-view scroll-x='true' class='scroll_wrap'>
+            <view class='coupon' style='background-image:url({{iconURL}}/img_xrzxyhqbg@2x.png)' wx:for="{{item.route.param}}" wx:for-item="coupon">
+              <view class='price'>
+                <text class='small'>￥</text>{{coupon.money}}</view>
+              <view class='tab'>
+                <text class='text'>{{coupon.use_type}}</text>
+              </view>
+            </view>
+          </scroll-view>
+          <view class='total_box'>
+            <view class='total_price'>
+              <text class='small'>￥</text>{{item.route.total}}</view>
+            <view class='get_btn' wx:if="{{item.route.take==1}}" catchtap='akeyToGet' data-ad_id='{{item.route.ad_id}}' data-param='{{item.route.param}}' style="background-image:url({{iconURL}}/btn_yjlq@2x.png)"></view>
+            <view class='get_btn' wx:if="{{item.route.take==2}}" style="background-image:url({{iconURL}}/yilingqu.png)"></view>
+          </view>
+        </view>
+        <!-- <view class="header-bar" wx:if="{{item.type == 2}}">
+            <image class="bar-image" bindtap="goThePage(item.route)" src="{{item.title}}"></image>
+            <text bindtap="goThePage(item.route)" class="bar-more t2 iconfont">更多 &#xe603;</text>
+        </view> -->
+        <view class="block-product" wx:if="{{item.type == 3&&item.sortype==1}}">
+          <goodList list="{{item.goods}}" type="3" symbolSize="small" align="center"></goodList>
+        </view>
+        <view class="block-product" wx:if="{{item.type == 3&&item.sortype==2}}" style='background-image:url({{iconURL}}/jbbj.png);'>
+          <swiper class='good_wrap' style='height:470rpx;' indicator-dots="true" indicator-active-color="#ffbb44" indicator-color="#ddd">
+            <block>
+              <swiper-item wx:for="{{item.goods}}" wx:for-item="goodArr">
+                <goodList list="{{goodArr}}" type="3" symbolSize="small" align="center"></goodList>
+              </swiper-item>
+            </block>
+          </swiper>
+        </view>
+        <view class="item-block block-margin" wx:if="{{item.type == 4}}">
+          <view wx:if="{{item.route.length == 1}}">
+            <image class="block-image-1" bindtap="goThePage" data-type="{{item.type}}" data-route='{{item.route[0]}}' src="{{item.route[0].pic}}"></image>
+          </view>
+          <view wx:if="{{item.route.length == 2}}" class="row block-merge-horizontal">
+            <image class="block-image-2" bindtap="goThePage" data-type="{{item.type}}" data-route='{{img}}' wx:for-item="img" src="{{img.pic}}" wx:for="{{item.route}}" wx:key='index'></image>
+          </view>
+          <view wx:if="{{item.route.length == 3}}" class="row block-merge-horizontal">
+            <image class="block-image-2" bindtap="goThePage" data-type="{{item.type}}" data-route='{{item.route[0]}}' src="{{item.route[0].pic}}"></image>
+            <view class="block-image-2">
+              <image class="block-image-3" bindtap="goThePage" data-type="{{item.type}}" data-route='{{item.route[1]}}' src="{{item.route[1].pic}}"></image>
+              <image class="block-image-3" bindtap="goThePage" data-type="{{item.type}}" data-route='{{item.route[2]}}' src="{{item.route[2].pic}}"></image>
+            </view>
+          </view>
+          <view wx:if="{{item.route.length >= 4}}" class="row block-merge-width">
+            <image class="block-image-3 block-image-bottom{{index%2 == 0 ? ' block-image-right' : ''}}" bindtap="goThePage" data-type="{{item.type}}" src="{{img.pic}}" wx:for="{{item.route}}" wx:for-item="img" wx:for-index='index' wx:key='index'></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- class="good_card{{type}} {{(index+1)%type==0 ? '' : space}}" wx:for="{{list}}" wx:key="{{item.goods_id}}" -->

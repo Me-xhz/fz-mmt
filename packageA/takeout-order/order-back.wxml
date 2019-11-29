@@ -1,0 +1,84 @@
+<!--main sn-->
+<view class='container'>
+    <!-- 返回首页悬浮框/分享进入显示 -->
+    <view class='goHomeFixed' catchtap='gotoHome' wx:if="{{isShowGoHome}}">
+        <image src='{{iconURL}}/product-icon-leftReturn.svg' class='icon-leftReturn'></image>
+        <text>返回首页</text>
+    </view>
+    <view class="sns-header row row-center">
+        <view class="col">{{backInfo.status_desc}}</view>
+        <button class='message t3' show-message-card='true' open-type='contact' session-from='goodBuy'>联系客服</button>
+    </view>
+    <!-- Goods -->
+    <view class="order-main">
+        <view class="goods-item no-border">
+            <view class="item-photo">
+                <image src='{{backInfo.back_goods_info.header_img}}'></image>
+            </view>
+            <view class="item-info">
+                <view class="info-name">
+                    {{backInfo.back_goods_info.goods_name}}
+                </view>
+                <view class="info-price">
+                    <i class='icon_rmb'>¥</i>{{backInfo.back_goods_info.shop_price}}
+                </view>
+                <view class="info-amount">x{{backInfo.back_goods_info.back_num}}</view>
+            </view>
+        </view>
+    </view>
+    <!--order msg-->
+    <view class="order-msg-box">
+        <view class="order-msg">
+            <view class="msg-header row">
+                <span class="header-title t4">退款金额</span>
+                <span class="col header-price">
+          <i class="font-bold">
+            <i class='icon_rmb'>¥</i>{{backInfo.refund_money}}
+          </i>
+        </span>
+            </view>
+        </view>
+        <view class="order-msg">
+            <view class="msg-header row">
+                <span class="header-title t4">申请原因</span>
+                <span class="header-txt col tr">{{backInfo.reason_desc}}</span>
+            </view>
+        </view>
+        <view class="order-msg-mainbox">
+            <view class="msg-header">
+                <span class="header-title t4">详细描述</span>
+            </view>
+            <text>{{backInfo.describe}}</text>
+            <view class="msg-imgbox" wx:if="{{backInfo.back_img_info.length > 0}}">
+                <view class="box-img" wx:for="{{backInfo.back_img_info}}">
+                    <image src="{{item}}" />
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="order-sns">
+        <p>
+            <i class="sns-title t4">申请时间：</i>
+            <i class="sns-txt t4">{{backInfo.format_create_time}}</i>
+        </p>
+        <p class="allowselect">
+            <i class="sns-title t4 forbiddenselect">订单编号：</i>
+            <i class="sns-txt t4 allowselect">{{backInfo.order_sn}}</i>
+        </p>
+        <p class="allowselect">
+            <i class="sns-title t4 forbiddenselect">售后单号：</i>
+            <i class="sns-txt t4 allowselect">{{backInfo.back_sn}}</i>
+        </p>
+    </view>
+</view>
+<!--GO KF-->
+<view class='order-kf'>
+    <view class='phone-kf t3' bindtap='phoneCall'>联系客服</view>
+    <view class='t2 phone-kf-time'>
+        <text>服务时间：</text>
+        <text>9:00-18:00</text>
+    </view>
+</view>
+
+<loading wx:if="{{loadingShow}}"></loading>

@@ -1,0 +1,70 @@
+<!--pages/couponCenter/couponCenter.wxml-->
+<view class='list'>
+<!-- 返回首页悬浮框/分享进入显示 -->
+  <view class='goHomeFixed' catchtap='gotoHome' wx:if="{{isShowGoHome}}">
+    <image src='{{iconURL}}/product-icon-leftReturn.svg' class='icon-leftReturn'></image>
+    <text>返回首页</text>
+  </view>
+
+  <view class="box_list row" style='background-image:url({{iconURL}}/coupon_orange01.png)'  wx:for="{{lists}}" wx:for-item="bonus" wx:key="index">
+    <!-- 左侧面额 -->
+    <view class='coupon_val color-coupon' wx:if="{{bonus.coupon_type==1}}">
+      <text class="text">{{bonus.value}}</text>
+      <text class="icon">折</text>
+    </view>
+    <view class='coupon_val color-coupon' wx:else>
+      <text class="icon">¥</text>
+      <text class="text">{{bonus.value}}</text>
+    </view>
+    <!-- 优惠券信息 -->
+    <view class="coupon_info color_gray_dark col-50">
+      <view class="list_title">{{bonus.use_type}}</view>
+      <view class="dom-attr">{{bonus.description}}</view>
+      <view class="list_time">{{bonus.use_end_date}}</view>
+    </view>
+    <!-- 右侧领取部位 -->
+    <form class="get_coupon_btn col-30" bindsubmit='addCoupon' report-submit='true' data-id='{{bonus.id}}'  wx:if="{{bonus.give_type==3}}">
+      <button class='getCoupon'  formType='submit'>
+        <span class="get_coupon">领取</span>
+      </button>
+    </form>
+    <span class="list_button_img"  wx:if="{{bonus.give_type==2}}">
+            <image  mode='widthFix' src='{{iconURL}}/is_used_102.png'></image>
+          </span>
+    <span class="list_button_img" wx:if="{{bonus.give_type==1}}">
+            <image  mode='widthFix' src='{{iconURL}}/receive_over02.png'></image>
+          </span>
+  </view>
+
+  <!--<view-->
+    <!--class='coupon'-->
+    <!--style='background-image:url({{iconURL}}/coupon_orange01.png)'-->
+    <!--wx:for="{{lists}}">-->
+    <!--&lt;!&ndash; 判断折扣类型 &ndash;&gt;-->
+    <!--<view class='price' wx:if="{{item.coupon_type==0}}"><text class='small'>￥</text>{{item.value}}</view>-->
+    <!--<view class='price' wx:if="{{item.coupon_type==1}}">{{item.value}}<text class='small'>折</text></view>-->
+    <!--<view class='coupon_info'>-->
+      <!--<view class='des ellipsis'>{{item.use_type}}</view>-->
+      <!--<view class='des ellipsis'>{{item.description}}</view>-->
+      <!--<view class='des ellipsis'>{{item.use_end_date}}</view>-->
+    <!--</view>-->
+    <!--<button class='btn' wx:if="{{item.give_type==3}}" data-id='{{item.id}}' bindtap='addCoupon'>领取</button>-->
+    <!--<view class='give_type' wx:else>-->
+      <!--<image src='{{iconURL}}/is_used_102.png' wx:if="{{item.give_type==2}}"></image>-->
+      <!--<image src='{{iconURL}}/receive_over02.png' wx:if="{{item.give_type==1}}"></image>-->
+    <!--</view>-->
+
+  <!--</view>-->
+      <!-- 暂无红包 -->
+  <view wx:if='{{lists && lists.length <= 0 }}'>
+    <view class='coupon-empty' >
+      <view class='coupon-empty-image'>
+        <image src='{{iconURL}}/img_coupon_empty02.png'></image>
+      </view>
+      <text class='coupon-empty-text'>优惠券被抢光啦，请关注下次活动哦~</text>
+    </view>
+  </view>
+  <button class='to_share' open-type="share">
+    <image src='{{iconURL}}/button-icon-share01.png'></image>
+  </button>
+</view>

@@ -1,0 +1,9 @@
+var filters = {
+    toFix: function (digits,value) {
+        var v = parseFloat(value)//强转Float，毕竟有可能返回是String类型的数字
+        return v.toFixed(digits)
+    },
+}
+module.exports = {
+    toFix: filters.toFix
+}

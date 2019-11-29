@@ -1,0 +1,35 @@
+<!--pages/topay/topay.wxml-->
+<view class="head-img">
+    <image class="logo-img" src="https://img.shop.haoyousheng.com.cn/wechat_icons/maimaitilogo.png"></image>
+</view>
+<view>
+  <view class="pay-body">
+      <view class="set-money">
+          <text class="font-14">收银金额</text>
+      </view>
+      <view class="set-money">
+          <text class="font-24">￥</text>
+          <input class="toSetPrice"  type="digit"  maxlength="{{priceMaxLength}}" bindblur="bindPriceBlur" bindfocus="bindPriceFocus"  bindinput="bindPriceInput" focus="true" value="{{price}}"/>
+      </view>
+      <view class="hr">
+
+      </view>
+  </view>
+  <view class="show-money">
+    <view wx:if="{{show_price}}">
+      <view>
+          <text class="font-14">实际付款</text>
+      </view>
+      <view class='price-box'>
+          <text class="price-font price-little">￥</text>
+          <text class="price-font price-big">{{now_price}}</text>
+          <text class="price-font font-14 price-discount" wx:if="{{show_discount}}">(小程序支付优享{{discount*10}}折)</text>
+      </view>
+    </view>
+  </view>
+  <view class="to-pay" animation="{{animationView}}">
+      <button class="{{check_price==true ? 'pay-btn' : 'no-pay-btn'}}" bindtap="toPay" data-payprice="{{now_price}}">
+          <text>立即支付</text>
+      </button>
+  </view>
+</view>

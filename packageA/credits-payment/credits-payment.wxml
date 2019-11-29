@@ -1,0 +1,17 @@
+<view class='payment_box'>
+    <view class='title_wrap' wx:if='{{success == 1}}'>
+        <view class='iconfont icon-img_zhifuchenggongx' style='color:#7ed321!important'></view>
+        <view class='tc font_17'>商品兑换成功</view>
+    </view>
+    <view class='title_wrap' wx:if='{{success == 0}}'>
+        <view class='iconfont icon-img_zhifushibaix' style='color:#eb3c39!important' ></view>
+        <view class='tc font_17'>商品兑换失败</view>
+    </view>
+    <view class='btns row'>
+        <!-- <button type='default' bindtap='goOrderDetail' class='btn col'>查看订单</button> -->
+        <button type='default' style="background-color: #fff!important;" bindtap='goOrderList' class='btn col'>查看订单</button>
+        <button type='warn' style='background-color:#ffe150!important;color:#303030!important;border:none' bindtap='goHome' wx:if='{{success == 1}}' class='btn col'>继续兑换</button>
+        <button type='warn' bindtap='onPay' wx:if='{{success == 0}}' style='background-color:#ffe150!important;color:#303030!important;border:none' class='btn col onPay'>重新支付</button>
+    </view>
+
+</view>

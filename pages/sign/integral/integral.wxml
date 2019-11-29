@@ -1,0 +1,14 @@
+<!--pages/user/money/money.wxml-->
+<view class='list'>
+  <view class='item' wx:for="{{account_info}}" wx:key='{{index}}'>
+    <view class='des t4'>{{item.name}}</view>
+    <view class='time t2'>{{item.add_time}}</view>
+    <view class='price'>{{item.points}}</view>
+  </view>
+  <view class="empty" wx:if="{{account_info.length==0}}">
+    <view class="empty-item">
+      <image class="item-logo" src="{{iconURL}}/icon_order_empty02.png" />
+      <view class="item-text">暂无积分记录</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,357 @@
+<!--返回首页-->
+<!-- <view class='goHomeFixed' catchtap='gotoHome' wx:if="{{isShowGoHome}}">
+  <image src='{{iconURL}}/product-icon-leftReturn.svg' class='icon-leftReturn'></image>
+  <text>返回首页</text>
+</view> -->
+<view class="page-bg">
+  <!-- <view class="show-bg" style="background-image:url({{iconURL}}/packet-new-bg.png)">
+
+  </view> -->
+  <view class='goHomeFixed' catchtap='gotoHome'>
+    <text class='iconfont icon-btn_shangxiangshouyex icon-leftReturn'></text>
+    <text>去首页</text>
+  </view>
+  <view class="packet-rule" catchtap="showRule">
+    活动规则
+  </view>
+  <!-- <view class="packet-money">
+    {{packet_msg.format_max_price}}
+  </view> -->
+
+  <view class="packet-card" style="background-image:url({{packet_msg.status==0&&packet_msg.is_self==1||packet_msg.is_self==0?iconURL+'/help-card-packet.png':iconURL+'/packet-new-use-card.png'}});height:{{packet_msg.status==0&&packet_msg.is_self==1||packet_msg.is_self==0?'806rpx':'596rpx'}};padding-top: {{packet_msg.status == 0 || (packet_msg.status == 1 && packet_msg.is_self == 0) || showTimeEnd ? '90rpx' : '0'}}">
+    <image class="head-pic" wx:if="{{packet_msg.status == 0 || (packet_msg.status == 1 && packet_msg.is_self == 0) || showTimeEnd}}" src="{{packet_msg.head_pic}}"></image>
+    <!-- 助力红包分享获取 -->
+    <view wx:if="{{packet_msg.status==0||packet_msg.is_self==0}}">
+      <view class="get-money">
+        <view class="get-money-font {{packet_msg.status==1&&packet_msg.is_self==0?'margain-t':''}}">
+          <text class="i">已获得</text>
+          <text class="packet-get-money">{{packet_msg.current_price}}</text>
+          <text class="i">元</text>
+        </view>
+      </view>
+      <view class="count-time" wx:if="{{packet_msg.status==0}}">
+        活动倒计时
+        <countDown bind:countTimeOver="countTimeEnd" time-text="time-text" doc-text="doc-text" timestamp="{{packet_msg.end_time*1000}}"></countDown>
+      </view>
+      <view class="packet-progress">
+        <view class="packet-progress-font-box">
+          <view class="packet-progress-font" style="left:{{packet_msg.exchange_precent>75?75:packet_msg.exchange_precent}}%;">
+            ￥{{packet_msg.exchange_price}}可兑换
+          </view>
+        </view>
+        <view class="packet-progress-box">
+          <view class="packet-progress-size" style="width:{{packet_msg.percent}}%"></view>
+          <view class="packet-hr" style="left:{{packet_msg.exchange_precent}}%"></view>
+        </view>
+        <view class="packet-progress-font-box">
+          <view wx:if="{{packet_msg.current_price!=packet_msg.max_price||(packet_msg.is_self==0&&packet_msg.is_exchange==0)}}" class="packet-progress-font" style="{{packet_msg.percent<10?'left:10':'left:'+packet_msg.percent}}%;{{packet_msg.percent>75?'left:75':'left:'+packet_msg.percent}}%;">
+            当前￥{{packet_msg.current_price}}
+          </view>
+        </view>
+        <view class="{{packet_msg.current_price==packet_msg.max_price?'packet-all-money-end':'packet-all-money'}}">
+          最高￥{{packet_msg.format_max_price}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 助力倒计时结束 -->
+    <view wx:if="{{packet_msg.status==2&&packet_msg.is_self==1}}">
+      <view class="fail-get-packet">
+        助力倒计时结束
+      </view>
+      <view class="fail-get-text">
+        <view>
+          很遗憾
+        </view>
+        <view>
+          您未能达到领取红包条件
+        </view>
+      </view>
+    </view>
+    <!-- 助力红包领取成功 -->
+    <view wx:if="{{packet_msg.status==1&&packet_msg.is_self==1}}">
+      <view class="fail-get-packet">
+        恭喜成功领取!
+      </view>
+      <view class="packet-coupon">
+        <view class="packet-coupon-box" style="background-image:url({{iconURL}}/packet-coupon.png);">
+          <view class="packet-coupon-price">
+            <i wx:if="{{packet_msg.coupon.coupon_type==0||packet_msg.coupon.coupon_type==2}}">￥</i>
+
+            <text>{{packet_msg.coupon.value}}</text>
+            <i wx:if="{{packet_msg.coupon.coupon_type==1}}">折</i>
+          </view>
+          <view class="packet-coupon-msg">
+            <view class="packet-coupon-name">
+              {{packet_msg.coupon.name}}
+            </view>
+            <view class="packet-coupon-desc">
+              {{packet_msg.coupon.description}}
+            </view>
+            <view class="packet-coupon-time">
+              {{packet_msg.coupon.use_end_date}}
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="packet-all-btn">
+      <view>
+
+        <!-- 发起方 -->
+        <!-- 进行中未达到领取条件 -->
+        <form report-submit='true' bindsubmit='onShare'>
+          <button class="share-btn" form-type='submit' wx:if="{{packet_msg.status==0&&packet_msg.is_self==1&&packet_msg.is_exchange==0}}" open-type="share">
+            <text>快喊人~ 让红包变大</text>
+            <image class="share-btn-font" src="{{iconURL}}/packet-btn-icon.png"></image>
+          </button>
+        </form>
+
+        <!-- 进行中已达到领取条件 -->
+        <form report-submit='true' bindsubmit='onShare'>
+          <button class="share-btn" form-type='submit' wx:if="{{packet_msg.status==0&&packet_msg.is_self==1&&packet_msg.is_exchange==1}}" open-type="share">
+            <text>继续让红包变大</text>
+          </button>
+        </form>
+        <form report-submit='true' bindsubmit='showModal'>
+          <button class="share-btn" form-type='submit' wx:if="{{packet_msg.status==0&&packet_msg.is_self==1&&packet_msg.is_exchange==1}}">
+            <text>马上兑换</text>
+          </button>
+        </form>
+
+        <!-- 活动失败 -->
+        <form report-submit='true' bindsubmit='toCreatePacket'>
+          <button class="share-btn" form-type='submit' wx:if="{{packet_msg.status==2&&packet_msg.is_self==1&&packet_msg.is_exchange==0&&packet_msg.is_can_sponsor == 1&&packet_msg.is_in_activity==0}}">
+            <text>点击领取大红包</text>
+          </button>
+        </form>
+        <form report-submit='true' bindsubmit='goShop'>
+          <button class="share-btn" form-type='submit' wx:if="{{packet_msg.status==2&&packet_msg.is_self==1&&packet_msg.is_exchange==0&&(packet_msg.is_can_sponsor == 0 || packet_msg.is_in_activity==1)}}">
+            <text>去逛逛</text>
+          </button>
+        </form>
+
+        <!-- 领取成功 -->
+        <form report-submit='true' bindsubmit='goShop'>
+          <button class="share-btn" form-type='submit' wx:if="{{packet_msg.status==1&&packet_msg.is_self==1&&packet_msg.is_exchange==1}}">
+            <text>去使用</text>
+          </button>
+        </form>
+
+        <!-- 领取成功并且还有红包发起次数 -->
+        <!-- <form report-submit='true' bindsubmit='toCreatePacket'>
+          <button class="share-btn" form-type='submit' wx:if="{{packet_msg.status==1&&packet_msg.is_self==1&&packet_msg.is_exchange==1&&packet_msg.is_can_sponsor==1&&}}">
+            <text>再领一个</text>
+          </button>
+        </form> -->
+
+
+
+        <!-- 助力方 -->
+        <!-- 助力活动未完成 未助力 -->
+        <form report-submit='true' bindsubmit='helpGetPcket'>
+          <button class="share-btn" form-type='submit' wx:if="{{packet_msg.status==0&&packet_msg.is_self==0&&packet_msg.is_bargain==0&&packet_msg.is_max==0&&packet_msg.is_can_help == 1}}">
+            <text>点击帮TA助力</text>
+          </button>
+        </form>
+
+        <!--  助力活动未完成 有红包发起次数 -->
+        <form report-submit='true' bindsubmit='toCreatePacket'>
+          <button class="share-btn" form-type='submit' wx:if="{{packet_msg.status == 0 && packet_msg.is_self==0 && packet_msg.is_bargain == 1 && packet_msg.is_can_sponsor==1 && packet_msg.is_in_activity==0}}">
+            <text>点击领取大红包</text>
+          </button>
+        </form>
+
+        <!--  助力活动未完成 无红包发起次数 -->
+        <form report-submit='true' bindsubmit='goShop'>
+          <button class="share-btn" form-type='submit' wx:if="{{packet_msg.status == 0 && packet_msg.is_self==0 && packet_msg.is_bargain == 1 &&  (packet_msg.is_can_sponsor==0 || packet_msg.is_in_activity==1)}}">
+            <text>去逛逛</text>
+          </button>
+        </form>
+
+        <!--  助力活动已完成 有红包发起次数 -->
+        <form report-submit='true' bindsubmit='toCreatePacket'>
+          <button class="share-btn" form-type='submit' wx:if="{{packet_msg.is_self==0 && packet_msg.is_bargain == 1 && packet_msg.is_can_sponsor==1 && packet_msg.is_in_activity==0 && (packet_msg.status == 1 || packet_msg.status == 2)}}">
+            <text>点击领取大红包</text>
+          </button>
+        </form>
+
+        <!--  助力活动已完成 无红包发起次数 -->
+        <form report-submit='true' bindsubmit='goShop'>
+          <button class="share-btn" form-type='submit' wx:if="{{packet_msg.is_self==0 && (packet_msg.is_can_sponsor==0 || packet_msg.is_in_activity==1) && (packet_msg.status == 1 || packet_msg.status == 2)}}">
+            <text>去逛逛</text>
+          </button>
+        </form>
+
+        <view class="to-share-font">
+          <text wx:if="{{packet_msg.status==0&&packet_msg.is_self==1&&packet_msg.is_exchange==0}}">分享到群里，红包金额会更大哦~</text>
+          <text wx:if="{{packet_msg.status==1&&packet_msg.is_self==1}}">红包已发放账户！尽情使用吧~</text>
+          <text wx:if="{{packet_msg.status==2&&packet_msg.is_self==1}}">别气馁，再发起冲刺大红包</text>
+          <text wx:if="{{packet_msg.status==0&&packet_msg.is_self==0&&packet_msg.is_in_activity==1}}">助力好友，自己的红包也会变大哦</text>
+          <!-- <text wx:if="{{packet_msg.is_self==0&&packet_msg.is_can_sponsor==0}}">更多商城活动等你来探索</text> -->
+        </view>
+      </view>
+      <view class="get-success-icon" style="background-image:url({{iconURL}}/packet-is-get01.png)" wx:if="{{packet_msg.status==1&&packet_msg.is_self==0}}">
+
+      </view>
+    </view>
+    
+
+  </view>
+  <view class="list-help-red-box" style="top:{{packet_msg.status==0&&packet_msg.is_self==1||packet_msg.is_self==0?'810rpx':'602rpx'}};">
+      <view class="help-list" >
+        <view class="help-list-title">
+          <view>好友助力排行榜</view>
+          <view class="help-list-title-hr">
+
+          </view>
+        </view>
+
+        <view class="help-list-box" scroll-y="true">
+          <view class="rank-list {{index==packet_list.length-1?'border-none':''}}" wx:for="{{packet_list}}" wx:key="{{index}}" wx:if="{{packet_list&&packet_list.length>0}}">
+            <image class="rank-img" src='{{item.head_pic}}'></image>
+            <view class="rank-name">
+              <view>
+                {{item.nickname}}
+              </view>
+              <view>
+                {{item.add_time}}
+              </view>
+            </view>
+            <view class="rank-price">
+              <view>
+                {{item.bargain_price}}元
+              </view>
+              <view class="help-tips" wx:if="{{item.type==2&&index!=0}}">
+                助力增值
+              </view>
+              <view class="help-tips" wx:if="{{index==0}}">
+                手气最佳
+              </view>
+            </view>
+          </view>
+          <view class="packet-list-none" wx:if="{{packet_list.length==0}}">
+            <view>暂无好友相助</view>
+            <view>赶快邀请好友得{{packet_msg.format_max_price}}元大红包!</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="show-all-bg">
+    
+    </view>
+    <view class="show-bg-bottom"  style="background-image:url({{iconURL}}/packet-new-bottom.png)">
+    
+    </view>
+</view>
+
+
+
+<!-- 助力弹窗 -->
+<view class="drawer_screen" wx:if="{{isShowHelpModal}}" catchtap="{{!activityEnd || !showSelfShare?'closeModal':''}}"></view>
+<view class='share-moudle-box {{isShowHelpModal ? "show" : ""}}' wx:if="{{isShowHelpModal}}">
+  <view class="packet-top" style="background-image:url({{iconURL}}/packet-bottom.png)">
+    <view wx:if="{{showBargain}}">
+      <view class='header-img'>
+        <image class='img' src='{{help_packet.head_pic}}'></image>
+      </view>
+      <view class="text">
+        谢谢你为我助力
+      </view>
+      <view class="price">
+        <i>￥</i>
+        <text>{{help_packet.bargain_price}}</text>
+      </view>
+    </view>
+    <view wx:if="{{showSelfShare}}">
+      <view class='header-img'>
+        <image class='img' src='{{packet_msg.head_pic}}'></image>
+      </view>
+      <view class="text">
+        捡到一个可变大的红包哟~
+      </view>
+      <!-- <view class="price">
+        <i>￥</i>
+        <text>{{packet_msg.current_price}}</text>
+      </view> -->
+    </view>
+    <view wx:if="{{showHelp}}">
+      <view class="share-header">
+        助力次数已用完
+      </view>
+      <view class="share-help-coupon" style="background-image:url({{iconURL}}/packet-help-coupon.png)">
+        <view class="coupon-price">
+          <i>￥</i>
+          <text>{{packet_msg.red_packet.max_price}}</text>
+        </view>
+        <view class="help-packet-text">
+          {{packet_msg.red_packet.text}}
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{showNotHelp}}">
+      <view class="share-header">
+        助力次数已用完
+      </view>
+      <view class="help-end-text">
+        <view>
+          更多商城活动
+        </view>
+        <view>等你来探索</view>
+      </view>
+    </view>
+    <view class="activtity-end-text" wx:if="{{showTimeEnd}}">
+      <view>该红包倒计时已结束</view>
+    </view>
+    <view class="activtity-end-text" wx:if="{{activityEnd}}">
+      <view>
+        活动已经过期咯，
+      </view>
+      <view>
+        更多商城活动
+      </view>
+      <view>等你来探索</view>
+    </view>
+  </view>
+  <view class="share-msg" style="background-image:url({{iconURL}}/packet-top.png)">
+    <view class="help-text" wx:if="{{showBargain && help_packet.is_in_activity == 1}}">恭喜！你的大红包同时获得
+      <i>￥{{help_packet.help_price}}</i>增值</view>
+    <form report-submit='true' bindsubmit='toCreatePacket'>
+      <button class="get-coupon-btn" form-type='submit' wx:if="{{showHelp}}">
+        点击领取
+      </button>
+    </form>
+    <form report-submit='true' bindsubmit='goShop'>
+      <button class="get-coupon-btn" form-type='submit' wx:if="{{showNotHelp||showTimeEnd||activityEnd}}">
+        去逛逛
+      </button>
+    </form>
+    <form report-submit='true' bindsubmit='onShare'>
+      <button class="get-coupon-btn" form-type='submit' wx:if="{{showSelfShare}}" open-type="share">
+        <text>让红包变大</text>
+      </button>
+    </form>
+  </view>
+</view>
+<view class="iconfont icon-btn_guanbianniux icon-close" wx:if="{{isShowHelpModal&&!activityEnd&&!showSelfShare}}" catchtap="closeModal">
+
+</view>
+<!-- 规则弹窗 -->
+<view class="rules-pop-hold {{showRules?'hide':'show'}}">
+  <view class="rules-pop">
+    <view class='rules-content'>
+      <view class='rules-title'>{{packet_rule.title}}</view>
+      <view class='rules-line'></view>
+      <!-- 活动规则内容 -->
+      <scroll-view class='rules-text-box' scroll-y="true">
+        <view class='rules-text' wx:for="{{packet_rule.rule_content}}" wx:key="{{index}}">
+          <text>{{item}}</text>
+        </view>
+      </scroll-view>
+      <form report-submit='true' bindsubmit='showRule'>
+        <button class="iconfont icon-btn_guanbianniux icon-closs {{showRules?'hide':'show'}}" form-type='submit'></button>
+      </form>
+    </view>
+  </view>
+  <view class='rules-pop-md' bindtap='showRule'></view>
+</view>

@@ -1,0 +1,200 @@
+<!--pages/cart/cart.wxml-->
+<view class="page" wx:if="{{showPage}}">
+
+
+  <!-- <view class="cart-postage">
+    <view class="row">
+      <view class="col" wx:for='{{groups.services_title}}' wx:for-item='shipping_data'>
+        <image src="{{iconURL}}/icon_confirm.png" />
+        <text>{{shipping_data}}</text>
+      </view>
+    </view>
+  </view> -->
+  <!-- <view class="cart-toptip" wx:if='{{groups.goods && groups.goods.length > 0 }}'>
+    <text class="toptip-txt">主人，有{{total}}件宝贝等你带走哟(≧ω≦)ﾉ</text>
+    <text class="toptip-btn" bindtap="clearCart">清空</text>
+  </view> -->
+  <!--样式-->
+  <view class="container cart-list">
+    <!--购物车空-->
+    <view class="empty" wx:if="{{groups.goods && groups.goods.length <= 0 }}">
+      <view class='empty-item mt_10'>
+        <image class="item-logo" src="{{iconURL}}/icon_cart_empty02.png" />
+        <view class="item-text font-w t7 mt_48">您还没有添加商品~</view>
+        <button type='default' bindtap='goHome' class='goHome t4 empty_color'>
+          去添加
+          <view class='iconfont icon-btn_sanjiaoxiaojiantoux1'></view>
+        </button>
+      </view>
+    </view>
+
+    <!--列表数据-->
+
+
+    <view class='cart-group cart-bg-yellow'>
+      <!-- <view class='cart-tip'>
+        <text class='t1'>已优惠12元，再购1件，享受8折优惠</text>
+        <view class='go-buy'><text>去凑单</text><text class='iconfont icon-btn_xiangyoudajiantoux'></text></view>
+      </view> -->
+      <view class="mt_16" wx:for="{{groups.goods}}" wx:for-item="good" wx:key="{{index}}">
+        <!-- 任选商品活动提示 -->
+        <view class='remind_header' wx:if="{{good.tips.is_show==1}}" >
+          <!--<view style='width:97rpx;'>-->
+            <!--<view class="select_prev" bindtap="optionalSelect" data-goods="{{good}}" data-index="{{index}}">-->
+              <!--<image src='{{iconURL}}/gouxuan03.png' hidden='{{!optionalSelect}}'></image>-->
+              <!--<image src='{{iconURL}}/weixuanzhong.svg' hidden='{{optionalSelect}}'></image>-->
+            <!--</view>-->
+            <!--<view class="item-disable is-tip" wx:if="{{goods.is_disable==1}}" hidden="{{edit_mode}}"></view>-->
+          <!--</view>-->
+          <view  class="remind_headers" data-activity_id="{{good.tips.activity_id}}" catchtap="load_select">
+            <block  wx:if="{{good.tips.is_done==1}}">
+              <view class='select_btn'><text>{{good.tips.activity_type_desc}}</text></view>
+              <text class="ml_24">{{good.tips.desc}}</text>
+              <view class="to_add" style="color:#555">
+                <text class="font_26">查看活动</text>
+                <view class='iconfont icon-btn_xiangyoudajiantoux icon-right-arrow font_color_555'></view>
+              </view>
+            </block>
+            <block wx:else>
+              <view class='select_btn'><text>{{good.tips.activity_type_desc}}</text></view>
+              <text class="ml_24">{{good.tips.desc}}</text>
+              <view class="to_add">
+                <text class="font_26">去凑单</text>
+                <view class='iconfont icon-btn_xiangyoudajiantoux icon-right-arrow'></view>
+              </view>
+            </block>
+          </view>
+        </view>
+
+        <view wx:for="{{good.list}}" wx:for-item="goods" wx:for-index="g_index" wx:key="{{index}}">
+          <!--正常/待修改-->
+          <view class="row list-item cart-bg-white" wx:if="{{goods.is_on_sale==1 && goods.is_enough==1 && goods.is_disable==0}}">
+            <view class="item-prev">
+              <view class="item-checkbox" bindtap="touchSelect" data-goods="{{goods}}" data-index="{{index}}" data-tips="{{good.tips}}">
+                <image src='{{iconURL}}/gouxuan03.png' hidden='{{!goods.selected}}'></image>
+                <image src='{{iconURL}}/weixuanzhong.svg' hidden='{{goods.selected}}'></image>
+              </view>
+              <view class="item-disable is-tip" wx:if="{{goods.is_disable==1}}" hidden="{{edit_mode}}"></view>
+            </view>
+            <!--购买状态-->
+            <view class="item-box row" hidden="{{edit_mode}}">
+              <view class="item-photo" bindtap="touchProduct" data-product="{{goods}}">
+                <span style="background-image: url({{goods.header_img}});"></span>
+              </view>
+              <view class="item-info col">
+                <view class='good_name'>
+                  <text bindtap="touchProduct" data-product="{{goods}}">{{goods.goods_name}}</text>
+                </view>
+                <view class="info-attr no-padding-top">{{goods.sku_key_name}}</view>
+                <view class="info-price" bindtap="touchProduct" data-product="{{goods}}">
+                <span class="price-normal font-face-ios_Avenir">
+                  <span class="price-val">
+                    <i class='icon_rmb'>¥</i>{{goods.shop_price}}</span>
+                </span>
+
+                  <text wx:if="{{goods.shop_price != goods.market_price}}" class='price-n'>¥{{goods.market_price}}</text>
+                </view>
+              </view>
+              <form class='item-del' bindsubmit="touchDel" data-product="{{goods}}" report-submit='true'>
+                <button formType='submit'>
+                  <text class='iconfont icon-lajitong'></text>
+                </button>
+              </form>
+              <view class="info-amount" bindtap="stopBubbling($event)">
+                <form class="amount-button left" report-submit='true' bindsubmit="touchAmountSub" data-goods="{{goods}}" data-index="{{index}}" data-g_index="{{g_index}}">
+                  <button form-type='submit' class='amount-icon base-font-color {{goods.amount <= goods.min_buy_amount ? "cant-del" : ""}}'>-</button>
+                </form>
+                <input type="number" disabled='disabled' class="amount-input" value="{{goods.amount}}" />
+                <form class="amount-button right" report-submit='true' bindsubmit="touchAmountAdd" data-goods="{{goods}}" data-index="{{index}}" data-g_index="{{g_index}}">
+                  <button form-type='submit' class='amount-icon base-font-color {{goods.amount < 0 ? "cant-del" : ""}}'>+</button>
+                </form>
+              </view>
+            </view>
+          </view>
+          <!--下架/售罄-->
+          <!-- wx:if="{{goods.is_on_sale==0 || goods.is_enough==0 || goods.is_disable==1}}" -->
+          <view class="row list-item cart-bg-white" wx:if="{{goods.is_on_sale==0 || goods.is_enough==0 || goods.is_disable==1}}">
+
+            <view class="item-prev">
+              <!--购买状态-->
+              <view class="item-false" style='background-image:url({{iconURL}}/is_on_sale.png)' hidden="{{edit_mode}}" wx:if="{{goods.is_on_sale==0}}"></view>
+              <view class="item-false" style='background-image:url({{iconURL}}/is_enough.png)' hidden="{{edit_mode}}" wx:if="{{goods.is_enough==0}}"></view>
+              <view class="item-false" style='background-image:url({{iconURL}}/is_disable.png)' hidden="{{edit_mode}}" wx:if="{{goods.is_disable==1}}"></view>
+              <!--编辑状态-->
+              <view class="item-checkbox {{goods.selected ? 'radio-icon-active':''}}" hidden="{{!edit_mode}}" bindtap="touchSelect" data-goods="{{goods}}" data-index="{{index}}" data-g_index="{{g_index}}"></view>
+            </view>
+            <!--购买状态-->
+            <view class="item-box row" hidden="{{edit_mode}}">
+              <view class="item-photo" bindtap="touchProduct" data-product="{{goods}}">
+                <view class="hide_white"></view>
+                <span style="background-image: url({{goods.header_img}});"></span>
+              </view>
+              <view class="item-info col">
+                <view class="info-name color" bindtap="touchProduct" data-product="{{goods}}">{{goods.goods_name}}</view>
+                <view class="info-attr color">{{goods.sku_key_name}}</view>
+                <view class="info-price color" bindtap="touchProduct" data-product="{{goods}}">
+                  <text class="font-face-ios_Avenir">
+                    <text class="price-coin font-face-ios_Arial">¥</text>
+                    <text class="price-val">{{goods.shop_price}}</text>
+                  </text>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view  class="bottom_border"></view>
+        </view>
+
+      </view>
+    </view>
+    <!--一键删除失效商品-->
+    <view class="cart-del-button" bindtap="delAllInvalidGoods" wx:if="{{hasInvalid}}">一键删除失效商品</view>
+  </view>
+  <!--底部-->
+  <view class="cart-submit row" wx:if='{{groups.goods && groups.goods.length > 0 }}'>
+    <view class="submit-select" bindtap="touchSelectAll">
+      <view class="select-checkbox">
+          <image src='{{iconURL}}/gouxuan03.png' hidden='{{!isSelectedAll}}'></image>
+          <image src='{{iconURL}}/weixuanzhong.svg' hidden='{{isSelectedAll}}'></image>
+      </view>全选
+    </view>
+    <view class="submit-total {{selectedGoods && selectedGoods.length?' active':''}}" hidden="{{edit_mode}}">
+      <view class="total-price">
+        <view class="price_all">
+          <text class="i">合计：</text>
+          <i class='icon_rmb font_26'>¥</i><text  class="font_36">{{totalPrice == null ? 0 : totalPrice}}</text>
+        </view>
+        <view class="price_sale" wx:if="{{totalShare!='0.00'}}">
+          <view><text class="font_color_555">已优惠:</text> ￥{{totalShare}}</view>
+        </view>
+        <!-- <span class="price-yf">{{sendMsg}}</span>不含运费 -->
+      </view>
+    </view>
+    <!-- <view class='submit-total col' hidden="{{!edit_mode}}"></view> -->
+    <!-- <button type="{{selectedGoods && selectedGoods.length?'primary':'disabled'}}" class='col' hidden="{{!edit_mode}}" bindtap="touchWinlog">
+      <span>移入收藏</span>
+    </button> -->
+    <!-- <button type="{{selectedGoods && selectedGoods.length?'warn':'disabled'}}" class='col' hidden="{{!edit_mode}}" bindtap="ftouchDelete">
+      <span>删除所选</span>
+    </button> -->
+    <form bindsubmit='toNowpay' report-submit='true'>
+      <button 
+        class='col toPay' 
+        formType="submit">
+        <span>结算<span class="num">({{selectedAmount}})</span></span>
+      </button>
+    </form>
+  </view>
+
+  <!-- <view class='title'><image src='{{iconURL}}/cart_list_header.png'></image></view> -->
+  <!-- 推荐商品 -->
+  <!-- <view class='recommend'>
+    <goodList list="{{recommend_good_list}}" type="2" align="left" class="goodList"></goodList>
+  </view> -->
+
+
+</view>
+<no_warehouse wx:else city="{{city}}" isAuthorization="{{isAuthorization}}" bindopenevent="openSet"></no_warehouse>
+<!-- 红包-顶部通知消息 -->
+<notice type="2"></notice>
+
+<loading wx:if="{{loadingShow}}"></loading>

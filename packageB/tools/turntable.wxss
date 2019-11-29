@@ -1,0 +1,377 @@
+.container {
+  background-color: #ffd3a1;
+  height: 100%;
+}
+
+.header-row {
+  padding: 20rpx 50rpx;
+  position: relative;
+}
+
+.integral-text {
+  align-items: center;
+}
+
+.integral-text-i {
+  font-size: 26rpx;
+  line-height: 46rpx;
+  color: #713000;
+  font-weight: bold;
+}
+
+.integral-text-p {
+  margin-left: 5rpx;
+  color: #dc0805;
+  font-size: 36rpx;
+  line-height: 44rpx;
+  font-weight: bold;
+}
+
+.rule-btn {
+  position: absolute;
+  top: 40rpx;
+  right: -20rpx;
+  background-color: #ffa54a;
+  color: #fff;
+  font-size: 24rpx;
+  letter-spacing: 5rpx;
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border-radius: 50rpx;
+  text-align: center;
+}
+
+.container-out {
+  height: 600rpx;
+  width: 650rpx;
+  background-color: #ffa54a;
+  margin: 0 auto 20rpx auto;
+  border-radius: 40rpx;
+  box-shadow: 0 10px 0 #ffa79a;
+  position: relative;
+}
+
+.container-in {
+  width: 580rpx;
+  height: 530rpx;
+  background-color: #ffa79a;
+  border-radius: 40rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.container-msg{
+  font-size: 28rpx;
+  text-align: center;
+  color: #aa4800;
+  padding: 15rpx 0;
+}
+
+/**小圆球
+box-shadow: inset 3px 3px 3px #fff2af;*/
+
+.circle {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  height: 20rpx;
+  width: 20rpx;
+}
+
+.content-out {
+  position: absolute;
+  height: 150rpx;
+  width: 166.6666rpx;
+  background-color: #f5f0fc;
+  border-radius: 15rpx;
+  box-shadow: 0 5px 0 red;
+}
+
+/**居中 加粗*/
+
+.start-btn {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 15rpx;
+  height: 150rpx;
+  width: 166.6666rpx;
+  background-color: #ffe400;
+  box-shadow: 0 5px 0 #e7930a;
+  color: #f6251e;
+  text-align: center;
+  font-size: 40rpx;
+  font-weight: bolder;
+  line-height: 150rpx;
+}
+
+.award-image {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 140rpx;
+  width: 140rpx;
+}
+
+/* 中奖信息 */
+
+.container-footer {
+  position: relative;
+  width: 700rpx;
+  height: 360rpx;
+  margin: 0 25rpx;
+  background-color: #fff;
+  border-radius: 8rpx;
+}
+
+.scrollText-header {
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #ffe4c5;
+  padding: 0 24rpx;
+}
+.scrollText-header .header-filter{
+  align-items: center;
+}
+.scrollText-header .header-text {
+  font-size: 26rpx;
+  color: #713000;
+  margin-left: 10rpx;
+  font-weight: bold;
+}
+
+.scrollText-header .header-icon-filter {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.scrollText-header .header-myprize {
+  text-align: right;
+}
+
+.scrollText-header .header-myprize-text {
+  font-size: 26rpx;
+  color: #dc0805;
+}
+
+.scrollText-header  .header-myprize-icon-filter {
+  width: 15rpx;
+  height: 20rpx;
+  margin-left: 10rpx;
+}
+
+.prize-scrollY {
+  position: relative;
+  width: 100%;
+  height: 270rpx;
+  overflow: hidden;
+}
+
+.filter {
+  position: absolute;
+  top: -15rpx;
+  left: 0;
+  width: 100%;
+  height: 60rpx;
+  background-color: #fff;
+  -webkit-filter: blur(4px);
+  filter: blur(4px);
+}
+
+.scrollText-items {
+  width: 100%;
+  height: 270rpx;
+  line-height: 40rpx;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.scrollText-item {
+  width: 100%;
+  padding: 12rpx 24rpx;
+}
+
+.item-name {
+  text-align: left;
+}
+
+.item-value {
+  text-align: right;
+  color: #aa4800;
+}
+
+/* 弹窗 */
+
+.modal-box {
+  width: 586rpx;
+  /* overflow: hidden; */
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  /* transform:translate(-50%, -50%); */
+  opacity: 0;
+  z-index: 1200;
+  background: #ffe150;
+  padding: 0 24rpx;
+  padding-bottom: 100rpx;
+  border-radius: 16rpx;
+}
+
+.modal-box .icon-btn_qiapianguanbianniux {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -100rpx;
+  color: #fff;
+  padding: 20rpx;
+  border: 2rpx solid #fff;
+  border-radius: 50%;
+}
+
+.modal-box .box-header {
+  padding-top: 50rpx;
+  margin-bottom: 30rpx;
+  font-size: 32rpx;
+  line-height: 70rpx;
+  text-align: center;
+  color: #303030;
+  font-weight: 500;
+  position: relative;
+  border-radius: 20rpx;
+}
+
+.modal-box .box-header::after {
+  content: '';
+  display: block;
+  width: 70rpx;
+  height: 6rpx;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+}
+
+.modal-box .box-margin {
+  padding: 48rpx 24rpx;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+  max-height: 600rpx;
+  background-color: #fff;
+  border-radius: 8rpx;
+}
+
+.modal-box .box-margin .box-text {
+  width: 100%;
+  font-size: 30rpx;
+  color: #555;
+  line-height: 40rpx;
+  margin-bottom: 10rpx;
+}
+
+.modal-box .box-margin .box-ps {
+  font-size: 28rpx;
+  color: #555;
+  line-height: 40rpx;
+  margin-top: 20rpx;
+  margin-bottom: 10rpx;
+}
+
+.modal-box .box-margin .box-ps .box-text {
+  font-size: 28rpx;
+}
+
+.modal-inner {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1200;
+  opacity: 0;
+  background: #fff;
+}
+
+.modal-inner .modal-close {
+  width: 750rpx;
+}
+
+.modal-inner .modal-conter {
+  padding: 24rpx 80rpx;
+}
+
+.modal-inner .modal-coupon-text {
+  text-align: center;
+  font-size: 32rpx;
+  color: #713000;
+  font-weight: bold;
+  height: 105rpx;
+  background-color: #ffe4c5;
+  line-height: 105rpx;
+}
+
+.modal-inner .modal-subbar {
+  background-color: #ddd;
+  padding: 20rpx 0;
+  font-size: 26rpx;
+  color: #555;
+  width: 100%;
+}
+
+.modal-inner .modal-subbar .modal-subbar-item {
+  text-align: center;
+  font-size: 26rpx;
+}
+
+.modal-inner .modal-list-box {
+  width: 100%;
+}
+
+.modal-inner .modal-msg {
+  font-size: 24rpx;
+  color: #bbb;
+  margin-top: 20rpx;
+  text-align: center;
+  width: 100%;
+}
+
+.modal-inner .modal-list-box .modal-list {
+  padding-top: 20rpx;
+}
+
+.modal-inner .modal-page-btns {
+  padding: 20rpx 0;
+}
+
+.modal-inner .modal-page-btns .page-btn-up {
+  height: 60rpx;
+  font-size: 24rpx;
+  line-height: 60rpx;
+}
+
+.modal-inner .modal-page-btns .page-btn-down {
+  height: 60rpx;
+  font-size: 24rpx;
+  line-height: 60rpx;
+}
+
+.modal-inner .modal-list-box .modal-list .modal-list-item {
+  text-align: center;
+  font-size: 26rpx;
+  color: #aa4800;
+}
+
+.modal-inner .modal-list-box .modal-list .modal-list-item-taim {
+  text-align: center;
+  font-size: 26rpx;
+  color: #555;
+}
